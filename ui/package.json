@@ -1,0 +1,14 @@
+{
+  "name": "chatbot_ui",
+  "version": "1.0.0",
+  "description": "ui",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vinay",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.2"
+  }
+}

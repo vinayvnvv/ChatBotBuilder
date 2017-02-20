@@ -1,0 +1,27 @@
+{
+  "name": "chatbotbuilder",
+  "version": "1.0.0",
+  "description": "chat bot builder",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vinayvnvv/git-tester.git"
+  },
+  "keywords": [
+    "later"
+  ],
+  "author": "vinay shanubhag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinayvnvv/git-tester/issues"
+  },
+  "homepage": "https://github.com/vinayvnvv/git-tester#readme",
+  "dependencies": {
+    "express": "^4.14.1",
+    "gulp-concat": "^2.6.1",
+    "socket.io": "^1.7.3"
+  }
+}
