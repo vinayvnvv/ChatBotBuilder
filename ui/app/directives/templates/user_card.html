@@ -1,0 +1,11 @@
+<li ng-repeat="list in suggestionData" class="sug-user-list" ng-click="openUserInfoModule(list)" title="{{list.name}}">
+
+
+<div class="pic">
+<img ng-if="list.photograph != null" src="http://aicstage.accionlabs.com{{list.photograph}}" alt="photo"/>
+<img ng-if="list.photograph == null" src="https://bitmesra.ac.in/Defaultimg/photo.png"/>
+</div>
+<div class="details">{{list.name}}</div>
+
+
+</li>

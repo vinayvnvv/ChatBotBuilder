@@ -1,0 +1,30 @@
+
+<div ng-draggable='dragOptions' class="chat">
+
+		<div class="toolbar">
+		          <span class="title">Assistant</span>
+        </div>
+
+
+
+
+		<div class="container">
+				<li ng-animate="'animate'" ng-repeat="m in msgs track by $index" class="animation msg {{m.by || 'bot'}} {{m.msg.msg_style}}">
+				<ng-include src="_chat_bot_msgs_template_"></ng-include>
+				</li>
+				<div ng-if="suggestion" ng-include="suggestion_template" class="sug-container"></div>
+				<div style="display:{{typing}}" class="msg bot typing">...</div>
+		</div>
+
+		<div class='field'>
+            <input type="text" placeholder="Ask Me" ng-model="_chat_bot_query_" ng-keyup="bindQueryOnPress($event)"  />
+        <fab-button class="md-fab md-mini md-primary send-fab" aria-label="Use Android" ng-disabled="query == '' || query == undefined " ng-click="bindQueryOnClick()">
+          <md-icon class="icon"><i class="material-icons" style="font-size: 15px">send</i></md-icon>
+        </fab-button>
+
+		</div>
+
+
+
+
+</div>

@@ -1,3 +1,6 @@
+console.log("hello")
+
+
 app.controller('mainCtrl', ['$scope', function($scope){
 
 	console.log("called main ctrl");
@@ -5,16 +8,16 @@ app.controller('mainCtrl', ['$scope', function($scope){
 
      $scope.msgs = [];
 
-     var socket = io();
+     var test = io.connect('http://127.0.0.1:3000/test');
 
-     socket.on('resmsg', function(data) {
+     test.on('resmsg', function(data) {
      	console.log(data)
      	if($scope.name != data.name )
      	$scope.msgs.push(data);
      	$scope.$apply();
      })
 
-     socket.on('typing', function(data) {
+     test.on('typing', function(data) {
      	if(data.name != $scope.name) { 
      		$scope.typing = true;
      		$scope.typing_name = data.name;
@@ -27,7 +30,7 @@ app.controller('mainCtrl', ['$scope', function($scope){
      var id = Math.random();
 
 
-      var chat = io.connect('/chat');
+      var chat = io.connect('http://127.0.0.1:3000/chat');
 		
 		 chat.on('connect', function() {
 		 	    chat.emit('id', id);
@@ -50,10 +53,10 @@ app.controller('mainCtrl', ['$scope', function($scope){
      if(e.keyCode == 13) {
      	var m = {name:$scope.name,msg:$scope.query};
      	$scope.msgs.push(m);
-     	socket.emit('newmsg', m);
+     	test.emit('newmsg', m);
      	$scope.query = '';
      } else {
-     	socket.emit('typing', {name:$scope.name});
+     	test.emit('typing', {name:$scope.name});
      }
 
   }

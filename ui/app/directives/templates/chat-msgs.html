@@ -1,0 +1,3 @@
+<div ng-if="m.msg.msg_style == '' || m.msg.msg_style == null">{{m.msg}}</div>
+
+<ng-include ng-if="m.msg.msg_style == 'user-info-card'" src="'directives/templates/user-info-card.html'">{{m.msg.name}}</ng-include>

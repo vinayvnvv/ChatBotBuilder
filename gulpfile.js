@@ -1,11 +1,14 @@
 var express = require('express');
 var app = express();
+var cors = require('cors')
+app.use(cors());
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var path = require('path');
-var gulp_task = require('./gulp/task');
+var gulp_task = require('./Server/task');
 var Server = new gulp_task(app, http);
+var path = require('path');
 var port = 3000;
+
 
 
 // app.set('views', path.join(__dirname, 'ui'));
@@ -17,20 +20,22 @@ app.get('/', function(req, res){
 });
 
 
-io.on('connection', function(socket){
-  socket.on('newmsg', function(msg){
-    console.log('message: ' + msg);
-    setTimeout(function() { io.emit('resmsg', msg) }, 2000);
-    
-    
-  });
+var test = io
+           .of('/test')
+            .on('connection', function(socket){
+              socket.on('newmsg', function(msg){
+                console.log('message: ' + msg);
+                setTimeout(function() { test.emit('resmsg', msg) }, 2000);
+                
+                
+              });
 
-  socket.on('typing', function(msg){
-    setTimeout(function() { io.emit('typing', msg) }, 10);
-    
-    
-  });
-});
+              socket.on('typing', function(msg){
+                setTimeout(function() { test.emit('typing', msg) }, 10);
+                
+                
+              });
+            });
 
 var chat = io
               .of('/chat')
@@ -49,6 +54,7 @@ var chat = io
 
 
 Server.start(port);
+
 
 
 

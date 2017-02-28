@@ -1,0 +1,29 @@
+
+<div id="demo">
+</div>
+
+<script>
+loadXMLDoc();
+function loadXMLDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    	var s = document.createElement('eee');
+        s.innerHTML = this.responseText; // file contains alert("hello!");
+        document.body.appendChild(s);
+      loadScript();
+    }
+  };
+  xhttp.open("GET", "http://127.0.0.1:3000", true);
+  xhttp.send();;
+}
+
+
+function loadScript() {
+
+	var s = document.createElement('script');	
+        s.type = "text/javascript";
+        s.src = "http://127.0.0.1:3000/build/script.js"; // file contains alert("hello!");
+        document.body.appendChild(s);
+}
+</script>

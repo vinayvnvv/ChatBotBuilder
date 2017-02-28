@@ -1,0 +1,17 @@
+<div>
+<div class="ph-no" title = "{{m.msg.designations[m.msg.designation-1].description}}" ><i class="material-icons">bookmark_border</i> {{m.msg.designations[m.msg.designation-1].description}}</div>
+<div  class="pic">
+<img ng-if="m.msg.photograph != null" src="http://aicstage.accionlabs.com{{m.msg.photograph}}" alt="photo"/>
+<img ng-if="m.msg.photograph == null" src="https://bitmesra.ac.in/Defaultimg/photo.png"/>
+</div>
+
+<div class="details-list"><b>{{m.msg.name}}</b></div>
+<div class="details-list">{{m.msg.email}}</div>
+<div class="details-list"><i class="material-icons">location_on</i> {{m.msg.locations[m.msg.location-1].description}}</div>
+<div class="actions">
+<a href="http://aicstage.accionlabs.com/#/profile/user/{{m.msg.id}}" target="_blank">View Profile</a>
+</div>
+
+
+</div>
+
