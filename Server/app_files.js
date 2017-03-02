@@ -3,11 +3,12 @@ var AppFiles = function() {
     this.libs = {
     	js: [
               'ui/node_modules/angular/angular.min.js',
+              'ui/node_modules/angular-animate/angular-animate.min.js',
               'ui/libs/socket.io/socket.io.min.js'
     	    ],
     	css:[
     	    ]    
-    }
+    };
 
     this.custom = {
     	js: [
@@ -18,7 +19,16 @@ var AppFiles = function() {
     	css:[
     	      'ui/style/style.css'
     	    ]    
-    }
+    };
+
+    this.server = 
+         [
+           'application/socket/*.*',
+           'application/db/*.*',
+           'application/*'
+
+         ];
+    
 
 
 }

@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat')
 var AppFiles = new (require('./app_files'))();
+var spawn = require('child_process').spawn;
 
 
 var gulpActivity = function(app, http) {
@@ -8,12 +9,7 @@ var gulpActivity = function(app, http) {
 	this.app = app;
 	this.http = http;
 
-	var libs_js = [
-	                'ui/node_modules/angular/angular.min.js', 'ui/libs/socket.io/socket.io.min.js'
-	              ];
-	var ui_files = ['ui/'];
-	var ui_js = ['ui/*.js', 'ui/app/directives/*.js', 'ui/app/services/*.js'];
-	var libs_css = 
+	var server_app = AppFiles.server;
 
 	this.start = function(port) {
 
@@ -59,10 +55,19 @@ var gulpActivity = function(app, http) {
 
 		gulp.task('watch', function(event) {
 			console.log("files changed")
-			gulp.watch(ui_files, ['build_js', 'build_final_js']);
 			gulp.watch(AppFiles.custom.js, ['build_js', 'build_final_js']);
 			gulp.watch(AppFiles.custom.css, ['build_css']);
-		})
+			gulp.watch(server_app, ['gulp-autoreload']);
+		});
+
+
+		gulp.task('gulp-autoreload', function() {
+			spawn('gulp', ['default'], {stdio: 'inherit'});
+            process.exit();
+     	 });
+
+
+
 		gulp.task('default', ['connect', 'build_js', 'build_libs_js', 'build_final_js', 'build_css', 'build_libs_css', 'watch']);
 
 

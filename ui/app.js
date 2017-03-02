@@ -3,7 +3,7 @@
 *
 * Description
 */
-var app = angular.module('ChatBot', []);
+var app = angular.module('ChatBot', ['ngAnimate']);
 
 app.config(function($sceDelegateProvider) {
  $sceDelegateProvider.resourceUrlWhitelist([

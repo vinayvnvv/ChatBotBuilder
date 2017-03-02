@@ -16,6 +16,12 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
              $scope.isTrack = false;
              $scope.shortcut = false;
              $scope.shortcutType = null;
+             var bot_socket = io.connect(URLVars.sokectsUrl.bot);
+             $scope.client_id = "123";
+
+             bot_socket.emit('welcome', {c_id:$scope.client_id, msg:"hello"});
+
+
 		 	//set templates
 		 	 $scope._chat_bot_msgs_template_ = URLVars.templateUrl.chatBotTemplateMsgs;
 		 	//get scroller element
@@ -25,17 +31,27 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
 
 
+            $scope.reqModules = function(msg) {
+            	 console.log("module is requesting by user..." + msg)
+            	 var data = { id:$scope.client_id, msg: msg };
+            	 bot_socket.emit('modules_req', data)
+            }
+
+
+            //this function is real-time
+            $scope.resModules = function() {
+                 bot_socket.on('modules_res', function(data) {
+                 	console.log(data)
+                 	$scope.msgs.push({by:"bot",msg:data.module[0].msg});
+                 	$scope.$apply();
+                 })
+            }
 
 
             $scope.getRecords = function (user_msg) {
 
 			  	console.log("called getRecords")
                  return
-                 var data = { msg: user_msg}; 
-                 if($scope.shortcut) {
-                   data.shortcut = $scope.shortcutType;	
-                   data.userId = $scope.userId;
-               }
                  var res = $http.post("api/bot/module",data);
                  res.success(function(data) {
 
@@ -152,18 +168,18 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
 
            $scope.bindQuery = function() {
+           	     //validation
+           	     if($scope._chat_bot_query_ == undefined) return; 
+                 if($scope._chat_bot_query_.length == 0) return; //check empty
+
               	 $scope.suggestion = false; //hide suggestion section
 
-					   
-					   //check empty
-					   if($scope._chat_bot_query_.length == 0)
-					   	return;
+				   $scope.msgs.push({
+				   	   msg:$scope._chat_bot_query_,
+				   	   by:"me"
+				   });
 
-					   $scope.msgs.push({
-					   	   msg:$scope._chat_bot_query_,
-					   	   by:"me"
-					   });
-					   $scope._chat_bot_query_ = "";
+				   $scope._chat_bot_query_ = "";
               }
 
 
@@ -179,6 +195,9 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
                           $scope.bindQuery();
 					}
   				}
+  			$scope.bindQueryOnClick = function() {
+              	$scope.bindQuery();
+              }	
 
   		     $scope.scrollToBottom = function() {
 			  	$scope.chat_scroller[0].scrollTop = ($scope.chat_scroller[0].scrollHeight + 20);
@@ -191,7 +210,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 			  }
 
 			 $scope.popTypingMsg = function() {
-
+                console.log("poping typing....")
 			  	$scope.typing = "none";
 
 			  } 
@@ -210,6 +229,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
 
             $scope.initBot();
+            $scope.resModules(); //call for real-time modules listen
 
 		 },
 		// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
@@ -243,23 +263,17 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
 			  	$timeout(function() {$scope.scrollToBottom();}, 100);
 			  	if($scope.msgs.length>0) {
-                       if($scope.msgs[$scope.msgs.length-1].by == 'me') {
+                       if($scope.msgs[$scope.msgs.length-1].by == 'me') { // user submition 
 
-
-                       	$scope.playSound("user");
-					    
-                          
-                          if($scope.isTrack) {
-                           	 $scope.matchRegex($scope.msgs[$scope.msgs.length-1].msg);
-                          }  else {
-                          	console.log("called")
-                             $scope.getRecords($scope.msgs[$scope.msgs.length-1].msg);
-                           }
-
-                           $timeout(function() {$scope.pushTypingMsg();}, 800); 
+                       	 	$scope.playSound("user");
+                       	 	$scope.reqModules($scope.msgs[$scope.msgs.length-1].msg);
+							$timeout(function() {$scope.pushTypingMsg();}, 500); 
                             
-                        }	 else {
+                        } else {  //bot resposnse
+
+                        	$scope.playSound("bot");
                         	$scope.popTypingMsg();
+
                         }
                     }
 
