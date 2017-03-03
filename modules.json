@@ -1,0 +1,69 @@
+{
+  "type":"single|flow",
+  "module": [
+    {
+       "id":"aa123213", 
+       "msg":"hello",
+       "beforeMsg":[],
+       "afterMsg":[],
+       "shortcut":"list|option|yes-no",
+       "shortcutData":["hello","bye"],
+       "customStyleTemplate":"true",
+       "template":"<h1>{{msg[1]}}</h1",
+       "validate":"date",
+       "validateErrMsg":"it must be date"
+  },
+  {
+       "id":"aa123213",
+       "msg":"hello , where is {{}}",
+       "beforeMsg":[],
+       "afterMsg":[],
+       "shortcut":"list|option|yes-no",
+       "customStyleTemplate":"true",
+       "template":"<h1>{{$flow[0]}}</h1"
+  }
+  ]
+}
+
+{
+  "type":"flow",
+  "module": [
+    {
+       "id":"aa123213", 
+       "msg":"hello",
+       "beforeMsg":[],
+       "afterMsg":[],
+       "shortcut":"list|option|yes-no",
+       "shortcutData":["hello","bye"],
+       "customStyleTemplate":"true",
+       "template":"<h1>{{msg[1]}}</h1",
+       "validate":"date",
+       "validateErrMsg":"it must be date"
+  },
+  {
+       "id":"aa123213", 
+       "msg":"hello",
+       "beforeMsg":[],
+       "afterMsg":[],
+       "shortcut":"list|option|yes-no",
+       "shortcutData":["hello","bye"],
+       "customStyleTemplate":"true",
+       "template":"<h1>{{msg[1]}}</h1",
+       "validate":"date",
+       "validateErrMsg":"it must be date"
+  }
+  ]
+}
+
+*********************
+
+{  
+  
+   "client_id":"123",
+   "flow_id":"mongodb_id",
+   "current_module":"1",  /* -1 for welcome text send*/
+   "validated":"true|false",
+   "answers":["vinay"],
+   
+  
+}

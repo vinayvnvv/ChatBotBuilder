@@ -1,7 +1,7 @@
 
 var Sockets = function(http) {
 var io = require('socket.io')(http);
-var DB = new require('./../db/main')();
+var DB = new (require('./../db/main'))();
 
 
 var msg = {

@@ -15,15 +15,15 @@ var MainDB = function() {
 	};
 
    
-   this.getData = function(data, callback) {
-   	MongoClient.connect(url, function(err, db) {
+   this.getData = function(id, callback) {
+   	MongoClient.connect(header.db.url, function(err, db) {
 		  
 		  assert.equal(null, err);
 		  getDoc(
 		  	 db, 
 		  	 id,
 		  	 function(result) {
-			  	  callback(result);
+			  	  callback(result[0]);
 			      db.close();
 		     }, 
 		     function(err) {
