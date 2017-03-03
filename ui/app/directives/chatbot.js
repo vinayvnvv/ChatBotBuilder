@@ -1,4 +1,4 @@
-app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($http, $timeout, $compile, URLVars){
+app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars','Helper', function($http, $timeout, $compile, URLVars, Helper){
 	// Runs during compile
 	return {
 		// name: '',
@@ -138,6 +138,13 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
            
             $scope.initBot = function() {
+
+            	//Helper.setCookie('name', 'vinay');
+            	//console.log(Helper.getCookie('name'));
+            	console.log(Helper.deleteCookie('name'));
+
+            	//check for cookie 
+
               	var m_ = {
               		by:"bot",
               		msg:"Welcome! I am Your Assistant, How can I Help You?",
