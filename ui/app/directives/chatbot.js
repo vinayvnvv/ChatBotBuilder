@@ -168,6 +168,15 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars','Helper', f
                     	$scope.performSuggestion(m_.type,m_.sub_info);
               }
 
+             $scope.connectBot = function() {
+             	var uid = Helper.getCookie('__bot__uid_identity__');
+             	if(uid == null) { //first connect
+
+             	} else { //alredy connected
+
+             	}
+             } 
+
 
 
 

@@ -28,7 +28,7 @@ app.service('Helper', ['$http', function($http){
             return c.substring(name.length, c.length);
         }
     }
-    return "";
+    return null;
 
  }
 
