@@ -1,7 +1,7 @@
 
 var Sockets = function(http) {
 var io = require('socket.io')(http);
-var DB = new (require('./../db/main'))();
+var DB = new (require('./../db/main'))  ();
 
 
 var msg = {
@@ -43,6 +43,13 @@ this.listen = function () {
 	              		console.log(data)
 	                    bot.emit('entry', data);
 	              	})
+
+                  socket.on('init', function(data) {
+                      console.log(data)
+                      socket.emit('entry', data);
+                  })
+
+
 
 
 	              	socket.on('modules_req', function(data) {

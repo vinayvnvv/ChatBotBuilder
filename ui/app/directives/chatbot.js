@@ -137,29 +137,29 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
             }
 
            
-            $scope.initBot = function() {
-              	var m_ = {
-              		by:"bot",
-              		msg:"Welcome! I am Your Assistant, How can I Help You?",
-              		type:"option",
-              		sub_info:{
-              			items:[
-              			      {
-              			      	name:"who ramesh?",
-              			      },
-              			      {
-              			      	name:"Hello"
-              			      }
-              			  ]
-              		}
-              	}
-              	$scope.playSound("bot");
-              	$scope.msgs.push(m_);
-              			$scope.is_sub_info = true;
-                    	$scope.sub_info_type = m_.type;
-                        $scope.sub_info_data = m_.sub_info;
-                    	$scope.performSuggestion(m_.type,m_.sub_info);
+        $scope.initBot = function() {
+          var data = { client_id: $scope.client_id, uuid: $scope.uuid };
+          bot_socket.emit('init', data);
+        }
+
+          $scope.connectBot = function() {
+
+              //check cookie value
+              $scope.uuid = "1233456";
+              if($scope.uuid  != undefined) { //alreday connected
+
+                 $scope.initBot();
+
+
+
+              } else {  //first connects
+                 //create uuid
+                 //store cookie
+                 $scope.initBot();
+
               }
+
+          }    
 
 
 
@@ -228,7 +228,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
             }  
 
 
-            $scope.initBot();
+            $scope.connectBot();
             $scope.resModules(); //call for real-time modules listen
 
 		 },
