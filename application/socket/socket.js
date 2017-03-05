@@ -2,6 +2,7 @@
 var Sockets = function(http) {
 var io = require('socket.io')(http);
 var DB = new (require('./../db/main'))  ();
+var DBHelper = new (require('./../db/Helper')) ();
 
 
 var msg = {
@@ -41,11 +42,28 @@ this.listen = function () {
 
 	              	socket.on('welcome', function(data) {
 	              		console.log(data)
+                     
 	                    bot.emit('entry', data);
 	              	})
 
                   socket.on('init', function(data) {
-                      console.log(data)
+                       DBHelper.isCollectionExists(
+
+                             'test',
+                             function(flag) { 
+                              if(flag) { // continue from tracking
+                                  
+
+
+
+                              } else {  //start from new instance
+
+                              }
+                             
+                            },
+                             function(err) {}
+
+                         );
                       socket.emit('entry', data);
                   })
 
