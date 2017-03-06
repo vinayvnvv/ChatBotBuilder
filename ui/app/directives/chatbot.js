@@ -1,4 +1,4 @@
-app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($http, $timeout, $compile, URLVars){
+app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 'STRVars', function($http, $timeout, $compile, URLVars, Helper, STRVars){
   // Runs during compile
   return {
     // name: '',
@@ -19,7 +19,6 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
              var bot_socket = io.connect(URLVars.sokectsUrl.bot);
              $scope.client_id = "123";
 
-             bot_socket.emit('welcome', {c_id:$scope.client_id, msg:"hello"});
 
 
       //set templates
@@ -50,7 +49,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
             $scope.getRecords = function (user_msg) {
 
-          console.log("called getRecords")
+                 console.log("called getRecords")
                  return
                  var res = $http.post("api/bot/module",data);
                  res.success(function(data) {
@@ -64,7 +63,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
 
                   //reset flags
-          $scope.shortcut = false;
+                $scope.shortcut = false;
                 $scope.shortcutType = null;
 
                   $scope.popTypingMsg();
@@ -117,24 +116,24 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
 
         } 
       
-      $scope.openOptionModule = function(obj) {
-              $scope.suggestion = false;
-              //$scope.user_msg.msg = obj.name;
-              $scope.msgs.push({
-                 msg:obj.name,
-                 by:"me"
-             });
-            }
+          $scope.openOptionModule = function(obj) {
+                  $scope.suggestion = false;
+                  //$scope.user_msg.msg = obj.name;
+                  $scope.msgs.push({
+                     msg:obj.name,
+                     by:"me"
+                 });
+                }
 
-            $scope.openListModule = function(obj) {
-              $scope.suggestion = false;
-              //$scope.user_msg.msg = obj.name;
-              $scope.msgs.push({
-                 msg:obj.name,
-                 by:"me"
-             });
+          $scope.openListModule = function(obj) {
+            $scope.suggestion = false;
+            //$scope.user_msg.msg = obj.name;
+            $scope.msgs.push({
+               msg:obj.name,
+               by:"me"
+           });
 
-            }
+          }
 
            
         $scope.initBot = function() {
@@ -145,16 +144,18 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', function($
           $scope.connectBot = function() {
 
               //check cookie value
-              $scope.uuid = "1233456";
+              $scope.uuid = Helper.getCookie(STRVars.cookies.uuid_key);
               if($scope.uuid  != undefined) { //alreday connected
+                console.log("connecting with existance uuid")
 
                  $scope.initBot();
 
 
 
               } else {  //first connects
-                 //create uuid
-                 //store cookie
+                console.log("connecting with new uuid")
+                 $scope.uuid = Helper.generateUUID();
+                 Helper.setCookie(STRVars.cookies.uuid_key, $scope.uuid);
                  $scope.initBot();
 
               }

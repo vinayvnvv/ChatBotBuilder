@@ -40,23 +40,23 @@ this.listen = function () {
 	              .on('connection', function(socket) {
 
 
-	              	socket.on('welcome', function(data) {
-	              		console.log(data)
-                     
-	                    bot.emit('entry', data);
-	              	})
+	              	
 
                   socket.on('init', function(data) {
-                       DBHelper.isCollectionExists(
+                    //DBHelper.updateTrack('uuid', DBHelper.constructTrackModel({flow_id: "m_id_21312"}));
+                    console.log(data)
+                       DBHelper.isTrack(
 
-                             'test',
+                             data.uuid,
                              function(flag) { 
                               if(flag) { // continue from tracking
+                                console.log("continue from tracking")
                                   
 
 
 
                               } else {  //start from new instance
+                                console.log("no tracking")
 
                               }
                              
