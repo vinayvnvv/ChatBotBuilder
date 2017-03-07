@@ -25,6 +25,7 @@ var AppFiles = function() {
          [
            'application/socket/*.*',
            'application/db/*.*',
+           'application/services/*.*',
            'application/*'
 
          ];

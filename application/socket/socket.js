@@ -45,18 +45,35 @@ this.listen = function () {
                   socket.on('init', function(data) {
                     //DBHelper.updateTrack('uuid', DBHelper.constructTrackModel({flow_id: "m_id_21312"}));
                     console.log(data)
-                       DBHelper.isTrack(
+                       DBHelper.trackStatus(
 
                              data.uuid,
-                             function(flag) { 
+                             function(flag, doc) { 
                               if(flag) { // continue from tracking
                                 console.log("continue from tracking")
-                                  
-
-
+                                //return all msgs
+                                //send next module[index]
+                                socket.emit('modules_res', {module:{msg:["Resuming Session"]}})
 
                               } else {  //start from new instance
                                 console.log("no tracking")
+                                //return all msgs
+
+                                DBHelper.getInitModule(  //send welcome msg
+                                      data.c_id,
+                                      function(module) { 
+                                        DBHelper.insertTrack(  //send after updating track 
+
+                                           data.uuid, data.c_id,
+                                           function(res) { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  },
+                                           function(err) {}
+
+                                          );
+
+                                      },
+                                      function(err) {}
+                                )  
+
 
                               }
                              
@@ -71,13 +88,30 @@ this.listen = function () {
 
 
 	              	socket.on('modules_req', function(data) {
-	              		console.log("req for modules")
-	              		DB.getData(
-	              			data.id, 
-	              			function(data){
-                                 setTimeout(function() { socket.emit('modules_res', data); }, 1000); 
-	              			}
-	              			);
+	              		
+                    DBHelper.trackStatus(
+
+                        data.uuid,
+                        function(flag, doc) {
+
+                           if(doc.current_module == 'init') { 
+                              DB.matchModule(
+                                    data.c_id,data.uuid,data.query, 
+                                    function(module) { 
+                                      if(module!=false) {
+                                        setTimeout(function() { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  }, 1200);
+                                        
+                                      }
+                                    },
+                                    function() {}
+                                )
+                           }
+
+
+                        },
+                        function(err) {}
+
+                      );
 	              		
 	              	});
 

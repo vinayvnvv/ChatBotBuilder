@@ -5,7 +5,10 @@ module.exports = {
   },
 
   collections: {
-    track:"track"
+    track:"track",
+    module:function(id) {
+    	return "module_" + id;
+    }
   }
   
 }

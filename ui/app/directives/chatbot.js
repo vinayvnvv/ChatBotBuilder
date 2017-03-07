@@ -32,7 +32,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
             $scope.reqModules = function(msg) {
                console.log("module is requesting by user..." + msg)
-               var data = { id:$scope.client_id, msg: msg };
+               var data = { c_id:$scope.client_id, uuid: $scope.uuid,  query: msg };
                bot_socket.emit('modules_req', data)
             }
 
@@ -41,9 +41,21 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
             $scope.resModules = function() {
                  bot_socket.on('modules_res', function(data) {
                   console.log(data)
-                  $scope.msgs.push({by:"bot",msg:data.module[0].msg});
+                  $scope.pushMsgs(data.module.msg);
+                  $scope.performSuggestion(data.module.shortcut, data.module.shortcutData)
                   $scope.$apply();
                  })
+            }
+
+            $scope.pushMsgs = function(msg) {
+                  if(typeof(msg) == 'object') {
+                        for(var i=0;i<msg.length;i++) {
+                          $scope.msgs.push({by:"bot",msg:msg[i]});
+                          $scope.$apply();
+                      }
+                    } else {
+                        $scope.msgs.push(msg);
+                }
             }
 
 
@@ -95,17 +107,18 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
              }
 
             $scope.performSuggestion = function(type, data) {
+                 console.log("shortcut Type:" + type)
 
                   if(type == 'option') {
                     $scope.suggestion_template = URLVars.suggestionTemplateUrl.option;
                     $scope.suggestion = true;
-                    $scope.suggestionData = data.items;
+                    $scope.suggestionData = data;
                   }
 
                   if(type == 'list') {
                     $scope.suggestion_template = URLVars.suggestionTemplateUrl.list;
                     $scope.suggestion = true;
-                    $scope.suggestionData = data.items;
+                    $scope.suggestionData = data;
                   }
                   if(type == 'user_list') {
                     $scope.suggestion_template = URLVars.suggestionTemplateUrl.user_card;
@@ -129,7 +142,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
             $scope.suggestion = false;
             //$scope.user_msg.msg = obj.name;
             $scope.msgs.push({
-               msg:obj.name,
+               msg:obj,
                by:"me"
            });
 
@@ -137,7 +150,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
            
         $scope.initBot = function() {
-          var data = { client_id: $scope.client_id, uuid: $scope.uuid };
+          var data = { c_id: $scope.client_id, uuid: $scope.uuid };
           bot_socket.emit('init', data);
         }
 

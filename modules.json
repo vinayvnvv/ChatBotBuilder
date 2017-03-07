@@ -1,11 +1,11 @@
 Flow modules
 *************
-          {
+        {
             "_id":"db_id",
             "matches":[],
             "type":"single|flow",
             "welcome":{
-                 "msg":[],
+                 "msg":["hello", "Good morning"],
                  "shortcut":"list|option|yes-no",
                  "shortcutData":["hello","bye"]
               
@@ -39,12 +39,23 @@ Flow modules
 track structure
 *********************
             {  
-              
+               "uuid":"323213",
                "client_id":"123",
-               "flow_id":"mongodb_id",
+               "module_id":"mongodb_id",
+               "cleared":"true|false",
                "current_module":"1",  /* -1 for welcome text send*/
                "validated":"true|false",
                "answers":["vinay"],
                
               
             }
+****************
+init modules
+***************
+{
+  "_id":"db_id",
+  "type":"init",
+  "msg":"welcome to bot",
+  "shortcut":"list",
+  "shortcutData":["hello","bye"]
+}            
