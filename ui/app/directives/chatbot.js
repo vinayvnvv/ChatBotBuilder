@@ -54,7 +54,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                           $scope.$apply();
                       }
                     } else {
-                        $scope.msgs.push(msg);
+                        $scope.msgs.push({by:"bot",msg:msg});
                 }
             }
 

@@ -94,7 +94,7 @@ this.listen = function () {
                         data.uuid,
                         function(flag, doc) {
 
-                           if(doc.current_module == 'init') { 
+                           if(doc.current_module == 'init') {  //init bot send
                               DB.matchModule(
                                     data.c_id,data.uuid,data.query, 
                                     function(module) { 
@@ -105,6 +105,19 @@ this.listen = function () {
                                     },
                                     function() {}
                                 )
+                           } else { // send modules from track info
+                              DB.getModule(
+                                  doc,
+                                  data.query,
+                                  function(module) { 
+                                    console.log("sending welocome msg...")
+                                    console.log(module)
+                                    setTimeout(function() { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  }, 1200); 
+                                  },
+                                  function() {}
+ 
+                                )
+
                            }
 
 

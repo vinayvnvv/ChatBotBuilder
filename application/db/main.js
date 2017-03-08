@@ -28,7 +28,7 @@ var MainDB = function() {
 				  		console.log(matched.welcome)
 				  		//update track details
 				  		DBHelper.updateTrack(
-				  			  uuid, DBHelper.constructTrackModel( {module_id: matched._id, current_module:"-1"} ), 
+				  			  uuid, DBHelper.constructTrackModel( {module_id: matched._id, current_module:"0"} ), 
 				  			  function(res) { callback_suc(matched.welcome); }, 
 				  			  function(err) {}
 				  			  );
@@ -38,6 +38,62 @@ var MainDB = function() {
 			});
 
 
+
+   }
+
+   this.getModule = function(track, query, callback_suc, callback_err) {
+
+   	console.log("getting modules....")
+
+   	MongoClient.connect(header.db.url, function(err, db) {
+
+   		 assert.equal(null, err);
+		  if(err) return callback_err(err);
+		   var collection = db.collection(header.collections.module(track.client_id));
+
+   	   if(parseInt(track.current_module) == -1 ) {
+          collection.find({_id:track.module_id}).toArray( function(err, docs) {
+             var doc = docs[0];
+             DBHelper.updateTrack(
+             	                   track.uuid,
+             	                   DBHelper.constructTrackModel({current_module:Utility.incObj(track.current_module)}),
+             	                   function(res) {  callback_suc(doc.welcome); },
+             	                   function() {}
+
+             	                 );
+             
+          })
+             
+
+
+   	   } else {
+   	   	  collection.find({_id:track.module_id}).toArray( function(err, docs) {
+             var doc = docs[0];
+             var cur_modl = Utility.incObj(track.current_module);
+             var answers = track.answers;
+             answers.push(query);
+             var update_track_obj = {
+                                      current_module:cur_modl,
+                                      answers:answers
+             						};
+             if(cur_modl == doc.modules.length) { // check for last module in a array
+             	console.log("called last module in a array");
+             	update_track_obj.current_module = "final";
+
+             }
+             DBHelper.updateTrack(
+             	                   track.uuid,
+             	                   DBHelper.constructTrackModel(update_track_obj),
+             	                   function(res) {  callback_suc(doc.modules[cur_modl - 1]); },
+             	                   function() {}
+
+             	                 );
+             
+          })
+
+   	   } 
+
+   	});
 
    }
 

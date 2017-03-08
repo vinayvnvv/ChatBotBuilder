@@ -33,13 +33,15 @@ var header = require('./../header');
 				  	if(doc.length == 0) return callback_suc(false, null);
 				  	if(err) return callback_err(err);
 				  	if(doc[0].cleared == 'false' || doc[0].cleared == false) return callback_suc(true, doc[0]);
-				  	else return callback_suc(false, null);
+				  	else return callback_suc(false, doc[0]);
 				});
 			});
 
     }
 
     this.constructTrackModel = function(model) {
+    	console.log("constructing track model")
+    	console.log(model)
 	    var doc = {};
 	    if(model.uuid != undefined ) 			doc.uuid = model.uuid;
 	    if(model.client_id != undefined )  		doc.client_id = model.client_id;

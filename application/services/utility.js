@@ -13,6 +13,15 @@ var Utility = function() {
     
      return false;
   }
+
+
+  this.incObj = function(n) {
+        if(typeof(n) != 'number') {
+            return "" + (parseInt(n)+1);
+        } else {
+            return ++n;
+        }
+  }
   
 }
 
