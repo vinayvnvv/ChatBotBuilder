@@ -6,7 +6,7 @@ Flow modules
             "type":"single|flow",
             "welcome":{
                  "msg":["hello", "Good morning"],
-                 "shortcut":"list|option|yes-no",
+                 "shortcut":"list",
                  "shortcutData":["hello","bye"]
               
             },
@@ -32,7 +32,12 @@ Flow modules
                  "customStyleTemplate":"true",
                  "template":"<h1>{{$flow[0]}}</h1"
             }
-            ]
+            ],
+            "final": {
+                 "msg":["Final", "Thank You ! Bye!!!"],
+                 "shortcut":"list",
+                 "shortcutData":["hello","again"]
+            }
           }
 
 *********************

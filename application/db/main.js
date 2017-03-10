@@ -66,9 +66,27 @@ var MainDB = function() {
              
 
 
+   	   } else if(track.current_module == 'final') {
+   	   	     collection.find({_id:track.module_id}).toArray( function(err, docs) {
+             var doc = docs[0];
+             DBHelper.updateTrack(
+             	                   track.uuid,
+             	                   DBHelper.constructTrackModel({
+             	                   	                             current_module:"init",
+             	                   	                             module_id : ""
+             	                   	                           }),
+             	                   function(res) {  callback_suc(doc.final); },
+             	                   function() {}
+
+             	                 );
+             
+          })
+
+
    	   } else {
    	   	  collection.find({_id:track.module_id}).toArray( function(err, docs) {
              var doc = docs[0];
+             console.log(doc)
              var cur_modl = Utility.incObj(track.current_module);
              var answers = track.answers;
              answers.push(query);
