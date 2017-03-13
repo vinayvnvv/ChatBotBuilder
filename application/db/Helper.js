@@ -4,7 +4,10 @@ var ObjectId = require('mongodb').ObjectID;
 var header = require('./../header');
 
 
+
  var Helper = function() {
+
+ 	var DBHelper = this;
 
     this.isCollectionExists = function(collection_, callback_suc, callback_err) {  //returns true if colllection having docs or returns false
 
@@ -43,13 +46,14 @@ var header = require('./../header');
     	console.log("constructing track model")
     	console.log(model)
 	    var doc = {};
-	    if(model.uuid != undefined ) 			doc.uuid = model.uuid;
-	    if(model.client_id != undefined )  		doc.client_id = model.client_id;
-	    if(model.module_id != undefined ) 		doc.module_id = model.module_id;
-	    if(model.cleared != undefined ) 		doc.cleared = model.cleared;
-	    if(model.current_module != undefined )  doc.current_module = model.current_module;
-	    if(model.validated != undefined ) 		doc.validated = model.validated;
-	    if(model.answers != undefined ) 		doc.answers = model.answers;
+	    if(model.uuid != undefined ) 					doc.uuid = model.uuid;
+	    if(model.client_id != undefined )  				doc.client_id = model.client_id;
+	    if(model.module_id != undefined ) 				doc.module_id = model.module_id;
+	    if(model.cleared != undefined ) 				doc.cleared = model.cleared;
+	    if(model.current_module != undefined )  		doc.current_module = model.current_module;
+	    if(model.validate != undefined ) 				doc.validate = model.validate;
+	    if(model.answers != undefined ) 				doc.answers = model.answers;
+	    if(model.last_track_details != undefined ) 		doc.last_track_details = model.last_track_details;
 
        	return doc;
    
@@ -78,7 +82,7 @@ var header = require('./../header');
                "client_id":c_id,
                "module_id":"",
                "current_module":"init",
-               "validated":"true",
+               "validate":"0",
                "answers":[],
                "cleared":"false"
            };
@@ -126,6 +130,34 @@ var header = require('./../header');
        																  } 
         return {"module":module};  																  		 		
     }
+
+    this.sendAutoFirstModule = function(uuid, socket, DB) {
+    	console.log("sending auto first module for uuid: " + uuid);
+    	this.trackStatus(
+
+            uuid,
+            function(flag, doc) {
+
+                 DB.getModule(
+                                  doc,
+                                  null,
+                                  function(module) { 
+                                    console.log(module)
+                                    setTimeout(function() { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  }, 1200); 
+                                  },
+                                  function() {}
+ 
+                                );
+
+            },
+            function(err) {}
+           
+        );
+         
+         
+
+    }
+
 
 
 

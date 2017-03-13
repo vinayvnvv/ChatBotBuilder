@@ -93,15 +93,19 @@ this.listen = function () {
 
                         data.uuid,
                         function(flag, doc) {
-
+                           console.log("tracked doc:" + doc)
                            if(doc.current_module == 'init') {  //init bot send
                               DB.matchModule(
                                     data.c_id,data.uuid,data.query, 
                                     function(module) { 
                                       if(module!=false) {
-                                        setTimeout(function() { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  }, 1200);
-                                        
-                                      }
+                                        setTimeout(function() { 
+                                            socket.emit('modules_res', DBHelper.generateModuleForWeb(module)); 
+                                            DBHelper.sendAutoFirstModule(data.uuid, socket, DB);
+                                             }, 1200);
+                                            
+                                                      
+                                          }
                                     },
                                     function() {}
                                 )
@@ -116,7 +120,7 @@ this.listen = function () {
                                   },
                                   function() {}
  
-                                )
+                                );
 
                            }
 

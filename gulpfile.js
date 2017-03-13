@@ -6,8 +6,7 @@ var http = require('http').Server(app);
 var gulp_task = require('./Server/task');
 var Server = new gulp_task(app, http);
 var path = require('path');
-var sockets_task = require('./application/socket/socket')
-var Sockets = new sockets_task(http);
+var Sockets = new (require('./application/socket/socket')) (http);
 var port = 3000;
 
 

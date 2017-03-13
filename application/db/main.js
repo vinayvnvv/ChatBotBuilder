@@ -4,7 +4,8 @@ var ObjectId = require('mongodb').ObjectID;
 var header = require('./../header');
 var Utility = new (require('./../services/utility.js')) ();
 var DBHelper = new (require('./../db/Helper')) ();
-
+var Validator = new (require('./../services/validator')) ();
+var Parser = require('./../services/Parser');
 var MainDB = function() {
    console.log("called MainDB")
 
@@ -51,29 +52,34 @@ var MainDB = function() {
 		  if(err) return callback_err(err);
 		   var collection = db.collection(header.collections.module(track.client_id));
 
-   	   if(parseInt(track.current_module) == -1 ) {
-          collection.find({_id:track.module_id}).toArray( function(err, docs) {
-             var doc = docs[0];
-             DBHelper.updateTrack(
-             	                   track.uuid,
-             	                   DBHelper.constructTrackModel({current_module:Utility.incObj(track.current_module)}),
-             	                   function(res) {  callback_suc(doc.welcome); },
-             	                   function() {}
-
-             	                 );
-             
-          })
-             
-
-
-   	   } else if(track.current_module == 'final') {
+   	    if(track.current_module == 'final') {
    	   	     collection.find({_id:track.module_id}).toArray( function(err, docs) {
              var doc = docs[0];
+
+             if(doc.modules[track.validate].validate != null && doc.modules[track.validate].validate != undefined) {
+              console.log("entering for validation...")
+                   if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc)) {  //not validated , return
+                      console.log("validated Errr, Sending Validated Err Msg...")
+                      callback_suc({msg:doc.modules[track.validate].validateErrMsg});
+                      return;
+                   }
+              }
+
+
+              if( query != null || query != undefined ) track.answers.push(query);
+
+              delete track['last_track_details']; //delete last track details from track to update current one
+
+
+
              DBHelper.updateTrack(
              	                   track.uuid,
              	                   DBHelper.constructTrackModel({
              	                   	                             current_module:"init",
-             	                   	                             module_id : ""
+             	                   	                             module_id : "",
+                                                               answers:[],
+                                                               last_track_details:track,
+                                                               validate:"0"
              	                   	                           }),
              	                   function(res) {  callback_suc(doc.final); },
              	                   function() {}
@@ -84,25 +90,41 @@ var MainDB = function() {
 
 
    	   } else {
+          console.log("track doc:")
+          console.log(track)
+
    	   	  collection.find({_id:track.module_id}).toArray( function(err, docs) {
              var doc = docs[0];
              console.log(doc)
+              //check for validation
+
+            console.log("Validation:" + doc.modules[track.validate].validate)  
+             if(doc.modules[track.validate].validate != null && doc.modules[track.validate].validate != undefined) {
+              console.log("entering for validation...")
+                   if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc)) {  //not validated , return
+                      console.log("validated Errr, Sending Validated Err Msg...")
+                      callback_suc({msg:doc.modules[track.validate].validateErrMsg});
+                      return;
+                   }
+              }
              var cur_modl = Utility.incObj(track.current_module);
              var answers = track.answers;
-             answers.push(query);
+             if( query != null || query != undefined ) answers.push(query);
              var update_track_obj = {
                                       current_module:cur_modl,
-                                      answers:answers
+                                      answers:answers,
+                                      validate:cur_modl-1
              						};
              if(cur_modl == doc.modules.length) { // check for last module in a array
              	console.log("called last module in a array");
              	update_track_obj.current_module = "final";
 
              }
+             console.log("answers......", answers)
              DBHelper.updateTrack(
              	                   track.uuid,
              	                   DBHelper.constructTrackModel(update_track_obj),
-             	                   function(res) {  callback_suc(doc.modules[cur_modl - 1]); },
+             	                   function(res) {  callback_suc(Parser.ansParser(doc.modules[cur_modl - 1], answers)); },
              	                   function() {}
 
              	                 );
