@@ -8,10 +8,22 @@
 	<script type="text/javascript" src="build/scripts.js"></script>
 
 
+	<!-- other libs -->
+
+              <!-- fonts -->
+		    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+		      <!-- icons library -->
+		    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
 </head>
 
 <body ng-controller="mainApp">
 
+
+<ng-include src="'templates/header_toolbar.html'" scope="" onload=""></ng-include>
+
+<ui-view> </ui-view>
 
 
 </body>

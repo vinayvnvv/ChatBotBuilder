@@ -93,7 +93,7 @@ var gulpActivity = function(app, http) {
 		gulp.task('build_manager_final_js', function() {
 			return gulp.src(['ui/build/scripts_libs.js', 'ui/build/scripts.js'])
 			         .pipe(concat('script.js'))
-			         .pipe(gulp.dest('ui/build'));
+			         .pipe(gulp.dest('ui-manager/build'));
 		})
 
 
