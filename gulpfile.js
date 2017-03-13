@@ -14,6 +14,7 @@ var port = 3000;
 // app.set('views', path.join(__dirname, 'ui'));
 // // app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'ui')));
+app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');

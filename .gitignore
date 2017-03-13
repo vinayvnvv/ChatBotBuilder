@@ -1,3 +1,5 @@
 node_modules/
 ui/build/
 ui/node_modules/
+ui-manager/node_modules/
+ui-manager/build/

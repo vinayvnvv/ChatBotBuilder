@@ -81,7 +81,7 @@ var MainDB = function() {
                                                                last_track_details:track,
                                                                validate:"0"
              	                   	                           }),
-             	                   function(res) {  callback_suc(doc.final); },
+             	                   function(res) {  callback_suc(Parser.ansParser(doc.final, track.answers)); },
              	                   function() {}
 
              	                 );
