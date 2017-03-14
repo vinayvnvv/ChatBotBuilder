@@ -38,6 +38,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 app.config(['$mdThemingProvider',function($mdThemingProvider) {
 
   $mdThemingProvider.theme('default')
-    .primaryPalette('indigo')
-    .accentPalette('indigo');
+    .primaryPalette('teal')
+    .accentPalette('teal');
 }]);

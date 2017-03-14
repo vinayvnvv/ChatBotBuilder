@@ -1,1 +1,35 @@
-<h1>DashBoard</h1>
+<div class="dashboard">
+<ng-include src="'templates/header_toolbar.html'" scope="" onload="" class="titlebar"></ng-include>
+
+<div class="content">
+	<div class="left-bar">
+
+	 <div class="tab">
+	 	<div class="info"><span class="md-title">Flows</span></div>
+	 	<div class="search">
+	 	    <center>
+	 		<input type="text" placeholder="Search" />
+	 		</center>
+	 	</div>
+	 </div>
+     
+     <div class="lists left-list-scroller">
+	     <div class="list" ng-repeat="a in [1,2,3,4,5,6,7,9,11,13,14,15,23,33,35,566,345]">
+	      <div class="main">
+	       <div class="title">Title of Flow {{a}}</div>
+	       <div class="desc">This is a description of the flow {{a}}</div>
+	       <div class="sub-info md-caption">This is a Sub info of the flow {{a}}</div>
+	      </div>
+	      <div class="action">
+	      	act
+	      </div>
+	     
+	     </div>
+     </div>
+
+	</div>
+	<div class="right-bar">Right bar</div>
+</div>
+
+
+</div>
