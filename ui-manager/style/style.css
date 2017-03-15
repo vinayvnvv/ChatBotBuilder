@@ -78,6 +78,12 @@
    color: #666;
    flex-basis: 100px;
   }
+.dashboard .content .left-bar .tab span {
+  border-bottom: 2px solid;
+  font-size: 17px;
+  position: relative;
+  top:3px;
+}  
 .dashboard .content .left-bar .tab .search {
   flex-basis: 100px;
 }  
