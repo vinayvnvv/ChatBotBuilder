@@ -1,0 +1,28 @@
+<div class="tab">
+	 	<div class="info"><span class="md-title">Flows</span></div>
+	 	<div class="search">
+	 	    <center>
+	 		<i class="material-icons icon">search</i><input type="text" placeholder="Search" />
+	 		</center>
+	 	</div>
+	 </div>
+     
+     <div class="lists left-list-scroller">
+	     <div class="list" ng-repeat="a in [1,2,3,4,5,6,7,9,11,13,14,15,23,33,35,566,345]" md-ink-ripple>
+	      <div class="main">
+	       <div class="title"><span>Title of Flow {{a}}</span></div>
+	       <div class="desc">
+	       <span ng-repeat="a in [1,2,3,4,5]">Book a table , </span>
+	       </div>
+	       <div class="sub-info md-caption">
+	       <span class="caption small" md-colors="{background:'teal-900-0.53',color:'primary-50'}">Triggered 2 day ago .. flow {{a}}</span>
+	       </div>
+	      </div>
+	      <div class="action">
+	      	<md-button class="md-icon-button" aria-label="More">
+        		<md-icon> <i class="material-icons">more_vert</i> </md-icon>
+      		</md-button>
+	      </div>
+	     
+	     </div>
+     </div>
