@@ -238,6 +238,7 @@
    flex-grow: 1;
    display: flex;
    flex-direction: row;
+   height:1;
  }
 
   .dashboard .content .right-bar .body .flow-bar {
@@ -248,7 +249,7 @@
   }
 
   .dashboard .content .right-bar .body .flow-info-bar {
-    flex-grow: 2;
+    flex-grow: 4;
   }  
   
 
@@ -265,6 +266,7 @@
   border-radius: 9px;
    border:1px solid;
   animation-duration: .7s;
+  box-shadow: 1px 1px 5px #d9d9d9;
 }
 .flow .card.left {
    left:5%;
@@ -274,6 +276,12 @@
    background-color: #d9d9d9;
    right:5%;
    float: right;
+}
+
+.flow .card.center {
+   background-color: #f0f0f0;
+   border:1px solid #d9d9d9;
+       display: inline-block;
 }
 
 
@@ -303,6 +311,9 @@
    display: inline-block; 
      color:#777;
      transition: .2s all;
+     animation-name: pulse;
+     animation-duration: 1s;
+      animation-iteration-count: infinite;
   }  
 .flow .new-card .add i { 
   font-size: 41px;  

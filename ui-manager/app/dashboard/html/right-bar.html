@@ -9,8 +9,20 @@
 
 <div class="flow">
 
+
+<!-- Welcome module -->
+<div class="card center fadeInDown">
+	<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Welcome Module {{$index}}</span></div>
+		<div class="msg valign-center">Module msg {{$index}}</div>
+		<div class="sub-info valign-center">Module sub - info</div>
+</div>
+
+<div class="new-card"> <div class="edge"><span></span></div><div class="add"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
+<!-- Welcome Module end -->
+
+<!-- Repeat Modules -->
  <div ng-repeat="a in [1,2,3,4,5,6]">
-	<div class="card" ng-class="{'left': $even, 'fadeInLeft': $even, 'fadeInRight': $odd, 'right': $odd }" md-colors="$even && {background:'primary-600', color:'primary-50'} || {background:'warn-500-0.13', color:'warn-900-0.73', 'border-color':'warn-400-0.1'}">
+	<div class="card" ng-class="{'left': $even, 'fadeInLeft': $even, 'fadeInRight': $odd, 'right': $odd }" md-colors="$even && {background:'primary-600', color:'primary-50', 'border-color':'primary-400-0.1'} || {background:'warn-500-0.13', color:'warn-900-0.73', 'border-color':'warn-400-0.1'}">
 		
 		<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Module title {{$index}}</span></div>
 		<div class="msg valign-center">Module msg {{$index}}</div>
@@ -22,6 +34,13 @@
 
 	<div class="new-card"> <div class="edge"><span></span></div><div class="add"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
 
+</div>
+<!-- Repeat modules End -->
+
+<div class="card center fadeInUp">
+	<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Final Module {{$index}}</span></div>
+		<div class="msg valign-center">Module msg {{$index}}</div>
+		<div class="sub-info valign-center">Module sub - info</div>
 </div>
 
 </div>	
