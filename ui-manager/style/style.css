@@ -263,6 +263,8 @@
   text-align: center;
   width:55%;
   border-radius: 9px;
+   border:1px solid;
+  animation-duration: .7s;
 }
 .flow .card.left {
    left:5%;
@@ -281,6 +283,8 @@
    height:100px;
    display: block;
    overflow:hidden;
+   animation-name: slideInUp;
+   animation-duration: 1.2s;
 }
 .flow .new-card .edge {
    height:30px;
@@ -334,6 +338,12 @@
   border-bottom: 1px solid #e9e9e9;
   padding-bottom: 4px;
   font-size: 19px;
+  cursor: pointer;
+  }
+
+ .flow .card .title span:hover {
+  animation-name: swing;
+  animation-duration: .5s;
   }
 .flow .card .msg {
   height:20px;
