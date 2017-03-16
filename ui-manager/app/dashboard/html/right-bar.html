@@ -10,15 +10,18 @@
 <div class="flow">
 
  <div ng-repeat="a in [1,2,3,4,5,6]">
-	<div class="l-card" md-colors="{background:'primary-600'}"></div>
+	<div class="card" ng-class="{'left': $even,'right': $odd }" md-colors="$even && {background:'primary-600', color:'primary-50'} || {background:'warn-500-0.33', color:'warn-900-0.93'}">
+		
+		<div class="title valign-center"><span>Module title {{$index}}</span></div>
+		<div class="msg valign-center">Module msg {{$index}}</div>
+		<div class="sub-info valign-center">Module sub - info</div>
+
+
+	</div>
 
 
 	<div class="new-card"> <div class="edge"><span></span></div><div class="add"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
 
-
-	<div class="r-card" md-colors="{background:'warn-300-.40'}"></div>
-
-    <div class="new-card"> <div class="edge"><span></span></div><div class="add"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
 </div>
 
 </div>	
