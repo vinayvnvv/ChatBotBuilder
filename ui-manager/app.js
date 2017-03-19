@@ -1,5 +1,31 @@
 var app = angular.module('ChatBotManager', ['ui.router', 'ngAnimate', 'ngMaterial']);
 
+app.run(['Auth', '$rootScope', '$state', '$location', function (Auth, $rootScope, $state, $location) {
+
+
+  
+  console.log($state)
+
+
+
+ 
+         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+          console.log("isAuth:", Auth.isAuth())
+            console.log("toState" , toState)
+           if(toState.name != 'login') {
+                  if ( !(Auth.isAuth())   ) {
+                    event.preventDefault();
+                    window.location = "#!/login";
+                    return false;
+                }
+
+            }
+          console.log(toState)
+        })
+ 
+   
+}])
+
 //Routing
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 

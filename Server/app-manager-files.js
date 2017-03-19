@@ -19,10 +19,11 @@ var AppManagerFiles = function() {
               'ui-manager/*.js',
               'ui-manager/app/dashboard/ctrl/*.js', 
               'ui-manager/app/auth/ctrl/*.js',  
-              'ui-manager/directives/*.js'
+              'ui-manager/directives/*.js',
+              'ui-manager/services/*.js'
     	    ],
     	css:[
-    	      'ui-manager/style/style.css'
+    	      'ui-manager/style/*.css'
     	    ]    
     }
 
