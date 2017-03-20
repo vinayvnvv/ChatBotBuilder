@@ -1,44 +1,90 @@
 Flow modules
 *************
-        {
-            "_id":"db_id",
-            "matches":[],
-            "type":"single|flow",
-            "welcome":{
-                 "msg":["hello", "Good morning"],
-                 "shortcut":"list",
-                 "shortcutData":["hello","bye"]
-              
-            },
-            "modules": [
-              {
-                 "id":"aa123213", 
-                 "msg":"hello",
-                 "beforeMsg":[],
-                 "afterMsg":[],
-                 "shortcut":"list|option|yes-no",
-                 "shortcutData":["hello","bye"],
-                 "customStyleTemplate":"true",
-                 "template":"<h1>{{msg[1]}}</h1",
-                 "validate":"date",
-                 "validateErrMsg":"it must be date"
-            },
-            {
-                 "id":"aa123213",
-                 "msg":"welcome",
-                 "beforeMsg":[],
-                 "afterMsg":[],
-                 "shortcut":"list|option|yes-no",
-                 "customStyleTemplate":"true",
-                 "template":"<h1>{{$flow[0]}}</h1"
-            }
-            ],
-            "final": {
-                 "msg":["Final", "Thank You ! Bye!!!"],
-                 "shortcut":"list",
-                 "shortcutData":["hello","again"]
-            }
-          }
+  {
+  "name": "Name of the module",
+  "timestamp":{
+     "created":"",
+     "updated":""
+  },
+  "matches": [
+    "order table",
+    "book table",
+    "book a Table"
+  ],
+  "type": "flow",
+  "welcome": {
+    "msg": [
+      "Okay, You are choosen order table help!!!!"
+    ]
+  },
+  "modules": [
+    {
+      "id": "aa123214",
+      "msg": "Enter Your Name",
+      "beforeMsg": [],
+      "afterMsg": [],
+      "shortcut": "list",
+      "shortcutData": [
+        "hello",
+        "bye"
+      ],
+      "customStyleTemplate": "true",
+      "template": "<h1>{{msg[1]}}</h1",
+      "validate": null,
+      "validateErrMsg": "UserID  must be number"
+    },
+    {
+      "id": "aa123213",
+      "msg": [
+        "Thank you {{$flow[0]}}!",
+        "Enter Your Email For ID:"
+      ],
+      "beforeMsg": [],
+      "afterMsg": [],
+      "shortcut": "option",
+      "customStyleTemplate": "true",
+      "template": "<h1>{{$flow[0]}}</h1",
+      "validate": "email",
+      "validateErrMsg": "Pls Enter correct email id:"
+    },
+    {
+      "id": "aa123213",
+      "msg": "How many tables You want?",
+      "beforeMsg": [],
+      "afterMsg": [],
+      "shortcut": "option",
+      "customStyleTemplate": "true",
+      "template": "<h1>{{$flow[0]}}</h1",
+      "validate": "number",
+      "validateErrMsg": "It should be a number!"
+    },
+    {
+      "id": "aa123213",
+      "msg": [
+        "Last one step",
+        "Enter your address"
+      ],
+      "beforeMsg": [],
+      "afterMsg": [],
+      "shortcut": "option",
+      "customStyleTemplate": "true",
+      "template": "<h1>{{$flow[0]}}</h1",
+      "validate": null,
+      "validateErrMsg": "It should be a number!"
+    }
+  ],
+  "final": {
+    "msg": [
+      "Success",
+      "Table is booked {{$flow[0]}}!!, notification sent to {{$flow[1]}}"
+    ],
+    "shortcut": "option",
+    "shortcutData": [
+      "call",
+      "order table"
+    ]
+  }
+}
 
 *********************
 track structure
@@ -64,6 +110,8 @@ init modules
   "shortcut":"list",
   "shortcutData":["hello","bye"]
 }            
+
+
 
 
 

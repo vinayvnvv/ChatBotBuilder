@@ -11,6 +11,7 @@ var gulpActivity = function(app, http) {
 	this.http = http;
 
 	var server_app = AppFiles.server;
+	var server_app_manager = AppManagerFiles.server;
 
 	this.start = function(port) {
 
@@ -114,6 +115,7 @@ var gulpActivity = function(app, http) {
 			gulp.watch(AppManagerFiles.custom.css, ['build_manager_css']);
 
 			gulp.watch(server_app, ['gulp-autoreload']);
+			gulp.watch(server_app_manager, ['gulp-autoreload']);
 		});
 
 

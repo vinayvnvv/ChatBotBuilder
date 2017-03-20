@@ -3,7 +3,6 @@
 app.service('Auth', ['$rootScope', 'Strings', function ($rootScope, Strings) {
 
     this.isAuth = function() {
-    	console.log('strorage', 	localStorage.getItem(authInstance.storageName))
         if( (localStorage.getItem(authInstance.storageName) == "null") || (localStorage.getItem(authInstance.storageName) == null) || (localStorage.getItem(authInstance.storageName) == undefined))
         	return false;
         return true;
@@ -14,41 +13,36 @@ app.service('Auth', ['$rootScope', 'Strings', function ($rootScope, Strings) {
     }
 
 
+    this.initAuth = function() {
+      var data = JSON.parse(localStorage.getItem(authInstance.storageName));
+      if(data == null) return;
+      
+      $rootScope._auth_user_id = data[authInstance.storageIdKey];
+      $rootScope._auth_user_name = data[authInstance.storageNameKey];
+      $rootScope._auth_user_email = data[authInstance.storageEmailKey];
+      $rootScope._auth_user_avtar = data[authInstance.storageAvtarKey];
+      $rootScope.$apply();
+    }
+
+
+    this.setAuth = function(data) {
+      localStorage.setItem(authInstance.storageName, JSON.stringify(data));
+    }
+
+
 }]);
-
-
-
-
-
-function onSignIn(googleUser) {
-
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); 
-
-  var data = {};
-  data[authInstance.storageIdKey] = profile.getId();
-  data[authInstance.storageNameKey] = profile.getName();
-  data[authInstance.storageAvtarKey] = profile.getImageUrl();
-  data[authInstance.storageEmailKey] = profile.getEmail();
-
-
-  console.log(data)
-
-  localStorage.setItem(authInstance.storageName, JSON.stringify(data));
 
   
 
-}
-
  function signOut() {
- 	console.log(gapi)
+  gapi.load('auth2', function() {
+        gapi.auth2.init();
+      });
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
       console.log('User signed out.');
       localStorage.setItem(authInstance.storageName, null)
+      window.location = "#!/login"
     });
   }
 

@@ -6,11 +6,55 @@
 
         <h2 flex md-truncate class="font-1">ChatBot Manager</h2>
 
-        <md-button class="md-icon-button" aria-label="Favorite">
-          <md-icon> <i class="material-icons">person</i> </md-icon>
-        </md-button>
 
-        <md-button class="md-icon-button" aria-label="More">
+         <md-menu>
+            <md-button aria-label="Open menu with custom trigger" class="md-button" ng-mouseenter="$mdMenu.open()">
+              <md-icon> <i class="material-icons">account_circle</i></md-icon> {{_auth_user_name}}
+            </md-button>
+                <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                    <div class="menu-user-p">
+                        <div class="icon valign-center"> <img src="{{_auth_user_avtar}}"/> </div>
+                        <div class="title valign-center"> <div><div class="name">{{_auth_user_name}}</div><div class="email">{{_auth_user_email}}</div></div> </div>
+                    </div>
+                    
+
+           
+                    <md-menu-item >
+                      <md-button>
+                       <md-icon><i class="material-icons">account_circle</i></md-icon> Your Profile
+                      </md-button>
+                    </md-menu-item>
+
+                    <md-menu-divider></md-menu-divider>
+
+                    <md-menu-item >
+                      <md-button>
+                       <md-icon><i class="material-icons">settings</i></md-icon> Setting
+                      </md-button>
+                    </md-menu-item>
+
+                    <md-menu-item >
+                      <md-button>
+                       <md-icon><i class="material-icons">help</i></md-icon> Help
+                      </md-button>
+                    </md-menu-item>
+
+                    <md-menu-divider></md-menu-divider>
+
+                    <md-menu-item >
+                      <md-button>
+                       <md-icon><i class="material-icons">power_settings_new</i></md-icon> Sign Out
+                      </md-button>
+                    </md-menu-item>
+
+                </md-menu-content>
+          </md-menu>
+
+
+
+
+
+        <md-button class="md-icon-button" aria-label="More" onclick="signOut()">
           <md-icon ><i class="material-icons">power_settings_new</i></md-icon>
         </md-button>
       </div>

@@ -488,3 +488,30 @@ body , html {
   font-size: 16px;
   font-weight: 400;
 }
+
+
+.menu-user-p {
+  display: flex;
+  flex-direction: row;
+  padding: 6px;
+  background-color: #f6f6f6;
+}
+.menu-user-p .icon { 
+  flex-basis: 60px;
+  text-align: right;
+}
+.menu-user-p .icon img { 
+  width:40px;
+  border-radius: 50px;
+}
+.menu-user-p .title { 
+  flex-grow:1;
+  text-align: left;
+}
+.menu-user-p .title .name { 
+  color:#555;
+}
+.menu-user-p .title .email { 
+  color:#999;
+  font-size: 12px;
+}

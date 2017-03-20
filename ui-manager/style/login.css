@@ -37,7 +37,7 @@
 	animation-duration: .8s;
 }
 
-.abcRioButton.abcRioButtonLightBlue {
+.login-button {
 	width:70%!important;
 	display: inline-block;
 }

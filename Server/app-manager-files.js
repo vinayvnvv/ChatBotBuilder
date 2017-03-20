@@ -28,6 +28,17 @@ var AppManagerFiles = function() {
     }
 
 
+     this.server = 
+         [
+           'app-manager/*.*',
+           'app-manager/db/*.*',
+           'app-manager/route/*.*',
+           'app-manager/models/*.*',
+           'app-manager/services/*.*'
+
+         ];
+
+
 }
 
 
