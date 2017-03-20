@@ -1,6 +1,6 @@
 Flow modules
 *************
-  {
+{
   "name": "Name of the module",
   "timestamp":{
      "created":"",
@@ -83,6 +83,10 @@ Flow modules
       "call",
       "order table"
     ]
+  },
+  "statastics":{
+    "triggered":"",
+    "triggeredAt":""
   }
 }
 
