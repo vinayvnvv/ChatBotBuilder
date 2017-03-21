@@ -21,7 +21,7 @@
 		
 		<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Module {{$index + 1}}</span></div>
 		<div class="msg valign-center">{{m.msg}}</div>
-		<div class="sub-info valign-center"><span class="caption small" md-colors="$even && {background:'primary-50', color:'primary-900'} || {background:'warn-700-0.6', color:'warn-50'}">Validation Type: {{m.validate}}</span></div>
+		<div class="sub-info valign-center"><span class="caption small" md-colors="$even && {background:'primary-900', color:'primary-50'} || {background:'warn-700-0.6', color:'warn-50'}">Validation Type: {{m.validate || 'not set'}}</span></div>
 
 
 	</div>

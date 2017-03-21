@@ -87,6 +87,14 @@ app.directive('loader', ['$compile', function($compile){
 			iElm.css('position', 'absolute');
 			iElm.css('height', '100%')
 
+			if(iElm[0].parentElement != null) {
+				iElm.css('top', iElm[0].parentElement.offsetTop);
+				iElm.css('width', iElm["0"].parentElement.offsetWidth);
+				iElm.css('left', iElm["0"].parentElement.offsetLeft);
+				iElm.css('position', 'fixed');
+				iElm.css('height', iElm["0"].parentElement.offsetHeight);
+			}
+
 			
 		}
 	};
