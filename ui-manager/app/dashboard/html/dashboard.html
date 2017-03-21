@@ -10,8 +10,35 @@
 	</div>
 </div>
 
+</div>
 
+<div class="fab">
+<md-fab-speed-dial md-open="isFabOpen" md-direction="up"
+                         class="md-fling" ng-mouseenter="isFabOpen=true" ng-mouseleave="isFabOpen=false" ng-cloak>
+        <md-fab-trigger aria-expanded="false">
+          <md-button aria-label="menu" class="md-fab md-warn">
+	          <md-tooltip md-direction="left" md-visible="false"
+	                        md-autohide="false">
+	              New
+	          </md-tooltip>
+             <md-icon > <i class="material-icons">add</i> </md-icon>
+          </md-button>
+        </md-fab-trigger>
 
-
-
+        <md-fab-actions aria-hidden="false">
+          <md-button aria-label="Twitter" class="md-fab md-raised md-mini" ng-click="openCreateModuleDialog($event)">
+          <md-tooltip md-direction="left" md-visible="false"
+                        md-autohide="false">
+              Add Module
+            </md-tooltip>
+            <md-icon > <i class="material-icons">chrome_reader_mode</i> </md-icon>
+          </md-button>
+          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+            <md-icon ></md-icon>
+          </md-button>
+          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+            <md-icon ></md-icon>
+          </md-button>
+        </md-fab-actions>
+</md-fab-speed-dial>
 </div>
