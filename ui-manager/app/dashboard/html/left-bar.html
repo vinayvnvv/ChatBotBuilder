@@ -3,7 +3,7 @@
 	 	<div class="info"><span class="title" md-colors="{'border-color': 'primary-600'}">Flows</span></div>
 	 	<div class="search">
 	 	    <center>
-	 		<i class="material-icons icon">search</i><input type="text" placeholder="Search" />
+	 		<i class="material-icons icon">search</i><input type="text" placeholder="Search" ng-model="leftBarSearch.name"/>
 	 		</center>
 	 	</div>
 	 </div>
@@ -12,9 +12,9 @@
 
      
      <div class="lists left-list-scroller">
-	     <div class="list" ng-repeat="a in [1,2,3,4,5,6,7,9,11,13,14,15,23,33,35,566,345]" md-ink-ripple>
+	     <div class="list" ng-repeat="m in moduleData | filter : leftBarSearch : strict " md-ink-ripple ng-click="openModule(m, $index)">
 	      <div class="main">
-	       <div class="title"><span>Title of Flow {{a}}</span></div>
+	       <div class="title"><span>{{m.name}}</span></div>
 	       <div class="desc">
 	       <span ng-repeat="a in [1,2,3,4,5]">Book a table , </span>
 	       </div>

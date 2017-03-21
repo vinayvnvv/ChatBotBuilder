@@ -1,0 +1,31 @@
+.animation-bottom-long {
+  position: relative;
+}
+
+.animation-bottom-long.ng-enter {
+  opacity: 0;
+  left:-100%;
+  transition: 0.6s all;
+}
+
+.animation-bottom-long.ng-leave {
+  position: absolute;
+  top:0;
+  width: 100%;
+  opacity: 0;
+  left:0;
+  transition: 0.6s all;
+}
+
+.animation-bottom-long.ng-enter.ng-enter-active {   
+  opacity: 1;
+  left:0;
+}
+
+.animation-bottom-long.ng-leave.ng-leave-active {
+  position: absolute;
+  top:0;
+  width: 100%;
+  opacity: 1;
+  left:100%;
+}

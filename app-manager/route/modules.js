@@ -8,7 +8,7 @@ var Model = require('./../models/models');
 router.get('/:id', function(req, res, next) {
    moduleDb.get(
         req.params.id,
-        function(docs) { res.json(docs) },
+        function(docs) { setTimeout(function() { res.json(docs) }, 2000);  },
         function(err) {}
    	)
 });
@@ -18,7 +18,7 @@ router.post('/create/:id', function(req, res) {
 	moduleDb.create(
           req.params.id,
           req.body,
-          function(result) { res.json(Model.success_obj(result)); },
+          function(result) { setTimeout(function() { res.json(Model.success_obj(result)); }, 2000);  },
           function(err) { res.json(Model.error_obj(err)); }
 		);
 });

@@ -9,6 +9,11 @@ app.service('Strings',['$location', function($location) {
 		updateModules: origin + "api/manager/modules/update/",
 		createModules: origin + "api/manager/modules/create/"
 	}
+
+	this.templateUrl = {
+		statsView : 'app/dashboard/html/stats-view.html',
+		moduleView : 'app/dashboard/html/module-view.html'
+	}
 	
 }]);
 

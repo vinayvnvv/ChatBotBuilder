@@ -33,6 +33,8 @@ app.controller('loginCtrl', ['$scope', '$rootScope', '$state', 'Auth', function(
             data[authInstance.storageAvtarKey] = profile.getImageUrl();
             data[authInstance.storageEmailKey] = profile.getEmail();
 
+            console.log('logged Id: ' +  profile.getId())
+
             Auth.setAuth(data);
             Auth.initAuth();
             $state.go("dashboard");
