@@ -3,20 +3,29 @@
 }
 .in-aria.row {
 	flex-direction: row;
+  border-bottom: 10px solid #f7f7f7;
+}
+.in-aria.row:last-child {
+  border-bottom: none;
 }
 .in-aria .title {
   padding: 9px;
+  flex-grow: 1;
+  max-width:40%;
+  width: 40%;
 }
 .in-aria .input {
   padding: 9px;
+  flex-grow: 1; 
 }
 .in-aria .input input {
-	outline: none;
+	  outline: none;
     border: none;
     border-bottom: 2px solid #d9d9d9;
     padding: 3px;
     color:#555;
     transition: .3s all;
+    width:85%;
 }
 
 .in-aria .input input:hover {
@@ -25,4 +34,11 @@
 
 .in-aria .input input:focus {
 	border-bottom:2px solid #222;
+}
+.in-err {
+    color: #cc0000;
+    font-size: 13px;
+    font-weight: 300;
+    padding: 3px;
+    animation-duration: 2s;
 }

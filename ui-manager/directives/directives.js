@@ -80,20 +80,22 @@ app.directive('loader', ['$compile', function($compile){
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
 		link: function($scope, iElm, iAttrs, controller) {
 
+            if(iAttrs.lTitle != undefined && iAttrs.lTitle != null && iAttrs.lTitle != '') $scope.title = iAttrs.lTitle;
 
 			console.log(iElm)
 			iElm.css('top', iElm[0].parentElement.offsetTop);
 			iElm.css('width', iElm["0"].parentElement.offsetWidth);
 			iElm.css('position', 'absolute');
-			iElm.css('height', '100%')
+			iElm.css('height', '100%');
+			iElm.css('height', iElm["0"].parentElement.offsetHeight);
 
-			if(iElm[0].parentElement != null) {
-				iElm.css('top', iElm[0].parentElement.offsetTop);
-				iElm.css('width', iElm["0"].parentElement.offsetWidth);
-				iElm.css('left', iElm["0"].parentElement.offsetLeft);
-				iElm.css('position', 'fixed');
-				iElm.css('height', iElm["0"].parentElement.offsetHeight);
-			}
+			// if(iElm[0].parentElement != null) {
+			// 	iElm.css('top', iElm[0].parentElement.offsetTop);
+			// 	iElm.css('width', iElm["0"].parentElement.offsetWidth);
+			// 	iElm.css('left', iElm["0"].parentElement.offsetLeft);
+			// 	iElm.css('position', 'fixed');
+			// 	iElm.css('height', iElm["0"].parentElement.offsetHeight);
+			// }
 
 			
 		}

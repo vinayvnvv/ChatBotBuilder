@@ -13,7 +13,7 @@
 <div class="section">
 	<div class="title">Matches</div>
 	<div class="content">
-	<div class="item" ng-repeat="m in moduleSelectedData.matches"><span md-colors="{'background':'teal-{{($index+4)%7}}00-0.{{(($index%4)+4)%8}}'}" class="caption">{{m}}</span></div>
+	<div class="item" ng-repeat="m in moduleSelectedData.matches"><span md-colors="{'background':'teal-{{($index+4)%7}}00-0.{{(($index%4)+4)%8}}', 'border-color':'teal-{{($index+1)%5}}00'}" class="caption" style="border:1px solid">{{m}}</span></div>
 	</div>
 </div>
 

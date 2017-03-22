@@ -1,4 +1,4 @@
-app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$mdDialog', function($scope, $http, Strings, $rootScope, $mdDialog){
+app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$mdDialog', 'Service', function($scope, $http, Strings, $rootScope, $mdDialog, Service){
 	console.log("called dashboard ctrl...Id :  " + $rootScope._auth_user_id);
 
 	//init vars  
@@ -6,14 +6,14 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 	//init template Urls
 	$rootScope.rightBarTemplate = Strings.templateUrl.statsView;
 
-    $scope.getModules = function() {
+    $rootScope.getModules = function(title) {
 
-      $rootScope.leftBarLoader = true;
+      Service.loader.showLeftBar(title);
     	$http.get(Strings.apis.getModules + $rootScope._auth_user_id).then(function(res) {
        		$scope.moduleData = res.data;
-       		$rootScope.leftBarLoader = false;
+       		Service.loader.hideLeftBar();
 		}, function(err) {
-			$rootScope.leftBarLoader = false;
+			    Service.loader.hideLeftBar();
 		})
 
     }
