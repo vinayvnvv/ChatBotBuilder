@@ -1,0 +1,28 @@
+.in-aria {
+	display: flex;
+}
+.in-aria.row {
+	flex-direction: row;
+}
+.in-aria .title {
+  padding: 9px;
+}
+.in-aria .input {
+  padding: 9px;
+}
+.in-aria .input input {
+	outline: none;
+    border: none;
+    border-bottom: 2px solid #d9d9d9;
+    padding: 3px;
+    color:#555;
+    transition: .3s all;
+}
+
+.in-aria .input input:hover {
+	border-bottom:2px solid #999;
+}	
+
+.in-aria .input input:focus {
+	border-bottom:2px solid #222;
+}

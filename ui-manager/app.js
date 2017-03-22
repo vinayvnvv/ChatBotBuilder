@@ -1,4 +1,4 @@
-var app = angular.module('ChatBotManager', ['ui.router', 'ngAnimate', 'ngMaterial']);
+var app = angular.module('ChatBotManager', ['ui.router', 'ngAnimate', 'ngMaterial', 'autoAddInput']);
 
 app.run(['Auth', '$rootScope', '$state', '$location', function (Auth, $rootScope, $state, $location) {
 

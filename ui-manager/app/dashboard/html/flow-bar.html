@@ -9,7 +9,7 @@
 <div class="card center fadeInDown">
 	<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Welcome Module {{$index}}</span></div>
 		<div class="msg valign-center">{{moduleSelectedData.welcome.msg}}</div>
-		<div class="sub-info valign-center">Module sub - info</div>
+		<div class="sub-info valign-center"><span class="caption small" md-colors="{background:'red-500-0.5', color:'primary-50'}">This module will called first</span></div>
 </div>
 
 <div class="new-card"> <div class="edge"><span></span></div><div class="add" md-ink-ripple><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
@@ -19,9 +19,11 @@
  <div ng-repeat="m in moduleSelectedData.modules">
 	<div class="card" ng-class="{'left': $even, 'fadeInLeft': $even, 'fadeInRight': $odd, 'right': $odd }" md-colors="$even && {background:'primary-600', color:'primary-50', 'border-color':'primary-800-0.4'} || {background:'warn-500-0.13', color:'warn-900-0.73', 'border-color':'warn-400-0.1'}">
 		
-		<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Module {{$index + 1}}</span></div>
+		<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">{{$index+1}}. {{m.name}}</span></div>
 		<div class="msg valign-center">{{m.msg}}</div>
-		<div class="sub-info valign-center"><span class="caption small" md-colors="$even && {background:'primary-900', color:'primary-50'} || {background:'warn-700-0.6', color:'warn-50'}">Validation Type: {{m.validate || 'not set'}}</span></div>
+
+		<div class="sub-info valign-center"><span class="caption small" md-colors="$even && {background:'primary-50', color:'primary-900'} || {background:'warn-700-0.6', color:'warn-50'}">Validation Type: {{m.validate || ' no validation'}}</span></div>
+
 
 
 	</div>

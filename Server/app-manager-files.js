@@ -7,7 +7,8 @@ var AppManagerFiles = function() {
               'ui-manager/node_modules/angular-animate/angular-animate.min.js',
               'ui-manager/node_modules/angular-material/angular-material.min.js',
               'ui-manager/node_modules/angular-aria/angular-aria.min.js',
-              'ui-manager/node_modules/angular-messages/angular-messages.min.js'
+              'ui-manager/node_modules/angular-messages/angular-messages.min.js',
+              'ui-manager/libs/auto-add-input.js'
     	    ],
     	css:[
     	      'ui-manager/node_modules/angular-material/angular-material.min.css'

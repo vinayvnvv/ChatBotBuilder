@@ -516,3 +516,9 @@ body , html {
   color:#999;
   font-size: 12px;
 }
+
+.fab {
+  position: fixed;
+  bottom:20px;
+  right:20px;
+}
