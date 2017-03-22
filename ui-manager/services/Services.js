@@ -20,5 +20,12 @@ app.service('Service', ['$rootScope', function($rootScope){
 	}
 
 
+	this.addModuleAt = function(index, data, item) {
+       console.log(data, index, item);
+       data.splice(index, 0, item);
+       return data;  
+	}
+
+
 	
 }])

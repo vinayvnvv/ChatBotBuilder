@@ -44,6 +44,24 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
     }
 
 
+    $scope.openModuleItemDialog = function(index, ev) {
+      $rootScope[Strings.selected.moduleIndex] = index;
+      $mdDialog.show({
+            controller: 'moduleItemCtrl',
+            templateUrl: 'app/dashboard/html/module_item_dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:false,
+            fullscreen: true // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    }
+
+
 
 
 

@@ -4,9 +4,9 @@ app.controller('createModuleCtrl', ['$scope', '$mdDialog', '$http', 'Api', '$roo
     $scope.err = {};
 
 
-	$scope.closeDialog = function() {
+  $scope.closeDialog = function() {
       $mdDialog.cancel();
-	}
+  }
 
 
 	$scope.create = function() {

@@ -14,7 +14,23 @@ app.service('Strings',['$location', function($location) {
 		statsView : 'app/dashboard/html/stats-view.html',
 		moduleView : 'app/dashboard/html/module-view.html'
 	}
+
+
+	this.selected = {
+		moduleIndex : "selected_module_index"
+	}
+
+	this.validationTypeArray = [
+		                         {title:"Number", value:"number"},
+		                         {title:"Email", value:"email"}
+		                       ];
 	
+	this.suggestionTypeArray = [
+		                         {title:"List", value:"list"},
+		                         {title:"Option", value:"option"}
+		                       ];
+
+
 }]);
 
 
