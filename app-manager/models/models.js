@@ -15,7 +15,7 @@ var Models = function() {
 	       	  	model[field[i]] = data[field[i]];
 	       	  }
 	       }
-
+    
 	       return model;
 	}
 

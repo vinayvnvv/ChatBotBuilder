@@ -2,7 +2,7 @@
 
 <md-dialog aria-label="Mango (Fruit)">
 
-  <form name="createModule" ng-clock style="width:801px;">
+  <form name="createModuleItem" ng-clock style="width:801px;">
     <md-toolbar >
       <div class="md-toolbar-tools" >
         <h2>Create New Module</h2>
@@ -19,8 +19,8 @@
           <div class="in-aria row">
             <div class="title">Name Of the Module</div>
             <div class="input"> 
-               <input type="text" name="m_name" placeholder="Name" ng-model="create_module_name" required />
-               <div class="in-err flash" ng-if="createModule.m_name.$invalid && err.show">Specify the name of the Module</div>
+               <input type="text" name="m_name" placeholder="Name" ng-model="create_module_item_name" required />
+               <div class="in-err flash" ng-if="createModuleItem.m_name.$invalid && err.show">Specify the name of the Module</div>
             </div>
           </div>
 
@@ -28,51 +28,49 @@
            <div class="in-aria row">
             <div class="title">Module Message </div>
             <div class="input"> 
-              <auto-add-input ng-model="create_module_matches" name="m_match">
+              <auto-add-input ng-model="create_module_item_msg" name="m_msg">
                   <input type="text" placeholder="msg" data-array="$index" required/>
               </auto-add-input>
-              <div class="in-err flash" ng-if="createModule.m_match.$viewValue.length==0 && err.show">Specify atleast one match!</div>
+              <div class="in-err flash" ng-if="createModuleItem.m_msg.$viewValue.length==0 && err.show">Specify Msg to display in Bot!</div>
             </div>
           </div>
 
           <div class="in-aria row">
             <div class="title">Before Message </div>
             <div class="input"> 
-              <auto-add-input ng-model="create_module_matches" name="m_match">
+              <auto-add-input ng-model="create_module_item_before_msg" name="m_b_msg">
                   <input type="text" placeholder="msg" data-array="$index" required/>
               </auto-add-input>
-              <div class="in-err flash" ng-if="createModule.m_match.$viewValue.length==0 && err.show">Specify atleast one match!</div>
             </div>
           </div>
 
           <div class="in-aria row">
             <div class="title">After Message </div>
             <div class="input"> 
-              <auto-add-input ng-model="create_module_matches" name="m_match">
+              <auto-add-input ng-model="create_module_item_after_msg" name="m_a_msg">
                   <input type="text" placeholder="msg" data-array="$index" required/>
               </auto-add-input>
-              <div class="in-err flash" ng-if="createModule.m_match.$viewValue.length==0 && err.show">Specify atleast one match!</div>
             </div>
           </div>
 
         <div class="in-aria row">
             <div class="title">Validation</div>
-            <div class="input"> 
-                  <md-input-container class="md-block" flex-gt-sm>
-                    <label>Type</label>
-                    <md-select ng-model="user.state">
+            <div class="input" ng-init="create_module_item_validation = 'none'"> 
+                  <md-input-container class="md-block" flex-gt-sm >
+                    
+                    <md-select ng-model="create_module_item_validation" name="m_val"> 
                       <md-option ng-repeat="item in validation_type_array" value="{{item.value}}">
                         {{item.title}}
                       </md-option>
                     </md-select>
                   </md-input-container>
-               <div class="in-err flash" ng-if="createModule.m_name.$invalid && err.show">Specify the name of the Module</div>
 
-               <div >
-                   <auto-add-input ng-model="create_module_matches" name="m_match">
+               <div ng-show="create_module_item_validation != 'none'">
+                 <div class="sub-info md-caption">Validation Error Msgs:</div>
+                   <auto-add-input ng-model="create_module_matches" name="m_vl_array">
                       <input type="text" placeholder="add msgs" data-array="$index" required/>
                   </auto-add-input>
-                  <div class="in-err flash" ng-if="createModule.m_match.$viewValue.length==0 && err.show">Specify atleast one match!</div>
+                  <div class="in-err flash" ng-if="create_module_matches == 0 && err.show">Specify atleast one Error msg !</div>
                </div>
             </div>
           </div>
@@ -80,22 +78,21 @@
 
         <div class="in-aria row">
             <div class="title">Suggestion</div>
-            <div class="input"> 
-                  <md-input-container class="md-block" flex-gt-sm>
-                    <label>Type</label>
-                    <md-select ng-model="user.state">
+            <div class="input" ng-init="create_module_item_shortcut = 'none'"> 
+                  <md-input-container class="md-block" flex-gt-sm >
+                    <md-select ng-model="create_module_item_shortcut" name="m_sug">
                       <md-option ng-repeat="item in suggestion_type_array" value="{{item.value}}">
                         {{item.title}}
                       </md-option>
                     </md-select>
                   </md-input-container>
-               <div class="in-err flash" ng-if="createModule.m_name.$invalid && err.show">Specify the name of the Module</div>
 
-               <div >
-                   <auto-add-input ng-model="create_module_matches" name="m_match">
-                      <input type="text" placeholder="add msgs" data-array="$index" required/>
+               <div ng-show="create_module_item_shortcut != 'none'">
+                <div class="sub-info md-caption">Suggestion Items:</div>
+                   <auto-add-input ng-model="create_module_item_shortcut_array" name="m_sh_array">
+                      <input type="text" placeholder="add items" data-array="$index" required/>
                   </auto-add-input>
-                  <div class="in-err flash" ng-if="createModule.m_match.$viewValue.length==0 && err.show">Specify atleast one match!</div>
+                  <div class="in-err flash" ng-if="create_module_item_shortcut_array.length == 0 && err.show">Specify atleast one Suggestion Item !</div>
                </div>
             </div>
           </div> 

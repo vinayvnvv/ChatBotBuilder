@@ -29,7 +29,7 @@ router.post('/update/:id/:moduleId', function(req, res) {
           req.params.id,
           req.params.moduleId,
           req.body,
-          function(result) { res.json(Model.success_obj(result)); },
+          function(result) { setTimeout(function() { res.json(Model.success_obj(result)); }, 2200);  },
           function(err) { res.json(Model.error_obj(err)); }
 		);
 

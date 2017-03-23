@@ -20,7 +20,7 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 
 
     $scope.openModule = function(module, index) {
-    	$scope.moduleSelectedData = module;
+    	$rootScope[Strings.selected.module] = module;
     	$rootScope.rightBarTemplate = "";
     	$rootScope.rightBarTemplate = Strings.templateUrl.moduleView;
     	console.log("selected Module", module)

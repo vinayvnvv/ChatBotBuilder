@@ -63,3 +63,10 @@ app.config(['$mdThemingProvider',function($mdThemingProvider) {
     .primaryPalette('light-green')
     .accentPalette('light-green');
 }]);
+
+//animate config
+
+app.config(function($animateProvider) {
+  $animateProvider.classNameFilter(/angular-animate/);
+  $animateProvider.classNameFilter(/md-fling/);
+});

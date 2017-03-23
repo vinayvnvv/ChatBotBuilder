@@ -101,3 +101,44 @@ app.directive('loader', ['$compile', function($compile){
 		}
 	};
 }]);
+
+app.directive('boxLoader', ['$compile', function($compile){
+	// Runs during compile
+	return {
+		// name: '',
+		// priority: 1,
+		// terminal: true,
+		// scope: {}, // {} = isolate, true = child, false/undefined = no change
+		// controller: function($scope, $element, $attrs, $transclude) {},
+		// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
+		// restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
+		// template: '',
+		 templateUrl: 'directives/templates/box-loader.html',
+		 replace: true,
+		 //transclude: true,
+		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+		link: function($scope, iElm, iAttrs, controller) {
+
+            if(iAttrs.lTitle != undefined && iAttrs.lTitle != null && iAttrs.lTitle != '') $scope.title = iAttrs.lTitle;
+
+            console.log("box-loader:" ,  iElm)
+
+            console.log("replace", (angular.element(iElm[0].parentElement).css("borderLeftWidth")).replace(/px/, ""))
+
+			$scope.Height = iElm["0"].parentElement.offsetHeight;
+			$scope.Left = parseInt((angular.element(iElm[0].parentElement).css("borderLeftWidth")).replace(/px/, ""));
+			$scope.Top = parseInt((angular.element(iElm[0].parentElement).css("borderTopWidth")).replace(/px/, ""));
+			$scope.Width = iElm["0"].parentElement.offsetWidth;
+
+			// if(iElm[0].parentElement != null) {
+			// 	iElm.css('top', iElm[0].parentElement.offsetTop);
+			// 	iElm.css('width', iElm["0"].parentElement.offsetWidth);
+			// 	iElm.css('left', iElm["0"].parentElement.offsetLeft);
+			// 	iElm.css('position', 'fixed');
+			// 	iElm.css('height', iElm["0"].parentElement.offsetHeight);
+			// }
+
+			
+		}
+	};
+}]);

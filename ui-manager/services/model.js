@@ -16,7 +16,7 @@ app.service('Models', function () {
        if(m.afterMsg == undefined || m.afterMsg == '' || m.afterMsg == null  ) model.afterMsg = [];
        else model.afterMsg = m.afterMsg;
 
-       if(m.validate == undefined || m.validate == '' || m.validate == null  ) {
+       if(m.validate == undefined || m.validate == '' || m.validate == null || m.validate == 'none' ) {
        	  model.validate = null;
        	  model.validateErrMsg = [];
 
@@ -27,7 +27,7 @@ app.service('Models', function () {
 
        	}
 
-       	if(m.shortcut == undefined || m.shortcut == '' || m.shortcut == null  ) {
+	if(m.shortcut == undefined || m.shortcut == '' || m.shortcut == null || m.shortcut == 'none') {
        	  model.shortcut = null;
        	  model.shortcutData = [];
 
@@ -37,6 +37,6 @@ app.service('Models', function () {
        		else model.shortcutData = m.shortcutData;
 
        	}
-      return model; 	
+         return model; 	
 	}
 });

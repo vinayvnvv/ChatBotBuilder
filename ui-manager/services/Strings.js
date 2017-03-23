@@ -17,15 +17,19 @@ app.service('Strings',['$location', function($location) {
 
 
 	this.selected = {
-		moduleIndex : "selected_module_index"
+		moduleIndex : "selected_module_index",
+		module: "moduleSelectedData",
+		moduleIndexSelectedLoader: "moduleIndexSelectedLoader"
 	}
 
 	this.validationTypeArray = [
+	                             {title:"None", value:"none"},
 		                         {title:"Number", value:"number"},
 		                         {title:"Email", value:"email"}
 		                       ];
 	
 	this.suggestionTypeArray = [
+	                             {title:"None", value:"none"},
 		                         {title:"List", value:"list"},
 		                         {title:"Option", value:"option"}
 		                       ];

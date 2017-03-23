@@ -14,7 +14,7 @@ app.controller('createModuleCtrl', ['$scope', '$mdDialog', '$http', 'Api', '$roo
         if($scope.errorCheck()) {
           var data = {
           			 "name" : $scope.create_module_name,
-					 "matches": $scope.create_module_matches
+					       "matches": $scope.create_module_matches
 					};
 		  Service.loader.showRoot('Creating Modules....');			
           Api.createModule(data).then(function(res){
