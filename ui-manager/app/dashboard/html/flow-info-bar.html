@@ -13,7 +13,7 @@
 <div class="section">
 	<div class="title">Matches</div>
 	<div class="content">
-	<div class="item" ng-repeat="m in moduleSelectedData.matches"><span md-colors="{'background':'teal-{{($index+4)%7}}00-0.{{(($index%4)+4)%8}}', 'border-color':'teal-{{($index+1)%5}}00'}" class="caption" style="border:1px solid">{{m}}</span></div>
+	<div class="item" ng-repeat="m in moduleSelectedData.matches"><span md-colors="{'border-color':'primary-600', 'color':'primary-700'}" class="caption border" style="border:1px solid">{{m}}</span></div>
 	</div>
 </div>
 
@@ -22,10 +22,10 @@
 <div class="section">
 	<div class="title">Statastics</div>
 	<div class="content">
-	<div class="item">Title Of Module</div>
-	<div class="item">Title Of Module</div>
-	<div class="item">Title Of Module</div>
-	<div class="item">Title Of Module</div>
+	<div class="item"><span class="caption small border">Created at {{moduleSelectedData.timestamp_created.at}}</span></div>
+	<div class="item"><span class="caption small border">Updated at {{moduleSelectedData.timestamp_updated.at}}</span></div>
+	<div class="item"><span class="caption small border">Last Triggered: 27 July</span></div>
+	<div class="item"><span class="caption small border">Triggered 31 times</span></div>
 	</div>
 </div>
 

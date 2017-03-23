@@ -5,6 +5,28 @@ app.controller('moduleItemCtrl', ['$scope', '$rootScope', 'Strings', '$mdDialog'
     $scope.err = {};
     $scope.validation_type_array = Strings.validationTypeArray;
     $scope.suggestion_type_array = Strings.suggestionTypeArray;
+    $scope.c_m_input = {};
+    console.log("select type", $rootScope[Strings.selected.openModuleItemDialogType])
+    //check action type
+      if($rootScope[Strings.selected.openModuleItemDialogType] == 'insert') { //insert
+        $scope.action = "Create";
+        $scope.actionMode = 'insert';
+        $scope.c_m_input.validate = "none";
+        $scope.c_m_input.shortcut = "none";
+        $rootScope.itemCreateModuleLoaderTitle = "Creating...";
+        $scope.toastTitle = "New Module Item is created!";
+      } else { //update
+        $scope.action = "Edit";
+        $scope.actionMode = 'edit';
+        $rootScope.itemCreateModuleLoaderTitle = "Updating...";
+        $scope.toastTitle = "Module is Item Updated!";
+        var d = JSON.stringify($rootScope[Strings.selected.module].modules[$rootScope[Strings.selected.moduleIndex]]);
+        d = JSON.parse(d);
+        //handle null inputs
+        if(d.validate == null) d.validate = Strings.validationTypeArray[0].value;
+        if(d.shortcut == null) d.shortcut = Strings.suggestionTypeArray[0].value;
+        $scope.c_m_input = d;
+      }
 
 
 	$scope.closeDialog = function() {
@@ -15,7 +37,7 @@ app.controller('moduleItemCtrl', ['$scope', '$rootScope', 'Strings', '$mdDialog'
     	$scope.err.show = true;
     	if($scope.validateInputs()) {
            var item = Models.moduleItems($scope.createModule());
-           var modules = Service.addModuleAt($rootScope[Strings.selected.moduleIndex], $rootScope[Strings.selected.module].modules, item);
+           var modules = Service.addModuleAt($rootScope[Strings.selected.moduleIndex], $rootScope[Strings.selected.module].modules, item, $scope.actionMode);
            
            $rootScope[Strings.selected.module].modules = modules; 
            $rootScope[Strings.selected.moduleIndexSelectedLoader] = $rootScope[Strings.selected.moduleIndex]; 
@@ -27,7 +49,7 @@ app.controller('moduleItemCtrl', ['$scope', '$rootScope', 'Strings', '$mdDialog'
            Api.updateModule(data).then(function(res) {
                console.log(res);
                $rootScope[Strings.selected.moduleIndexSelectedLoader] = null;
-               Service.Toast("New Module is created!");
+               Service.Toast($scope.toastTitle);
 
            }, function(err) {
               $rootScope[Strings.selected.moduleIndexSelectedLoader] = null;

@@ -1,0 +1,48 @@
+<loader ng-if="createLoader" l-title="Creating Module..."></loader>
+
+<md-dialog aria-label="Mango (Fruit)">
+
+  <form name="finalModule" ng-clock style="width:701px">
+    <md-toolbar >
+      <div class="md-toolbar-tools" >
+        <h2>{{action}} Final Module</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="closeDialog()">
+          <md-icon><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+       
+
+           <div class="in-aria row">
+            <div class="title">Add messages </div>
+            <div class="input"> 
+              <auto-add-input ng-model="create_final_array" name="m_match">
+                  <input type="text" placeholder="add msgs" data-array="$index" required/>
+              </auto-add-input>
+              <div class="in-err flash" ng-if="finalModule.m_match.$viewValue.length==0 && err.show">Specify atleast one message!</div>
+            </div>
+          </div>
+
+
+      
+
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <span flex></span>
+      <md-button ng-click="create()">
+       {{action}}
+      </md-button>
+      <md-button ng-click="closeDialog()">
+        close
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

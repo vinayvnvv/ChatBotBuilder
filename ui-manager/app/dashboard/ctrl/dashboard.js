@@ -44,8 +44,11 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
     }
 
 
-    $scope.openModuleItemDialog = function(index, ev) {
+    $scope.openModuleItemDialog = function(index, ev, type) {
+      console.log("type from dash", type);
+      if(type != 'insert') --index;
       $rootScope[Strings.selected.moduleIndex] = index;
+      $rootScope[Strings.selected.openModuleItemDialogType] = type;
       $mdDialog.show({
             controller: 'moduleItemCtrl',
             templateUrl: 'app/dashboard/html/module_item_dialog.html',
@@ -60,6 +63,44 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
             $scope.status = 'You cancelled the dialog.';
           });
     }
+
+
+
+     $scope.openWelcomeModuleDialog = function(index, ev) {
+      $rootScope[Strings.selected.moduleIndex] = index;
+      $mdDialog.show({
+            controller: 'welcomeMsgSetCtrl',
+            templateUrl: 'app/dashboard/html/set_welcome_msg_dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:false,
+            fullscreen: true // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    }
+
+    $scope.openFinalModuleDialog = function(index, ev) {
+      $rootScope[Strings.selected.moduleIndex] = index;
+      $mdDialog.show({
+            controller: 'finalMsgSetCtrl',
+            templateUrl: 'app/dashboard/html/set_final_msg_dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:false,
+            fullscreen: true // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    }
+
+
 
 
 

@@ -20,10 +20,12 @@ app.service('Service', ['$rootScope', '$mdToast', function($rootScope, $mdToast)
 	}
 
 
-	this.addModuleAt = function(index, data, item) {
+	this.addModuleAt = function(index, data, item, type) {
 	   if(data == undefined) data = [];
+	   if(type == 'insert') mode = 0;
+	   else mode = 1;
        console.log(data, index, item);
-       data.splice(index, 0, item);
+       data.splice(index, mode, item);
        return data;  
 	}
 

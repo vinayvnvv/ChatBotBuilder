@@ -108,7 +108,9 @@ app.directive('boxLoader', ['$compile', function($compile){
 		// name: '',
 		// priority: 1,
 		// terminal: true,
-		// scope: {}, // {} = isolate, true = child, false/undefined = no change
+		 scope: {
+		 	lTitle:"=lTitle"
+		 }, // {} = isolate, true = child, false/undefined = no change
 		// controller: function($scope, $element, $attrs, $transclude) {},
 		// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
 		// restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
@@ -119,7 +121,9 @@ app.directive('boxLoader', ['$compile', function($compile){
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
 		link: function($scope, iElm, iAttrs, controller) {
 
-            if(iAttrs.lTitle != undefined && iAttrs.lTitle != null && iAttrs.lTitle != '') $scope.title = iAttrs.lTitle;
+			console.log("box-dir", $scope)
+
+            if(iAttrs.lTitle != undefined && iAttrs.lTitle != null && iAttrs.lTitle != '') $scope.title = $scope.lTitle;
 
             console.log("box-loader:" ,  iElm)
 

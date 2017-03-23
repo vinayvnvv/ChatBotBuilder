@@ -6,23 +6,24 @@
 
 
 <!-- Welcome module -->
-<div class="card center fadeInDown" ng-if="moduleSelectedData.welcome.msg">
-	<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Welcome Module {{$index}}</span></div>
-		<div class="msg valign-center">{{moduleSelectedData.welcome.msg}}</div>
+<div class="card center fadeInDown" ng-if="moduleSelectedData.welcome" style="border-width: 5px;">
+<box-loader ng-if="moduleIndexSelectedLoader == 'welcome'" l-title="welcomeCreateModuleLoaderTitle"></box-loader>
+	<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}" ng-click="openWelcomeModuleDialog()">Welcome Module {{$index}}</span></div>
+		<div class="msg valign-center">Msgs:<span ng-repeat="msg in moduleSelectedData.welcome.msg" class="caption small" style="border:1px solid #d8d8d8">{{msg}}</span></div>
 		<div class="sub-info valign-center"><span class="caption small" md-colors="{background:'red-500-0.5', color:'primary-50'}">This module will called first</span></div>
 </div>
-<div class="not-set-card" ng-if="!moduleSelectedData.welcome.msg" ><span md-colors="{background:'warn-600', color:'primary-50'}"><i class="material-icons">add</i> <span>Set Welcome Message</span></span></div>
+<div class="not-set-card" ng-if="!moduleSelectedData.welcome" ><span ng-click="openWelcomeModuleDialog()" md-colors="{background:'warn-600', color:'primary-50'}"><i class="material-icons">add</i> <span>Set Welcome Message</span></span></div>
 
-<div class="new-card"> <div class="edge"><span></span></div><div class="add" md-ink-ripple ng-click="openModuleItemDialog(0, $event)"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
+<div class="new-card"> <div class="edge"><span></span></div><div class="add" md-ink-ripple ng-click="openModuleItemDialog(0, $event, 'insert')"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
 <!-- Welcome Module end -->
 
 <!-- Repeat Modules -->
  <div ng-repeat="m in moduleSelectedData.modules">
 
-	<div class="card" ng-class="{'left': $even, 'fadeInLeft': $even, 'fadeInRight': $odd, 'right': $odd }" md-colors="$even && {background:'primary-600', color:'primary-50', 'border-color':'primary-800-0.4'} || {background:'warn-500-0.13', color:'warn-900-0.73', 'border-color':'warn-400-0.1'}" style="border-width: 5px;">	
-		<box-loader ng-if="moduleIndexSelectedLoader == $index" l-title="Creating..."></box-loader>
-		<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">{{$index+1}}. {{m.name}}</span></div>
-		<div class="msg valign-center">{{m.msg}}</div>
+	<div class="card" ng-class="{'left': $even, 'fadeInLeft': $even, 'fadeInRight': $odd, 'right': $odd }" md-colors="$even && {background:'primary-600', color:'primary-50', 'border-color':'primary-800-0.4'} || {background:'warn-500-0.13', color:'warn-900-0.73', 'border-color':'warn-400-0.1'}" style="border-width: 5px;" ng-init="parentEven = $even">	
+		<box-loader ng-if="moduleIndexSelectedLoader == $index" l-title="itemCreateModuleLoaderTitle"></box-loader>
+		<div class="title valign-center"><span ng-click="openModuleItemDialog($index+1, $event, 'edit')" md-colors="$odd && {'border-color':'warn-700-0.6'}">{{$index+1}}. {{m.name}}</span></div>
+		<div class="msg valign-center">Msgs : <span ng-repeat="msg in m.msg" md-colors="parentEven && {color:'primary-50', 'border-color':'primary-50-0.5'} || {color:'warn-900-0.73', 'border-color':'warn-900-0.43'}" class="caption small" style="border:1px solid">{{msg}}</span></div>
 
 		<div class="sub-info valign-center"><span class="caption small" md-colors="$even && {background:'primary-50', color:'primary-900'} || {background:'warn-700-0.6', color:'warn-50'}">Validation Type: {{m.validate || ' no validation'}}</span></div>
 
@@ -31,7 +32,7 @@
 	</div>
 
 
-	<div class="new-card"> <div class="edge"><span></span></div><div class="add" md-ink-ripple ng-click="openModuleItemDialog($index+1, $event)"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
+	<div class="new-card"> <div class="edge"><span></span></div><div class="add" md-ink-ripple ng-click="openModuleItemDialog($index+1, $event, 'insert')"><i class="material-icons">control_point</i></div><div class="edge"><span></span></div></div>
 
 </div>
 <!-- Repeat modules End -->
@@ -39,11 +40,12 @@
 
 
 <!-- final module -->
-<div class="card center fadeInUp" ng-if="moduleSelectedData.final.msg">
-	<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}">Set Final Module {{$index}}</span></div>
-		<div class="msg valign-center">Module msg {{$index}}</div>
-		<div class="sub-info valign-center">Module sub - info</div>
+<div class="card center fadeInUp" ng-if="moduleSelectedData.final" style="border-width: 5px;">
+<box-loader ng-if="moduleIndexSelectedLoader == 'final'" l-title="finalCreateModuleLoaderTitle"></box-loader>
+	<div class="title valign-center"><span md-colors="$odd && {'border-color':'warn-700-0.6'}" ng-click="openFinalModuleDialog()">Final Module</span></div>
+		<div class="msg valign-center">Msgs: <span ng-repeat="msg in moduleSelectedData.final.msg" class="caption small" style="border:1px solid #d8d8d8">{{msg}}</span></div>
+		<div class="sub-info valign-center"><span class="caption small" md-colors="{background:'red-500-0.5', color:'primary-50'}">This module will called at the end.</span></div>
 </div>
-<div class="not-set-card" ng-if="!moduleSelectedData.final.msg" ><span md-colors="{background:'warn-600', color:'primary-50'}"><i class="material-icons">add</i> <span>Add Final Module </span></span></div>
+<div class="not-set-card" ng-if="!moduleSelectedData.final" ><span md-colors="{background:'warn-600', color:'primary-50'}" ng-click="openFinalModuleDialog()"><i class="material-icons">add</i> <span>Add Final Module </span></span></div>
 
 </div>	

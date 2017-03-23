@@ -572,3 +572,7 @@ align-items: center;
  text-align: center;
  display: inline-flex;
 }
+
+.border {
+  border:1px solid #d9d9d9;
+}

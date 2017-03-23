@@ -19,7 +19,8 @@ app.service('Strings',['$location', function($location) {
 	this.selected = {
 		moduleIndex : "selected_module_index",
 		module: "moduleSelectedData",
-		moduleIndexSelectedLoader: "moduleIndexSelectedLoader"
+		moduleIndexSelectedLoader: "moduleIndexSelectedLoader",
+		openModuleItemDialogType:"openModuleItemDialogType"
 	}
 
 	this.validationTypeArray = [
