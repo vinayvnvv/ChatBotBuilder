@@ -20,7 +20,7 @@
 <!-- Repeat Modules -->
  <div ng-repeat="m in moduleSelectedData.modules">
 
-	<div class="card" ng-class="{'left': $even, 'fadeInLeft': $even, 'fadeInRight': $odd, 'right': $odd }" md-colors="$even && {background:'primary-600', color:'primary-50', 'border-color':'primary-800-0.4'} || {background:'warn-500-0.13', color:'warn-900-0.73', 'border-color':'warn-400-0.1'}" style="border-width: 5px;" ng-init="parentEven = $even">	
+	<div class="card" ng-class="{'left': $even, 'fadeInLeft': $even, 'fadeInRight': $odd, 'right': $odd }" md-colors="$even && {background:'primary-500', color:'primary-50', 'border-color':'primary-800-0.4'} || {background:'warn-500-0.13', color:'warn-900-0.73', 'border-color':'warn-400-0.1'}" style="border-width: 5px;" ng-init="parentEven = $even">	
 		<box-loader ng-if="moduleIndexSelectedLoader == $index" l-title="itemCreateModuleLoaderTitle"></box-loader>
 		<div class="title valign-center"><span ng-click="openModuleItemDialog($index+1, $event, 'edit')" md-colors="$odd && {'border-color':'warn-700-0.6'}">{{$index+1}}. {{m.name}}</span></div>
 		<div class="msg valign-center">Msgs : <span ng-repeat="msg in m.msg" md-colors="parentEven && {color:'primary-50', 'border-color':'primary-50-0.5'} || {color:'warn-900-0.73', 'border-color':'warn-900-0.43'}" class="caption small" style="border:1px solid">{{msg}}</span></div>

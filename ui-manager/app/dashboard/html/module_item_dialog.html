@@ -71,7 +71,7 @@
                    <auto-add-input ng-model="c_m_input.validateErrMsg" name="m_vl_array">
                       <input type="text" placeholder="add msgs" data-array="$index" required/>
                   </auto-add-input>
-                  <div class="in-err flash" ng-if="create_module_matches == 0 && err.show">Specify atleast one Error msg !</div>
+                  <div class="in-err flash" ng-if="c_m_input.validateErrMsg == 0 && err.show">Specify atleast one Error msg !</div>
                </div>
             </div>
           </div>
@@ -93,7 +93,7 @@
                    <auto-add-input ng-model="c_m_input.shortcutData" name="m_sh_array">
                       <input type="text" placeholder="add items" data-array="$index" required/>
                   </auto-add-input>
-                  <div class="in-err flash" ng-if="create_module_item_shortcut_array.length == 0 && err.show">Specify atleast one Suggestion Item !</div>
+                  <div class="in-err flash" ng-if="c_m_input.shortcutData.length == 0 && err.show">Specify atleast one Suggestion Item !</div>
                </div>
             </div>
           </div> 

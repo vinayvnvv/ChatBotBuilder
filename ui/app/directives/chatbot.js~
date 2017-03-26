@@ -17,10 +17,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
              $scope.shortcut = false;
              $scope.shortcutType = null;
              var bot_socket = io.connect(URLVars.sokectsUrl.bot);
-             $scope.client_id = Helper.decodeId(document.querySelectorAll('chat-bot-link')["0"].attributes["0"].value);
-
-             console.log("client", $scope.client_id)
-             
+             $scope.client_id = "104342557300628477866";
 
 
 
@@ -30,6 +27,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
        $scope.chat_scroller = angular.element($element["0"].children["0"].children.item(1));
 
       /* end of variables init */
+
 
 
             $scope.reqModules = function(msg) {
@@ -49,21 +47,15 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                  })
             }
 
-            $scope.pushMsgs = function(msg, by) {
-               console.log("Pushing", by)
-               if(by == null) by = 'bot'; 
-               console.log(typeof(msg) == 'object')
+            $scope.pushMsgs = function(msg) {
                   if(typeof(msg) == 'object') {
                         for(var i=0;i<msg.length;i++) {
-                          console.log("msgs:" , msg[i])
-                          $scope.msgs.push({by:by,msg:msg[i]});
-                          //$scope.$apply();
+                          $scope.msgs.push({by:"bot",msg:msg[i]});
+                          $scope.$apply();
                       }
                     } else {
-                        $scope.msgs.push({by:by,msg:msg});
+                        $scope.msgs.push({by:"bot",msg:msg});
                 }
-
-                console.log($scope.msgs)
             }
 
 
@@ -141,7 +133,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                   $scope.suggestion = false;
                   //$scope.user_msg.msg = obj.name;
                   $scope.msgs.push({
-                     msg:obj,
+                     msg:obj.name,
                      by:"me"
                  });
                 }
@@ -169,19 +161,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
               if($scope.uuid  != undefined) { //alreday connected
                 console.log("connecting with existance uuid")
 
-                 //$scope.initBot();
-                 $http.get("http://127.0.0.1:3000/api/bot/msgs/" + $scope.uuid).then(function(res) { //get msgs from server
-
-                   $scope.initBot();
-                   $scope.resModules(); //call for real-time modules listen
-                   for(var i=0;i<res.data.length;i++) {
-
-                      $scope.pushMsgs(res.data[i].msg, res.data[i].by);
-                   }
-
-              }, function(err) {
-
-              });
+                 $scope.initBot();
 
 
 
@@ -190,12 +170,8 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                  $scope.uuid = Helper.generateUUID();
                  Helper.setCookie(STRVars.cookies.uuid_key, $scope.uuid);
                  $scope.initBot();
-                 $scope.resModules(); //call for real-time modules listen
 
               }
-
-              
-             
 
           }    
 
@@ -267,7 +243,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
 
             $scope.connectBot();
-            
+            $scope.resModules(); //call for real-time modules listen
 
      },
     // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements

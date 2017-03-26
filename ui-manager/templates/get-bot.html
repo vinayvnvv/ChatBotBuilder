@@ -1,0 +1,43 @@
+<loader ng-if="createLoader" l-title="Creating Module..."></loader>
+
+<md-dialog aria-label="Mango (Fruit)">
+
+  <form name="welcomeModule" ng-clock style="width:701px">
+    <md-toolbar >
+      <div class="md-toolbar-tools" >
+        <h2>Get Your Bot</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="closeDialog()">
+          <md-icon><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+       
+        <div class="md-caption" style="color:#555">Insert below javascript snippet to your App.</div><br/>
+
+        <code class="caption" style="background-color: #f5f5f5;color:#777"> 
+        &#60;script chat-bot-id="{{_auth_user_id}}" type="text/javascript" src="http://127.0.0.1:3000/bot-client/bot.min.js"&#62;&#60;/script&#62;
+          
+        </code>
+
+
+
+      
+
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <!-- <span flex></span>
+
+      <md-button ng-click="closeDialog()">
+        close
+      </md-button> -->
+    </md-dialog-actions>
+  </form>
+</md-dialog>

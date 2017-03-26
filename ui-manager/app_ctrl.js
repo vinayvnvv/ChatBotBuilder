@@ -27,6 +27,29 @@ app.controller('mainApp', ['$scope', '$mdDialog', '$rootScope', function($scope,
     }
   }
 
+
+  $rootScope.getMyBot = function(ev) {
+      $mdDialog.show({
+            controller:"myBotCtrl",
+            templateUrl: 'templates/get-bot.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: true // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    }
+
+
+    $rootScope.closeDialog = function() {
+      $mdDialog.cancel();
+  }
+
+
   
 	
 }]);

@@ -118,6 +118,7 @@ var header = require('./../header');
 
     this.generateModuleForWeb = function(module_) {
     	console.log(module_)
+    	if(!module_) return;
     	var module = {};
     	if(module_.msg!= undefined && module_.msg!= null)                module.msg = module_.msg; 
     	if(module_.beforeMsg!= undefined && module_.beforeMsg!= null) 
@@ -156,6 +157,33 @@ var header = require('./../header');
          
          
 
+    }
+
+    this.saveQuery = function(uuid, query) {
+
+    	var doc = {};
+		doc.msg = query.msg;
+		doc.by = query.by;
+		doc.timestamp = new Date();
+    	
+
+    	MongoClient.connect(header.db.url, function(err, db) {
+		  
+		  assert.equal(null, err);
+		  if(err) return ;
+		   var collection = db.collection(header.collections.msgs(uuid));
+				  collection.insert(
+				  	doc,
+				    function(err, res) {
+
+					  	if(err) { console.log("msg saving err!");
+					  	          return ; 
+					  	        }
+					  	else    { console.log("msg saved!");
+					  	          return ; 
+					  	        }
+				});
+			});
     }
 
 

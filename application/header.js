@@ -8,6 +8,9 @@ module.exports = {
     track:"track",
     module:function(id) {
     	return "module_" + id;
+    },
+    msgs:function(id) {
+    	return "msgs_" + id;
     }
   }
   

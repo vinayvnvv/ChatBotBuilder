@@ -9,8 +9,9 @@ var Server = new gulp_task(app, http);
 var path = require('path');
 var Sockets = new (require('./application/socket/socket')) (http);
 var managerApi = require('./app-manager/routes');
+var botApi = require('./application/routes');
 
-var port = 3001;
+var port = 3000;
 
 
 
@@ -32,6 +33,8 @@ app.get('/test', function(req, res) {
 })
 
 app.use('/api/manager', managerApi);
+app.use('/api/bot', botApi);
+
 
 
 Server.start(port);

@@ -88,6 +88,8 @@ this.listen = function () {
 
 
 	              	socket.on('modules_req', function(data) {
+
+                    DBHelper.saveQuery(data.uuid, {by:"me", msg:data.query});
 	              		
                     DBHelper.trackStatus(
 
@@ -99,6 +101,8 @@ this.listen = function () {
                                     data.c_id,data.uuid,data.query, 
                                     function(module) { 
                                       if(module!=false) {
+                                        //save query
+                                        DBHelper.saveQuery(data.uuid, DBHelper.generateModuleForWeb(module).module);
                                         setTimeout(function() { 
                                             socket.emit('modules_res', DBHelper.generateModuleForWeb(module)); 
                                             DBHelper.sendAutoFirstModule(data.uuid, socket, DB);
@@ -114,6 +118,8 @@ this.listen = function () {
                                   doc,
                                   data.query,
                                   function(module) { 
+                                    //save query
+                                    DBHelper.saveQuery(data.uuid, DBHelper.generateModuleForWeb(module).module);
                                     console.log("sending welocome msg...")
                                     console.log(module)
                                     setTimeout(function() { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  }, 1200); 

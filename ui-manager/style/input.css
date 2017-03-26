@@ -26,6 +26,7 @@
     color:#555;
     transition: .3s all;
     width:85%;
+    background-color: transparent;
 }
 
 .in-aria .input input:hover {
