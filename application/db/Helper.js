@@ -145,6 +145,7 @@ var header = require('./../header');
                                   function(module) { 
                                     console.log(module)
                                     setTimeout(function() { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  }, 1200); 
+                                    DBHelper.saveQuery(uuid, DBHelper.generateModuleForWeb(module).module);
                                   },
                                   function() {}
  

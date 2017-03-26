@@ -53,7 +53,7 @@ this.listen = function () {
                                 console.log("continue from tracking")
                                 //return all msgs
                                 //send next module[index]
-                                socket.emit('modules_res', {module:{msg:["Resuming Session"]}})
+                                //socket.emit('modules_res', {module:{msg:["Resuming Session"]}})
 
                               } else {  //start from new instance
                                 console.log("no tracking")
@@ -65,7 +65,12 @@ this.listen = function () {
                                         DBHelper.insertTrack(  //send after updating track 
 
                                            data.uuid, data.c_id,
-                                           function(res) { socket.emit('modules_res', DBHelper.generateModuleForWeb(module));  },
+                                           function(res) { 
+                                            if(module != null)
+                                              socket.emit('modules_res', DBHelper.generateModuleForWeb(module)); 
+                                            else
+                                              socket.emit('modules_res', {module:{msg:["Welcome"]}});
+                                             },
                                            function(err) {}
 
                                           );
