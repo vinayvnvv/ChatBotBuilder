@@ -3,7 +3,7 @@ var Sockets = function(http) {
 var io = require('socket.io')(http);
 var DB = new (require('./../db/main'))  ();
 var DBHelper = new (require('./../db/Helper')) ();
-
+var Strings = require('./../string');
 
 var msg = {
   "type":"single|flow",
@@ -94,6 +94,20 @@ this.listen = function () {
 
 	              	socket.on('modules_req', function(data) {
 
+                    //check for exit msg
+                    if(data.query == (Strings.exit.Reqmsg).toLowerCase()) {
+                        console.log("exit from current tracking")
+                          DBHelper.resetTrack(
+                                data.uuid,
+                                function() { 
+                                            socket.emit('modules_res', DBHelper.generateModuleForWeb({msg:Strings.exit.Resmsg}));
+                                          },
+                                function() {}
+                             );
+                          return;
+                     }
+
+                     
                     DBHelper.saveQuery(data.uuid, {by:"me", msg:data.query});
 	              		
                     DBHelper.trackStatus(

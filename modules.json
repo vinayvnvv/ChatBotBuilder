@@ -121,14 +121,26 @@ init modules
 
 
 
-///
-
- function addAt(index, data, item) {
-       console.log(data, index, item);
-       data.splice(index, 0, item);
-       return data;
-   }    
-
+///menu object
+***************
+{
+  "name": "Name of the module",
+  "timestamp":{
+     "created":"",
+     "updated":""
+  },
+  "matches": [
+    "order table",
+    "book table",
+    "book a Table"
+  ],
+  "type": "menu",
+  "menus": ["menu1","menu2"],
+  "statastics":{
+    "triggered":"",
+    "triggeredAt":""
+  }
+}
 
 
 

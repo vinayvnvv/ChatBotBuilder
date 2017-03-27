@@ -188,6 +188,23 @@ var header = require('./../header');
     }
 
 
+    this.resetTrack = function(uuid, callback_suc, callback_err) {
+    	DBHelper.updateTrack(
+             	                   uuid,
+             	                   DBHelper.constructTrackModel({
+             	                   	                             current_module:"init",
+             	                   	                             module_id : "",
+                                                                 answers:[],
+                                                              	 last_track_details:{},
+                                                              	 validate:"0"
+             	                   	                           }),
+             	                   function(res) {  callback_suc(); },
+             	                   function() {}
+
+             	                 );
+    }
+
+
 
 
  }
