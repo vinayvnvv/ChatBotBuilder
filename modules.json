@@ -124,17 +124,18 @@ init modules
 ///menu object
 ***************
 {
-  "name": "Name of the module",
+  "name": "Home",
   "timestamp":{
      "created":"",
      "updated":""
   },
   "matches": [
-    "order table",
-    "book table",
+    "menu",
+    "main menu",
     "book a Table"
   ],
   "type": "menu",
+  "menu_type":"option",
   "menus": ["menu1","menu2"],
   "statastics":{
     "triggered":"",

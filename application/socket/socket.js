@@ -116,22 +116,36 @@ this.listen = function () {
                         function(flag, doc) {
                            console.log("tracked doc:" + doc)
                            if(doc.current_module == 'init') {  //init bot send
-                              DB.matchModule(
-                                    data.c_id,data.uuid,data.query, 
-                                    function(module) { 
-                                      if(module!=false) {
-                                        //save query
-                                        DBHelper.saveQuery(data.uuid, DBHelper.generateModuleForWeb(module).module);
-                                        setTimeout(function() { 
-                                            socket.emit('modules_res', DBHelper.generateModuleForWeb(module)); 
-                                            DBHelper.sendAutoFirstModule(data.uuid, socket, DB);
-                                             }, 1200);
-                                            
-                                                      
-                                          }
-                                    },
-                                    function() {}
-                                )
+                            DB.matchMenu(
+                              data.c_id,data.uuid,data.query,
+                              function(menu_module) { 
+
+                                  if(menu_module!=false) { //menu is matched
+                                     socket.emit('modules_res', DBHelper.generateModuleForWeb(menu_module)); 
+                                  } else {    //search in modules for flow
+                                        DB.matchModule(
+                                          data.c_id,data.uuid,data.query, 
+                                          function(module) { 
+                                            if(module!=false) {
+                                              //save query
+                                              DBHelper.saveQuery(data.uuid, DBHelper.generateModuleForWeb(module).module);
+                                              setTimeout(function() { 
+                                                  socket.emit('modules_res', DBHelper.generateModuleForWeb(module)); 
+                                                  DBHelper.sendAutoFirstModule(data.uuid, socket, DB);
+                                                   }, 1200);
+                                                  
+                                                            
+                                                }
+                                          },
+                                          function() {}
+                                      );
+                                  }
+
+
+                                },
+                              function(err) {}
+                              );
+                              
                            } else { // send modules from track info
                               DB.getModule(
                                   doc,

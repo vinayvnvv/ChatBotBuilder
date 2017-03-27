@@ -6,6 +6,7 @@ var Utility = new (require('./../services/utility.js')) ();
 var DBHelper = new (require('./../db/Helper')) ();
 var Validator = new (require('./../services/validator')) ();
 var Parser = require('./../services/Parser');
+var Strings = require('./../string');
 var MainDB = function() {
    console.log("called MainDB")
 
@@ -19,7 +20,7 @@ var MainDB = function() {
 		  assert.equal(null, err);
 		  if(err) return callback_err(err);
 		   var collection = db.collection(header.collections.module(c_id));
-				  collection.find({"type":{$ne:"init"}}).toArray( function(err, docs) {
+				  collection.find({"type":"flow"}).toArray( function(err, docs) {
 				  	var matched = Utility.matchQuery(query, docs);
 				  	if(matched == false) {
 				  	   console.log("no modules are matched with query:" + query + ", under client id:" + c_id)
@@ -41,6 +42,39 @@ var MainDB = function() {
 
 
    }
+
+
+   this.matchMenu = function(c_id, uuid, query, callback_suc, callback_err) {
+       console.log("matching module......")
+
+
+      MongoClient.connect(header.db.url, function(err, db) {
+      
+      assert.equal(null, err);
+      if(err) return callback_err(err);
+       var collection = db.collection(header.collections.module(c_id));
+          collection.find({"type":"menu"}).toArray( function(err, docs) {
+
+            console.log("matched*************\n***************\n************", docs)
+
+            var matched = Utility.matchQuery(query, docs);
+            console.log("matched", matched);
+            
+            if(matched == false) {
+               console.log("no menu are matched with query:" + query + ", under client id:" + c_id)
+                       callback_suc(false)
+            } else {
+              console.log("matched module with id:" + matched._id + ", under client_id:" + c_id);
+              callback_suc({msg:Strings.common.selectMenu, shortcut:"list", shortcutData:matched.menus});
+            }
+        });
+      });
+
+
+
+   }
+
+
 
    this.getModule = function(track, query, callback_suc, callback_err) {
 
