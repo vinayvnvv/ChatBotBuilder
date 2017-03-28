@@ -12,8 +12,17 @@ app.controller('flowInfoCtrl', ['$scope', '$rootScope', 'Strings', 'Api', 'Servi
         editMatches:false
     }
 
+
+   $scope.$watch(function() {
+      return $rootScope.moduleSelectedData;
+    }, function() {
+            //reset all events
+      $scope.isOpen = {};
+      $scope.isLoading = {};
+    }, true);
+
     $scope.openEditModuleNameUI = function() {
-        $scope._edit_module_name = $rootScope[Strings.selected.module].name;
+      $scope._edit_module_name = $rootScope[Strings.selected.module].name;
     	$scope.isOpen.editName = true;
     }
 	

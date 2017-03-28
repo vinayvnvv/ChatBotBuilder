@@ -6,6 +6,7 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 	//init template Urls
 	$rootScope.rightBarTemplate = Strings.templateUrl.statsView;
   $scope.middleBarTemplate = null;
+  $scope.leftBarSearch = {};
  
     $rootScope.getModules = function(title) {
 
@@ -21,6 +22,8 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 
 
     $scope.openModule = function(module, index) {
+
+
       //set middle template
       console.log("module Type:" + module.type)
       if(module.type == 'flow') $scope.middleBarTemplate = Strings.templateUrl.flowView;
@@ -126,6 +129,28 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
     }
 
 
+      $scope.selectTypeModule = function(type) {
+        if(type=="flow") {
+          $scope.setFlowSelectedStyle();
+        } else {
+          $scope.setMenuSelectedStyle();
+        }
+      }
+
+      $scope.setFlowSelectedStyle = function() {
+         $scope.leftBarSearch.type='flow';
+         $scope.flowSelectedClass = "tab-selected";
+         $scope.menuSelectedClass = "tab-unselected";
+      }  
+
+      $scope.setMenuSelectedStyle = function() {
+        $scope.leftBarSearch.type='menu';
+         $scope.flowSelectedClass = "tab-unselected";
+         $scope.menuSelectedClass = "tab-selected";
+      }  
+    
+
+
 
 
 
@@ -142,6 +167,8 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 
     //init calls
     $scope.getModules();
+    //call default selection type
+    $scope.setFlowSelectedStyle();
 	
 
 	

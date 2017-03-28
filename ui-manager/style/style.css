@@ -163,7 +163,7 @@ align-items: center;
   }
 .dashboard .content .left-bar .tab span {
   border-bottom: 2px solid;
-  font-size: 17px;
+  font-size: 15px;
   position: relative;
   top:3px;
 }  
@@ -214,6 +214,7 @@ align-items: center;
    cursor:pointer;
    position: relative;
    transition: .2s all;
+   outline: none;
   }
 .dashboard .content .left-bar .lists .list:hover {
     background-color: #d9d9d9;
@@ -614,4 +615,23 @@ align-items: center;
 }
 .anim {
   animation-duration: 0.4s;
+}
+
+.tab-selected {
+  outline: none;
+  margin-right: 3px;
+  transition: .4s all;
+  color: #888!important;
+  text-transform: uppercase;
+}
+.tab-unselected {
+  border-bottom: none!important;
+  cursor: pointer;
+  outline: none;
+  margin-right: 3px;
+  transition: 0.4s all;
+  text-transform: uppercase;
+}
+.activeItemSelected {
+  background-color: #e0e0e0!important;
 }
