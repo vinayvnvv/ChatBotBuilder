@@ -6,8 +6,9 @@ app.service('Api', ['$http', 'Strings', '$rootScope', function($http, Strings, $
 	// "name" : "aa pizza",
 	// "matches": ["order pizza", "book pizza"]
  //   }
-  this.createModule = function(data) {
-     data.type = "flow";
+  this.createModule = function(type, data) {
+     data.type = type;
+     console.log("insertion data", data);
      return $http({
                 method: 'POST',
                 url: Strings.apis.createModules + $rootScope._auth_user_id,

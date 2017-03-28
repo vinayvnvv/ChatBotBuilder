@@ -1,0 +1,86 @@
+<loader ng-if="createLoader" l-title="Creating Module..."></loader>
+
+<md-dialog aria-label="Mango (Fruit)">
+
+  <form name="createModule" ng-clock style="width:701px">
+    <md-toolbar >
+      <div class="md-toolbar-tools" >
+        <h2>Create New Module</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="closeDialog()">
+          <md-icon><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+       
+          <div class="in-aria row">
+            <div class="title">Name Of the Module</div>
+            <div class="input"> 
+               <input type="text" name="m_name" placeholder="Name" ng-model="create_menu_name" required />
+               <div class="in-err flash" ng-if="createModule.m_name.$invalid && err.show">Specify the name of the Module</div>
+            </div>
+          </div>
+
+
+          
+
+
+          <div class="in-aria row">
+            <div class="title">Matches For call </div>
+            <div class="input"> 
+              <auto-add-input ng-model="create_menu_matches" name="m_match">
+                  <input type="text" placeholder="add matches" data-array="$index" required/>
+              </auto-add-input>
+              <div class="in-err flash" ng-if="createModule.m_match.$viewValue.length==0 && err.show">Specify atleast one match!</div>
+            </div>
+          </div>
+
+
+           <div class="in-aria row">
+            <div class="title">Menu Type </div>
+            <div class="input"> 
+                 <md-input-container class="md-block" ng-init="create_menu_type = menuTypes[0].value">
+                    <label>State</label>
+                    <md-select ng-model="create_menu_type" name="m_type">
+                      <md-option ng-repeat="m in menuTypes" value="{{m.value}}">
+                        {{m.title}}
+                      </md-option>
+                    </md-select>
+                </md-input-container>
+              <div class="in-err flash" ng-if="createModule.m_type.$invalid && err.show">Select Type Of Menu!</div>
+            </div>
+          </div>
+
+
+          <div class="in-aria row">
+            <div class="title">Add Menu's Items </div>
+            <div class="input"> 
+              <auto-add-input ng-model="create_menu_list" name="m_list">
+                  <input type="text" placeholder="add items" data-array="$index" required/>
+              </auto-add-input>
+              <div class="in-err flash" ng-if="createModule.m_list.$viewValue.length==0 && err.show">Specify atleast one Item!</div>
+            </div>
+          </div>
+
+
+      
+
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      
+      <span flex></span>
+      <md-button ng-click="create()">
+       Create
+      </md-button>
+      <md-button ng-click="closeDialog()">
+        close
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

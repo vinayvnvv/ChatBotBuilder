@@ -9,13 +9,13 @@ var Modules = function() {
 
 	this.get = function(id, success_callback, error_callback) {
 
-
 		MongoClient.connect(header.db.url, function(err, db) {
 		  
 		  assert.equal(null, err);
 		  if(err) return callback_err(err);
 		   var collection = db.collection(header.collections.module(id));
-				  collection.find({"type":{$ne:"init"}}).toArray( function(err, docs) {
+				  collection.find( {"type": { $ne:"init" } } ).toArray( function(err, docs) {
+				  	console.log("docs>>>>>>>>>>>>", docs)
 				  	 if(err) { error_callback(err); return }
 
                      success_callback(docs);
@@ -25,12 +25,24 @@ var Modules = function() {
 
 	}
 
+
+
 	this.create = function(id, doc, success_callback, error_callback) {
   
-        if((doc = Model.modules_insert(doc)) == false) {  //check model validity
-        	error_callback('insert modeule error');
-        	return;
-        }
+        if(doc.type == 'flow') {   //check model validity for flows
+			        if((doc = Model.modules_insert(doc)) == false) { 
+			        	error_callback('insert flow error');
+			        	return;
+			        }
+   		 } else if(doc.type == 'menu') {  //check model validity for MENUS
+   		 	 		if((doc = Model.menu_insert(doc)) == false) {  
+			        	error_callback('insert menu error');
+			        	return;
+			        }
+   		 } else {
+   		 		    error_callback('insert error');
+			        return;
+   		 }
 
         //add timestamp
         doc.timestamp_created = Service.getCreatedTimeStamp();

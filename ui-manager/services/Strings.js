@@ -7,12 +7,14 @@ app.service('Strings',['$location', function($location) {
 	this.apis = {
 		getModules : origin + "api/manager/modules/",
 		updateModules: origin + "api/manager/modules/update/",
-		createModules: origin + "api/manager/modules/create/",
+		createModules: origin + "api/manager/modules/create/"
 	}
 
 	this.templateUrl = {
 		statsView : 'app/dashboard/html/stats-view.html',
-		moduleView : 'app/dashboard/html/module-view.html'
+		moduleView : 'app/dashboard/html/module-view.html',
+		flowView : 'app/dashboard/html/flow-bar.html',
+		menuView : 'app/dashboard/html/menu-bar.html'
 	}
 
 
@@ -35,6 +37,10 @@ app.service('Strings',['$location', function($location) {
 		                         {title:"Option", value:"option"}
 		                       ];
 
+    this.menuTypes = [ 
+                         {title:"List", value:"list"},
+                         {title:"Option", value:"option"}
+                     ];
 
 }]);
 

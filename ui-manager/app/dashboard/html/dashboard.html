@@ -33,8 +33,12 @@
             </md-tooltip>
             <md-icon > <i class="material-icons">chrome_reader_mode</i> </md-icon>
           </md-button>
-          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-            <md-icon ></md-icon>
+          <md-button aria-label="Facebook" class="md-fab md-raised md-mini" ng-click="openCreateMenuDialog($event)">
+           <md-tooltip md-direction="left" md-visible="false"
+                        md-autohide="false">
+              Add New Menu
+            </md-tooltip>
+            <md-icon ><i class="material-icons">playlist_add</i></md-icon>
           </md-button>
           <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
             <md-icon ></md-icon>

@@ -5,7 +5,8 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 	$scope.moduleData = [];
 	//init template Urls
 	$rootScope.rightBarTemplate = Strings.templateUrl.statsView;
-
+  $scope.middleBarTemplate = null;
+ 
     $rootScope.getModules = function(title) {
 
       Service.loader.showLeftBar(title);
@@ -20,6 +21,11 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 
 
     $scope.openModule = function(module, index) {
+      //set middle template
+      console.log("module Type:" + module.type)
+      if(module.type == 'flow') $scope.middleBarTemplate = Strings.templateUrl.flowView;
+      if(module.type == 'menu') $scope.middleBarTemplate = Strings.templateUrl.menuView;
+
     	$rootScope[Strings.selected.module] = module;
     	$rootScope.rightBarTemplate = "";
     	$rootScope.rightBarTemplate = Strings.templateUrl.moduleView;
@@ -33,7 +39,7 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
             templateUrl: 'app/dashboard/html/create_module_dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose:true,
+            clickOutsideToClose:false,
             fullscreen: true // Only for -xs, -sm breakpoints.
           })
           .then(function(answer) {
@@ -42,6 +48,25 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
             $scope.status = 'You cancelled the dialog.';
           });
     }
+
+    $scope.openCreateMenuDialog = function(ev) {
+      $mdDialog.show({
+            controller: 'createMenu',
+            templateUrl: 'app/dashboard/html/create-menu-dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:false,
+            fullscreen: true // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    }
+
+
+
 
 
     $scope.openModuleItemDialog = function(index, ev, type) {

@@ -1,0 +1,45 @@
+<loader ng-if="flowLoader"></loader>
+
+<div class="flow">
+<flow-scroll-toggle class="stick-header" id="12">Menu's</flow-scroll-toggle>
+<div class="title-bar valign-center" md-colors="{'background':'primary-50'}"> <i class="material-icons">storage</i> Menu's</div>
+
+  
+    <div class="section">
+	<div class="title">
+         <div class="text">Menu Items</div><div class="action"><span class="caption" ng-if="!isOpen.editMatches" ng-click="openEditModuleMatchUI()"> <i class="material-icons">mode_edit</i> Edit</span></div>
+	</div>
+	<div class="content">
+	{{moduleSelectedData}}
+	<div class="item slideInDown anim" ng-repeat="m in moduleSelectedData.menus" ng-if="!isOpen.editMatches"><span md-colors="{'border-color':'primary-600', 'color':'primary-700'}" class="caption border" style="border:1px solid">{{m}}</span></div>
+	</div>
+	<div class="item slideInUp anim" ng-if="isOpen.editMatches">
+					  <div class="in-aria row row-r" >
+			            <div class="title">
+			               <md-progress-circular ng-if="isLoading.editMatches" ng-disabled="!isLoading.editMatches" class="md-warn" md-diameter="20"></md-progress-circular>  
+                           <div ng-if="!isLoading.editMatches">
+			                <md-button ng-disabled="MatchEdit.name.$viewValue.length==0 || MatchEdit.name.$pristine" ng-click="editMatchOfModule(MatchEdit.match.$viewValue)" class="md-fab md-primary md-mini" aria-label="Settings" style="top:-11px">
+						        <md-icon style="color:#fff"> <i class="material-icons">check</i> </md-icon>
+						    </md-button>
+						     <md-button ng-click="cancelEditModuleMatchUI()" class="md-fab md-warn md-mini" aria-label="Settings" style="top:-11px">
+						        <md-icon style="color:#fff"> <i class="material-icons">cancel</i> </md-icon>
+						    </md-button>
+						    </div>
+			             </div>
+			            <div class="input" ng-form="MatchEdit"> 
+ 
+                              <auto-add-input ng-model="_edit_module_match" name="match">
+				                  <input type="text" placeholder="msg" data-array="$index" required/>
+				              </auto-add-input>
+			              <div class="in-err flash" ng-if="finalModule.m_match.$viewValue.length==0 && err.show">Specify atleast one message!</div>
+			            </div>
+			          </div>
+	</div>
+
+
+
+</div>
+
+
+
+</div>	

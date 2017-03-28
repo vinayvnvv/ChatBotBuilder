@@ -17,7 +17,7 @@ app.controller('createModuleCtrl', ['$scope', '$mdDialog', '$http', 'Api', '$roo
 					       "matches": $scope.create_module_matches
 					};
 		  Service.loader.showRoot('Creating Modules....');			
-          Api.createModule(data).then(function(res){
+          Api.createModule("flow", data).then(function(res){
              console.log(res)
              Service.loader.hideRoot();
              $mdDialog.cancel(); //cancel dialog
