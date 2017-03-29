@@ -51,7 +51,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
             $scope.pushMsgs = function(msg, by, time) {
                if(!time) time = new Date();
-               console.log("Pushing", by)
+               console.log("Pushing", by, time)
                if(by == null) by = 'bot'; 
                console.log(typeof(msg) == 'object')
                   if(typeof(msg) == 'object') {
@@ -62,7 +62,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                       }
                     } else {
                         $scope.msgs.push({by:by,msg:msg, timestamp:time});
-                }
+                } 
 
                 console.log($scope.msgs)
             }
@@ -141,19 +141,13 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
           $scope.openOptionModule = function(obj) {
                   $scope.suggestion = false;
                   //$scope.user_msg.msg = obj.name;
-                  $scope.msgs.push({
-                     msg:obj,
-                     by:"me"
-                 });
+                  $scope.pushMsgs(obj, "me");
                 }
 
           $scope.openListModule = function(obj) {
             $scope.suggestion = false;
             //$scope.user_msg.msg = obj.name;
-            $scope.msgs.push({
-               msg:obj,
-               by:"me"
-           });
+            $scope.pushMsgs(obj, "me");
 
           }
 
@@ -215,11 +209,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
                  $scope.suggestion = false; //hide suggestion section
 
-           $scope.msgs.push({
-               msg:$scope._chat_bot_query_,
-               by:"me"
-           });
-
+           $scope.pushMsgs($scope._chat_bot_query_, "me");
            $scope._chat_bot_query_ = "";
               }
 
@@ -240,9 +230,15 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                 $scope.bindQuery();
               } 
 
-           $scope.scrollToBottom = function() {
+       $scope.scrollToBottom = function() {
           $scope.chat_scroller[0].scrollTop = ($scope.chat_scroller[0].scrollHeight + 20);
         }   
+
+        $scope.scrollToBottomOnOpen = function() {
+          console.log("SCROLL ON OPEN")
+          $scope.chatOpened = true;
+          $timeout(function() { $scope.scrollToBottom } , 1000)
+        }
 
        $scope.pushTypingMsg = function() {
 
