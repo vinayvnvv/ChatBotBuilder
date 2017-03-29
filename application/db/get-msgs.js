@@ -16,7 +16,7 @@ var DBMsgs = function() {
 		  if(err) return callback_err(err);
 		   var collection = db.collection(header.collections.msgs(uuid));
 		   console.log(collection)
-				  collection.find().toArray( function(err, docs) {
+				  collection.find().sort({$natural:-1}).limit(20).toArray( function(err, docs) {
 				  	console.log(docs)
 				  	 if(err) { error_callback(err); return }
 
