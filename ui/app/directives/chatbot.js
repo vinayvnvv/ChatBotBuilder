@@ -179,6 +179,8 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                       $scope.pushMsgs(res.data[i].msg, res.data[i].by);
                    }
 
+                    $scope.scrollToBottom();  
+
               }, function(err) {
 
               });
@@ -305,7 +307,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
                           $scope.playSound("user");
                           $scope.reqModules($scope.msgs[$scope.msgs.length-1].msg);
-              $timeout(function() {$scope.pushTypingMsg();}, 500); 
+                          $timeout(function() {$scope.pushTypingMsg();}, 500); 
                             
                         } else {  //bot resposnse
 

@@ -1,16 +1,18 @@
 
-<div ng-draggable='dragOptions' class="chat">
+<div ng-draggable='dragOptions' class="chat zoomInDown" ng-show="chatOpened" ng-init="chatOpened = false">
 
-		<div class="toolbar">
-		          <span class="title">Assistant</span>
+		<div class="toolbar valign-center" >
+		          <div class="title">Help Assistant</div>
+		          <div class="action" ng-click="chatOpened = false"></div>
         </div>
 
 
 
 
 		<div class="container">
-				<li ng-animate="'animate'" ng-repeat="m in msgs track by $index" class="animation msg {{m.by || 'bot'}} {{m.msg.msg_style}}">
-				<ng-include src="_chat_bot_msgs_template_"></ng-include>
+				<li ng-animate="'animate'" ng-repeat="m in msgs track by $index" class="animation msg {{m.by || 'bot'}} {{m.msg.msg_style}} valign-center">
+				<div ng-if="m.by == 'bot'" class="icon valign-center"><i class="material-icons">toys</i></div>
+				<div class="body" ng-include src="_chat_bot_msgs_template_"></div>
 				</li>
 				<div ng-if="suggestion" ng-include="suggestion_template" class="sug-container"></div>
 				
@@ -19,8 +21,8 @@
 
 		<div class='field'>
             <input type="text" placeholder="Ask Me" ng-model="_chat_bot_query_" ng-keyup="bindQueryOnPress($event)"  />
-        <fab-button class="md-fab md-mini md-primary send-fab" aria-label="Use Android" ng-disabled="_chat_bot_query_ == '' || _chat_bot_query_ == undefined " ng-click="bindQueryOnClick()">
-          <md-icon class="icon"><i class="material-icons" style="font-size: 15px">send</i></md-icon>
+        <fab-button class="md-fab md-mini md-primary send-fab valign-center" aria-label="Use Android" ng-disabled="_chat_bot_query_ == '' || _chat_bot_query_ == undefined " ng-click="bindQueryOnClick()">
+          <md-icon class="icon"><i class="material-icons" style="font-size: 19px">send</i></md-icon>
         </fab-button>
 
 		</div>
@@ -29,3 +31,9 @@
 
 
 </div>
+
+<div ng-show="!chatOpened" class="opnbtn zoomInDown" ng-click="chatOpened = true ||  scrollToBottom()">
+	<div class="title valign-center">Help Bot</div>
+	<div class="icon valign-center"><i class="material-icons">chat</i></div>
+</div>
+
