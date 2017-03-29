@@ -100,7 +100,7 @@ this.listen = function () {
                           DBHelper.resetTrack(
                                 data.uuid,
                                 function() { 
-                                            socket.emit('modules_res', DBHelper.generateModuleForWeb({msg:Strings.exit.Resmsg}));
+                                            setTimeout(function() { socket.emit('modules_res', DBHelper.generateModuleForWeb({msg:Strings.exit.Resmsg})); }, 1000); 
                                           },
                                 function() {}
                              );
@@ -121,7 +121,8 @@ this.listen = function () {
                               function(menu_module) { 
 
                                   if(menu_module!=false) { //menu is matched
-                                     socket.emit('modules_res', DBHelper.generateModuleForWeb(menu_module)); 
+                                    setTimeout(function() { socket.emit('modules_res',  DBHelper.generateModuleForWeb(menu_module));  }, 1700);
+                                     
                                   } else {    //search in modules for flow
                                         DB.matchModule(
                                           data.c_id,data.uuid,data.query, 

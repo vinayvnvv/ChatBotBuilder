@@ -1,3 +1,4 @@
-<div ng-if="m.msg.msg_style == '' || m.msg.msg_style == null">{{m.msg}}</div>
+<div ng-if="m.msg.msg_style == '' || m.msg.msg_style == null">{{m.msg}} </div>
+<div class="time" ng-if="m.by == 'me'">{{m.timestamp | date }}</div>
 
 <ng-include ng-if="m.msg.msg_style == 'user-info-card'" src="'directives/templates/user-info-card.html'">{{m.msg.name}}</ng-include>

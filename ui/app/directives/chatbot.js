@@ -49,18 +49,19 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                  })
             }
 
-            $scope.pushMsgs = function(msg, by) {
+            $scope.pushMsgs = function(msg, by, time) {
+               if(!time) time = new Date();
                console.log("Pushing", by)
                if(by == null) by = 'bot'; 
                console.log(typeof(msg) == 'object')
                   if(typeof(msg) == 'object') {
                         for(var i=0;i<msg.length;i++) {
                           console.log("msgs:" , msg[i])
-                          $scope.msgs.push({by:by,msg:msg[i]});
+                          $scope.msgs.push({by:by,msg:msg[i], timestamp:time});
                           //$scope.$apply();
                       }
                     } else {
-                        $scope.msgs.push({by:by,msg:msg});
+                        $scope.msgs.push({by:by,msg:msg, timestamp:time});
                 }
 
                 console.log($scope.msgs)
@@ -176,7 +177,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                    $scope.resModules(); //call for real-time modules listen
                    for(var i=0;i<res.data.length;i++) {
 
-                      $scope.pushMsgs(res.data[i].msg, res.data[i].by);
+                      $scope.pushMsgs(res.data[i].msg, res.data[i].by, res.data[i].timestamp);
                    }
 
                     $scope.scrollToBottom();  
