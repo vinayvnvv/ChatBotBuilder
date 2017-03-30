@@ -680,3 +680,9 @@
   animation-name: zoomInDown;
   animation-duration: 0.4s;
 }
+
+.zoomInDown.ng-hide-add-active {
+    -webkit-animation-name: zoomInDown;
+  animation-name: zoomInDown;
+  animation-duration: 0s;
+  }

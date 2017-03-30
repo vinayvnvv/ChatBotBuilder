@@ -19,5 +19,10 @@ app.service('URLVars', ['$location', function($location){
      this.sokectsUrl = {
      	bot:host + "sockets/bot"
      }
+
+     this.api = {
+        getMsg: "http://127.0.0.1:3000/api/bot/msgs/"
+     }
+
 	
 }])

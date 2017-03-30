@@ -18,6 +18,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
              $scope.shortcutType = null;
              var bot_socket = io.connect(URLVars.sokectsUrl.bot);
              $scope.client_id = Helper.decodeId(document.querySelectorAll('chat-bot-link')["0"].attributes["0"].value);
+             $scope.currentPage = 1;
 
              console.log("client", $scope.client_id)
              
@@ -29,7 +30,28 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
       //get scroller element
        $scope.chat_scroller = angular.element($element["0"].children["0"].children.item(1));
 
+       console.log("scroller", $scope.chat_scroller)
+
       /* end of variables init */
+
+
+      $scope.chat_scroller[0].onscroll = function() {
+        console.log("scrolling..", $scope.chat_scroller[0].scrollTop)
+        if($scope.chat_scroller[0].scrollTop == 0) {
+
+          $http.get(URLVars.api.getMsg + $scope.uuid + "/" + STRVars.pagination.limit + "/" + ( ++$scope.currentPage )).then(function(res) {
+               var arr = res.data.reverse();
+                   for(var i=0;i<arr.length;i++) {
+                      $scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp, true);
+                   }
+
+               console.log(arr)
+          });
+
+          console.log(JSON.stringify($scope.msgs))
+
+        }
+      }
 
 
             $scope.reqModules = function(msg) {
@@ -49,22 +71,33 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                  })
             }
 
-            $scope.pushMsgs = function(msg, by, time) {
+            $scope.pushMsgs = function(msg, by, time, reverse) {
+              console.log("reverse", reverse)
                if(!time) time = new Date();
-               console.log("Pushing", by, time)
                if(by == null) by = 'bot'; 
-               console.log(typeof(msg) == 'object')
                   if(typeof(msg) == 'object') {
                         for(var i=0;i<msg.length;i++) {
-                          console.log("msgs:" , msg[i])
-                          $scope.msgs.push({by:by,msg:msg[i], timestamp:time});
+                          if(reverse == true) {
+                            console.log("reverse adding")
+                            $scope.msgs.splice(0, 0, {by:by,msg:msg[i], timestamp:time});
+                            $scope.msgs.join();
+                          }
+                          else{
+                            $scope.msgs.push({by:by,msg:msg[i], timestamp:time});
+                          }
                           //$scope.$apply();
                       }
                     } else {
-                        $scope.msgs.push({by:by,msg:msg, timestamp:time});
+                        if(reverse == true) {
+                            console.log("reverse adding")
+                            $scope.msgs.splice(0, 0, {by:by,msg:msg, timestamp:time});
+                            $scope.msgs.join();
+                          }
+                          else{
+                            $scope.msgs.push({by:by,msg:msg, timestamp:time});
+                          }
                 } 
 
-                console.log($scope.msgs)
             }
 
 
@@ -152,10 +185,10 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
           }
 
            
-        $scope.initBot = function() {
-          var data = { c_id: $scope.client_id, uuid: $scope.uuid };
-          bot_socket.emit('init', data);
-        }
+          $scope.initBot = function() {
+            var data = { c_id: $scope.client_id, uuid: $scope.uuid };
+            bot_socket.emit('init', data);
+          }
 
           $scope.connectBot = function() {
 
@@ -165,13 +198,14 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                 console.log("connecting with existance uuid")
 
                  //$scope.initBot();
-                 $http.get("http://127.0.0.1:3000/api/bot/msgs/" + $scope.uuid).then(function(res) { //get msgs from server
+                 $http.get(URLVars.api.getMsg + $scope.uuid + "/" + STRVars.pagination.limit + "/1").then(function(res) { //get msgs from server
 
                    $scope.initBot();
                    $scope.resModules(); //call for real-time modules listen
-                   for(var i=0;i<res.data.length;i++) {
+                   var arr = res.data.reverse();
+                   for(var i=0;i<arr.length;i++) {
 
-                      $scope.pushMsgs(res.data[i].msg, res.data[i].by, res.data[i].timestamp);
+                      $scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp);
                    }
 
                     $scope.scrollToBottom();  
