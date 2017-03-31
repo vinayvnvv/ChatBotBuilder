@@ -9,7 +9,7 @@ router.get('/msgs/:id/:limit/:page', function(req, res, next) {
      DB.getMsgs(
           
             req.params.id, parseInt(req.params.limit), parseInt(req.params.page),
-            function(docs) { res.json(docs); },
+            function(docs) { setTimeout(function() { res.json(docs); }, 2000);  },
             function(err) { res.send("err"); }
 
      	)

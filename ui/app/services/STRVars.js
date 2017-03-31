@@ -5,7 +5,7 @@ app.service('STRVars', ['$location', function($location){
 
 
      this.pagination = {
-        limit: 10
+        limit: 20
      }
 
      

@@ -36,6 +36,11 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
     }
 
 
+    $scope.closeModuleView = function() {
+      $rootScope.rightBarTemplate = Strings.templateUrl.statsView;
+    }
+
+
     $scope.openCreateModuleDialog = function(ev) {
       $mdDialog.show({
             controller: 'createModuleCtrl',

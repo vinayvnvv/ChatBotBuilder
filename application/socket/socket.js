@@ -44,7 +44,7 @@ this.listen = function () {
 
                   socket.on('init', function(data) {
                     //DBHelper.updateTrack('uuid', DBHelper.constructTrackModel({flow_id: "m_id_21312"}));
-                    console.log(data)
+                    console.log("init", data, socket.handshake)
                        DBHelper.trackStatus(
 
                              data.uuid,

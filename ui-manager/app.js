@@ -60,8 +60,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 app.config(['$mdThemingProvider',function($mdThemingProvider) {
 
   $mdThemingProvider.theme('default')
-    .primaryPalette('light-green')
-    .accentPalette('light-green');
+    .primaryPalette('teal')
+    .accentPalette('teal');
 }]);
 
 //animate config

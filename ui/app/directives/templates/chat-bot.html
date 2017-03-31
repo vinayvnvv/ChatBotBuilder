@@ -10,6 +10,7 @@
 
 
 		<div class="container">
+		        <div class="load-more zoomInDown" ng-if="moreLoading"><span><i class="material-icons">settings_backup_restore</i>Loading</span></div>
 				<li ng-animate="'animate'" ng-repeat="m in msgs track by $index" class="animation msg {{m.by || 'bot'}} {{m.msg.msg_style}} valign-center">
 				<div ng-if="m.by == 'bot'" class="icon valign-center"><i class="material-icons">toys</i></div>
 				<div class="body" ng-include src="_chat_bot_msgs_template_"></div>

@@ -19,6 +19,8 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
              var bot_socket = io.connect(URLVars.sokectsUrl.bot);
              $scope.client_id = Helper.decodeId(document.querySelectorAll('chat-bot-link')["0"].attributes["0"].value);
              $scope.currentPage = 1;
+             $scope.isScroll = true;
+             $scope.moreLoading = false;
 
              console.log("client", $scope.client_id)
              
@@ -36,19 +38,21 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
 
       $scope.chat_scroller[0].onscroll = function() {
-        console.log("scrolling..", $scope.chat_scroller[0].scrollTop)
+        
         if($scope.chat_scroller[0].scrollTop == 0) {
+          if($scope.moreLoading == true) return;
+          $scope.moreLoading = true;
+          var height = $scope.chat_scroller["0"].scrollHeight;
 
           $http.get(URLVars.api.getMsg + $scope.uuid + "/" + STRVars.pagination.limit + "/" + ( ++$scope.currentPage )).then(function(res) {
-               var arr = res.data.reverse();
+               var arr = res.data;
                    for(var i=0;i<arr.length;i++) {
+                      $scope.isScroll = false;
                       $scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp, true);
                    }
-
-               console.log(arr)
+               $timeout(function(){$scope.chat_scroller[0].scrollTop = ($scope.chat_scroller["0"].scrollHeight-height); }, 0); 
+               $scope.moreLoading = false;    
           });
-
-          console.log(JSON.stringify($scope.msgs))
 
         }
       }
@@ -265,13 +269,17 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
               } 
 
        $scope.scrollToBottom = function() {
-          $scope.chat_scroller[0].scrollTop = ($scope.chat_scroller[0].scrollHeight + 20);
+          if($scope.isScroll) {
+            $scope.chat_scroller[0].scrollTop = ($scope.chat_scroller[0].scrollHeight + 20);
+          } else {
+            $scope.isScroll = true;
+          } 
         }   
 
         $scope.scrollToBottomOnOpen = function() {
           console.log("SCROLL ON OPEN")
           $scope.chatOpened = true;
-          $timeout(function() { $scope.scrollToBottom } , 1000)
+          $timeout(function() { $scope.scrollToBottom(); } , 0000)
         }
 
        $scope.pushTypingMsg = function() {
