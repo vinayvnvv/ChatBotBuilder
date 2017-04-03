@@ -14,7 +14,7 @@ app.controller('createMenu', ['$scope', '$mdDialog', '$rootScope', 'Service', 'S
 		$scope.err.show = true;
         if($scope.errorCheck()) {
           var data = {
-          			 	   "name" : $scope.create_menu_name,
+          			 "name" : $scope.create_menu_name,
 					       "matches": $scope.create_menu_matches,
 					       "menu_type": $scope.create_menu_type,
 					       "menus": $scope.create_menu_list

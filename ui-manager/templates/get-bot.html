@@ -15,6 +15,69 @@
 
     <md-dialog-content>
       <div class="md-dialog-content">
+
+
+        <div class>
+
+
+          <md-card md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Setup Bot</span>
+                  <span class="md-subhead md-caption">Bot initializers</span>
+                  {{i_b_input}}
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content layout-sm="row" layout-align="space-between">
+                <div class="md-media-sm card-media">
+
+                    <div class="in-aria row">
+                    <div class="title">Welcome Message : </div>
+                    <div class="input"> 
+                       <auto-add-input ng-model="i_b_input.msg" name="i_welcome">
+                              <input type="text" placeholder="Messages" data-array="$index" required/>
+                          </auto-add-input>
+                       <div class="in-err flash" ng-if="init_bot.i_welcome.$viewValue.length==0 && err.show">Specify atleast one message! </div>
+                    </div>
+                  </div>
+
+
+                  <div class="in-aria row" ng-init="i_b_input.shortcut = 'none'">
+                    <div class="title">Suggestion</div>
+                    <div class="input"> 
+                          <md-input-container class="md-block" flex-gt-sm >
+                            <md-select ng-model="i_b_input.shortcut" name="i_sug">
+                              <md-option ng-repeat="item in suggestion_type_array" value="{{item.value}}">
+                                {{item.title}}
+                              </md-option>
+                            </md-select>
+                          </md-input-container>
+
+                       <div ng-show="i_b_input.shortcut != 'none'">
+                        <div class="sub-info md-caption">Suggestion Items:</div>
+                           <auto-add-input ng-model="i_b_input.shortcutData" name="i_sh_array">
+                              <input type="text" placeholder="add items" data-array="$index" required/>
+                          </auto-add-input>
+                          <div class="in-err flash" ng-if="i_b_input.shortcutData.length == 0 && err.show">Specify atleast one Suggestion Item !</div>
+                       </div>
+                    </div>
+                  </div> 
+                  
+
+
+
+                </div>
+
+                <md-card-actions layout="column" layout-align="end center">
+                  <md-button class="md-raised" aria-label="Favorite" ng-click="setUpBot()">
+                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Setup
+                  </md-button>
+                </md-card-actions>
+              </md-card-content>
+      </md-card>
+
+
+        </div>
        
         <div class="md-caption" style="color:#555">Insert below javascript snippet to your App.</div><br/>
 

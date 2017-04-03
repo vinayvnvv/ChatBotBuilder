@@ -25,6 +25,27 @@ var Modules = function() {
 
 	}
 
+	this.getInit = function(id, success_callback, error_callback) {
+
+		MongoClient.connect(header.db.url, function(err, db) {
+		  
+		  assert.equal(null, err);
+		  if(err) return callback_err(err);
+		   var collection = db.collection(header.collections.module(id));
+				  collection.find( {"type": "init"} ).toArray( function(err, docs) {
+				  	console.log("docs>>>>>>>>>>>>", docs)
+				  	 if(err) { error_callback(err); return }
+
+                     success_callback(docs);
+				  	
+				});
+			});
+
+	}
+
+
+
+
 
 
 	this.create = function(id, doc, success_callback, error_callback) {
@@ -90,6 +111,39 @@ var Modules = function() {
 								}
 							);
 			});
+
+	}
+
+
+	this.updateInit = function(id, doc, success_callback, error_callback) {
+
+       console.log("initializing bot", id) ;
+        // if((doc = Model.modules_insert(doc)) == false) {  //check model validity
+        // 	error_callback('insert modeule error');
+        // 	return;
+        // }
+
+        //upadte time stamp
+        doc.type="init";
+        doc.timestamp_updated = Service.getUpdatedTimeStamp();
+
+		MongoClient.connect(header.db.url, function(err, db) {
+		  
+		  assert.equal(null, err);
+		  if(err) return callback_err(err);
+		   var collection = db.collection(header.collections.module(id));
+				  collection.update(
+				  	        {"type": "init"},
+				  	        { $set: doc },
+				  	        { upsert:true },
+				  	        function(err, result) {
+							  	 if(err) { error_callback(err); return }
+			                     success_callback(result);
+								}
+							);
+			});
+
+
 
 	}
 

@@ -39,4 +39,23 @@ app.service('Models', function () {
        	}
          return model; 	
 	}
+
+     this.initBot = function(m) {
+       var model = {};
+
+         if(m.msg == undefined || m.msg == null || m.msg == '') model.msg = "Welcome!";
+         else model.msg = m.msg;
+
+         if(m.shortcut == undefined || m.shortcut == '' || m.shortcut == null || m.shortcut == 'none') {
+                model.shortcut = null;
+                model.shortcutData = [];
+
+              } else { 
+                     model.shortcut = m.shortcut;
+                     if(m.shortcutData == undefined || m.shortcutData == '' || m.shortcutData == null || m.shortcutData.length == 0) model.shortcutData = [];
+                     else model.shortcutData = m.shortcutData;
+
+              }
+        return model;      
+     }  
 });

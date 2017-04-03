@@ -25,6 +25,20 @@ app.service('Api', ['$http', 'Strings', '$rootScope', function($http, Strings, $
             });
   }
 
+  this.updateInitBot = function(data) {
+     return $http({
+                method: 'POST',
+                url: Strings.apis.updateInitBot + $rootScope._auth_user_id,
+                data: data
+            });
+  }
+
+  this.getInitBot = function() {
+     return $http({
+                method: 'GET',
+                url: Strings.apis.getInitBot + $rootScope._auth_user_id
+            });
+  }
 
 
 

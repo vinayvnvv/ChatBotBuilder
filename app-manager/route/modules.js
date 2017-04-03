@@ -35,4 +35,30 @@ router.post('/update/:id/:moduleId', function(req, res) {
 
 });
 
+
+router.get('/init/:id', function(req, res, next) {
+   moduleDb.getInit(
+        req.params.id,
+        function(docs) { setTimeout(function() { res.json(docs) }, 2000);  },
+        function(err) {}
+    )
+});
+
+
+
+router.post('/init/:id', function(req, res) {
+
+
+  moduleDb.updateInit(
+          req.params.id,
+          req.body,
+          function(result) { setTimeout(function() { res.json(Model.success_obj(result)); }, 2200);  },
+          function(err) { res.json(Model.error_obj(err)); }
+    );
+
+});
+
+
+
+
 module.exports = router;

@@ -7,7 +7,9 @@ app.service('Strings',['$location', function($location) {
 	this.apis = {
 		getModules : origin + "api/manager/modules/",
 		updateModules: origin + "api/manager/modules/update/",
-		createModules: origin + "api/manager/modules/create/"
+		createModules: origin + "api/manager/modules/create/",
+		updateInitBot : origin + "api/manager/modules/init/",
+		getInitBot : origin + "api/manager/modules/init/"
 	}
 
 	this.templateUrl = {

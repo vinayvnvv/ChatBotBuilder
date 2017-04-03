@@ -66,11 +66,13 @@
 }
 .chat .container .msg .time {
     font-size: 11px;
-    color: #999;
+    color: #777;
     position: absolute;
-    left: -61px;
+    margin-left: -111px;
     bottom: 11px;
     font-weight: 200;
+    border-right: 1px solid #d9d9d9;
+    padding-right: 11px;
 }
 .chat .container .msg {
   list-style: none;
@@ -102,13 +104,17 @@
 .chat .container .msg .body {
   flex-grow: 1;
   padding: 13px 21px;
-  border-radius: 50px;
+  border-radius: 21px;
   margin-left: 10px;
   font-size: 14px;
   font-weight: 400;
+  display: inline-table;
+  text-align: left;
 }
+
 .chat .container .msg.me {
   float: right;
+  text-align: -webkit-right;
 }
 .chat .container .msg.me .body {
   background-color: #607D8B;
