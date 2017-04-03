@@ -1,4 +1,4 @@
-app.controller('mainApp', ['$scope', '$mdDialog', '$rootScope', function($scope, $mdDialog, $rootScope){
+app.controller('mainApp', ['$scope', '$mdDialog', '$rootScope', 'Strings', 'Models', 'Api', 'Service', function($scope, $mdDialog, $rootScope, Strings, Models, Api, Service){
 
 	console.log("called main controller");
     

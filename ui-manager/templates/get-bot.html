@@ -17,15 +17,25 @@
       <div class="md-dialog-content">
 
 
-        <div class>
+        
+
+      
+       
+        <div class="md-caption" style="color:#555" >Insert below javascript snippet to your App.</div><br/>
+
+        <code class="caption" style="background-color: #f5f5f5;color:#777"> 
+        &#60;script chat-bot-id="{{_auth_user_id}}" type="text/javascript" src="http://127.0.0.1:3000/bot-client/bot.min.js"&#62;&#60;/script&#62;
+          
+        </code>
+
+          <md-button ng-show="!showSetup" class="md-block md-raised" ng-click="showSetup = true">Setup</md-button>
 
 
-          <md-card md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
-              <md-card-title>
+        <md-card ng-if="showSetup" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
+              <md-card-title >
                 <md-card-title-text>
                   <span class="md-headline">Setup Bot</span>
                   <span class="md-subhead md-caption">Bot initializers</span>
-                  {{i_b_input}}
                 </md-card-title-text>
               </md-card-title>
               <md-card-content layout-sm="row" layout-align="space-between">
@@ -42,7 +52,7 @@
                   </div>
 
 
-                  <div class="in-aria row" ng-init="i_b_input.shortcut = 'none'">
+                  <div class="in-aria row">
                     <div class="title">Suggestion</div>
                     <div class="input"> 
                           <md-input-container class="md-block" flex-gt-sm >
@@ -68,23 +78,16 @@
 
                 </div>
 
-                <md-card-actions layout="column" layout-align="end center">
+                <md-card-actions layout="row" layout-align="end center">
                   <md-button class="md-raised" aria-label="Favorite" ng-click="setUpBot()">
                     <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Setup
+                  </md-button>
+                  <md-button class="" aria-label="Favorite" ng-click="showSetup = false">
+                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Close
                   </md-button>
                 </md-card-actions>
               </md-card-content>
       </md-card>
-
-
-        </div>
-       
-        <div class="md-caption" style="color:#555">Insert below javascript snippet to your App.</div><br/>
-
-        <code class="caption" style="background-color: #f5f5f5;color:#777"> 
-        &#60;script chat-bot-id="{{_auth_user_id}}" type="text/javascript" src="http://127.0.0.1:3000/bot-client/bot.min.js"&#62;&#60;/script&#62;
-          
-        </code>
 
 
 
