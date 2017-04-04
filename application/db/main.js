@@ -27,6 +27,8 @@ var MainDB = function() {
                        callback_suc(false)
 				  	} else {
 				  		console.log("matched module with id:" + matched._id + ", under client_id:" + c_id);
+              //update stats
+              DBHelper.updateModuleStatsOnMatch(c_id, matched)
 				  		console.log(matched.welcome)
 				  		//update track details
 				  		DBHelper.updateTrack(

@@ -204,6 +204,31 @@ var header = require('./../header');
              	                 );
     }
 
+    this.updateModuleStatsOnMatch = function(c_id, doc) {
+    	console.log("****************\n Updatting matched stats", doc)
+    	var triggered, triggeredAt;
+    	   if(doc.statastics == undefined || doc.statastics == null) triggered = 0;
+    	   else triggered = (doc.statastics.triggeredAt+1);
+
+    	   triggeredAt = new Date();
+           	
+           var data = {"statastics.triggered":triggered, "statastics.triggeredAt": triggeredAt};
+            
+         MongoClient.connect(header.db.url, function(err, db) {
+		  
+		  assert.equal(null, err);
+		  if(err) return ;
+		   var collection = db.collection(header.collections.module(c_id));
+				  collection.update({"_id":ObjectId(doc._id)}, {$set: data}, function(err, doc) {
+				  	console.log("************\n stats result", doc);
+				  	if(err) return ;
+				  	else return;
+				});
+			});
+
+
+    }
+
 
 
 
