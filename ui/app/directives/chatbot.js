@@ -21,6 +21,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
              $scope.currentPage = 1;
              $scope.isScroll = true;
              $scope.moreLoading = false;
+             $scope.msgFrom = "bot";
 
              console.log("client", $scope.client_id)
              
@@ -59,6 +60,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
 
             $scope.reqModules = function(msg) {
+              if($scope.msgFrom == "bot") return;
                console.log("module is requesting by user..." + msg)
                var data = { c_id:$scope.client_id, uuid: $scope.uuid,  query: msg };
                bot_socket.emit('modules_req', data)
@@ -176,12 +178,14 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
         } 
       
           $scope.openOptionModule = function(obj) {
+                  $scope.msgFrom = "user";
                   $scope.suggestion = false;
                   //$scope.user_msg.msg = obj.name;
                   $scope.pushMsgs(obj, "me");
                 }
 
           $scope.openListModule = function(obj) {
+            $scope.msgFrom = "user";
             $scope.suggestion = false;
             //$scope.user_msg.msg = obj.name;
             $scope.pushMsgs(obj, "me");
@@ -212,7 +216,8 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
                       $scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp);
                    }
 
-                    $scope.scrollToBottom();  
+                    $scope.scrollToBottom(); 
+                    $scope.initMsgs = true;  
 
               }, function(err) {
 
@@ -247,8 +252,8 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
                  $scope.suggestion = false; //hide suggestion section
 
-           $scope.pushMsgs($scope._chat_bot_query_, "me");
-           $scope._chat_bot_query_ = "";
+                 $scope.pushMsgs($scope._chat_bot_query_, "me");
+                 $scope._chat_bot_query_ = "";
               }
 
 
@@ -257,6 +262,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
       //ui events
       $scope.bindQueryOnPress = function(e) {
+          $scope.msgFrom = "user";
 
           var code = (e.keyCode ? e.keyCode : e.which);
           if(code == 13) { //Enter keycode
@@ -265,6 +271,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
           }
           }
         $scope.bindQueryOnClick = function() {
+                $scope.msgFrom = "user";
                 $scope.bindQuery();
               } 
 
@@ -343,6 +350,7 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
           $timeout(function() {$scope.scrollToBottom();}, 100);
           if($scope.msgs.length>0) {
                        if($scope.msgs[$scope.msgs.length-1].by == 'me') { // user submition 
+
 
                           $scope.playSound("user");
                           $scope.reqModules($scope.msgs[$scope.msgs.length-1].msg);
