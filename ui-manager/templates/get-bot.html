@@ -20,7 +20,7 @@
         
 
       
-       
+       <div ng-show="!showSetup" >
         <div class="md-caption" style="color:#555" >Insert below javascript snippet to your App.</div><br/>
 
         <code class="caption" style="background-color: #f5f5f5;color:#777"> 
@@ -28,10 +28,10 @@
           
         </code>
 
-          <md-button ng-show="!showSetup" class="md-block md-raised" ng-click="showSetup = true">Setup</md-button>
+          <md-button class="md-block md-raised" ng-click="showSetup = true">Setup</md-button>
+      </div>
 
-
-        <md-card ng-if="showSetup" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
+        <md-card ng-show="showSetup" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
               <md-card-title >
                 <md-card-title-text>
                   <span class="md-headline">Setup Bot</span>

@@ -67,6 +67,8 @@ var MainDB = function() {
                        callback_suc(false)
             } else {
               console.log("matched module with id:" + matched._id + ", under client_id:" + c_id);
+              //update stats
+              DBHelper.updateModuleStatsOnMatch(c_id, matched)
               callback_suc({msg:Strings.common.selectMenu, shortcut:"list", shortcutData:matched.menus});
             }
         });

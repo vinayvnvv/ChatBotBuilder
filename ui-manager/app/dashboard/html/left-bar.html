@@ -19,10 +19,13 @@
 	      <div class="main">
 	       <div class="title"><span>{{m.name}}</span></div>
 	       <div class="desc">
-	       <span ng-repeat="a in m.matches">{{a}} , </span>
+	       <span ng-repeat="a in m.matches" class="caption small" md-colors="{color:'primary-50', background:'primary-500'}">{{a}} </span>
 	       </div>
 	       <div class="sub-info md-caption">
-	       <span class="caption small" md-colors="{background:'primary-900-0.57',color:'primary-50'}">Triggered <b am-time-ago="m.statastics.triggeredAt"></b></span>
+	       <span class="small" md-colors="{color:'grey-600'}"><i class="material-icons" style="font-size: 12px;">access_time</i> Triggered at <b am-time-ago="m.statastics.triggeredAt"></b></span>
+	       </div>
+	       <div class="sub-info md-caption">
+	       <span class="small" md-colors="{color:'grey-600'}"><i class="material-icons" style="font-size: 12px;">replay</i> Triggered <b>{{m.statastics.triggered}} times</b></span>
 	       </div>
 	      </div>
 	      <div class="action">
