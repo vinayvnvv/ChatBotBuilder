@@ -8,6 +8,8 @@ var AppManagerFiles = function() {
               'ui-manager/node_modules/angular-material/angular-material.min.js',
               'ui-manager/node_modules/angular-aria/angular-aria.min.js',
               'ui-manager/node_modules/angular-messages/angular-messages.min.js',
+              'ui-manager/node_modules/angular-moment/angular-moment.min.js',
+              'ui-manager/node_modules/moment/moment.js',
               'ui-manager/libs/auto-add-input.js'
     	    ],
     	css:[

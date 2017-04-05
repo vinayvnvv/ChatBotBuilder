@@ -78,10 +78,10 @@
 <div class="section">
 	<div class="title">Statastics</div>
 	<div class="content">
-	<div class="item"><span class="caption small border">Created at {{moduleSelectedData.timestamp_created.at}}</span></div>
-	<div class="item"><span class="caption small border">Updated at {{moduleSelectedData.timestamp_updated.at}}</span></div>
-	<div class="item"><span class="caption small border">Last Triggered: 27 July</span></div>
-	<div class="item"><span class="caption small border">Triggered 31 times</span></div>
+	<div class="item"><span class="caption small border">Created at {{moduleSelectedData.timestamp_created.at | date}}</span></div>
+	<div class="item"><span class="caption small border">Updated at {{moduleSelectedData.timestamp_updated.at | date}}</span></div>
+	<div class="item"><span class="caption small border">Last Triggered: <span am-time-ago="moduleSelectedData.statastics.triggeredAt"></span></span></div>
+	<div class="item"><span class="caption small border">Triggered {{moduleSelectedData.statastics.triggered}} times</span></div>
 	</div>
 </div>
 

@@ -13,6 +13,7 @@ app.controller('flowInfoCtrl', ['$scope', '$rootScope', 'Strings', 'Api', 'Servi
     }
 
 
+
    $scope.$watch(function() {
       return $rootScope.moduleSelectedData;
     }, function() {

@@ -207,8 +207,8 @@ var header = require('./../header');
     this.updateModuleStatsOnMatch = function(c_id, doc) {
     	console.log("****************\n Updatting matched stats", doc)
     	var triggered, triggeredAt;
-    	   if(doc.statastics == undefined || doc.statastics == null) triggered = 0;
-    	   else triggered = (doc.statastics.triggeredAt+1);
+    	   if(doc.statastics == undefined || doc.statastics == null) triggered = 1;
+    	   else triggered = (doc.statastics.triggered+1);
 
     	   triggeredAt = new Date();
            	
