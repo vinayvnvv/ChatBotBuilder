@@ -1,0 +1,52 @@
+<loader ng-if="createLoader" l-title="Creating Module..."></loader>
+
+<md-dialog aria-label="Mango (Fruit)">
+
+  <form  ng-clock style="width:701px">
+    <md-toolbar >
+      <div class="md-toolbar-tools" >
+        <h2>Setting</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="closeDialog()">
+          <md-icon><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+
+
+      <div class="in-aria row">
+                    <div class="title">Theme </div>
+                    <div class="input"> 
+                          <md-input-container class="md-block" flex-gt-sm >
+                            <md-select ng-model="setting_theme_name" name="i_sug" md-on-close="changeTheme()">
+                              <md-option ng-repeat="t in themeNames" value="{{t.value}}">
+                                {{t.title}}
+                              </md-option>
+                            </md-select>
+                          </md-input-container>
+                       
+                    </div>
+       </div> 
+
+
+      
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" ng-show="showSetup" class="fadeInUp anim">
+            
+      <span flex></span>
+
+      <md-button class="md-primary md-raised" aria-label="Favorite" ng-click="setUpBot()">
+                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Setup
+     </md-button>
+
+
+     <md-button  class="" aria-label="Favorite" ng-click="showSetup = false">
+                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Close
+      </md-button>
+
+    </md-dialog-actions>
+  </form>
+</md-dialog>

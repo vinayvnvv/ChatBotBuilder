@@ -41,6 +41,15 @@ app.service('Service', ['$rootScope', '$mdToast', function($rootScope, $mdToast)
 		    );
 	}
 
+	this.storage = {
+		set: function(key, value) {
+            return localStorage.setItem(key, value);
+		},
+		get: function(key) {
+			return localStorage.getItem(key);
+		}
+	}
+
 
 	
 }])

@@ -4,6 +4,7 @@ var ObjectId = require('mongodb').ObjectID;
 var header = require('./../../application/header');
 var Model = require('./../models/models');
 var Service = require('./../services/services')
+var Inits = require('./../services/inits')
 
 var Modules = function() {
 
@@ -146,6 +147,62 @@ var Modules = function() {
 
 
 	}
+
+
+	this.initDB = function(id, success_callback, error_callback) {
+
+       console.log("initializing bot", id) ;
+        // if((doc = Model.modules_insert(doc)) == false) {  //check model validity
+        // 	error_callback('insert modeule error');
+        // 	return;
+        // }
+
+        var doc = {
+        	type:"init",
+        	msg: ["Welcome!"],
+        	style: Inits.getInitBotStyle,
+        	timestamp_updated : Service.getUpdatedTimeStamp(),
+        	initilized:true
+        };
+
+
+
+
+		MongoClient.connect(header.db.url, function(err, db) {
+		  
+		  assert.equal(null, err);
+		  if(err) return callback_err(err);
+		   var collection = db.collection(header.collections.module(id));
+		          collection.find({"type": "init"}).toArray(function(err, docs) {
+		          	if(err) { error_callback(err); return }
+		          	if(docs.length == 0) { success_callback("already initialized"); return }
+
+                    if((docs[0].initilized) != true) { //first time init
+                     	collection.update(
+				  	        {"type": "init"},
+				  	        { $set: doc },
+				  	        { upsert:true },
+				  	        function(err, result) {
+							  	 if(err) { error_callback(err); return }
+			                     success_callback(result);
+								}
+							);
+                     } else {
+                     	success_callback("already initialized");
+                     }
+
+
+		          });
+		          return;
+				  
+			});
+
+
+
+	}
+
+
+
 
 
 

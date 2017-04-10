@@ -9,7 +9,8 @@ app.service('Strings',['$location', function($location) {
 		updateModules: origin + "api/manager/modules/update/",
 		createModules: origin + "api/manager/modules/create/",
 		updateInitBot : origin + "api/manager/modules/init/",
-		getInitBot : origin + "api/manager/modules/init/"
+		getInitBot : origin + "api/manager/modules/init/",
+		initBotDB : origin + "api/manager/modules/init_db/"
 	}
 
 	this.templateUrl = {
@@ -43,6 +44,33 @@ app.service('Strings',['$location', function($location) {
                          {title:"List", value:"list"},
                          {title:"Option", value:"option"}
                      ];
+
+    this.themeNames = [
+                         {title:"red", value:"red"},
+                         {title:"pink", value:"pink"},
+                         {title:"purple", value:"purple"},
+                         {title:"deep-purple", value:"deep-purple"},
+                         {title:"indigo", value:"indigo"},
+                         {title:"blue", value:"blue"},
+                         {title:"light-blue", value:"light-blue"},
+                         {title:"cyan", value:"cyan"},
+                         {title:"teal", value:"teal"},
+                         {title:"green", value:"green"},
+                         {title:"light-green", value:"light-green"},
+                         {title:"lime", value:"lime"},
+                         {title:"yellow", value:"yellow"},
+                         {title:"amber", value:"amber"},
+                         {title:"orange", value:"orange"},
+                         {title:"deep-orange", value:"deep-orange"},
+                         {title:"brown", value:"brown"},
+                         {title:"grey", value:"grey"},
+                         {title:"blue-grey", value:"blue-grey"},
+
+                      ];                 
+
+    this.theme = {
+    	name: "appThemeName"
+    }                 
 
 }]);
 

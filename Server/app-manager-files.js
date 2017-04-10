@@ -21,7 +21,8 @@ var AppManagerFiles = function() {
     	js: [
               'ui-manager/*.js',
               'ui-manager/app/dashboard/ctrl/*.js', 
-              'ui-manager/app/auth/ctrl/*.js',  
+              'ui-manager/app/auth/ctrl/*.js', 
+              'ui-manager/app/setting/*.js', 
               'ui-manager/directives/*.js',
               'ui-manager/services/*.js'
     	    ],

@@ -50,6 +50,23 @@ app.controller('mainApp', ['$scope', '$mdDialog', '$rootScope', 'Strings', 'Mode
   }
 
 
+  $rootScope.openSetting = function(ev) {
+      $mdDialog.show({
+            controller:"settingCtrl",
+            templateUrl: 'app/setting/setting.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: true // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    }
+
+
   
 	
 }]);

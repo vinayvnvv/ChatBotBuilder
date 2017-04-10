@@ -59,6 +59,18 @@ router.post('/init/:id', function(req, res) {
 });
 
 
+router.post('/init_db/:id', function(req, res) {
+
+
+  moduleDb.initDB(
+          req.params.id,
+          function(result) { setTimeout(function() { res.json(Model.success_obj(result)); }, 2200);  },
+          function(err) { res.json(Model.error_obj(err)); }
+    );
+
+});
+
+
 
 
 module.exports = router;

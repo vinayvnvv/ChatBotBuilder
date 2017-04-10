@@ -112,12 +112,24 @@ track structure
 init modules
 ***************
 {
-  "_id":"db_id",
-  "type":"init",
-  "msg":"welcome to bot",
-  "shortcut":"list",
-  "shortcutData":["hello","bye"]
-}        
+  "type": "init",
+  "msg": "welcome to bot",
+  "shortcut": "list",
+  "shortcutData": [
+    "hello",
+    "bye"
+  ],
+  "style": {
+    "color": "#rfrfrf",
+    "height": "60",
+    "positionX": "left|right",
+    "positionY": "top|bottom",
+    "width": "350px"
+  },
+  "head": {
+    "title": "My Bot"
+  }
+}      
 
 
 

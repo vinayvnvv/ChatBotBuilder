@@ -28,10 +28,10 @@
           
         </code>
 
-          <md-button class="md-block md-raised" ng-click="showSetup = true">Setup</md-button>
+          <md-button class="md-block md-raised" ng-click="showSetup = true">Setup Bot </md-button>
       </div>
 
-        <md-card ng-show="showSetup" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
+        <md-card class="fadeIn anim " ng-if="showSetup" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
               <md-card-title >
                 <md-card-title-text>
                   <span class="md-headline">Setup Bot</span>
@@ -79,12 +79,7 @@
                 </div>
 
                 <md-card-actions layout="row" layout-align="end center">
-                  <md-button class="md-raised" aria-label="Favorite" ng-click="setUpBot()">
-                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Setup
-                  </md-button>
-                  <md-button class="" aria-label="Favorite" ng-click="showSetup = false">
-                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Close
-                  </md-button>
+                  
                 </md-card-actions>
               </md-card-content>
       </md-card>
@@ -97,13 +92,19 @@
       </div>
     </md-dialog-content>
 
-    <md-dialog-actions layout="row">
-      
-      <!-- <span flex></span>
+    <md-dialog-actions layout="row" ng-show="showSetup" class="fadeInUp anim">
+            
+      <span flex></span>
 
-      <md-button ng-click="closeDialog()">
-        close
-      </md-button> -->
+      <md-button class="md-primary md-raised" aria-label="Favorite" ng-click="setUpBot()">
+                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Setup
+     </md-button>
+
+
+     <md-button  class="" aria-label="Favorite" ng-click="showSetup = false">
+                    <!-- <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon> -->Close
+      </md-button>
+
     </md-dialog-actions>
   </form>
 </md-dialog>

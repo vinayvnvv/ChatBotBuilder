@@ -40,6 +40,13 @@ app.service('Api', ['$http', 'Strings', '$rootScope', function($http, Strings, $
             });
   }
 
+  this.initBotDb = function() {
+    return $http({
+                method: 'POST',
+                url: Strings.apis.initBotDB + $rootScope._auth_user_id
+            });
+  }
+
 
 
 

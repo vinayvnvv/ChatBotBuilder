@@ -59,11 +59,15 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
  }]);
 
 //theme config
-app.config(['$mdThemingProvider',function($mdThemingProvider) {
+app.config(['$mdThemingProvider', function($mdThemingProvider) {
+
+  var name = localStorage.getItem("appThemeName");
+  console.log("theme", name)
+  if(name==null) name = "brown";
 
   $mdThemingProvider.theme('default')
-    .primaryPalette('brown')
-    .accentPalette('brown');
+    .primaryPalette(name)
+    .accentPalette(name);
 }]);
 
 //animate config
