@@ -229,6 +229,22 @@ var header = require('./../header');
 
     }
 
+    this.getBotStyle = function(id, success_callback, error_callback) {
+    	MongoClient.connect(header.db.url, function(err, db) {
+		  
+		  assert.equal(null, err);
+		  if(err) return callback_err(err);
+		   var collection = db.collection(header.collections.module(id));
+				  collection.find( {"type": "init"} ).toArray( function(err, docs) {
+				  	console.log("docs>>>>>>>>>>>>", docs)
+				  	 if(err) { error_callback(err); return }
+
+                     success_callback(docs[0].style);
+				  	
+				});
+			});
+    }
+
 
 
 

@@ -41,5 +41,24 @@ app.service('Helper', ['$http', function($http){
 
     return Base64.decode(id);
   }
+
+  this.setUpBotStyle = function(data) {
+        console.log("called theme config")
+        if(data == null || data == undefined ) return;
+        var align = (data.positionX == 'left' ? "left" : "right") + ":0;" + (data.positionY == 'top' ? "top" : "bottom") + ":0";
+        console.log("align", align)
+        var style = angular.element('<style></style>');
+                angular.element(document.body).append(style);
+                css = `
+                       .chat .container .msg.me .body { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       .chat .toolbar { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       .sug-option:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       .sug-list:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       .chat { height:` + data.height +  `%; width:` + data.width +  `px; }
+                       .chat { ` + align + ` }
+                       .opnbtn { background-color: ` + data.bgcolor +  `; color:` + data.color +  `;}
+                `;
+                        style.html(css);
+  }
 	
 }]);

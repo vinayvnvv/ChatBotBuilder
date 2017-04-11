@@ -2,7 +2,7 @@
 
 <md-dialog aria-label="Mango (Fruit)">
 
-  <form name="welcomeModule" ng-clock style="width:701px">
+  <form name="init_bot" ng-clock style="width:701px">
     <md-toolbar >
       <div class="md-toolbar-tools" >
         <h2>Get Your Bot</h2>
@@ -31,7 +31,7 @@
           <md-button class="md-block md-raised" ng-click="showSetup = true">Setup Bot </md-button>
       </div>
 
-        <md-card class="fadeIn anim " ng-if="showSetup" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-form="init_bot">
+        <md-card class="fadeIn anim " ng-if="showSetup" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch>
               <md-card-title >
                 <md-card-title-text>
                   <span class="md-headline">Setup Bot</span>
@@ -72,11 +72,83 @@
                        </div>
                     </div>
                   </div> 
+                   
+                   <md-divider></md-divider><br/>
+                   
+                   <span class="md-subhead">Theme Setup</span><br/><br/>
                   
+
+                  <div class="in-aria row">
+                    <div class="title">Theme Bg Color</div>
+                    <div class="input"> 
+                          <input ng-model="i_b_input.style.bgcolor" name="i_bg_color" required type="text">
+                          <color-shower style="background:{{i_b_input.style.bgcolor}}"></color-shower>
+                          <div class="in-err flash" ng-if="init_bot.i_bg_color.$invalid && err.show">Required !</div>
+                   </div>
+                  </div> 
+
+                  <div class="in-aria row">
+                    <div class="title">Theme Text Color</div>
+                    <div class="input"> 
+                          <input ng-model="i_b_input.style.color" name="i_color" required type="text">
+                          <color-shower style="background:{{i_b_input.style.color}}"></color-shower>
+                          <div class="in-err flash" ng-if="init_bot.i_color.$invalid && err.show">Required !</div>
+                   </div>
+                  </div> 
+
+                  <div class="in-aria row">
+                    <div class="title">Bot Height ( in % )</div>
+                    <div class="input"> 
+                          <input ng-model="i_b_input.style.height" name="i_height" required type="number" min="50" max="100" >
+                          <div class="in-err flash" ng-if="init_bot.i_height.$invalid && err.show">Must between 50 to 100% !</div>
+                   </div>
+                  </div>
+
+
+                  <div class="in-aria row">
+                    <div class="title">Bot Width (in pixel) </div>
+                    <div class="input"> 
+                          <input ng-model="i_b_input.style.width" name="i_width" required type="number" min="250">
+                          <div class="in-err flash" ng-if="init_bot.i_width.$invalid && err.show">Must be more than 250px !</div>
+                   </div>
+                  </div>
+
+
+                   <div class="in-aria row">
+                    <div class="title">Bot Horizontal position </div>
+                    <div class="input"> 
+                           <md-radio-group ng-model="i_b_input.style.positionX" name="i_pos_x">
+
+                              <md-radio-button value="right" class="md-primary">Right</md-radio-button>
+                              <md-radio-button value="left" class="md-primary"> Left </md-radio-button>
+
+                            </md-radio-group>
+                          <div class="in-err flash" ng-if="init_bot.i_pos_x.$invalid && err.show">Must be more than 250px !</div>
+                   </div>
+                  </div>
+
+                  <div class="in-aria row">
+                    <div class="title">Bot Vertical position </div>
+                    <div class="input"> 
+                           <md-radio-group ng-model="i_b_input.style.positionY" name="i_pos_y">
+
+                              <md-radio-button value="top" class="md-primary">Top</md-radio-button>
+                              <md-radio-button value="bottom" class="md-primary"> Bottom </md-radio-button>
+
+                            </md-radio-group>
+                          <div class="in-err flash" ng-if="init_bot.i_pos_y.$invalid && err.show">Must be more than 250px !</div>
+                   </div>
+                  </div>
+
 
 
 
                 </div>
+
+                
+
+
+
 
                 <md-card-actions layout="row" layout-align="end center">
                   

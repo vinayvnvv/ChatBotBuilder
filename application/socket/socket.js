@@ -40,9 +40,16 @@ this.listen = function () {
 	              .on('connection', function(socket) {
 
 
+
+
+
+
 	              	
 
                   socket.on('init', function(data) {
+                    DBHelper.getBotStyle(data.c_id, function(style){ socket.emit('setup', style); }, function(err){});//send Style Setup
+
+
                     //DBHelper.updateTrack('uuid', DBHelper.constructTrackModel({flow_id: "m_id_21312"}));
                     console.log("init", data, socket.handshake)
                        DBHelper.trackStatus(

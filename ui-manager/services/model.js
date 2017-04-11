@@ -56,6 +56,8 @@ app.service('Models', function () {
                      else model.shortcutData = m.shortcutData;
 
               }
+
+          model.style = m.style;    
         return model;      
      }  
 });

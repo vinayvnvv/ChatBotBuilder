@@ -120,7 +120,8 @@ init modules
     "bye"
   ],
   "style": {
-    "color": "#rfrfrf",
+    "bgcolor": "#rfrfrf",
+    "color":"#dasdsa",
     "height": "60",
     "positionX": "left|right",
     "positionY": "top|bottom",

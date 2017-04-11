@@ -151,11 +151,13 @@ var Modules = function() {
 
 	this.initDB = function(id, success_callback, error_callback) {
 
-       console.log("initializing bot", id) ;
+       console.log("initializing bot DB", id) ;
         // if((doc = Model.modules_insert(doc)) == false) {  //check model validity
         // 	error_callback('insert modeule error');
         // 	return;
         // }
+
+
 
         var doc = {
         	type:"init",
@@ -174,10 +176,16 @@ var Modules = function() {
 		  if(err) return callback_err(err);
 		   var collection = db.collection(header.collections.module(id));
 		          collection.find({"type": "init"}).toArray(function(err, docs) {
+		          	console.log("getting initialized docs", docs)
 		          	if(err) { error_callback(err); return }
-		          	if(docs.length == 0) { success_callback("already initialized"); return }
+		          	if(docs.length != 0) { 
+		          		if(docs[0].initilized == true) {
+			          		success_callback("already initialized"); 
+			          		return;
+		          		}
+		          	}
 
-                    if((docs[0].initilized) != true) { //first time init
+                     //first time init
                      	collection.update(
 				  	        {"type": "init"},
 				  	        { $set: doc },
@@ -187,9 +195,7 @@ var Modules = function() {
 			                     success_callback(result);
 								}
 							);
-                     } else {
-                     	success_callback("already initialized");
-                     }
+                     
 
 
 		          });

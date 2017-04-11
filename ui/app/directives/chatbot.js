@@ -28,6 +28,8 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
 
 
+
+
       //set templates
        $scope._chat_bot_msgs_template_ = URLVars.templateUrl.chatBotTemplateMsgs;
       //get scroller element
@@ -306,15 +308,24 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
       $scope.playSound = function (who) {
               if(who == "user") {
                 var audio = new Audio(URLVars.soundUrl.user);
-          audio.play();
-        } else {
-          var audio = new Audio(URLVars.soundUrl.bot);
-          audio.play();
-        }
-            }  
+                 audio.play();
+              } else {
+                var audio = new Audio(URLVars.soundUrl.bot);
+                audio.play();
+              }
+       }  
 
 
+       $scope.setBot = function() {
+        bot_socket.on("setup", function(data) {
+           Helper.setUpBotStyle(data);
+        })
+       }
+
+
+            $scope.setBot();
             $scope.connectBot();
+            
             
 
      },
