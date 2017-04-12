@@ -40,6 +40,10 @@ body , html {
   transition: .3s all;
 }
 
+.flow .card .msg::-webkit-scrollbar {
+  width: 2px;
+}
+
 .loader {
   position: relative;
   top:0;
@@ -347,15 +351,13 @@ align-items: center;
   text-align: center;
   width:55%;
   border-radius: 1px;
-   border:1px solid;
   animation-duration: .7s;
   box-shadow: 1px 1px 3px #d9d9d9;
-  border: 5px solid #f8f8f8;
-  border-width: 5px;
   -webkit-animation-fill-mode: forwards;  
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
 }
+
 .flow .card.left {
    left:5%;
 }
@@ -469,6 +471,24 @@ align-items: center;
   max-height: 40px;
   text-align: left;
   padding:11px;
+  overflow:auto;
+  font-size: 11px;
+}
+.flow .card .index {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #888;
+    border-radius: 50px;
+    top: -13px;
+    left: -13px;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.flow .card .index span {
+  flex-grow: 1;
 }
 .flow .card .sub-info {
   height:20px;
