@@ -25,6 +25,15 @@ app.service('Api', ['$http', 'Strings', '$rootScope', function($http, Strings, $
             });
   }
 
+  this.deleteModule = function(data) {
+     return $http({
+                method: 'DELETE',
+                url: Strings.apis.deleteModules + $rootScope._auth_user_id + "/" + $rootScope[Strings.selected.module]._id
+            });
+  }
+
+
+
   this.updateInitBot = function(data) {
      return $http({
                 method: 'POST',

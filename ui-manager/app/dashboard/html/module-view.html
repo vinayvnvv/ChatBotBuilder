@@ -1,8 +1,36 @@
-<div class="titlebar" md-colors='{"background":"primary-600", "color":"primary-50"}'>
+<div class="titlebar" mdd-colors='{"background":"primary-600", "color":"primary-50"}'>
 	   	<div class="text md-subhead"> {{moduleSelectedData.name}}</div>
 	   	<div class="actions"> 
+	   	     <md-menu>
+			      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+			        <md-icon md-menu-origin><i class="material-icons">more_horiz</i></md-icon>
+			      </md-button>
+			      <md-menu-content width="4">
+			        <md-menu-item>
+			          <md-button ng-click="ctrl.redial($event)">
+			            <md-icon md-menu-align-target><i class="material-icons">content_copy</i></md-icon>
+			            Copy
+			          </md-button>
+			        </md-menu-item>
+			        <md-menu-item>
+			          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+			            <md-icon><i class="material-icons">airplanemode_inactive</i></md-icon>
+			            De-activate
+			          </md-button>
+			        </md-menu-item>
+			        <md-menu-divider></md-menu-divider>
+			        <md-menu-item>
+			          <md-button ng-click="openDeleteModuleDialog()">
+			            <md-icon><i class="material-icons" style="color:#cc0000">delete_forever</i></md-icon>
+			            Delete
+			          </md-button>
+			        </md-menu-item>
+			      </md-menu-content>
+			 </md-menu>
+
+
 	   	    <md-button class="md-icon-button" aria-label="Favorite" ng-click="closeModuleView()">
-        			<md-icon><i md-colors='{color:"red-50"}' class="material-icons">close</i></md-icon>
+        			<md-icon><i class="material-icons">close</i></md-icon>
       		</md-button>
 	   	</div>
 </div>

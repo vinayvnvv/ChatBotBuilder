@@ -1,4 +1,4 @@
-app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$mdDialog', 'Service', function($scope, $http, Strings, $rootScope, $mdDialog, Service){
+app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$mdDialog', 'Service', 'Api', function($scope, $http, Strings, $rootScope, $mdDialog, Service, Api){
 	console.log("called dashboard ctrl...Id :  " + $rootScope._auth_user_id);
 
 	//init vars  
@@ -153,6 +153,39 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
          $scope.flowSelectedClass = "tab-unselected";
          $scope.menuSelectedClass = "tab-selected";
       }  
+
+
+
+      $scope.openDeleteModuleDialog = function(ev) {
+        
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                  .title('Would you like to delete Module?')
+                  .textContent('No longer available after delete.')
+                  .ariaLabel('Delete')
+                  .targetEvent(ev)
+                  .clickOutsideToClose(true)
+                  .ok('Confirm Delete')
+                  .cancel('Cancel');
+
+                $mdDialog.show(confirm).then(function() {
+                     Service.loader.showRoot("Deleting Module..");
+                        Api.deleteModule().then(function(res) {
+                           Service.loader.hideRoot();
+                           console.log(res);
+                           Service.Toast("Module Deleted SuccessFully!");
+                           $rootScope.getModules('Updating...');
+                           $scope.closeModuleView();
+                       }, function(err) {
+                           Service.loader.hideRoot();
+                       }) 
+                }, function() {
+                      Service.Toast("Cancelled Deletion!");
+                });
+          
+
+
+      }
     
 
 

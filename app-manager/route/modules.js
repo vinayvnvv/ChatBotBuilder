@@ -36,6 +36,21 @@ router.post('/update/:id/:moduleId', function(req, res) {
 });
 
 
+router.delete('/delete/:id/:moduleId', function(req, res) {
+
+  moduleDb.delete(
+          req.params.id,
+          req.params.moduleId,
+          function(result) { setTimeout(function() { res.json(Model.success_obj(result)); }, 2200);  },
+          function(err) { res.json(Model.error_obj(err)); }
+    );
+
+});
+
+
+
+
+
 router.get('/init/:id', function(req, res, next) {
    moduleDb.getInit(
         req.params.id,
@@ -43,6 +58,8 @@ router.get('/init/:id', function(req, res, next) {
         function(err) {}
     )
 });
+
+
 
 
 

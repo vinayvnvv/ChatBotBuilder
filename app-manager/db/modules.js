@@ -116,6 +116,32 @@ var Modules = function() {
 	}
 
 
+		this.delete = function(id, module_id, success_callback, error_callback) {
+
+		console.log("Deleting", module_id)
+
+
+		MongoClient.connect(header.db.url, function(err, db) {
+		  
+		  assert.equal(null, err);
+		  if(err) return callback_err(err);
+		   var collection = db.collection(header.collections.module(id));
+				  collection.remove(
+				  	        {"_id": ObjectId(module_id)},
+				  	        function(err, result) {
+							  	 if(err) { error_callback(err); return }
+			                     success_callback(result);
+								}
+							);
+			});
+
+	}
+
+
+
+
+
+
 	this.updateInit = function(id, doc, success_callback, error_callback) {
 
        console.log("initializing bot", id) ;
