@@ -152,6 +152,10 @@ align-items: center;
   display: flex;
   flex-direction: column;
 }
+.dashboard .content .right-bar.margin {
+  margin:13px;
+  border:1px solid #c9c9c9;
+}
 .dashboard .content .left-bar .tab {
   background-color: #f3f3f3;
   display: flex;
@@ -510,6 +514,12 @@ align-items: center;
   padding:11px;
   max-height: 40px;
 }  
+.flow .card .actions {
+    position: absolute;
+    bottom: -35;
+    display: block;
+    width: 100%;
+} 
 
 .flow-info {
    display: block;

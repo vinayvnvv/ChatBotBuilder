@@ -186,6 +186,48 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 
 
       }
+
+
+
+      $scope.deleteFlowItem = function(at, ev) {
+
+            var confirm = $mdDialog.confirm()
+                  .title('Would you like to delete Flow Item?')
+                  .textContent('No longer available after delete.')
+                  .ariaLabel('Delete')
+                  .targetEvent(ev)
+                  .clickOutsideToClose(true)
+                  .ok('Confirm Delete')
+                  .cancel('Cancel');
+
+                $mdDialog.show(confirm).then(function() {
+                       $rootScope.itemCreateModuleLoaderTitle = "Deleting...";
+                       $rootScope[Strings.selected.moduleIndexSelectedLoader] = at;
+                       var module_str = JSON.parse(JSON.stringify($rootScope[Strings.selected.module].modules));
+                       var modules = Service.removeModuleAt(module_str, at);
+                       var data = {
+                                   modules: modules
+                               };
+
+                       Api.updateModule(data).then(function(res) {
+                           $rootScope[Strings.selected.moduleIndexSelectedLoader] = null;
+                           console.log(res);
+                           Service.Toast("Flow Item is Deleted!");
+                           $rootScope[Strings.selected.module].modules = modules; 
+                       }, function(err) {
+                           $rootScope[Strings.selected.moduleIndexSelectedLoader] = null;
+                           Service.Toast("Error In Deleting Flow Item!");
+                       })        
+                }, function() {
+                      Service.Toast("Cancelled Deletion!");
+                });
+
+
+
+          
+
+      
+    }
     
 
 

@@ -71,6 +71,36 @@
 					</span>
 				</div>
 
+               <div class="actions valign-center">
+						<md-menu>
+					      <md-button aria-label="Open phone interactions menu" class="md-fab md-mini md-raised" ng-click="$mdMenu.open($event)">
+					         <md-tooltip md-direction="top">Actions</md-tooltip>
+					         <md-icon><i class="material-icons">more_vert</i></md-icon>
+					      </md-button>
+					      <md-menu-content width="2">
+					        <md-menu-item>
+					          <md-button ng-click="openModuleItemDialog($index+1, $event, 'edit')">
+					            <md-icon><i class="material-icons" style="color:green">mode_edit</i></md-icon>
+					            Edit
+					          </md-button>
+					        </md-menu-item>
+					        <md-menu-item>
+					          <md-button ng-click="ctrl.redial($event)" disabled="disabled">
+					            <md-icon md-menu-align-target><i class="material-icons" style="color:#3b5998">content_copy</i></md-icon>
+					            Copy
+					          </md-button>
+					        </md-menu-item>
+					        
+					        <md-menu-divider></md-menu-divider>
+					        <md-menu-item>
+					          <md-button ng-click="deleteFlowItem($index, $event)">
+					            <md-icon><i class="material-icons" style="color:#cc0000">delete_forever</i></md-icon>
+					            Delete
+					          </md-button>
+					        </md-menu-item>
+					      </md-menu-content>
+					   </md-menu>
+				</div>
 
 
 			</div>
@@ -81,6 +111,7 @@
 					<span></span>
 				</div>
 				<div class="add" md-ink-ripple ng-click="openModuleItemDialog($index+1, $event, 'insert')">
+				    <md-tooltip md-direction="right">Add New Item</md-tooltip>
 					<i class="material-icons">control_point</i>
 				</div>
 				<div class="edge">

@@ -28,6 +28,10 @@ app.service('Service', ['$rootScope', '$mdToast', function($rootScope, $mdToast)
        data.splice(index, mode, item);
        return data;  
 	}
+	this.removeModuleAt = function(array, at) { 
+		   array.splice(at, 1);
+		   return array;
+    }
 
 	this.Toast = function(text, position, delay) {
 		if(text == undefined) return;
