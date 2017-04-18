@@ -28,6 +28,12 @@
 			      </md-menu-content>
 			 </md-menu>
 
+            <md-button class="md-icon-button" aria-label="Favorite" ng-click="toggleFullScreen()">
+        			<md-icon>
+        			   <i class="material-icons" ng-show="!flowFullScreen">fullscreen</i>
+        			   <i class="material-icons" ng-show="flowFullScreen">fullscreen_exit</i>
+        			</md-icon>
+      		</md-button>
 
 	   	    <md-button class="md-icon-button" aria-label="Favorite" ng-click="closeModuleView()">
         			<md-icon><i class="material-icons">close</i></md-icon>

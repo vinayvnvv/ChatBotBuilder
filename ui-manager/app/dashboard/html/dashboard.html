@@ -1,8 +1,8 @@
 <div class="dashboard">
-<ng-include src="'templates/header_toolbar.html'" scope="" onload="" class="titlebar fadeInDown"></ng-include>
+<ng-include src="'templates/header_toolbar.html'" scope="" onload="" class="titlebar fadeInDown" ng-show="!flowFullScreen"></ng-include>
 
 <div class="content">
-	<div style="margin-left:{{toggleMenuStatus}}" class="left-bar fadeInLeft" ng-include="'app/dashboard/html/left-bar.html'" scope="" onload="">
+	<div style="margin-left:{{toggleMenuStatus}}" class="left-bar fadeInLeft" ng-show="!flowFullScreen" ng-include="'app/dashboard/html/left-bar.html'" scope="" onload="">
 	</div>
 	<div class="right-bar" ng-include="rightBarTemplate" scope="" onload="" ng-class="{'margin': rightBarTemplate != 'app/dashboard/html/stats-view.html'}">
 

@@ -7,6 +7,7 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
 	$rootScope.rightBarTemplate = Strings.templateUrl.statsView;
   $scope.middleBarTemplate = null;
   $scope.leftBarSearch = {};
+  $rootScope.flowFullScreen = false;
  
     $rootScope.getModules = function(title) {
 
@@ -185,6 +186,11 @@ app.controller('dashboardCtrl', ['$scope', '$http', 'Strings', '$rootScope', '$m
           
 
 
+      }
+
+
+      $scope.toggleFullScreen = function() {
+        $rootScope.flowFullScreen = !$rootScope.flowFullScreen;
       }
 
 
