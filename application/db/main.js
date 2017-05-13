@@ -7,6 +7,7 @@ var DBHelper = new (require('./../db/Helper')) ();
 var Validator = new (require('./../services/validator')) ();
 var Parser = require('./../services/Parser');
 var Strings = require('./../string');
+var BotService = require('./../services/BotService');
 var MainDB = function() {
    console.log("called MainDB")
 
@@ -119,7 +120,11 @@ var MainDB = function() {
                                                                last_track_details:track,
                                                                validate:"0"
              	                   	                           }),
-             	                   function(res) {  callback_suc(Parser.ansParser(doc.final, track.answers)); },
+             	                   function(res) {  
+                                                  callback_suc(Parser.ansParser(doc.final, track.answers));
+                                                  if(doc.final.service != undefined || doc.final.service != null) 
+                                                      BotService.send(Parser.ansParser(doc.final.service, track.answers));
+                                               },
              	                   function() {}
 
              	                 );
