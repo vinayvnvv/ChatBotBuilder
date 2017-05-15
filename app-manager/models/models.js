@@ -15,6 +15,23 @@ var Models = function() {
 	       	  	model[field[i]] = data[field[i]];
 	       	  }
 	       }
+
+
+	       //add defaults
+	       model.statastics = {
+	       	      triggered:0,
+	       	      triggeredAt:null
+	       };
+	       model.final = {
+	       	  msg:undefined
+	       };
+	       model.services = {
+	       	  	   email:[],
+	       	  	   api:[]
+	       	};
+	       model.welcome = {
+	       	msg:undefined
+	       }
     
 	       return model;
 	}
@@ -69,6 +86,7 @@ var Models = function() {
 
 		return model;
 	}
+
 
 }
 

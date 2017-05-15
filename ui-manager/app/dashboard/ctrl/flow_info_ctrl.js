@@ -1,4 +1,4 @@
-app.controller('flowInfoCtrl', ['$scope', '$rootScope', 'Strings', 'Api', 'Service', function($scope, $rootScope, Strings, Api, Service) {
+app.controller('flowInfoCtrl', ['$scope', '$rootScope', 'Strings', 'Api', 'Service', '$mdDialog', function($scope, $rootScope, Strings, Api, Service, $mdDialog) {
     
     console.log("called flow info ctrl")
 
@@ -94,6 +94,27 @@ app.controller('flowInfoCtrl', ['$scope', '$rootScope', 'Strings', 'Api', 'Servi
 
 
 
+    }
+
+    $scope.openEmailServiceModal = function(ev, mode, index) {
+        $rootScope.serviceModalInfo = {
+             index:index,
+             mode:mode
+        };
+
+        $mdDialog.show({
+            controller: 'emailService',
+            templateUrl: 'app/dashboard/html/email-service-dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: true // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
     }
 
 

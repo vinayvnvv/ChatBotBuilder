@@ -9,7 +9,7 @@
 
 
 		<!-- Welcome module -->
-		<div class="card center fadeInDown" ng-if="moduleSelectedData.welcome" style="border-width: 0px;">
+		<div class="card center fadeInDown" ng-if="moduleSelectedData.welcome.msg" style="border-width: 0px;">
 		<box-loader ng-if="moduleIndexSelectedLoader == 'welcome'" l-title="welcomeCreateModuleLoaderTitle"></box-loader>
 			<div class="title valign-center">
 			 		 <span md-colors="$odd && {'border-color':'warn-700-0.6'}" ng-click="openWelcomeModuleDialog()">
@@ -28,7 +28,7 @@
 			    </span>
 			</div>
 		</div>
-		<div class="not-set-card" ng-if="!moduleSelectedData.welcome" >
+		<div class="not-set-card" ng-if="!moduleSelectedData.welcome.msg" >
 		    <span ng-click="openWelcomeModuleDialog()" md-colors="{background:'warn-600', color:'primary-50'}">
 		         <i class="material-icons">add</i>
 		         <span>Set Welcome Message</span>
@@ -125,7 +125,7 @@
 
 
 		<!-- final module -->
-		<div class="card center fadeInUp" ng-if="moduleSelectedData.final" style="border-width: 0px;">
+		<div class="card center fadeInUp" ng-if="moduleSelectedData.final.msg" style="border-width: 0px;">
 			<box-loader ng-if="moduleIndexSelectedLoader == 'final'" l-title="finalCreateModuleLoaderTitle"></box-loader>
 			<div class="title valign-center">
 				<span md-colors="$odd && {'border-color':'warn-700-0.6'}" ng-click="openFinalModuleDialog()">
@@ -144,7 +144,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="not-set-card" ng-if="!moduleSelectedData.final" >
+		<div class="not-set-card" ng-if="!moduleSelectedData.final.msg" >
 			<span md-colors="{background:'warn-600', color:'primary-50'}" ng-click="openFinalModuleDialog()">
 				<i class="material-icons">add</i> 
 				<span>Add Final Module </span>

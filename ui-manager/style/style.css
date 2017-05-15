@@ -330,6 +330,7 @@ align-items: center;
   .dashboard .content .right-bar .body .flow-info-bar {
     flex-grow: 4;
     animation-duration: .5s;
+    overflow-x:auto;
 
   }  
   

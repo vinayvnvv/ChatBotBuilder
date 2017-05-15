@@ -1,0 +1,75 @@
+<loader ng-if="createLoader" l-title="Creating Module..."></loader>
+
+<md-dialog aria-label="Mango (Fruit)">
+
+  <form name="emailServiceForm" ng-clock style="width:801px;">
+
+    <md-toolbar >
+      <div class="md-toolbar-tools" >
+        <h2>{{action}} Email Service</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="closeDialog()">
+          <md-icon><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+       
+          <div class="in-aria row">
+            <div class="title">Name of Email Service</div>
+            <div class="input"> 
+               <input type="text" name="name" placeholder="Name" required ng-model="formVars.name"/>
+               <div class="in-err flash" ng-if="emailServiceForm.name.$invalid && err.show">Specify the name of the Module</div>
+            </div>
+          </div>
+
+
+           <div class="in-aria row">
+            <div class="title">Email Reciever</div>
+            <div class="input"> 
+              <auto-add-input name="to" ng-model="formVars.to" required>
+                  <input type="text" placeholder="+ Add Recievers" data-array="$index"/>
+              </auto-add-input>
+              <div class="in-err flash" ng-if="emailServiceForm.to.$viewValue.length==0 && err.show">Specify atleast one reciever!</div>
+            </div>
+          </div>
+
+          <div class="in-aria row">
+            <div class="title">Email Subject</div>
+            <div class="input"> 
+               <input type="text" name="subject" placeholder="Subject" required ng-model="formVars.subject"/>
+               <div class="in-err flash" ng-if="emailServiceForm.subject.$invalid && err.show">Specify the name of the Module</div>
+            </div>
+          </div>
+
+          <div class="in-aria row">
+            <div class="title">Email Body </div>
+            <div class="input"> 
+              <md-input-container class="md-block">
+                <label>Email Body</label>
+                <textarea name="body" rows="3" md-select-on-focus ng-model="formVars.body" required></textarea>
+              </md-input-container>
+               <div class="in-err flash" ng-if="emailServiceForm.body.$invalid && err.show">Specify the name of the Module</div>
+            </div>
+          </div>
+
+      
+
+
+      </div>
+    </md-dialog-content>
+    <md-divider></md-divider>
+    <md-dialog-actions layout="row">
+      
+      <span flex></span>
+      <md-button class="md-primary md-raised" ng-click="update()">
+       {{action}}
+      </md-button>
+      <md-button ng-click="closeDialog()">
+        close
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

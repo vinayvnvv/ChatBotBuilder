@@ -4,9 +4,12 @@ var BotService = function() {
 
     this.send = function(service) {
     	console.log("\n\n**************Serivece called********************", service);
-    	if(service.type == 'email') {
-    		this.sendEmailService(service);
+    	if(service.email.length != 0) {
+    		for(var i=0; i<service.email.length; i++) {
+    			this.sendEmailService(service.email[i]);
+    		}
     	}
+    	
     }
 
 
@@ -25,9 +28,9 @@ var BotService = function() {
 
 		var mailOptions = {
 			   from: '"Chat Bot 👻" <tech.vinaybv@gmail.com>', 
-			   to: service.emailService.to.join(),
-			   subject: service.emailService.subject, 
-			   text: service.emailService.body
+			   to: service.to.join(),
+			   subject: service.subject, 
+			   text: service.body
 			};
 
 		smtpTransport.sendMail(mailOptions, function(error, info){

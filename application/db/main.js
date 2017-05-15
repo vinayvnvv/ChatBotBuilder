@@ -122,8 +122,8 @@ var MainDB = function() {
              	                   	                           }),
              	                   function(res) {  
                                                   callback_suc(Parser.ansParser(doc.final, track.answers));
-                                                  if(doc.final.service != undefined || doc.final.service != null) 
-                                                      BotService.send(Parser.ansParser(doc.final.service, track.answers));
+                                                  if(doc.services != undefined && doc.services != null) 
+                                                    BotService.send(Parser.ansParser(doc.services, track.answers));
                                                },
              	                   function() {}
 
