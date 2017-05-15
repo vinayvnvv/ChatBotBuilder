@@ -27,16 +27,16 @@ app.service('Models', function () {
 
        	}
 
-	if(m.shortcut == undefined || m.shortcut == '' || m.shortcut == null || m.shortcut == 'none') {
-       	  model.shortcut = null;
-       	  model.shortcutData = [];
+        if(m.shortcut == undefined || m.shortcut == '' || m.shortcut == null || m.shortcut == 'none') {
+             	  model.shortcut = null;
+             	  model.shortcutData = [];
 
-       	} else { 
-       		model.shortcut = m.shortcut;
-       		if(m.shortcutData == undefined || m.shortcutData == '' || m.shortcutData == null || m.shortcutData.length == 0) model.shortcutData = [];
-       		else model.shortcutData = m.shortcutData;
+             	} else { 
+             		model.shortcut = m.shortcut;
+             		if(m.shortcutData == undefined || m.shortcutData == '' || m.shortcutData == null || m.shortcutData.length == 0) model.shortcutData = [];
+             		else model.shortcutData = m.shortcutData;
 
-       	}
+        }
          return model; 	
 	}
 

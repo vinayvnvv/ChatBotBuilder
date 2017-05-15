@@ -13,6 +13,15 @@ router.get('/:id', function(req, res, next) {
    	)
 });
 
+router.get('/:id/:moduleId', function(req, res, next) {
+   moduleDb.getFlowItem(
+        req.params.id,
+        req.params.moduleId,
+        function(docs) { setTimeout(function() { res.json(Model.getModuleModel(docs)) }, 2000);  },
+        function(err) { res.status(500).send({err:JSON.stringify(err)}) }
+    )
+});
+
 
 router.post('/create/:id', function(req, res) {
 	moduleDb.create(

@@ -62,6 +62,14 @@ var Models = function() {
        return obj;
 	}
 
+
+	this.getModuleModel = function(model) {
+		if(!model.msg) model.msg = [];
+
+
+		return model;
+	}
+
 }
 
 module.exports = new Models();

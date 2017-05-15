@@ -26,6 +26,32 @@ var Modules = function() {
 
 	}
 
+
+	this.getFlowItem = function(id, module_id, success_callback, error_callback) {
+
+	  
+
+		MongoClient.connect(header.db.url, function(err, db) {
+		  assert.equal(null, err);
+		  if(err) return callback_err(err);
+		   var collection = db.collection(header.collections.module(id));
+				 try {
+				  collection.find( {"_id": ObjectId(module_id)} ).toArray( function(err, docs) {
+				  	console.log("docs>>>>>>>>>>>>", docs)
+				  	 if(err) { error_callback(err); return }
+
+                     success_callback(docs[0]);
+				  	
+				});
+				} catch(e) {
+					error_callback(e.toString());
+					return;
+				}
+			});
+		
+
+	}
+
 	this.getInit = function(id, success_callback, error_callback) {
 
 		MongoClient.connect(header.db.url, function(err, db) {

@@ -20,7 +20,7 @@ app.controller('loginCtrl', ['$scope', '$rootScope', '$state', 'Auth', 'Api', 'S
        'cookie_policy' : 'single_host_origin',
        'ux_mode' : 'popup',
        'callback' : function(data) {
-         console.log(data)
+         console.log(data);
        }
 
     }
