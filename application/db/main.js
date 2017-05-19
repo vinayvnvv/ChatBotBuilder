@@ -95,7 +95,7 @@ var MainDB = function() {
    	   	     collection.find({_id:track.module_id}).toArray( function(err, docs) {
              var doc = docs[0];
 
-             if(doc.modules[track.validate].validate != null && doc.modules[track.validate].validate != undefined) {
+             if(doc.modules[track.validate].validate != null && doc.modules[track.validate].validate != undefined && doc.modules[track.validate].validate != 'none') {
               console.log("entering for validation...")
                    if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc)) {  //not validated , return
                       console.log("validated Errr, Sending Validated Err Msg...")
@@ -142,7 +142,7 @@ var MainDB = function() {
               //check for validation
 
             console.log("Validation:" + doc.modules[track.validate].validate)  
-             if(doc.modules[track.validate].validate != null && doc.modules[track.validate].validate != undefined) {
+             if(doc.modules[track.validate].validate != null && doc.modules[track.validate].validate != undefined && doc.modules[track.validate].validate != 'none') {
               console.log("entering for validation...")
                    if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc)) {  //not validated , return
                       console.log("validated Errr, Sending Validated Err Msg...")

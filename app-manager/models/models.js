@@ -16,7 +16,6 @@ var Models = function() {
 	       	  }
 	       }
 
-
 	       //add defaults
 	       model.statastics = {
 	       	      triggered:0,
