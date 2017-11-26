@@ -61,7 +61,7 @@ var Modules = function() {
 		   var collection = db.collection(header.collections.module(id));
 				  collection.find( {"type": "init"} ).toArray( function(err, docs) {
 				  	console.log("docs>>>>>>>>>>>>", docs)
-				  	 if(err) { error_callback(err); return }
+				  	 if(err) { error_callback(err); console.log(err); return }
 
                      success_callback(docs);
 				  	

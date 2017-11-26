@@ -11,7 +11,7 @@ var Sockets = new (require('./application/socket/socket')) (http);
 var managerApi = require('./app-manager/routes');
 var botApi = require('./application/routes');
 
-var port = 3000;
+var port = 8080;
 
 
 
