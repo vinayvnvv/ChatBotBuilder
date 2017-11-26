@@ -10,7 +10,6 @@ var path = require('path');
 var Sockets = new (require('./application/socket/socket')) (http);
 var managerApi = require('./app-manager/routes');
 var botApi = require('./application/routes');
-
 var port = (process.env.PORT || 3000);
 
 
