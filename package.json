@@ -4,7 +4,8 @@
   "description": "chat bot builder",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
