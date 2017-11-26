@@ -11,22 +11,21 @@ var Sockets = new (require('./application/socket/socket')) (http);
 var managerApi = require('./app-manager/routes');
 var botApi = require('./application/routes');
 
-var port = (process.env.PORT || 8080);
+var port = (process.env.PORT || 3000);
 
 
 
 // app.set('views', path.join(__dirname, 'ui'));
 // // app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'ui')));
-app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname, '/dist')));
+app.use(express.static(path.join(__dirname, '/ui')));
+
 
 //body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
-});
+
 
 app.get('/test', function(req, res) {
 	setTimeout(function() { res.send("hello"); }, 3000);
@@ -34,6 +33,10 @@ app.get('/test', function(req, res) {
 
 app.use('/api/manager', managerApi);
 app.use('/api/bot', botApi);
+
+app.get('/*', function(req, res){
+  res.sendFile(__dirname + '/dist/index.html');
+});
 
 
 
