@@ -130,6 +130,8 @@ var gulpActivity = function(app, http) {
 
 			gulp.watch(BotFiles.js, ['build_bot_js']);
 
+			gulp.watch(BotFiles.js, ['build_bot_prod_js']);
+
 
 			gulp.watch(AppManagerFiles.custom.js, ['build_manager_js', 'build_manager_final_js']);
 			gulp.watch(AppManagerFiles.custom.css, ['build_manager_css']);

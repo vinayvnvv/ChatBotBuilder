@@ -19,3 +19,8 @@ var __c_b_env = {
 		}	
 	}
 }
+
+
+var __c_b_env_rootScope = {
+	app: 'vinay'
+}
