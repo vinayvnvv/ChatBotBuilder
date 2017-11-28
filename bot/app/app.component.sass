@@ -1,0 +1,81 @@
+._c_b_app
+	display: flex
+	flex-direction: column
+	position: fixed
+	top: 0
+	height: 100%
+	width: $bot-width
+	right: 0
+	font-family: 'Roboto', sans-serif
+	box-shadow: 0 3px 11px 0px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12)
+	& ._tpbr
+		height: $bot-top-bar-height
+		min-height: $bot-top-bar-height
+		background-color: $bot-theme-bg
+		color: $bot-theme-color
+		display: flex
+		align-items: center
+		padding: 0 11px
+	& ._bd
+		flex-grow: 1
+		overflow-y: auto
+		color: $bot-body-color
+		background-color: $bot-body-bg
+		padding: 0 11px
+		&::-webkit-scrollbar
+			width: 5px
+		&::-webkit-scrollbar-track 
+			background-color: transparent
+		&::-webkit-scrollbar-thumb
+			background-color: #999
+			border-radius: 7px
+	& ._fld
+		height: $bot-bottom-field-height
+		max-height: $bot-bottom-field-height
+		min-height: $bot-bottom-field-height
+		display: flex
+		align-items: center
+		position: relative
+		border-top: 1px solid rgba(169, 169, 169, 0.19)
+		box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 7px -2px 10px 1px rgba(0, 0, 0, 0.14), 17px -4px 14px 2px rgba(0, 0, 0, 0.02)
+		z-index: 99
+		& ._inpt
+			display: flex
+			align-items: center
+			width: 100%
+			position: relative
+			& ._input
+				height: 100%
+				width: 100%
+				border: 0
+				outline: none
+				padding: 0 55px 0px 11px
+				color: rgba(43, 43, 43, 0.97)
+				font-size: 16px
+				letter-spacing: 0.03em
+			& ._fab
+				width: 33px
+				height: 33px
+				position: absolute
+				right: 11px
+				background-color: $bot-theme-bg
+				border-radius: 50px
+				align-items: center
+				display: flex
+				justify-content: center
+				cursor: pointer
+				transition: 0.2s all
+				border: none
+				outline: none
+				&:hover
+					background-color: transparentize($bot-theme-bg, 0.2)
+				&:active
+					background-color: darken($bot-theme-bg, 20%)
+				& ._post
+					margin-left: 2px
+					position: absolute
+					width: 0px
+					height: 0px
+					border-left: solid 11px $bot-theme-color
+					border-bottom: solid 9px transparent
+					border-top: solid 9px transparent

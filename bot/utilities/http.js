@@ -24,7 +24,7 @@ function __c_b_envHttpPost(url, success, error) {
 
 
 
-__c_b_env.http = {
+__c_b_app.http = {
 	get: __c_b_envHttpGet,
 	post: __c_b_envHttpPost
 }

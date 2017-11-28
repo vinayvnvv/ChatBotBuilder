@@ -5,6 +5,8 @@ var BotFiles = new (require('./bot-files'))();
 var AppManagerFiles = new (require('./app-manager-files'))();
 var spawn = require('child_process').spawn;
 var Parser = require('./parser');
+var sass = require('gulp-sass');
+var rename = require('gulp-rename');
 
 
 var gulpActivity = function(app, http) {
@@ -52,9 +54,20 @@ var gulpActivity = function(app, http) {
 		})
 
 		gulp.task('build_bot_js', function() {
-			return gulp.src(BotFiles.js)
+
+
+			gulp.src('bot/sass/main.sass')
+			    .pipe(sass().on('error', sass.logError))
+			    .pipe(rename("style.css"))
+    			.pipe(gulp.dest('./bot/style'))
+    			.on('end', () => {
+	                return gulp.src(BotFiles.js)
 			         .pipe(concat('script.js'))
 			         .pipe(gulp.dest('bot/build'));
+	            });
+    		
+		
+			
 		})
 
 		gulp.task('build_bot_prod_js', function() {
@@ -128,9 +141,9 @@ var gulpActivity = function(app, http) {
 			gulp.watch(AppFiles.custom.js, ['build_js', 'build_final_js']);
 			gulp.watch(AppFiles.custom.css, ['build_css']);
 
-			gulp.watch(BotFiles.js, ['build_bot_js']);
+			gulp.watch(BotFiles.watch, ['build_bot_js']);
 
-			gulp.watch(BotFiles.js, ['build_bot_prod_js']);
+			gulp.watch(BotFiles.watch, ['build_bot_prod_js']);
 
 
 			gulp.watch(AppManagerFiles.custom.js, ['build_manager_js', 'build_manager_final_js']);

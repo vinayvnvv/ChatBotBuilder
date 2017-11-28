@@ -18,9 +18,9 @@ var Parser = function() {
 			    return console.log(err);
 			  }
 			  contents = data;
-			  var matched = contents.match(/__c_b_env.template.attachByUrl(\([^\)]*\)(\.[^\)]*\))?)/gi);
+			  var matched = contents.match(/__c_b_app.template.attachByUrl(\([^\)]*\)(\.[^\)]*\))?)/gi);
 			  //console.log("matched----.>>>>", matched);
-			  // contents = contents.replace(/__c_b_env.template.attachByUrl(\([^\)]*\)(\.[^\)]*\))?)/gi, function(match, p1, offset, string) {
+			  // contents = contents.replace(/__c_b_app.env.template.attachByUrl(\([^\)]*\)(\.[^\)]*\))?)/gi, function(match, p1, offset, string) {
 			  // 	var url = (p1.split(",")[0]).split("\"")[1];
 			  // 	return fs.readFile(base_url + url, 'utf8', function (err,data) {
 			  // 		replaced++;
@@ -29,7 +29,7 @@ var Parser = function() {
 			  // 	});
 			  // });
 			  var index = 0;
-			  this.iterateMatchArray(index, base_url, matched, matched_data, callback, contents);
+			  if(matched) this.iterateMatchArray(index, base_url, matched, matched_data, callback, contents);
 			  
 
 			 
@@ -53,7 +53,7 @@ var Parser = function() {
 
 	this.parseTemplateText = function(data, contents, callback) {
 		 var index = -1;
-		 contents = contents.replace(/__c_b_env.template.attachByUrl(\([^\)]*\)(\.[^\)]*\))?)/gi, function(match, p1, offset, string) {
+		 contents = contents.replace(/__c_b_app.template.attachByUrl(\([^\)]*\)(\.[^\)]*\))?)/gi, function(match, p1, offset, string) {
 			  	index++;	
 			  	return data[index].el + ".innerHTML = `" + data[index].data + "`";
 			});
