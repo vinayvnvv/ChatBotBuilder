@@ -1,5 +1,8 @@
 $msg-item-width: 80%
 $msg-item-border-radius: 7px
+$msg-user-bg: rgba(234, 234, 234, 0.6)
+$msg-user-color: #333
+
 
 ._c_b_app
 	& ._msg
@@ -26,3 +29,17 @@ $msg-item-border-radius: 7px
 				border-style: solid
 				border-color: transparent
 				border-right-color: inherit
+		&._user
+			justify-content: flex-end
+			& ._item
+				background-color: $msg-user-bg
+				color: $msg-user-color
+				margin-right: 11px
+				border-color: $msg-user-bg
+				border-radius: $msg-item-border-radius 0px $msg-item-border-radius $msg-item-border-radius
+				&:before
+					left: 100%
+					border-width: 0px 7px 7px 7px
+					border-color: transparent
+					border-left-color: inherit
+

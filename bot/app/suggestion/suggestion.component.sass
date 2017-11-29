@@ -1,0 +1,45 @@
+$sug-bg: #fff
+$sug-color: #333
+$sug-border-radius: 3px
+
+._c_b_app
+	& ._sgtn
+		display: inline-block
+		background-color: $sug-bg
+		color: $sug-color
+		min-width: 90px
+		margin: 0 9px 9px 9px
+		border-radius: $sug-border-radius
+		border: 1px solid rgba(233, 233, 233, 0.58)
+		max-width: 80%
+		box-shadow: 1px 1px 1px rgba(217, 217, 217, 0.42)
+		& ._itm
+			padding: 7px
+			font-size: 14px
+			font-weight: 400
+			transition: 0.2s all
+			cursor: pointer
+			border-bottom: 1px solid rgba(233, 233, 233, 0.25)
+			&:first-child
+				border-radius: $sug-border-radius $sug-border-radius 0 0
+			&:last-child
+				border-radius: 0 0 $sug-border-radius $sug-border-radius
+			&:hover
+				background-color: $bot-theme-bg
+				color: $bot-theme-color
+		&._option
+			display: flex
+			background-color: transparent
+			box-shadow: none
+			border: none
+			flex-wrap: wrap
+			& ._itm
+				background-color: $sug-bg
+				color: $sug-color
+				margin: 0 2px 3px 2px
+				border-radius: $sug-border-radius
+				border: 1px solid $bot-theme-bg
+				&:hover
+					background-color: $bot-theme-bg
+					color: $bot-theme-color
+				

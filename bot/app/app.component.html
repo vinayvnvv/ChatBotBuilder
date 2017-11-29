@@ -5,14 +5,17 @@
 	</div>
 
 	<div class="_bd">
-		<div class="_ldng">top</div>
+		<div class="_ldng">
+			<c-bot-loader></c-bot-loader>
+		</div>
 		<div class="_msgs">
 			<div al-repeat="i in [0,1,2,3,4,5,6,11,22,33,44,55,66,77,88,99]">
-				<c-bot-mgs :in="$index"></c-bot-mgs>
+				<c-bot-mgs :index="$index"></c-bot-mgs>
 			</div>
 		</div>
 		<div class="_btm">
-			bottom
+			<c-bot-sug></c-bot-sug>
+			<c-bot-typing></c-bot-typing>
 		</div>
 		
 	</div>
@@ -20,7 +23,7 @@
 	<div class="_fld">
 		<div class="_inpt">
 			<input type="_text" class="_input" placeholder="Ask Bot!" autofocus="" />
-			<button class="_fab">
+			<button class="_fab _ripple">
 				<span class="_post"></span>
 			</button>
 		</div>

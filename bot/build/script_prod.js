@@ -5670,14 +5670,39 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    	}
 	    };
 });
+alight.component('c-bot-loader', function (scope, element, env) {
+	    return { 
+	    	templateUrl: "app/loader/loader.component.html",
+	    	onStart: function() {}
+	    };
+});
 alight.component('c-bot-mgs', function (scope, element, env) {
 	    return { 
 	    	templateUrl: "app/msgs/msgs.component.html",
 	    	onStart: function() {
+	    			scope.index = scope.index;
 				    scope.name = scope.in;
 				    scope.click = function() {
 				    	scope.name = "Shannubhag"
 				    }
+	    	}
+	    };
+});
+alight.component('c-bot-sug', function (scope, element, env) {
+	    return { 
+	    	templateUrl: "app/suggestion/suggestion.component.html",
+	    	onStart: function() {
+	    			scope.data = scope.data;
+				    scope.click = function() {
+				    	scope.name = "Shannubhag"
+				    }
+	    	}
+	    };
+});
+alight.component('c-bot-typing', function (scope, element, env) {
+	    return { 
+	    	templateUrl: "app/typing/typing.component.html",
+	    	onStart: function() {
 	    	}
 	    };
 });
@@ -5825,6 +5850,42 @@ function addRootStyles() {
 	document.getElementsByTagName('head')[0].appendChild(style);
 	__c_b_app.env.ref.root.style.elm = document.querySelectorAll("[" + __c_b_app.env.ref.root.style.name + "]")[0];
 	 __c_b_app.env.ref.root.style.elm.innerHTML = `@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i");
+@keyframes sk-bouncedelay {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  80% { }
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0); }
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+._c_b_app ._ripple {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0); }
+  ._c_b_app ._ripple:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, white 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s; }
+  ._c_b_app ._ripple:active:after {
+    transform: scale(0, 0);
+    opacity: .5;
+    transition: 0s; }
+
 ._c_b_app {
   display: flex;
   flex-direction: column;
@@ -5896,8 +5957,6 @@ function addRootStyles() {
         outline: none; }
         ._c_b_app ._fld ._inpt ._fab:hover {
           background-color: rgba(96, 125, 139, 0.8); }
-        ._c_b_app ._fld ._inpt ._fab:active {
-          background-color: #36474f; }
         ._c_b_app ._fld ._inpt ._fab ._post {
           margin-left: 2px;
           position: absolute;
@@ -5931,6 +5990,103 @@ function addRootStyles() {
       border-style: solid;
       border-color: transparent;
       border-right-color: inherit; }
+  ._c_b_app ._msg._user {
+    justify-content: flex-end; }
+    ._c_b_app ._msg._user ._item {
+      background-color: rgba(234, 234, 234, 0.6);
+      color: #333;
+      margin-right: 11px;
+      border-color: rgba(234, 234, 234, 0.6);
+      border-radius: 7px 0px 7px 7px; }
+      ._c_b_app ._msg._user ._item:before {
+        left: 100%;
+        border-width: 0px 7px 7px 7px;
+        border-color: transparent;
+        border-left-color: inherit; }
+
+._c_b_app ._typing ._anim {
+  text-align: left;
+  margin-left: 9px;
+  display: inline-block;
+  background-color: #e0e0e0;
+  margin: 5px 0 5px 9px;
+  padding: 7px 11px;
+  border-radius: 50em;
+  display: inline-flex;
+  align-items: center;
+  min-height: 21px; }
+  ._c_b_app ._typing ._anim > div {
+    width: 12px;
+    height: 12px;
+    background-color: #565656;
+    border-radius: 100%;
+    animation: sk-bouncedelay 0.8s infinite ease-in-out both; }
+    ._c_b_app ._typing ._anim > div._bounce1 {
+      animation-delay: -0.32s;
+      height: 5px;
+      width: 5px;
+      margin-right: 7px; }
+    ._c_b_app ._typing ._anim > div._bounce2 {
+      animation-delay: -0.16s;
+      width: 8px;
+      height: 8px;
+      margin-right: 4px; }
+
+._c_b_app ._ldr {
+  display: block; }
+  ._c_b_app ._ldr ._itm {
+    display: block;
+    margin: 5px 0; }
+    ._c_b_app ._ldr ._itm ._ld {
+      min-height: 21px;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+      max-width: 80%;
+      width: 80%; }
+    ._c_b_app ._ldr ._itm._rt {
+      overflow: hidden; }
+      ._c_b_app ._ldr ._itm._rt ._ld {
+        float: right; }
+
+._c_b_app ._sgtn {
+  display: inline-block;
+  background-color: #fff;
+  color: #333;
+  min-width: 90px;
+  margin: 0 9px 9px 9px;
+  border-radius: 3px;
+  border: 1px solid rgba(233, 233, 233, 0.58);
+  max-width: 80%;
+  box-shadow: 1px 1px 1px rgba(217, 217, 217, 0.42); }
+  ._c_b_app ._sgtn ._itm {
+    padding: 7px;
+    font-size: 14px;
+    font-weight: 400;
+    transition: 0.2s all;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(233, 233, 233, 0.25); }
+    ._c_b_app ._sgtn ._itm:first-child {
+      border-radius: 3px 3px 0 0; }
+    ._c_b_app ._sgtn ._itm:last-child {
+      border-radius: 0 0 3px 3px; }
+    ._c_b_app ._sgtn ._itm:hover {
+      background-color: #607D8B;
+      color: rgba(255, 255, 255, 0.87); }
+  ._c_b_app ._sgtn._option {
+    display: flex;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    flex-wrap: wrap; }
+    ._c_b_app ._sgtn._option ._itm {
+      background-color: #fff;
+      color: #333;
+      margin: 0 2px 3px 2px;
+      border-radius: 3px;
+      border: 1px solid #607D8B; }
+      ._c_b_app ._sgtn._option ._itm:hover {
+        background-color: #607D8B;
+        color: rgba(255, 255, 255, 0.87); }
 `
 }
 
