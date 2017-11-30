@@ -9,8 +9,8 @@
 			<c-bot-loader></c-bot-loader>
 		</div>
 		<div class="_msgs">
-			<div al-repeat="i in [0,1,2,3,4,5,6,11,22,33,44,55,66,77,88,99]">
-				<c-bot-mgs :index="$index"></c-bot-mgs>
+			<div al-repeat="i in msgs track by $index">
+				<c-bot-mgs :index="$index" :data="i"></c-bot-mgs>
 			</div>
 		</div>
 		<div class="_btm">
@@ -22,8 +22,8 @@
 
 	<div class="_fld">
 		<div class="_inpt">
-			<input type="_text" class="_input" placeholder="Ask Bot!" autofocus="" />
-			<button class="_fab _ripple">
+			<input type="_text" class="_input" placeholder="Ask Bot!" autofocus="" al-value="query" @keydown.enter="sendQuery($event)"/>
+			<button class="_fab _ripple" :disabled="query == ''" @click="sendQuery($event)">
 				<span class="_post"></span>
 			</button>
 		</div>

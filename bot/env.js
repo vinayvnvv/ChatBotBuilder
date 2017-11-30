@@ -4,6 +4,15 @@ var __c_b_app_Controller = function(name, controller) {
 	this.controller = controller;
 }
 
+//api services
+var __c_b_app_Api_Service = function() {
+	this.host = ( (location.hostname == '127.0.0.1' || location.hostname == 'localhost') ?  "http://127.0.0.1:3000/" : "https://botflow.herokuapp.com/");
+    this.urls = {
+    	socket_connect: this.host + "sockets/bot",
+    	get_msg: this.host + "api/bot/msgs/"
+ 	}
+}
+
 
 
 
@@ -12,8 +21,14 @@ var __c_b_app = new function() {
 	//env
 	this.env = {
 		host: "http://localhost:3000",
-		vars: {},
+		vars: {
+			bot_id_selecter_attr: "chat-bot-id"
+		},
 		bot_id: null,
+		cookie: {
+			uuid_key:"__chat__bot__uuid__"
+		},
+		Api: new __c_b_app_Api_Service(),
 		ref: {
 			root: {
 				ele: {
@@ -36,10 +51,15 @@ var __c_b_app = new function() {
 	//list of controller array of type <__c_b_app_Controller>
 	this.controllers = [];
 	this.run = null;
+	this.service = {};
 
 	//run function will called at first time
 	this.runApp = function(_function) {
 		this.run = _function;
+	}
+
+	this.addService = function(name, _service) {
+		this.service[name] = new _service();
 	}
 
 	//add controller function

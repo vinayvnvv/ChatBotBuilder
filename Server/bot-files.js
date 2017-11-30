@@ -2,7 +2,8 @@ var BotFiles = function() {
 
   this.lib = [
   	"bot/bower_components/rivets/dist/rivets.bundled.min.js",
-  	"bot/bower_components/alight/alight.debug.js"
+  	"bot/bower_components/alight/alight.debug.js",
+    "bot/libs/socket.io/socket.io.min.js"
   ];
 
   this.al_app_js = [

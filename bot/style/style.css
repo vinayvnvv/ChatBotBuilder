@@ -11,6 +11,12 @@
     -webkit-transform: scale(1);
     transform: scale(1); } }
 
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -200px 0; }
+  100% {
+    background-position: 200px 0; } }
+
 ._c_b_app ._ripple {
   position: relative;
   overflow: hidden;
@@ -104,6 +110,9 @@
         transition: 0.2s all;
         border: none;
         outline: none; }
+        ._c_b_app ._fld ._inpt ._fab[disabled] {
+          opacity: 0;
+          pointer-events: none; }
         ._c_b_app ._fld ._inpt ._fab:hover {
           background-color: rgba(96, 125, 139, 0.8); }
         ._c_b_app ._fld ._inpt ._fab ._post {
@@ -119,8 +128,16 @@
   display: flex;
   width: 100%;
   margin: 11px 0; }
+  ._c_b_app ._msg ._icn {
+    background-color: rgba(234, 234, 234, 0.6);
+    border-radius: 50em;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
   ._c_b_app ._msg ._item {
-    max-width: 80%;
+    max-width: 65%;
     background-color: #607D8B;
     color: rgba(255, 255, 255, 0.87);
     padding: 9px;
@@ -143,6 +160,7 @@
     justify-content: flex-end; }
     ._c_b_app ._msg._user ._item {
       background-color: rgba(234, 234, 234, 0.6);
+      max-width: 80%;
       color: #333;
       margin-right: 11px;
       border-color: rgba(234, 234, 234, 0.6);
@@ -155,12 +173,11 @@
 
 ._c_b_app ._typing ._anim {
   text-align: left;
-  margin-left: 9px;
   display: inline-block;
   background-color: #e0e0e0;
-  margin: 5px 0 5px 9px;
+  margin: 5px 0 5px 13px;
   padding: 7px 11px;
-  border-radius: 50em;
+  border-radius: 5px;
   display: inline-flex;
   align-items: center;
   min-height: 21px; }
@@ -190,8 +207,16 @@
       min-height: 21px;
       background-color: #f0f0f0;
       border-radius: 3px;
-      max-width: 80%;
-      width: 80%; }
+      max-width: 50%;
+      width: 50%;
+      background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+      background-size: 400px 104px;
+      position: relative;
+      animation-name: placeHolderShimmer;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      animation-duration: 0.9s;
+      animation-iteration-count: infinite; }
     ._c_b_app ._ldr ._itm._rt {
       overflow: hidden; }
       ._c_b_app ._ldr ._itm._rt ._ld {
