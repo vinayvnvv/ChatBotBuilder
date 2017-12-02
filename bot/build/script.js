@@ -5666,37 +5666,234 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    	templateUrl: "app/app.component.html",
 	    	onStart: function() {
 
-	    			scope.initVars = function() {
+	    			scope.initVars = function() {  //vars
 	    				scope.query = "";
 				    	scope.msgs = [];
-				    	var Helper = __c_b_app.service.Helper;
+				    	scope.Helper = __c_b_app.service.Helper;
 				    	scope.bot_socket = io.connect(__c_b_app.env.Api.urls.socket_connect);
-				    	scope.client_id = Helper.decodeId(document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem(__c_b_app.env.vars.bot_id_selecter_attr).value);
+				    	scope.client_id = scope.Helper.decodeId(document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem(__c_b_app.env.vars.bot_id_selecter_attr).value);
+	    				scope.uuid = scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key);
+	    				scope.is_typing = false;
+	    				scope.suggestion = null;
+	    				scope.is_scroll = true;
+	    				scope.bot_scroller = document.getElementById("_c_b_app_scroller_id");
+	    				scope.is_scroll = true;
+             			scope.more_loading = false;
+             			scope.current_page = 1;
+             			scope.page_end = false;
 	    			}
 
 	    			//script to handle ui on incoming and outgoing msgs
 	    			scope.onMsgPush = function() {
 		    			env.watch("msgs", function(New, old) {
-		    					//here is the script
+
+		    				if(scope.msgs.length>0) {
+		    					if(scope.msgs[scope.msgs.length-1].by == 'me') { //user request
+		    						scope.typing.show();
+		    						scope.emitQuery(scope.msgs[scope.msgs.length-1].msg)
+		    						scope.playSound("user")
+		    					} else { // bot response
+		    						scope.typing.hide();
+		    						scope.playSound("bot")
+		    					}
+		    				}
+
+		    				setTimeout(function() {
+		    					scope.scrollToBottom();
+		    					env.scan();
+		    				}, 10);
 		    			}, true)
 	    			}
 
+	    			scope.emitQuery = function(msg) {  //send query to server
+		              if(scope.msgFrom != "user") return;
+		               console.log("query is requesting by user..." + msg)
+		               var data = { c_id:scope.client_id, uuid: scope.uuid,  query: msg };
+		               scope.bot_socket.emit('modules_req', data)
+		            }
+
+		            scope.listenQueryResponse = function() {
+		                 scope.bot_socket.on('modules_res', function(data) {
+		                  console.log(data)
+		                  scope.pushMsgs(data.module.msg);
+		                  scope.performSuggestion(data.module.shortcut, data.module.shortcutData)
+		                  //scope.$apply();
+		                  env.scan();
+		                 })
+		            }
+
+		            scope.performSuggestion = function(type, data) {
+		            	if(!type || !data) return;
+		            	scope.suggestion = {};
+		            	scope.suggestion['type'] = type;
+		            	scope.suggestion['data'] = data;
+
+		            	scope.scrollToBottom();
+		            }
+
+		            scope.onSuggestionSelect = function(item) {
+		            	scope.msgFrom = "user";
+                  		scope.suggestion = false;
+                  		scope.pushMsgs(item, "me");
+                  		env.scan();
+		            }
+
 	    			//fired on user-input
 				    scope.sendQuery = function(ev) {
-				    	scope.msgs.push(scope.query)
+				    	scope.msgFrom = "user";
+				    	scope.suggestion = false;
+				    	scope.pushMsgs(scope.query, "me")
 				    	scope.query = "";
 				    }
+
+				    scope.initBotSocket = function() {
+			            var data = { c_id: scope.client_id, uuid: scope.uuid };
+			            scope.bot_socket.emit('init', data);
+			        }
+
+
+			        scope.pushMsgs = function(msg, by, time, reverse) {
+			        	//valid params
+			        	if(!msg) return;
+			        	by = ( by ? by : 'bot' );
+			        	time = ( time ? time : new Date());
+
+			        	if(typeof(msg) == 'object') {  //array ? then add single items by loop
+	                        for(var i=0;i<msg.length;i++) {
+	                          if(reverse == true) {
+	                            console.log("reverse adding")
+	                            scope.msgs.splice(0, 0, {by:by,msg:msg[i], timestamp:time});
+	                            scope.msgs.join();
+	                          }
+	                          else{
+	                            scope.msgs.push({by:by,msg:msg[i], timestamp:time});
+	                          }
+	                          //$scope.$apply();
+	                      }
+	                    } else {
+	                        if(reverse == true) {
+	                            console.log("reverse adding")
+	                            scope.msgs.splice(0, 0, {by:by,msg:msg, timestamp:time});
+	                            scope.msgs.join();
+	                          }
+	                          else{
+	                            scope.msgs.push({by:by,msg:msg, timestamp:time});
+	                          }
+	                	}
+			        }
+
+
+			        scope.connectBot = function() {
+			        	console.log(scope.uuid)
+			        	if(scope.uuid) { //already user initiated with bot and resume with last session
+
+			        		__c_b_app.http.get(__c_b_app.env.Api.urls.get_msg + scope.uuid + "/" + __c_b_app.env.vars.pagination.limit + "/1", function(res) {
+						    	scope.initBotSocket();
+						    	scope.listenQueryResponse(); //real time sockets responce listen for queries
+						   		
+						   		var arr = (JSON.parse(res)).reverse();
+				                   for(var i=0;i<arr.length;i++) {  //push old session msgs
+				                      scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp);
+				                   }
+
+				                setTimeout(function() {
+				                	scope.scrollToBottom();
+				                }, 10);
+				                env.scan();	
+
+						    })
+			        		
+
+			        	} else {  //fresh connect by the user
+
+			        		scope.uuid = scope.Helper.generateUUID();
+			        		scope.Helper.setCookie(__c_b_app.env.cookie.uuid_key, scope.uuid);
+                 			scope.initBotSocket();
+                 			scope.listenQueryResponse(); //real time sockets responce listen for queries
+
+			        	}
+			        	
+			        }
 
 
 				    scope.init = function() {
 				    	scope.initVars();
+				    	scope.setupBot();
 				    	scope.onMsgPush();
+				    	scope.connectBot();
+				    	scope.fetchMsgsOnVertScroll();
+
+				    }
+
+				    scope.setupBot = function() {
+				    	scope.bot_socket.on("setup", function(data) {
+				    		console.log(data)
+				           //scope.Helper.setUpBotStyle(data);
+				        })
 				    }
 
 
-				    __c_b_app.http.get(__c_b_app.env.Api.urls.get_msg + 42342342 + "/" + 20 + "/1", function(r) {
-				    	console.log(r)
-				    })
+				    //ui events
+				    scope.typing = {
+				    	show: function() {
+				    		scope.is_typing = true;
+				    	},
+				    	hide: function() {
+				    		scope.is_typing = false;
+				    	}
+				    }
+
+				    scope.scrollToBottom = function() {
+			          if(scope.is_scroll) {
+			            scope.bot_scroller.scrollTop = (scope.bot_scroller.scrollHeight + 20);
+			          } else {
+			            scope.is_scroll = true;
+			          } 
+			        } 
+
+			        scope.fetchMsgsOnVertScroll = function() { //real-time scroll event to fetch more msgs on scroll to top
+			        	
+			        	scope.bot_scroller.onscroll = function() {
+        					if(scope.page_end) return;
+					        if(scope.bot_scroller.scrollTop == 0) {
+					          if(scope.more_loading == true) return;
+					          scope.more_loading = true;
+					          var height = scope.bot_scroller.scrollHeight;
+					          env.scan();
+					          __c_b_app.http.get(__c_b_app.env.Api.urls.get_msg + scope.uuid + "/" + __c_b_app.env.vars.pagination.limit + "/" + ( ++scope.current_page ), function(res) {
+					               var arr = (JSON.parse(res));
+					               if(arr.length == 0) {
+					               		scope.page_end =  true;
+					               		scope.more_loading = false;
+					               		env.scan();
+					               }
+					                   for(var i=0;i<arr.length;i++) {
+					                      scope.is_scroll = false;
+					                      scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp, true);
+					                   }
+					               setTimeout(function(){scope.bot_scroller.scrollTop = (scope.bot_scroller.scrollHeight-height); }, 0); 
+					               scope.more_loading = false;
+					        	   env.scan();	
+					          });
+
+					        }
+
+					      }
+			        }
+
+			        //other events'
+			       scope.playSound = function (who) {
+			              if(who == "user") {
+			                var audio = new Audio(__c_b_app.env.Api.urls.sounds.bot);
+			                 audio.play();
+			              } else {
+			                var audio = new Audio(__c_b_app.env.Api.urls.sounds.user);
+			                audio.play();
+			              }
+			       }
+
+
+				    
 
 					scope.init();
 	    	}
@@ -5706,6 +5903,19 @@ alight.component('c-bot-loader', function (scope, element, env) {
 	    return { 
 	    	templateUrl: "app/loader/loader.component.html",
 	    	onStart: function() {}
+	    };
+});
+alight.component('c-bot-sug', function (scope, element, env) {
+	    return { 
+	    	templateUrl: "app/suggestion/suggestion.component.html",
+	    	onStart: function() {
+	    			scope.data = scope.data;
+	    			scope.change = scope.change;
+
+	    			scope.onSelect = function(item) {
+	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
+	    			}
+	    	}
 	    };
 });
 alight.component('c-bot-mgs', function (scope, element, env) {
@@ -5728,17 +5938,6 @@ alight.component('c-bot-typing', function (scope, element, env) {
 	    	}
 	    };
 });
-alight.component('c-bot-sug', function (scope, element, env) {
-	    return { 
-	    	templateUrl: "app/suggestion/suggestion.component.html",
-	    	onStart: function() {
-	    			scope.data = scope.data;
-				    scope.click = function() {
-				    	scope.name = "Shannubhag"
-				    }
-	    	}
-	    };
-});
 //types
 var __c_b_app_Controller = function(name, controller) {
 	this.name = name;
@@ -5750,7 +5949,11 @@ var __c_b_app_Api_Service = function() {
 	this.host = ( (location.hostname == '127.0.0.1' || location.hostname == 'localhost') ?  "http://127.0.0.1:3000/" : "https://botflow.herokuapp.com/");
     this.urls = {
     	socket_connect: this.host + "sockets/bot",
-    	get_msg: this.host + "api/bot/msgs/"
+    	get_msg: this.host + "api/bot/msgs/",
+    	sounds: {
+    		bot: this.host + "bot/sound/bot.mp3",
+    		user: this.host + "bot/sound/user.mp3"
+    	}
  	}
 }
 
@@ -5763,7 +5966,10 @@ var __c_b_app = new function() {
 	this.env = {
 		host: "http://localhost:3000",
 		vars: {
-			bot_id_selecter_attr: "chat-bot-id"
+			bot_id_selecter_attr: "chat-bot-id",
+			pagination: {
+				limit: 20
+			}
 		},
 		bot_id: null,
 		cookie: {

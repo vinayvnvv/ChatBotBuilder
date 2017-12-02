@@ -3,9 +3,11 @@ alight.component('c-bot-sug', function (scope, element, env) {
 	    	templateUrl: "app/suggestion/suggestion.component.html",
 	    	onStart: function() {
 	    			scope.data = scope.data;
-				    scope.click = function() {
-				    	scope.name = "Shannubhag"
-				    }
+	    			scope.change = scope.change;
+
+	    			scope.onSelect = function(item) {
+	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
+	    			}
 	    	}
 	    };
 });

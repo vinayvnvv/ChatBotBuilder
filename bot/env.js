@@ -9,7 +9,11 @@ var __c_b_app_Api_Service = function() {
 	this.host = ( (location.hostname == '127.0.0.1' || location.hostname == 'localhost') ?  "http://127.0.0.1:3000/" : "https://botflow.herokuapp.com/");
     this.urls = {
     	socket_connect: this.host + "sockets/bot",
-    	get_msg: this.host + "api/bot/msgs/"
+    	get_msg: this.host + "api/bot/msgs/",
+    	sounds: {
+    		bot: this.host + "bot/sound/bot.mp3",
+    		user: this.host + "bot/sound/user.mp3"
+    	}
  	}
 }
 
@@ -22,7 +26,10 @@ var __c_b_app = new function() {
 	this.env = {
 		host: "http://localhost:3000",
 		vars: {
-			bot_id_selecter_attr: "chat-bot-id"
+			bot_id_selecter_attr: "chat-bot-id",
+			pagination: {
+				limit: 20
+			}
 		},
 		bot_id: null,
 		cookie: {

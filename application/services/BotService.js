@@ -21,7 +21,7 @@ var BotService = function() {
 		    port: 587,
 		    auth: {
 		        user: "tech.vinaybv@gmail.com", 
-		        pass: "gamapath" 
+		        pass: "gamapath01234" 
 		    },
 		    tls: {rejectUnauthorized: false}
 		});

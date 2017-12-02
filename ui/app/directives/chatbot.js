@@ -279,7 +279,10 @@ app.directive('chatBot', ['$http', '$timeout', '$compile', 'URLVars', 'Helper', 
 
        $scope.scrollToBottom = function() {
           if($scope.isScroll) {
-            $scope.chat_scroller[0].scrollTop = ($scope.chat_scroller[0].scrollHeight + 20);
+            setTimeout(function() {
+                $scope.chat_scroller[0].scrollTop = ($scope.chat_scroller[0].scrollHeight + 20);
+            }, 10);
+            
           } else {
             $scope.isScroll = true;
           } 

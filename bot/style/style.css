@@ -64,7 +64,8 @@
     overflow-y: auto;
     color: rgba(0, 0, 0, 0.87);
     background-color: rgba(232, 239, 245, 0.38);
-    padding: 0 11px; }
+    padding: 0 11px;
+    position: relative; }
     ._c_b_app ._bd::-webkit-scrollbar {
       width: 5px; }
     ._c_b_app ._bd::-webkit-scrollbar-track {
@@ -72,6 +73,16 @@
     ._c_b_app ._bd::-webkit-scrollbar-thumb {
       background-color: #999;
       border-radius: 7px; }
+    ._c_b_app ._bd ._pged {
+      display: block;
+      background-color: #fff;
+      padding: 9px;
+      color: #000;
+      font-weight: 100;
+      font-size: 10px;
+      text-align: center;
+      letter-spacing: 1.1px;
+      border-radius: 0 0px 5px 5px; }
   ._c_b_app ._fld {
     height: 52px;
     max-height: 52px;
@@ -254,6 +265,7 @@
     flex-wrap: wrap; }
     ._c_b_app ._sgtn._option ._itm {
       background-color: #fff;
+      padding: 7px 11px;
       color: #333;
       margin: 0 2px 3px 2px;
       border-radius: 3px;

@@ -4,8 +4,11 @@
 		Help Assistant
 	</div>
 
-	<div class="_bd">
-		<div class="_ldng">
+	<div class="_bd" id="_c_b_app_scroller_id">
+		<div class="_pged" al-if="page_end">
+			Already at the end of page!
+		</div>
+		<div class="_ldng" al-if="more_loading && !page_end">
 			<c-bot-loader></c-bot-loader>
 		</div>
 		<div class="_msgs">
@@ -14,8 +17,8 @@
 			</div>
 		</div>
 		<div class="_btm">
-			<c-bot-sug></c-bot-sug>
-			<c-bot-typing></c-bot-typing>
+			<c-bot-sug al-if="suggestion"  :data="suggestion" ></c-bot-sug>
+			<c-bot-typing al-if="is_typing"></c-bot-typing>
 		</div>
 		
 	</div>
