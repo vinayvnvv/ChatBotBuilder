@@ -7,6 +7,7 @@ var spawn = require('child_process').spawn;
 var Parser = require('./parser');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
+var minify = require('gulp-minify');
 
 
 var gulpActivity = function(app, http) {
@@ -70,11 +71,25 @@ var gulpActivity = function(app, http) {
 			
 		})
 
+
 		gulp.task('build_bot_prod_js', function() {
 			// return gulp.src(BotFiles.js)
 			//          .pipe(concat('script.js'))
 			//          .pipe(gulp.dest('bot/build'));
-			Parser.parseTemplateUrl('bot/build/script.js', 'bot/', function() {});
+			Parser.parseTemplateUrl('bot/build/script.js', 'bot/', function() {
+
+				gulp.src('bot/build/script_prod.js')
+			    .pipe(minify({
+			        // ext:{
+			        //     src:'-debug.js',
+			        //     min:'.js'
+			        // },
+			        exclude: ['tasks'],
+			        ignoreFiles: ['.combo.js', '-min.js']
+			    }))
+			    .pipe(gulp.dest('bot/build'));
+
+			});
 		})
 
 
@@ -143,7 +158,7 @@ var gulpActivity = function(app, http) {
 
 			gulp.watch(BotFiles.watch, ['build_bot_js']);
 
-			gulp.watch(BotFiles.watch, ['build_bot_prod_js']);
+			//gulp.watch(BotFiles.watch, ['build_bot_prod_js']);
 
 
 			gulp.watch(AppManagerFiles.custom.js, ['build_manager_js', 'build_manager_final_js']);
