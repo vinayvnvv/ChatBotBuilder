@@ -54,7 +54,14 @@ var Models = function() {
 
 	       //default values validaTE
 	       if(data.menu_type == undefined || data.menu_type == null || data.menu_type == '') model.menu_type = 'list';
-    
+    	   
+
+    	   //add defaults
+	       model.statastics = {
+	       	      triggered:0,
+	       	      triggeredAt:null
+	       };
+
 	       return model;
 	}
 
