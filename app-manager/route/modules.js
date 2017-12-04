@@ -60,7 +60,8 @@ router.delete('/delete/:id/:moduleId', function(req, res) {
 
 
 
-router.get('/init/:id', function(req, res) {
+router.post('/init_bot/:id', function(req, res) {
+  console.log("called init route")
    moduleDb.getInit(
         req.params.id,
         function(docs) { setTimeout(function() { res.json(docs) }, 1000);  },

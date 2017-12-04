@@ -41,4 +41,33 @@ __c_b_app.addService("Helper", function() {
 	this.deleteCookie = function(key) {
 	    document.cookie = key + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	};
+
+	this.setUpBotStyle = function(data) {
+        console.log("called theme config")
+        if(data == null || data == undefined ) return;
+        var align = (data.positionX == 'left' ? "left" : "right") + ":0;" + (data.positionY == 'top' ? "top" : "bottom") + ":0";
+        console.log("align", align)
+        var style = document.createElement('style');
+		style.type = 'text/css';
+		style.setAttribute(__c_b_app.env.ref.root.style.name, "");
+		
+                css = `
+                       ._c_b_app ._tpbr  { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._tpbr ._cls path { fill:` + data.color +  `; }
+                       ._c_b_app ._fld ._inpt ._fab { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app_tglbtn { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._ic path { fill:` + data.color +  `; }
+                       ._c_b_app ._msg ._item { background-color: ` + data.bgcolor +  `; color:` + data.color + `; border-color:` + data.bgcolor + `; }
+                       ._c_b_app ._sgtn ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._sgtn._option ._itm { border-color: ` + data.bgcolor +  `; color:` + data.bgcolor +  `; }
+                       ._c_b_app ._sgtn._option ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app { height:` + data.height +  `%; width:` + data.width +  `; }
+                       ._c_b_app { ` + align + ` }
+                `;
+                        style.innerHTML = css;
+        document.getElementsByTagName('head')[0].appendChild(style);
+  	}
 })

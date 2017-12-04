@@ -5,6 +5,7 @@ var header = require('./../../application/header');
 var Model = require('./../models/models');
 var Service = require('./../services/services')
 var Inits = require('./../services/inits')
+var BotInitModel = require('./../models/init_bot.model')
 
 var Modules = function() {
 
@@ -177,7 +178,7 @@ var Modules = function() {
         // }
 
         //upadte time stamp
-        doc.type="init";
+        doc = new BotInitModel(doc);
         doc.timestamp_updated = Service.getUpdatedTimeStamp();
 
 		MongoClient.connect(header.db.url, function(err, db) {
@@ -211,13 +212,10 @@ var Modules = function() {
 
 
 
-        var doc = {
-        	type:"init",
-        	msg: ["Welcome!"],
-        	style: Inits.getInitBotStyle,
-        	timestamp_updated : Service.getUpdatedTimeStamp(),
-        	initilized:true
-        };
+        var doc = new BotInitModel();
+        doc.type = "init";
+        doc.timestamp_updated = Service.getUpdatedTimeStamp(),
+        doc.initilized = true;
 
 
 

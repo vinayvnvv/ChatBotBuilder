@@ -2,18 +2,18 @@ var AppManagerFiles = function() {
 
     this.libs = {
     	js: [
-              'ui-manager/node_modules/angular/angular.min.js',
-              'ui-manager/node_modules/angular-ui-router/release/angular-ui-router.min.js',
-              'ui-manager/node_modules/angular-animate/angular-animate.min.js',
-              'ui-manager/node_modules/angular-material/angular-material.min.js',
-              'ui-manager/node_modules/angular-aria/angular-aria.min.js',
-              'ui-manager/node_modules/angular-messages/angular-messages.min.js',
-              'ui-manager/node_modules/angular-moment/angular-moment.min.js',
-              'ui-manager/node_modules/moment/moment.js',
+              'node_modules/angular/angular.min.js',
+              'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+              'node_modules/angular-animate/angular-animate.min.js',
+              'node_modules/angular-material/angular-material.min.js',
+              'node_modules/angular-aria/angular-aria.min.js',
+              'node_modules/angular-messages/angular-messages.min.js',
+              'node_modules/angular-moment/angular-moment.min.js',
+              'node_modules/moment/moment.js',
               'ui-manager/libs/auto-add-input.js'
     	    ],
     	css:[
-    	      'ui-manager/node_modules/angular-material/angular-material.min.css'
+    	      'node_modules/angular-material/angular-material.min.css'
     	    ]    
     }
 

@@ -239,7 +239,7 @@ var header = require('./../header');
 				  	console.log("docs>>>>>>>>>>>>", docs)
 				  	 if(err) { error_callback(err); return }
 
-                     success_callback(docs[0].style);
+                     success_callback({bot_name: docs[0].bot_name, style: docs[0].style});
 				  	
 				});
 			});

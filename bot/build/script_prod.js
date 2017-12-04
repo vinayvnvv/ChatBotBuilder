@@ -5663,10 +5663,16 @@ this.secure=null!=r.secure?r.secure:e.location&&"https:"===location.protocol,r.h
 }:this.iframe.onload=r}}).call(e,function(){return this}())},function(t,e,r){(function(e){function n(t){var e=t&&t.forceBase64;e&&(this.supportsBinary=!1),this.perMessageDeflate=t.perMessageDeflate,this.usingBrowserWebSocket=p&&!t.forceNode,this.usingBrowserWebSocket||(f=o),i.call(this,t)}var o,i=r(26),s=r(27),a=r(36),c=r(37),u=r(38),h=r(3)("engine.io-client:websocket"),p=e.WebSocket||e.MozWebSocket;if("undefined"==typeof window)try{o=r(41)}catch(t){}var f=p;f||"undefined"!=typeof window||(f=o),t.exports=n,c(n,i),n.prototype.name="websocket",n.prototype.supportsBinary=!0,n.prototype.doOpen=function(){if(this.check()){var t=this.uri(),e=void 0,r={agent:this.agent,perMessageDeflate:this.perMessageDeflate};r.pfx=this.pfx,r.key=this.key,r.passphrase=this.passphrase,r.cert=this.cert,r.ca=this.ca,r.ciphers=this.ciphers,r.rejectUnauthorized=this.rejectUnauthorized,this.extraHeaders&&(r.headers=this.extraHeaders),this.localAddress&&(r.localAddress=this.localAddress);try{this.ws=this.usingBrowserWebSocket?new f(t):new f(t,e,r)}catch(t){return this.emit("error",t)}void 0===this.ws.binaryType&&(this.supportsBinary=!1),this.ws.supports&&this.ws.supports.binary?(this.supportsBinary=!0,this.ws.binaryType="nodebuffer"):this.ws.binaryType="arraybuffer",this.addEventListeners()}},n.prototype.addEventListeners=function(){var t=this;this.ws.onopen=function(){t.onOpen()},this.ws.onclose=function(){t.onClose()},this.ws.onmessage=function(e){t.onData(e.data)},this.ws.onerror=function(e){t.onError("websocket error",e)}},n.prototype.write=function(t){function r(){n.emit("flush"),setTimeout(function(){n.writable=!0,n.emit("drain")},0)}var n=this;this.writable=!1;for(var o=t.length,i=0,a=o;i<a;i++)!function(t){s.encodePacket(t,n.supportsBinary,function(i){if(!n.usingBrowserWebSocket){var s={};if(t.options&&(s.compress=t.options.compress),n.perMessageDeflate){var a="string"==typeof i?e.Buffer.byteLength(i):i.length;a<n.perMessageDeflate.threshold&&(s.compress=!1)}}try{n.usingBrowserWebSocket?n.ws.send(i):n.ws.send(i,s)}catch(t){h("websocket closed before onclose event")}--o||r()})}(t[i])},n.prototype.onClose=function(){i.prototype.onClose.call(this)},n.prototype.doClose=function(){"undefined"!=typeof this.ws&&this.ws.close()},n.prototype.uri=function(){var t=this.query||{},e=this.secure?"wss":"ws",r="";this.port&&("wss"===e&&443!==Number(this.port)||"ws"===e&&80!==Number(this.port))&&(r=":"+this.port),this.timestampRequests&&(t[this.timestampParam]=u()),this.supportsBinary||(t.b64=1),t=a.encode(t),t.length&&(t="?"+t);var n=this.hostname.indexOf(":")!==-1;return e+"://"+(n?"["+this.hostname+"]":this.hostname)+r+this.path+t},n.prototype.check=function(){return!(!f||"__initialize"in f&&this.name===n.prototype.name)}}).call(e,function(){return this}())},function(t,e){},function(t,e){var r=[].indexOf;t.exports=function(t,e){if(r)return t.indexOf(e);for(var n=0;n<t.length;++n)if(t[n]===e)return n;return-1}},function(t,e){(function(e){var r=/^[\],:{}\s]*$/,n=/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,o=/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,i=/(?:^|:|,)(?:\s*\[)+/g,s=/^\s+/,a=/\s+$/;t.exports=function(t){return"string"==typeof t&&t?(t=t.replace(s,"").replace(a,""),e.JSON&&JSON.parse?JSON.parse(t):r.test(t.replace(n,"@").replace(o,"]").replace(i,""))?new Function("return "+t)():void 0):null}}).call(e,function(){return this}())},function(t,e,r){"use strict";function n(t,e,r){this.io=t,this.nsp=e,this.json=this,this.ids=0,this.acks={},this.receiveBuffer=[],this.sendBuffer=[],this.connected=!1,this.disconnected=!0,r&&r.query&&(this.query=r.query),this.io.autoConnect&&this.open()}var o=r(7),i=r(35),s=r(45),a=r(46),c=r(47),u=r(3)("socket.io-client:socket"),h=r(29);t.exports=e=n;var p={connect:1,connect_error:1,connect_timeout:1,connecting:1,disconnect:1,error:1,reconnect:1,reconnect_attempt:1,reconnect_failed:1,reconnect_error:1,reconnecting:1,ping:1,pong:1},f=i.prototype.emit;i(n.prototype),n.prototype.subEvents=function(){if(!this.subs){var t=this.io;this.subs=[a(t,"open",c(this,"onopen")),a(t,"packet",c(this,"onpacket")),a(t,"close",c(this,"onclose"))]}},n.prototype.open=n.prototype.connect=function(){return this.connected?this:(this.subEvents(),this.io.open(),"open"===this.io.readyState&&this.onopen(),this.emit("connecting"),this)},n.prototype.send=function(){var t=s(arguments);return t.unshift("message"),this.emit.apply(this,t),this},n.prototype.emit=function(t){if(p.hasOwnProperty(t))return f.apply(this,arguments),this;var e=s(arguments),r=o.EVENT;h(e)&&(r=o.BINARY_EVENT);var n={type:r,data:e};return n.options={},n.options.compress=!this.flags||!1!==this.flags.compress,"function"==typeof e[e.length-1]&&(u("emitting packet with ack id %d",this.ids),this.acks[this.ids]=e.pop(),n.id=this.ids++),this.connected?this.packet(n):this.sendBuffer.push(n),delete this.flags,this},n.prototype.packet=function(t){t.nsp=this.nsp,this.io.packet(t)},n.prototype.onopen=function(){u("transport is open - connecting"),"/"!==this.nsp&&(this.query?this.packet({type:o.CONNECT,query:this.query}):this.packet({type:o.CONNECT}))},n.prototype.onclose=function(t){u("close (%s)",t),this.connected=!1,this.disconnected=!0,delete this.id,this.emit("disconnect",t)},n.prototype.onpacket=function(t){if(t.nsp===this.nsp)switch(t.type){case o.CONNECT:this.onconnect();break;case o.EVENT:this.onevent(t);break;case o.BINARY_EVENT:this.onevent(t);break;case o.ACK:this.onack(t);break;case o.BINARY_ACK:this.onack(t);break;case o.DISCONNECT:this.ondisconnect();break;case o.ERROR:this.emit("error",t.data)}},n.prototype.onevent=function(t){var e=t.data||[];u("emitting event %j",e),null!=t.id&&(u("attaching ack callback to event"),e.push(this.ack(t.id))),this.connected?f.apply(this,e):this.receiveBuffer.push(e)},n.prototype.ack=function(t){var e=this,r=!1;return function(){if(!r){r=!0;var n=s(arguments);u("sending ack %j",n);var i=h(n)?o.BINARY_ACK:o.ACK;e.packet({type:i,id:t,data:n})}}},n.prototype.onack=function(t){var e=this.acks[t.id];"function"==typeof e?(u("calling ack %s with %j",t.id,t.data),e.apply(this,t.data),delete this.acks[t.id]):u("bad ack %s",t.id)},n.prototype.onconnect=function(){this.connected=!0,this.disconnected=!1,this.emit("connect"),this.emitBuffered()},n.prototype.emitBuffered=function(){var t;for(t=0;t<this.receiveBuffer.length;t++)f.apply(this,this.receiveBuffer[t]);for(this.receiveBuffer=[],t=0;t<this.sendBuffer.length;t++)this.packet(this.sendBuffer[t]);this.sendBuffer=[]},n.prototype.ondisconnect=function(){u("server disconnect (%s)",this.nsp),this.destroy(),this.onclose("io server disconnect")},n.prototype.destroy=function(){if(this.subs){for(var t=0;t<this.subs.length;t++)this.subs[t].destroy();this.subs=null}this.io.destroy(this)},n.prototype.close=n.prototype.disconnect=function(){return this.connected&&(u("performing disconnect (%s)",this.nsp),this.packet({type:o.DISCONNECT})),this.destroy(),this.connected&&this.onclose("io client disconnect"),this},n.prototype.compress=function(t){return this.flags=this.flags||{},this.flags.compress=t,this}},function(t,e){function r(t,e){var r=[];e=e||0;for(var n=e||0;n<t.length;n++)r[n-e]=t[n];return r}t.exports=r},function(t,e){"use strict";function r(t,e,r){return t.on(e,r),{destroy:function(){t.removeListener(e,r)}}}t.exports=r},function(t,e){var r=[].slice;t.exports=function(t,e){if("string"==typeof e&&(e=t[e]),"function"!=typeof e)throw new Error("bind() requires a function");var n=r.call(arguments,2);return function(){return e.apply(t,n.concat(r.call(arguments)))}}},function(t,e){function r(t){t=t||{},this.ms=t.min||100,this.max=t.max||1e4,this.factor=t.factor||2,this.jitter=t.jitter>0&&t.jitter<=1?t.jitter:0,this.attempts=0}t.exports=r,r.prototype.duration=function(){var t=this.ms*Math.pow(this.factor,this.attempts++);if(this.jitter){var e=Math.random(),r=Math.floor(e*this.jitter*t);t=0==(1&Math.floor(10*e))?t-r:t+r}return 0|Math.min(t,this.max)},r.prototype.reset=function(){this.attempts=0},r.prototype.setMin=function(t){this.ms=t},r.prototype.setMax=function(t){this.max=t},r.prototype.setJitter=function(t){this.jitter=t}}])});
 alight.component('bot-flow-root', function (scope, element, env) {
 	    return { 
-	    	template : `<div class="_c_b_app">
-	
+	    	template : `<div class="_c_b_app" :class.active="is_bot_open">
 	<div class="_tpbr">
-		Help Assistant
+		{{bot_name ? bot_name : 'Help Assistance'}}
+		<span class="_cls" @click="is_bot_open = false">
+			<div class="_ic">
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+				<path d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
+				</svg>
+			</div>	
+		</span>
 	</div>
 
 	<div class="_bd" id="_c_b_app_scroller_id">
@@ -5698,6 +5704,21 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	</div>
 
 
+</div>
+
+
+<div class="_c_b_app_tglbtn" al-if="!is_bot_open" @click="is_bot_open = true">
+	<div class="_ic">
+		<div class="_ldr" al-if="!is_bot_init"></div>
+		<div class="_icn" al-if="is_bot_init">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+				<path d="M12.25 11.75c-1.002 0-1.943-0.39-2.652-1.098l-1.598-1.598-1.598 1.598c-0.708 0.708-1.65 1.098-2.652 1.098s-1.944-0.39-2.652-1.098c-0.708-0.708-1.098-1.65-1.098-2.652s0.39-1.943 1.098-2.652c0.708-0.708 1.65-1.098 2.652-1.098s1.943 0.39 2.652 1.098l1.598 1.598 1.598-1.598c0.708-0.708 1.65-1.098 2.652-1.098s1.944 0.39 2.652 1.098c0.708 0.708 1.098 1.65 1.098 2.652s-0.39 1.943-1.098 2.652c-0.708 0.708-1.65 1.098-2.652 1.098zM10.652 9.598c0.427 0.427 0.994 0.662 1.598 0.662s1.171-0.235 1.598-0.662c0.427-0.427 0.662-0.994 0.662-1.598s-0.235-1.171-0.662-1.598c-0.427-0.427-0.994-0.662-1.598-0.662s-1.171 0.235-1.598 0.662l-1.598 1.598 1.598 1.598zM3.75 5.74c-0.604 0-1.171 0.235-1.598 0.662s-0.662 0.994-0.662 1.598c0 0.604 0.235 1.171 0.662 1.598s0.994 0.662 1.598 0.662c0.604 0 1.171-0.235 1.598-0.662l1.598-1.598-1.598-1.598c-0.427-0.427-0.994-0.662-1.598-0.662v0z"></path>
+			</svg>
+		</div>
+	</div>
+	<div class="_tx">
+		Help Bot
+	</div>
 </div>`,
 	    	onStart: function() {
 
@@ -5716,6 +5737,9 @@ alight.component('bot-flow-root', function (scope, element, env) {
              			scope.more_loading = false;
              			scope.current_page = 1;
              			scope.page_end = false;
+             			scope.is_bot_open = false;
+             			scope.is_bot_init = false;
+             			scope.bot_name = "Help Assistance";
 	    			}
 
 	    			//script to handle ui on incoming and outgoing msgs
@@ -5833,7 +5857,11 @@ alight.component('bot-flow-root', function (scope, element, env) {
 
 				                setTimeout(function() {
 				                	scope.scrollToBottom();
+				                	scope.typing.hide();
 				                }, 10);
+
+				                scope.is_bot_init = true;
+
 				                env.scan();	
 
 						    })
@@ -5845,7 +5873,7 @@ alight.component('bot-flow-root', function (scope, element, env) {
 			        		scope.Helper.setCookie(__c_b_app.env.cookie.uuid_key, scope.uuid);
                  			scope.initBotSocket();
                  			scope.listenQueryResponse(); //real time sockets responce listen for queries
-
+                 			scope.is_bot_init = true;
 			        	}
 			        	
 			        }
@@ -5863,7 +5891,8 @@ alight.component('bot-flow-root', function (scope, element, env) {
 				    scope.setupBot = function() {
 				    	scope.bot_socket.on("setup", function(data) {
 				    		console.log(data)
-				           //scope.Helper.setUpBotStyle(data);
+				            scope.Helper.setUpBotStyle(data.style);
+				            scope.bot_name = data.bot_name;
 				        })
 				    }
 
@@ -5906,7 +5935,11 @@ alight.component('bot-flow-root', function (scope, element, env) {
 					                      scope.is_scroll = false;
 					                      scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp, true);
 					                   }
-					               setTimeout(function(){scope.bot_scroller.scrollTop = (scope.bot_scroller.scrollHeight-height); }, 0); 
+					               setTimeout(function(){
+					               	scope.bot_scroller.scrollTop = (scope.bot_scroller.scrollHeight-height); 
+					               	scope.typing.hide();
+					               	env.scan()
+					               }, 0); 
 					               scope.more_loading = false;
 					        	   env.scan();	
 					          });
@@ -5934,6 +5967,23 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    	}
 	    };
 });
+alight.component('c-bot-sug', function (scope, element, env) {
+	    return { 
+	    	template : `<div class="_sgtn" :class._option="data.type == 'option'">
+	<div class="_itm _ripple" al-repeat="i in data.data" @click="onSelect(i)">
+		{{i}}
+	</div>
+</div>`,
+	    	onStart: function() {
+	    			scope.data = scope.data;
+	    			scope.change = scope.change;
+
+	    			scope.onSelect = function(item) {
+	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
+	    			}
+	    	}
+	    };
+});
 alight.component('c-bot-loader', function (scope, element, env) {
 	    return { 
 	    	template : `<div class="_ldr">
@@ -5949,7 +5999,7 @@ alight.component('c-bot-mgs', function (scope, element, env) {
 	    	template : `<div class="_msg" :class._user="data.by == 'me'">
 	<div class="_icn"  al-if="data.by != 'me'">
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-			<path fill="#666666" d="M5 3c0-1.657 1.343-3 3-3s3 1.343 3 3c0 1.657-1.343 3-3 3s-3-1.343-3-3zM12.001 7h-0.553l-3.111 6.316 1.163-5.816-1.5-1.5-1.5 1.5 1.163 5.816-3.111-6.316h-0.554c-1.999 0-1.999 1.344-1.999 3v5h12v-5c0-1.656 0-3-1.999-3z"></path>
+			<path fill="#666666" d="M12.25 11.75c-1.002 0-1.943-0.39-2.652-1.098l-1.598-1.598-1.598 1.598c-0.708 0.708-1.65 1.098-2.652 1.098s-1.944-0.39-2.652-1.098c-0.708-0.708-1.098-1.65-1.098-2.652s0.39-1.943 1.098-2.652c0.708-0.708 1.65-1.098 2.652-1.098s1.943 0.39 2.652 1.098l1.598 1.598 1.598-1.598c0.708-0.708 1.65-1.098 2.652-1.098s1.944 0.39 2.652 1.098c0.708 0.708 1.098 1.65 1.098 2.652s-0.39 1.943-1.098 2.652c-0.708 0.708-1.65 1.098-2.652 1.098zM10.652 9.598c0.427 0.427 0.994 0.662 1.598 0.662s1.171-0.235 1.598-0.662c0.427-0.427 0.662-0.994 0.662-1.598s-0.235-1.171-0.662-1.598c-0.427-0.427-0.994-0.662-1.598-0.662s-1.171 0.235-1.598 0.662l-1.598 1.598 1.598 1.598zM3.75 5.74c-0.604 0-1.171 0.235-1.598 0.662s-0.662 0.994-0.662 1.598c0 0.604 0.235 1.171 0.662 1.598s0.994 0.662 1.598 0.662c0.604 0 1.171-0.235 1.598-0.662l1.598-1.598-1.598-1.598c-0.427-0.427-0.994-0.662-1.598-0.662v0z"></path>
 		</svg>
 	</div>
 	<div class="_item">
@@ -5963,23 +6013,6 @@ alight.component('c-bot-mgs', function (scope, element, env) {
 				    scope.click = function() {
 				    	scope.name = "Shannubhag"
 				    }
-	    	}
-	    };
-});
-alight.component('c-bot-sug', function (scope, element, env) {
-	    return { 
-	    	template : `<div class="_sgtn" :class._option="data.type == 'option'">
-	<div class="_itm _ripple" al-repeat="i in data.data" @click="onSelect(i)">
-		{{i}}
-	</div>
-</div>`,
-	    	onStart: function() {
-	    			scope.data = scope.data;
-	    			scope.change = scope.change;
-
-	    			scope.onSelect = function(item) {
-	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
-	    			}
 	    	}
 	    };
 });
@@ -6142,6 +6175,35 @@ __c_b_app.addService("Helper", function() {
 	this.deleteCookie = function(key) {
 	    document.cookie = key + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	};
+
+	this.setUpBotStyle = function(data) {
+        console.log("called theme config")
+        if(data == null || data == undefined ) return;
+        var align = (data.positionX == 'left' ? "left" : "right") + ":0;" + (data.positionY == 'top' ? "top" : "bottom") + ":0";
+        console.log("align", align)
+        var style = document.createElement('style');
+		style.type = 'text/css';
+		style.setAttribute(__c_b_app.env.ref.root.style.name, "");
+		
+                css = `
+                       ._c_b_app ._tpbr  { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._tpbr ._cls path { fill:` + data.color +  `; }
+                       ._c_b_app ._fld ._inpt ._fab { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app_tglbtn { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._ic path { fill:` + data.color +  `; }
+                       ._c_b_app ._msg ._item { background-color: ` + data.bgcolor +  `; color:` + data.color + `; border-color:` + data.bgcolor + `; }
+                       ._c_b_app ._sgtn ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._sgtn._option ._itm { border-color: ` + data.bgcolor +  `; color:` + data.bgcolor +  `; }
+                       ._c_b_app ._sgtn._option ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app { height:` + data.height +  `%; width:` + data.width +  `; }
+                       ._c_b_app { ` + align + ` }
+                `;
+                        style.innerHTML = css;
+        document.getElementsByTagName('head')[0].appendChild(style);
+  	}
 })
 function __c_b_envHttpGet(url, success, error) {
 	  var xhr = new XMLHttpRequest();
@@ -6229,6 +6291,34 @@ function addRootStyles() {
   100% {
     background-position: 200px 0; } }
 
+@keyframes bot_open {
+  0% {
+    top: 96%;
+    right: 25px;
+    transform: scale(0, 0); }
+  60% {
+    top: 20%;
+    right: 0;
+    transform: scale(0.2, 0.2); }
+  100% {
+    bottom: 0;
+    right: 0;
+    transform: scale(1, 1); } }
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.3; }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1; } }
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 ._c_b_app ._ripple {
   position: relative;
   overflow: hidden;
@@ -6254,15 +6344,20 @@ function addRootStyles() {
     transition: 0s; }
 
 ._c_b_app {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: fixed;
   top: 0;
   height: 100%;
   width: 350px;
+  animation-name: bot_open;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
   right: 0;
   font-family: 'Roboto', sans-serif;
   box-shadow: 0 3px 11px 0px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+  ._c_b_app.active {
+    display: flex; }
   ._c_b_app ._tpbr {
     height: 52px;
     min-height: 52px;
@@ -6270,7 +6365,23 @@ function addRootStyles() {
     color: rgba(255, 255, 255, 0.87);
     display: flex;
     align-items: center;
-    padding: 0 11px; }
+    padding: 0 11px;
+    position: relative; }
+    ._c_b_app ._tpbr ._cls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 52px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2 all; }
+      ._c_b_app ._tpbr ._cls:hover {
+        background-color: rgba(255, 255, 255, 0.2); }
+      ._c_b_app ._tpbr ._cls path {
+        fill: rgba(255, 255, 255, 0.87); }
   ._c_b_app ._bd {
     flex-grow: 1;
     overflow-y: auto;
@@ -6337,7 +6448,8 @@ function addRootStyles() {
           opacity: 0;
           pointer-events: none; }
         ._c_b_app ._fld ._inpt ._fab:hover {
-          background-color: rgba(96, 125, 139, 0.8); }
+          transition: 0.6s all;
+          background-image: radial-gradient(circle, rgba(255, 255, 255, 0.26) 70%, transparent 10.01%); }
         ._c_b_app ._fld ._inpt ._fab ._post {
           margin-left: 2px;
           position: absolute;
@@ -6346,6 +6458,38 @@ function addRootStyles() {
           border-left: solid 11px rgba(255, 255, 255, 0.87);
           border-bottom: solid 9px transparent;
           border-top: solid 9px transparent; }
+
+._c_b_app_tglbtn {
+  display: inline-flex;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50em;
+  background-color: #607D8B;
+  color: rgba(255, 255, 255, 0.87);
+  padding: 11px 13px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  transition: 0.3s all;
+  font-weight: bold;
+  animation-name: zoomOut;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out; }
+  ._c_b_app_tglbtn:hover {
+    transform: scale(1.1, 1.1); }
+  ._c_b_app_tglbtn ._ic {
+    margin-right: 7px; }
+    ._c_b_app_tglbtn ._ic ._ldr {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-top: 2px solid #fff;
+      border-radius: 50em;
+      animation: spinner 0.73s linear infinite; }
+    ._c_b_app_tglbtn ._ic path {
+      fill: rgba(255, 255, 255, 0.87); }
 
 ._c_b_app ._msg {
   display: flex;

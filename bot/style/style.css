@@ -17,6 +17,34 @@
   100% {
     background-position: 200px 0; } }
 
+@keyframes bot_open {
+  0% {
+    top: 96%;
+    right: 25px;
+    transform: scale(0, 0); }
+  60% {
+    top: 20%;
+    right: 0;
+    transform: scale(0.2, 0.2); }
+  100% {
+    bottom: 0;
+    right: 0;
+    transform: scale(1, 1); } }
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.3; }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1; } }
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 ._c_b_app ._ripple {
   position: relative;
   overflow: hidden;
@@ -42,15 +70,20 @@
     transition: 0s; }
 
 ._c_b_app {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: fixed;
   top: 0;
   height: 100%;
   width: 350px;
+  animation-name: bot_open;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
   right: 0;
   font-family: 'Roboto', sans-serif;
   box-shadow: 0 3px 11px 0px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+  ._c_b_app.active {
+    display: flex; }
   ._c_b_app ._tpbr {
     height: 52px;
     min-height: 52px;
@@ -58,7 +91,23 @@
     color: rgba(255, 255, 255, 0.87);
     display: flex;
     align-items: center;
-    padding: 0 11px; }
+    padding: 0 11px;
+    position: relative; }
+    ._c_b_app ._tpbr ._cls {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 52px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2 all; }
+      ._c_b_app ._tpbr ._cls:hover {
+        background-color: rgba(255, 255, 255, 0.2); }
+      ._c_b_app ._tpbr ._cls path {
+        fill: rgba(255, 255, 255, 0.87); }
   ._c_b_app ._bd {
     flex-grow: 1;
     overflow-y: auto;
@@ -125,7 +174,8 @@
           opacity: 0;
           pointer-events: none; }
         ._c_b_app ._fld ._inpt ._fab:hover {
-          background-color: rgba(96, 125, 139, 0.8); }
+          transition: 0.6s all;
+          background-image: radial-gradient(circle, rgba(255, 255, 255, 0.26) 70%, transparent 10.01%); }
         ._c_b_app ._fld ._inpt ._fab ._post {
           margin-left: 2px;
           position: absolute;
@@ -134,6 +184,38 @@
           border-left: solid 11px rgba(255, 255, 255, 0.87);
           border-bottom: solid 9px transparent;
           border-top: solid 9px transparent; }
+
+._c_b_app_tglbtn {
+  display: inline-flex;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50em;
+  background-color: #607D8B;
+  color: rgba(255, 255, 255, 0.87);
+  padding: 11px 13px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  transition: 0.3s all;
+  font-weight: bold;
+  animation-name: zoomOut;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out; }
+  ._c_b_app_tglbtn:hover {
+    transform: scale(1.1, 1.1); }
+  ._c_b_app_tglbtn ._ic {
+    margin-right: 7px; }
+    ._c_b_app_tglbtn ._ic ._ldr {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-top: 2px solid #fff;
+      border-radius: 50em;
+      animation: spinner 0.73s linear infinite; }
+    ._c_b_app_tglbtn ._ic path {
+      fill: rgba(255, 255, 255, 0.87); }
 
 ._c_b_app ._msg {
   display: flex;

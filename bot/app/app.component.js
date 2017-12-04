@@ -18,6 +18,9 @@ alight.component('bot-flow-root', function (scope, element, env) {
              			scope.more_loading = false;
              			scope.current_page = 1;
              			scope.page_end = false;
+             			scope.is_bot_open = false;
+             			scope.is_bot_init = false;
+             			scope.bot_name = "Help Assistance";
 	    			}
 
 	    			//script to handle ui on incoming and outgoing msgs
@@ -135,7 +138,11 @@ alight.component('bot-flow-root', function (scope, element, env) {
 
 				                setTimeout(function() {
 				                	scope.scrollToBottom();
+				                	scope.typing.hide();
 				                }, 10);
+
+				                scope.is_bot_init = true;
+
 				                env.scan();	
 
 						    })
@@ -147,7 +154,7 @@ alight.component('bot-flow-root', function (scope, element, env) {
 			        		scope.Helper.setCookie(__c_b_app.env.cookie.uuid_key, scope.uuid);
                  			scope.initBotSocket();
                  			scope.listenQueryResponse(); //real time sockets responce listen for queries
-
+                 			scope.is_bot_init = true;
 			        	}
 			        	
 			        }
@@ -165,7 +172,8 @@ alight.component('bot-flow-root', function (scope, element, env) {
 				    scope.setupBot = function() {
 				    	scope.bot_socket.on("setup", function(data) {
 				    		console.log(data)
-				           //scope.Helper.setUpBotStyle(data);
+				            scope.Helper.setUpBotStyle(data.style);
+				            scope.bot_name = data.bot_name;
 				        })
 				    }
 
@@ -208,7 +216,11 @@ alight.component('bot-flow-root', function (scope, element, env) {
 					                      scope.is_scroll = false;
 					                      scope.pushMsgs(arr[i].msg, arr[i].by, arr[i].timestamp, true);
 					                   }
-					               setTimeout(function(){scope.bot_scroller.scrollTop = (scope.bot_scroller.scrollHeight-height); }, 0); 
+					               setTimeout(function(){
+					               	scope.bot_scroller.scrollTop = (scope.bot_scroller.scrollHeight-height); 
+					               	scope.typing.hide();
+					               	env.scan()
+					               }, 0); 
 					               scope.more_loading = false;
 					        	   env.scan();	
 					          });

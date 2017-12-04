@@ -2,7 +2,7 @@ app.service('Strings',['$location', function($location) {
 
 	console.log("called string service");
 
-	var origin = $location.$$protocol + "://" + $location.$$host + ":" + $location.$$port + "/";
+	var origin = ( ($location.$$host == 'localhost') ? ($location.$$protocol + "://" + $location.$$host + ":" + $location.$$port + "/") : ("https://botflow.herokuapp.com/") );
 	
 	this.apis = {
 		getModules : origin + "api/manager/modules/",
