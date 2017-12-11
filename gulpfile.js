@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var cors = require('cors')
+var cors = require('cors');
 app.use(cors());
 var http = require('http').Server(app);
 var gulp_task = require('./Server/task');
@@ -45,8 +45,6 @@ app.get('/ui-manager', function(req, res){
 app.get('/*', function(req, res){
   res.sendFile(__dirname + '/dist/index.html');
 });
-
-
 
 Server.start(port);
 Sockets.listen();

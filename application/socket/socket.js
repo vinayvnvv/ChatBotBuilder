@@ -143,6 +143,26 @@ this.listen = function () {
                                                    }, 1200);
                                                   
                                                             
+                                                } else {
+                                                   DBHelper.getInitModule(  //send welcome msg
+                                                        data.c_id,
+                                                        function(module) { 
+                                                          DBHelper.insertTrack(  //send after updating track 
+
+                                                             data.uuid, data.c_id,
+                                                             function(res) { 
+                                                              if(module != null)
+                                                                socket.emit('modules_res', DBHelper.generateModuleForWeb(module)); 
+                                                              else
+                                                                socket.emit('modules_res', {module:{msg:["Welcome"]}});
+                                                               },
+                                                             function(err) {}
+
+                                                            );
+
+                                                        },
+                                                        function(err) {}
+                                                  )  
                                                 }
                                           },
                                           function() {}
