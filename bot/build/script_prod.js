@@ -5967,16 +5967,6 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    	}
 	    };
 });
-alight.component('c-bot-loader', function (scope, element, env) {
-	    return { 
-	    	template : `<div class="_ldr">
-	<div class="_itm" al-repeat="i in [0,1]" :class._rt = "(($index % 2) == 0)">
-		<div class='_ld' ></div>
-	</div>
-</div>`,
-	    	onStart: function() {}
-	    };
-});
 alight.component('c-bot-mgs', function (scope, element, env) {
 	    return { 
 	    	template : `<div class="_msg" :class._user="data.by == 'me'">
@@ -5997,6 +5987,16 @@ alight.component('c-bot-mgs', function (scope, element, env) {
 				    	scope.name = "Shannubhag"
 				    }
 	    	}
+	    };
+});
+alight.component('c-bot-loader', function (scope, element, env) {
+	    return { 
+	    	template : `<div class="_ldr">
+	<div class="_itm" al-repeat="i in [0,1]" :class._rt = "(($index % 2) == 0)">
+		<div class='_ld' ></div>
+	</div>
+</div>`,
+	    	onStart: function() {}
 	    };
 });
 alight.component('c-bot-sug', function (scope, element, env) {
