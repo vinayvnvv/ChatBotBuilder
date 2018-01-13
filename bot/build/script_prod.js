@@ -5978,6 +5978,23 @@ alight.component('c-bot-loader', function (scope, element, env) {
 	    	onStart: function() {}
 	    };
 });
+alight.component('c-bot-sug', function (scope, element, env) {
+	    return { 
+	    	template : `<div class="_sgtn" :class._option="data.type == 'option'">
+	<div class="_itm _ripple" al-repeat="i in data.data" @click="onSelect(i)">
+		{{i}}
+	</div>
+</div>`,
+	    	onStart: function() {
+	    			scope.data = scope.data;
+	    			scope.change = scope.change;
+
+	    			scope.onSelect = function(item) {
+	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
+	    			}
+	    	}
+	    };
+});
 alight.component('c-bot-mgs', function (scope, element, env) {
 	    return { 
 	    	template : `<div class="_msg" :class._user="data.by == 'me'">
@@ -5997,23 +6014,6 @@ alight.component('c-bot-mgs', function (scope, element, env) {
 				    scope.click = function() {
 				    	scope.name = "Shannubhag"
 				    }
-	    	}
-	    };
-});
-alight.component('c-bot-sug', function (scope, element, env) {
-	    return { 
-	    	template : `<div class="_sgtn" :class._option="data.type == 'option'">
-	<div class="_itm _ripple" al-repeat="i in data.data" @click="onSelect(i)">
-		{{i}}
-	</div>
-</div>`,
-	    	onStart: function() {
-	    			scope.data = scope.data;
-	    			scope.change = scope.change;
-
-	    			scope.onSelect = function(item) {
-	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
-	    			}
 	    	}
 	    };
 });
