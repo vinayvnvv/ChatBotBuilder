@@ -4,6 +4,7 @@ var io = require('socket.io')(http);
 var DB = new (require('./../db/main'))  ();
 var DBHelper = new (require('./../db/Helper')) ();
 var Strings = require('./../string');
+var Utility = new (require('./../services/utility.js')) ();
 
 var msg = {
   "type":"single|flow",
@@ -49,9 +50,24 @@ this.listen = function () {
                   socket.on('init', function(data) {
                     DBHelper.getBotStyle(data.c_id, function(style){ socket.emit('setup', style); }, function(err){});//send Style Setup
 
+                    //check for test-bot if then reset track and return;
+                    console.log("istestbot----------->" + Utility.isTestBot(data.uuid))
+                    if(Utility.isTestBot(data.uuid)) {
+                      console.log("----> Initiated Test Bot")
+                      DBHelper.resetTrack();
+                      DBHelper.getInitModule(  //send welcome msg
+                                      data.c_id,
+                                      function(module) {
+                                            if(module != null)
+                                              socket.emit('modules_res', DBHelper.generateModuleForWeb(module)); 
+                                            else
+                                              socket.emit('modules_res', {module:{msg:["Welcome"]}});
+                                      },
+                                      function(err) {}
+                                )  
+                    }
 
-                    //DBHelper.updateTrack('uuid', DBHelper.constructTrackModel({flow_id: "m_id_21312"}));
-                    console.log("init", data, socket.handshake)
+
                        DBHelper.trackStatus(
 
                              data.uuid,

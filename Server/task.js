@@ -8,6 +8,7 @@ var Parser = require('./parser');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var minify = require('gulp-minify');
+var compressor = require('node-minify');
 
 
 var gulpActivity = function(app, http) {
@@ -78,16 +79,23 @@ var gulpActivity = function(app, http) {
 			//          .pipe(gulp.dest('bot/build'));
 			Parser.parseTemplateUrl('bot/build/script.js', 'bot/', function() {
 
-				gulp.src('bot/build/script_prod.js')
-			    .pipe(minify({
-			        // ext:{
-			        //     src:'-debug.js',
-			        //     min:'.js'
-			        // },
-			        exclude: ['tasks'],
-			        ignoreFiles: ['.combo.js', '-min.js']
-			    }))
-			    .pipe(gulp.dest('bot/build'));
+				compressor.minify({
+				  compressor: 'gcc',
+				  input: 'bot/build/script_prod.js',
+				  output: 'bot/build/script_prod-min.js',
+				  callback: function (err, min) {}
+				});
+
+				// gulp.src('bot/build/script_prod.js')
+			 //    .pipe(minify({
+			 //        // ext:{
+			 //        //     src:'-debug.js',
+			 //        //     min:'.js'
+			 //        // },
+			 //        exclude: ['tasks'],
+			 //        ignoreFiles: ['.combo.js', '-min.js']
+			 //    }))
+			 //    .pipe(gulp.dest('bot/build'));
 
 			});
 		})

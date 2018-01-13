@@ -5670,9 +5670,10 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    				scope.query = "";
 				    	scope.msgs = [];
 				    	scope.Helper = __c_b_app.service.Helper;
+				    	scope.test_bot = (document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem('test-bot'));
 				    	scope.bot_socket = io.connect(__c_b_app.env.Api.urls.socket_connect);
 				    	scope.client_id = scope.Helper.decodeId(document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem(__c_b_app.env.vars.bot_id_selecter_attr).value);
-	    				scope.uuid = scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key);
+	    				scope.uuid = (scope.test_bot ? ('	_test_' + scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)) : (scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)));
 	    				scope.is_typing = false;
 	    				scope.suggestion = null;
 	    				scope.is_scroll = true;
@@ -5917,19 +5918,6 @@ alight.component('c-bot-loader', function (scope, element, env) {
 	    	onStart: function() {}
 	    };
 });
-alight.component('c-bot-mgs', function (scope, element, env) {
-	    return { 
-	    	templateUrl: "app/msgs/msgs.component.html",
-	    	onStart: function() {
-	    			scope.index = scope.index;
-	    			scope.data = scope.data;
-				    scope.name = scope.in;
-				    scope.click = function() {
-				    	scope.name = "Shannubhag"
-				    }
-	    	}
-	    };
-});
 alight.component('c-bot-sug', function (scope, element, env) {
 	    return { 
 	    	templateUrl: "app/suggestion/suggestion.component.html",
@@ -5940,6 +5928,19 @@ alight.component('c-bot-sug', function (scope, element, env) {
 	    			scope.onSelect = function(item) {
 	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
 	    			}
+	    	}
+	    };
+});
+alight.component('c-bot-mgs', function (scope, element, env) {
+	    return { 
+	    	templateUrl: "app/msgs/msgs.component.html",
+	    	onStart: function() {
+	    			scope.index = scope.index;
+	    			scope.data = scope.data;
+				    scope.name = scope.in;
+				    scope.click = function() {
+				    	scope.name = "Shannubhag"
+				    }
 	    	}
 	    };
 });

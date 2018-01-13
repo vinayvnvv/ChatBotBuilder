@@ -5717,7 +5717,7 @@ alight.component('bot-flow-root', function (scope, element, env) {
 		</div>
 	</div>
 	<div class="_tx">
-		Help Bot
+		{{(test_bot ? 'Test Bot' : (bot_name ? bot_name : 'Help Assistance'))}}
 	</div>
 </div>`,
 	    	onStart: function() {
@@ -5726,9 +5726,10 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    				scope.query = "";
 				    	scope.msgs = [];
 				    	scope.Helper = __c_b_app.service.Helper;
+				    	scope.test_bot = (document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem('test-bot'));
 				    	scope.bot_socket = io.connect(__c_b_app.env.Api.urls.socket_connect);
 				    	scope.client_id = scope.Helper.decodeId(document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem(__c_b_app.env.vars.bot_id_selecter_attr).value);
-	    				scope.uuid = scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key);
+	    				scope.uuid = (scope.test_bot ? ('	_test_' + scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)) : (scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)));
 	    				scope.is_typing = false;
 	    				scope.suggestion = null;
 	    				scope.is_scroll = true;
@@ -5967,6 +5968,16 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    	}
 	    };
 });
+alight.component('c-bot-loader', function (scope, element, env) {
+	    return { 
+	    	template : `<div class="_ldr">
+	<div class="_itm" al-repeat="i in [0,1]" :class._rt = "(($index % 2) == 0)">
+		<div class='_ld' ></div>
+	</div>
+</div>`,
+	    	onStart: function() {}
+	    };
+});
 alight.component('c-bot-mgs', function (scope, element, env) {
 	    return { 
 	    	template : `<div class="_msg" :class._user="data.by == 'me'">
@@ -5987,16 +5998,6 @@ alight.component('c-bot-mgs', function (scope, element, env) {
 				    	scope.name = "Shannubhag"
 				    }
 	    	}
-	    };
-});
-alight.component('c-bot-loader', function (scope, element, env) {
-	    return { 
-	    	template : `<div class="_ldr">
-	<div class="_itm" al-repeat="i in [0,1]" :class._rt = "(($index % 2) == 0)">
-		<div class='_ld' ></div>
-	</div>
-</div>`,
-	    	onStart: function() {}
 	    };
 });
 alight.component('c-bot-sug', function (scope, element, env) {
@@ -6345,6 +6346,7 @@ function addRootStyles() {
 
 ._c_b_app {
   display: none;
+  z-index: 999;
   flex-direction: column;
   position: fixed;
   top: 0;
@@ -6386,7 +6388,7 @@ function addRootStyles() {
     flex-grow: 1;
     overflow-y: auto;
     color: rgba(0, 0, 0, 0.87);
-    background-color: rgba(232, 239, 245, 0.38);
+    background-color: #fff;
     padding: 0 11px;
     position: relative; }
     ._c_b_app ._bd::-webkit-scrollbar {
@@ -6410,6 +6412,7 @@ function addRootStyles() {
     height: 52px;
     max-height: 52px;
     min-height: 52px;
+    background-color: #fff;
     display: flex;
     align-items: center;
     position: relative;

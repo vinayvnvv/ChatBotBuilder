@@ -22,6 +22,14 @@ var Utility = function() {
             return ++n;
         }
   }
+
+  this.isTestBot = function(uuid) {
+    uuid = uuid.replace(/\s+/, "");
+    if(uuid.substring(0, 6) == '_test_' ) {
+      return true;
+    }
+    return false;
+  }
   
 }
 

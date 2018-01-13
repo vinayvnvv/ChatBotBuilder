@@ -71,6 +71,7 @@
 
 ._c_b_app {
   display: none;
+  z-index: 999;
   flex-direction: column;
   position: fixed;
   top: 0;
@@ -112,7 +113,7 @@
     flex-grow: 1;
     overflow-y: auto;
     color: rgba(0, 0, 0, 0.87);
-    background-color: rgba(232, 239, 245, 0.38);
+    background-color: #fff;
     padding: 0 11px;
     position: relative; }
     ._c_b_app ._bd::-webkit-scrollbar {
@@ -136,6 +137,7 @@
     height: 52px;
     max-height: 52px;
     min-height: 52px;
+    background-color: #fff;
     display: flex;
     align-items: center;
     position: relative;

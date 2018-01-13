@@ -2,6 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var header = require('./../header');
+var Utility = new (require('./../services/utility.js')) ();
 
 
 
@@ -162,6 +163,12 @@ var header = require('./../header');
 
     this.saveQuery = function(uuid, query) {
 
+
+    	if(Utility.isTestBot(uuid)) {
+    		console.log("--> Skipping saving queries for test-bot");
+    		return;
+    	}
+
     	var doc = {};
 		doc.msg = query.msg;
 		doc.by = query.by;
@@ -198,7 +205,7 @@ var header = require('./../header');
                                                               	 last_track_details:{},
                                                               	 validate:"0"
              	                   	                           }),
-             	                   function(res) {  callback_suc(); },
+             	                   function(res) {  if(callback_suc) callback_suc(); },
              	                   function() {}
 
              	                 );

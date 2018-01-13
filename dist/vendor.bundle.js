@@ -19553,7 +19553,7 @@ function transition$$1(stateChangeExpr, steps) {
 
 //# sourceMappingURL=core.es5.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(43)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(44)))
 
 /***/ }),
 /* 2 */,
@@ -19944,7 +19944,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var isFunction_1 = __webpack_require__(240);
-var Subscription_1 = __webpack_require__(40);
+var Subscription_1 = __webpack_require__(41);
 var Observer_1 = __webpack_require__(231);
 var rxSubscriber_1 = __webpack_require__(73);
 /**
@@ -33008,7 +33008,7 @@ exports.root = _root;
     }
 })();
 //# sourceMappingURL=root.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(44)))
 
 /***/ }),
 /* 24 */
@@ -41580,7 +41580,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Observable_1 = __webpack_require__(3);
 var Subscriber_1 = __webpack_require__(7);
-var Subscription_1 = __webpack_require__(40);
+var Subscription_1 = __webpack_require__(41);
 var ObjectUnsubscribedError_1 = __webpack_require__(237);
 var SubjectSubscription_1 = __webpack_require__(363);
 var rxSubscriber_1 = __webpack_require__(73);
@@ -41751,7 +41751,8 @@ exports.AnonymousSubject = AnonymousSubject;
 /* 36 */,
 /* 37 */,
 /* 38 */,
-/* 39 */
+/* 39 */,
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41951,7 +41952,7 @@ exports.ColorPickerService = ColorPickerService;
 //# sourceMappingURL=color-picker.service.js.map
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42151,7 +42152,7 @@ function flattenUnsubscriptionErrors(errors) {
 //# sourceMappingURL=Subscription.js.map
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42245,8 +42246,8 @@ exports.EmptyObservable = EmptyObservable;
 //# sourceMappingURL=EmptyObservable.js.map
 
 /***/ }),
-/* 42 */,
-/* 43 */
+/* 43 */,
+/* 44 */
 /***/ (function(module, exports) {
 
 var g;
@@ -42273,7 +42274,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43616,7 +43617,7 @@ var ɵPRE_STYLE = '!';
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45844,7 +45845,6 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["Version"]('4.4.6'
 
 
 /***/ }),
-/* 46 */,
 /* 47 */,
 /* 48 */,
 /* 49 */,
@@ -45868,7 +45868,7 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["Version"]('4.4.6'
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var color_picker_service_1 = __webpack_require__(39);
+var color_picker_service_1 = __webpack_require__(40);
 var formats_1 = __webpack_require__(64);
 var helpers_1 = __webpack_require__(65);
 var ColorPickerComponent = (function () {
@@ -46517,7 +46517,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Observable_1 = __webpack_require__(3);
 var ScalarObservable_1 = __webpack_require__(233);
-var EmptyObservable_1 = __webpack_require__(41);
+var EmptyObservable_1 = __webpack_require__(42);
 var isScheduler_1 = __webpack_require__(243);
 /**
  * We need this JSDoc comment for affecting ESDoc.
@@ -59136,7 +59136,7 @@ return zhTw;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
-var color_picker_service_1 = __webpack_require__(39);
+var color_picker_service_1 = __webpack_require__(40);
 var color_picker_component_1 = __webpack_require__(63);
 var ColorPickerDirective = (function () {
     function ColorPickerDirective(injector, cfr, appRef, vcRef, elRef, service) {
@@ -59925,7 +59925,7 @@ exports.pipeFromArray = pipeFromArray;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__(45);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return AnimationDriver; });
 /* unused harmony export ɵAnimation */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return AnimationStyleNormalizer; });
@@ -92937,7 +92937,7 @@ var platformBrowserDynamic = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_animations__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_animations__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_animations_browser__ = __webpack_require__(255);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BrowserAnimationsModule; });
 /* unused harmony export NoopAnimationsModule */
@@ -94603,7 +94603,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
-		module.exports = factory(__webpack_require__(1), __webpack_require__(19), __webpack_require__(340), __webpack_require__(44), __webpack_require__(24));
+		module.exports = factory(__webpack_require__(1), __webpack_require__(19), __webpack_require__(340), __webpack_require__(45), __webpack_require__(24));
 	else if(typeof define === 'function' && define.amd)
 		define(["@angular/core", "@angular/forms", "ng2-material-dropdown", "@angular/animations", "@angular/common"], factory);
 	else if(typeof exports === 'object')
@@ -99254,7 +99254,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(1);
 var common_1 = __webpack_require__(24);
 var helpers_1 = __webpack_require__(65);
-var color_picker_service_1 = __webpack_require__(39);
+var color_picker_service_1 = __webpack_require__(40);
 var color_picker_component_1 = __webpack_require__(63);
 var color_picker_directive_1 = __webpack_require__(230);
 var ColorPickerModule = (function () {
@@ -99289,7 +99289,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(63));
 __export(__webpack_require__(230));
 __export(__webpack_require__(343));
-__export(__webpack_require__(39));
+__export(__webpack_require__(40));
 __export(__webpack_require__(64));
 __export(__webpack_require__(65));
 //# sourceMappingURL=index.js.map
@@ -99571,7 +99571,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Subscription_1 = __webpack_require__(40);
+var Subscription_1 = __webpack_require__(41);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @ignore
@@ -99651,7 +99651,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Observable_1 = __webpack_require__(3);
 var ScalarObservable_1 = __webpack_require__(233);
-var EmptyObservable_1 = __webpack_require__(41);
+var EmptyObservable_1 = __webpack_require__(42);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -99735,7 +99735,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Subject_1 = __webpack_require__(32);
 var Observable_1 = __webpack_require__(3);
 var Subscriber_1 = __webpack_require__(7);
-var Subscription_1 = __webpack_require__(40);
+var Subscription_1 = __webpack_require__(41);
 var refCount_1 = __webpack_require__(236);
 /**
  * @class ConnectableObservable<T>
@@ -99918,7 +99918,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Observable_1 = __webpack_require__(3);
-var EmptyObservable_1 = __webpack_require__(41);
+var EmptyObservable_1 = __webpack_require__(42);
 var isArray_1 = __webpack_require__(75);
 var subscribeToResult_1 = __webpack_require__(76);
 var OuterSubscriber_1 = __webpack_require__(66);
@@ -102505,7 +102505,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Subscriber_1 = __webpack_require__(7);
 var ArgumentOutOfRangeError_1 = __webpack_require__(400);
-var EmptyObservable_1 = __webpack_require__(41);
+var EmptyObservable_1 = __webpack_require__(42);
 /**
  * Emits only the last `count` values emitted by the source Observable.
  *
