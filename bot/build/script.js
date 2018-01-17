@@ -5923,6 +5923,19 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    	}
 	    };
 });
+alight.component('c-bot-mgs', function (scope, element, env) {
+	    return { 
+	    	templateUrl: "app/msgs/msgs.component.html",
+	    	onStart: function() {
+	    			scope.index = scope.index;
+	    			scope.data = scope.data;
+				    scope.name = scope.in;
+				    scope.click = function() {
+				    	scope.name = "Shannubhag"
+				    }
+	    	}
+	    };
+});
 alight.component('c-bot-loader', function (scope, element, env) {
 	    return { 
 	    	templateUrl: "app/loader/loader.component.html",
@@ -5939,19 +5952,6 @@ alight.component('c-bot-sug', function (scope, element, env) {
 	    			scope.onSelect = function(item) {
 	    				env.parentChangeDetector.scope.onSuggestionSelect(item);
 	    			}
-	    	}
-	    };
-});
-alight.component('c-bot-mgs', function (scope, element, env) {
-	    return { 
-	    	templateUrl: "app/msgs/msgs.component.html",
-	    	onStart: function() {
-	    			scope.index = scope.index;
-	    			scope.data = scope.data;
-				    scope.name = scope.in;
-				    scope.click = function() {
-				    	scope.name = "Shannubhag"
-				    }
 	    	}
 	    };
 });

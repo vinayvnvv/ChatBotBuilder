@@ -17,9 +17,11 @@ var port = (process.env.PORT || 3000);
 
 // app.set('views', path.join(__dirname, 'ui'));
 // // app.set('view engine', 'ejs');
+
+
 app.use(express.static(path.join(__dirname, '/dist')));
 //app.use(express.static(path.join(__dirname, '/ui-manager')));
-app.use(express.static(path.join(__dirname, '/ui')));
+//app.use(express.static(path.join(__dirname, '/ui')));
 app.use(express.static(path.join(__dirname, '/')));
 
 
@@ -40,12 +42,14 @@ app.get('/bot', function(req, res) {
 app.use('/api/manager', managerApi);
 app.use('/api/admin', adminApi);
 app.use('/api/bot', botApi);
-app.get('/ui-manager', function(req, res){
+app.get('/ui-manager', function(req, res) {
   res.sendFile(__dirname + '/ui-manager/index.html');
 });
-
+app.get('/admin', function(req, res, next) {
+  res.sendFile(__dirname + '/dist/admin/admin-app/index.html');
+});
 app.get('/*', function(req, res){
-  res.sendFile(__dirname + '/dist/index.html');
+  res.sendFile(__dirname + '/dist/dashboard/index.html');
 });
 
 Server.start(port);
