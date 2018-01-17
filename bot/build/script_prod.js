@@ -5684,7 +5684,7 @@ alight.component('bot-flow-root', function (scope, element, env) {
 		</div>
 		<div class="_msgs">
 			<div al-repeat="i in msgs track by $index">
-				<c-bot-mgs :index="$index" :data="i"></c-bot-mgs>
+				<c-bot-mgs :index="$index" :data="i" :show-time="(msgs[$index+1] ? (msgs[$index+1].by != i.by) : (suggestion?false:true))"></c-bot-mgs>
 			</div>
 		</div>
 		<div class="_btm">
@@ -5817,6 +5817,7 @@ alight.component('bot-flow-root', function (scope, element, env) {
 			        	if(!msg) return;
 			        	by = ( by ? by : 'bot' );
 			        	time = ( time ? time : new Date());
+			        	time = scope.formatDate(time);
 
 			        	if(typeof(msg) == 'object') {  //array ? then add single items by loop
 	                        for(var i=0;i<msg.length;i++) {
@@ -5840,6 +5841,16 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	                            scope.msgs.push({by:by,msg:msg, timestamp:time});
 	                          }
 	                	}
+			        }
+
+			        scope.formatDate = function(date) {
+			        	var date = new Date(date);
+			        	var date_ = date.getDate();
+			        	var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			        	var month_ = month_names_short[date.getMonth()];
+			        	var hours_ = date.getHours();
+			        	var minute_ = date.getMinutes();
+			        	return (date_ + " " + month_ + " " + hours_ + ":" + minute_);
 			        }
 
 
@@ -5989,7 +6000,8 @@ alight.component('c-bot-mgs', function (scope, element, env) {
 	<div class="_item">
 		{{data.msg}}
 	</div>
-</div>`,
+</div>
+<div class="_time" al-if="showTime" :class._user="data.by == 'me'">{{data.timestamp}}</div>`,
 	    	onStart: function() {
 	    			scope.index = scope.index;
 	    			scope.data = scope.data;
@@ -6194,6 +6206,7 @@ __c_b_app.addService("Helper", function() {
                        ._c_b_app ._ic path { fill:` + data.color +  `; }
                        ._c_b_app ._msg ._item { background-color: ` + data.bgcolor +  `; color:` + data.color + `; border-color:` + data.bgcolor + `; }
                        ._c_b_app ._sgtn ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._sgtn  { border-color: ` + data.bgcolor + `; }
                        ._c_b_app ._sgtn._option ._itm { border-color: ` + data.bgcolor +  `; color:` + data.bgcolor +  `; }
                        ._c_b_app ._sgtn._option ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
                        ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
@@ -6390,7 +6403,8 @@ function addRootStyles() {
     color: rgba(0, 0, 0, 0.87);
     background-color: #fff;
     padding: 0 11px;
-    position: relative; }
+    position: relative;
+    padding-bottom: 21px; }
     ._c_b_app ._bd::-webkit-scrollbar {
       width: 5px; }
     ._c_b_app ._bd::-webkit-scrollbar-track {
@@ -6505,7 +6519,9 @@ function addRootStyles() {
     height: 24px;
     display: flex;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    position: relative;
+    top: 7px; }
   ._c_b_app ._msg ._item {
     max-width: 65%;
     background-color: #607D8B;
@@ -6540,6 +6556,16 @@ function addRootStyles() {
         border-width: 0px 7px 7px 7px;
         border-color: transparent;
         border-left-color: inherit; }
+
+._c_b_app ._time {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: -7px;
+  margin-left: 37px; }
+  ._c_b_app ._time._user {
+    text-align: right;
+    margin-left: 0px;
+    margin-right: 13px; }
 
 ._c_b_app ._typing ._anim {
   text-align: left;
@@ -6596,12 +6622,12 @@ function addRootStyles() {
   display: inline-block;
   background-color: #fff;
   color: #333;
-  min-width: 90px;
   margin: 0 9px 9px 9px;
   border-radius: 3px;
-  border: 1px solid rgba(233, 233, 233, 0.58);
+  border: 1px solid;
+  border-color: #607D8B;
   max-width: 80%;
-  box-shadow: 1px 1px 1px rgba(217, 217, 217, 0.42); }
+  margin-left: 34px; }
   ._c_b_app ._sgtn ._itm {
     padding: 7px;
     font-size: 14px;
@@ -6617,7 +6643,7 @@ function addRootStyles() {
       background-color: #607D8B;
       color: rgba(255, 255, 255, 0.87); }
   ._c_b_app ._sgtn._option {
-    display: flex;
+    display: inline-flex;
     background-color: transparent;
     box-shadow: none;
     border: none;

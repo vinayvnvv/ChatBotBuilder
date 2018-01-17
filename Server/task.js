@@ -76,7 +76,6 @@ var gulpActivity = function(app, http) {
 
 
 		gulp.task('build_bot_prod_js', function() { //makes bot minify , boot only via (gulp build_bot_prod_js)
-			return;
 			// return gulp.src(BotFiles.js)
 			//          .pipe(concat('script.js'))
 			//          .pipe(gulp.dest('bot/build'));
@@ -169,7 +168,7 @@ var gulpActivity = function(app, http) {
 
 			gulp.watch(BotFiles.watch, ['build_bot_js']);
 
-			gulp.watch(BotFiles.watch, ['build_bot_prod_js']);
+			//gulp.watch(BotFiles.watch, ['build_bot_prod_js']);
 
 
 			gulp.watch(AppManagerFiles.custom.js, ['build_manager_js', 'build_manager_final_js']);
