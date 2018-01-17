@@ -59,6 +59,7 @@ __c_b_app.addService("Helper", function() {
                        ._c_b_app ._ic path { fill:` + data.color +  `; }
                        ._c_b_app ._msg ._item { background-color: ` + data.bgcolor +  `; color:` + data.color + `; border-color:` + data.bgcolor + `; }
                        ._c_b_app ._sgtn ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._sgtn  { border-color: ` + data.bgcolor + `; }
                        ._c_b_app ._sgtn._option ._itm { border-color: ` + data.bgcolor +  `; color:` + data.bgcolor +  `; }
                        ._c_b_app ._sgtn._option ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
                        ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }

@@ -115,7 +115,8 @@
     color: rgba(0, 0, 0, 0.87);
     background-color: #fff;
     padding: 0 11px;
-    position: relative; }
+    position: relative;
+    padding-bottom: 21px; }
     ._c_b_app ._bd::-webkit-scrollbar {
       width: 5px; }
     ._c_b_app ._bd::-webkit-scrollbar-track {
@@ -230,7 +231,9 @@
     height: 24px;
     display: flex;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    position: relative;
+    top: 7px; }
   ._c_b_app ._msg ._item {
     max-width: 65%;
     background-color: #607D8B;
@@ -265,6 +268,16 @@
         border-width: 0px 7px 7px 7px;
         border-color: transparent;
         border-left-color: inherit; }
+
+._c_b_app ._time {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: -7px;
+  margin-left: 37px; }
+  ._c_b_app ._time._user {
+    text-align: right;
+    margin-left: 0px;
+    margin-right: 13px; }
 
 ._c_b_app ._typing ._anim {
   text-align: left;
@@ -321,12 +334,12 @@
   display: inline-block;
   background-color: #fff;
   color: #333;
-  min-width: 90px;
   margin: 0 9px 9px 9px;
   border-radius: 3px;
-  border: 1px solid rgba(233, 233, 233, 0.58);
+  border: 1px solid;
+  border-color: #607D8B;
   max-width: 80%;
-  box-shadow: 1px 1px 1px rgba(217, 217, 217, 0.42); }
+  margin-left: 34px; }
   ._c_b_app ._sgtn ._itm {
     padding: 7px;
     font-size: 14px;
@@ -342,7 +355,7 @@
       background-color: #607D8B;
       color: rgba(255, 255, 255, 0.87); }
   ._c_b_app ._sgtn._option {
-    display: flex;
+    display: inline-flex;
     background-color: transparent;
     box-shadow: none;
     border: none;

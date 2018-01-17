@@ -5761,6 +5761,7 @@ alight.component('bot-flow-root', function (scope, element, env) {
 			        	if(!msg) return;
 			        	by = ( by ? by : 'bot' );
 			        	time = ( time ? time : new Date());
+			        	time = scope.formatDate(time);
 
 			        	if(typeof(msg) == 'object') {  //array ? then add single items by loop
 	                        for(var i=0;i<msg.length;i++) {
@@ -5784,6 +5785,16 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	                            scope.msgs.push({by:by,msg:msg, timestamp:time});
 	                          }
 	                	}
+			        }
+
+			        scope.formatDate = function(date) {
+			        	var date = new Date(date);
+			        	var date_ = date.getDate();
+			        	var month_names_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			        	var month_ = month_names_short[date.getMonth()];
+			        	var hours_ = date.getHours();
+			        	var minute_ = date.getMinutes();
+			        	return (date_ + " " + month_ + " " + hours_ + ":" + minute_);
 			        }
 
 
@@ -6115,6 +6126,7 @@ __c_b_app.addService("Helper", function() {
                        ._c_b_app ._ic path { fill:` + data.color +  `; }
                        ._c_b_app ._msg ._item { background-color: ` + data.bgcolor +  `; color:` + data.color + `; border-color:` + data.bgcolor + `; }
                        ._c_b_app ._sgtn ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
+                       ._c_b_app ._sgtn  { border-color: ` + data.bgcolor + `; }
                        ._c_b_app ._sgtn._option ._itm { border-color: ` + data.bgcolor +  `; color:` + data.bgcolor +  `; }
                        ._c_b_app ._sgtn._option ._itm:hover { background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }
                        ._c_b_app .d{ background-color: ` + data.bgcolor +  `; color:` + data.color +  `; }

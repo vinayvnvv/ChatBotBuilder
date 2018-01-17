@@ -7,12 +7,12 @@ $sug-border-radius: 3px
 		display: inline-block
 		background-color: $sug-bg
 		color: $sug-color
-		min-width: 90px
 		margin: 0 9px 9px 9px
 		border-radius: $sug-border-radius
-		border: 1px solid rgba(233, 233, 233, 0.58)
+		border: 1px solid
+		border-color: $bot-theme-bg
 		max-width: 80%
-		box-shadow: 1px 1px 1px rgba(217, 217, 217, 0.42)
+		margin-left: 34px
 		& ._itm
 			padding: 7px
 			font-size: 14px
@@ -28,7 +28,7 @@ $sug-border-radius: 3px
 				background-color: $bot-theme-bg
 				color: $bot-theme-color
 		&._option
-			display: flex
+			display: inline-flex
 			background-color: transparent
 			box-shadow: none
 			border: none

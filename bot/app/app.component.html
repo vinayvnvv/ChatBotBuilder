@@ -19,7 +19,7 @@
 		</div>
 		<div class="_msgs">
 			<div al-repeat="i in msgs track by $index">
-				<c-bot-mgs :index="$index" :data="i"></c-bot-mgs>
+				<c-bot-mgs :index="$index" :data="i" :show-time="(msgs[$index+1] ? (msgs[$index+1].by != i.by) : (suggestion?false:true))"></c-bot-mgs>
 			</div>
 		</div>
 		<div class="_btm">

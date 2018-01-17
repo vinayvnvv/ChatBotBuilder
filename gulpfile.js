@@ -9,6 +9,7 @@ var Server = new gulp_task(app, http);
 var path = require('path');
 var Sockets = new (require('./application/socket/socket')) (http);
 var managerApi = require('./app-manager/routes');
+var adminApi = require('./admin-app/routes');
 var botApi = require('./application/routes');
 var port = (process.env.PORT || 3000);
 
@@ -37,6 +38,7 @@ app.get('/bot', function(req, res) {
 })
 
 app.use('/api/manager', managerApi);
+app.use('/api/admin', adminApi);
 app.use('/api/bot', botApi);
 app.get('/ui-manager', function(req, res){
   res.sendFile(__dirname + '/ui-manager/index.html');

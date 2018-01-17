@@ -6,6 +6,7 @@ module.exports = {
 
   collections: {
     track:"track",
+    templates: "templates",
     module:function(id) {
     	return "module_" + id;
     },

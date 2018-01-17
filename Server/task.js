@@ -3,6 +3,7 @@ var concat = require('gulp-concat')
 var AppFiles = new (require('./app_files'))();
 var BotFiles = new (require('./bot-files'))();
 var AppManagerFiles = new (require('./app-manager-files'))();
+var AdminAppFiles = new (require('./admin-app-files'))();
 var spawn = require('child_process').spawn;
 var Parser = require('./parser');
 var sass = require('gulp-sass');
@@ -38,6 +39,7 @@ var gulpActivity = function(app, http) {
 		})
 
 		gulp.task('build_js', function() {
+			return;
 			return gulp.src(AppFiles.custom.js)
 			         .pipe(concat('scripts.js'))
 			         .pipe(gulp.dest('ui/build'));
@@ -73,7 +75,8 @@ var gulpActivity = function(app, http) {
 		})
 
 
-		gulp.task('build_bot_prod_js', function() {
+		gulp.task('build_bot_prod_js', function() { //makes bot minify , boot only via (gulp build_bot_prod_js)
+			return;
 			// return gulp.src(BotFiles.js)
 			//          .pipe(concat('script.js'))
 			//          .pipe(gulp.dest('bot/build'));
@@ -166,7 +169,7 @@ var gulpActivity = function(app, http) {
 
 			gulp.watch(BotFiles.watch, ['build_bot_js']);
 
-			//gulp.watch(BotFiles.watch, ['build_bot_prod_js']);
+			gulp.watch(BotFiles.watch, ['build_bot_prod_js']);
 
 
 			gulp.watch(AppManagerFiles.custom.js, ['build_manager_js', 'build_manager_final_js']);
@@ -174,6 +177,7 @@ var gulpActivity = function(app, http) {
 
 			gulp.watch(server_app, ['gulp-autoreload']);
 			gulp.watch(server_app_manager, ['gulp-autoreload']);
+			gulp.watch(AdminAppFiles.server, ['gulp-autoreload']);
 		});
 
 
@@ -186,7 +190,7 @@ var gulpActivity = function(app, http) {
 
 		gulp.task('default', ['connect', 
 			                  'build_js', 'build_libs_js', 'build_final_js', 'build_css', 'build_libs_css', 
-			                  'build_manager_js', 'build_bot_prod_js', 'build_bot_js', 'build_manager_libs_js', 'build_manager_final_js', 'build_manager_css', 'build_manager_libs_css',
+			                  'build_manager_js', 'build_bot_js', 'build_manager_libs_js', 'build_manager_final_js', 'build_manager_css', 'build_manager_libs_css',
 			                  'watch']);
 
 
