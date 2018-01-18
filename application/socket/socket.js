@@ -54,7 +54,7 @@ this.listen = function () {
                     console.log("istestbot----------->" + Utility.isTestBot(data.uuid))
                     if(Utility.isTestBot(data.uuid)) {
                       console.log("----> Initiated Test Bot")
-                      DBHelper.resetTrack();
+                      DBHelper.resetTrack(data.uuid);
                       DBHelper.getInitModule(  //send welcome msg
                                       data.c_id,
                                       function(module) {
