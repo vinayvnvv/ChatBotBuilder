@@ -170,65 +170,13 @@ var _a, _b;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__environments_environment__ = __webpack_require__(35);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StringsService; });
-
-var StringsService = (function () {
-    function StringsService() {
-        this.port = 3000;
-        this.port = 3000;
-        this.origin = __WEBPACK_IMPORTED_MODULE_0__environments_environment__["a" /* environment */].origin;
-        console.log("Api Origin==", this.origin);
-        this.authInstance = {
-            storageName: "chat_bot_manager",
-            storageIdKey: "chat_bot_manager_id_",
-            storageNameKey: "chat_bot_manager_name_",
-            storageEmailKey: "chat_bot_manager_email_",
-            storageAvtarKey: "chat_bot_manager_avtar_"
-        };
-        this.apis = {
-            getModules: this.origin + "api/manager/modules/",
-            getFlowItem: this.origin + "api/manager/modules/",
-            updateModules: this.origin + "api/manager/modules/update/",
-            deleteModules: this.origin + "api/manager/modules/delete/",
-            createModules: this.origin + "api/manager/modules/create/",
-            updateInitBot: this.origin + "api/manager/modules/init/",
-            getInitBot: this.origin + "api/manager/modules/init_bot/",
-            initBotDB: this.origin + "api/manager/modules/init_db/"
-        };
-        this.validationTypeArray = [
-            { title: "None", value: "none" },
-            { title: "Number", value: "number" },
-            { title: "Email", value: "email" }
-        ];
-        this.suggestionTypeArray = [
-            { title: "None", value: "none" },
-            { title: "List", value: "list" },
-            { title: "Option", value: "option" }
-        ];
-        this.menuTypes = [
-            { title: "List", value: "list" },
-            { title: "Option", value: "option" }
-        ];
-    }
-    return StringsService;
-}());
-
-//# sourceMappingURL=strings.service.js.map
-
-/***/ }),
-
-/***/ 20:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__ = __webpack_require__(367);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(368);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_strings_service__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_strings_service__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_root_scope__ = __webpack_require__(8);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -278,6 +226,14 @@ var ApiService = (function () {
         return this._http.delete(this.String.apis.deleteModules + this.rootScope._auth_user.id + "/" + id)
             .map(this.extractData);
     };
+    ApiService.prototype.getTemplates = function () {
+        return this._http.get(this.String.apis.getTemplates)
+            .map(this.extractData);
+    };
+    ApiService.prototype.copyModule = function (id) {
+        return this._http.post(this.String.apis.copyTemplates + "/" + id + "/" + this.rootScope._auth_user.id, {})
+            .map(this.extractData);
+    };
     ApiService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
@@ -291,6 +247,60 @@ ApiService = __decorate([
 
 var _a, _b, _c;
 //# sourceMappingURL=api.services.js.map
+
+/***/ }),
+
+/***/ 18:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__environments_environment__ = __webpack_require__(35);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StringsService; });
+
+var StringsService = (function () {
+    function StringsService() {
+        this.port = 3000;
+        this.port = 3000;
+        this.origin = __WEBPACK_IMPORTED_MODULE_0__environments_environment__["a" /* environment */].origin;
+        console.log("Api Origin==", this.origin);
+        this.authInstance = {
+            storageName: "chat_bot_manager",
+            storageIdKey: "chat_bot_manager_id_",
+            storageNameKey: "chat_bot_manager_name_",
+            storageEmailKey: "chat_bot_manager_email_",
+            storageAvtarKey: "chat_bot_manager_avtar_"
+        };
+        this.apis = {
+            getModules: this.origin + "api/manager/modules/",
+            getFlowItem: this.origin + "api/manager/modules/",
+            updateModules: this.origin + "api/manager/modules/update/",
+            deleteModules: this.origin + "api/manager/modules/delete/",
+            createModules: this.origin + "api/manager/modules/create/",
+            updateInitBot: this.origin + "api/manager/modules/init/",
+            getInitBot: this.origin + "api/manager/modules/init_bot/",
+            initBotDB: this.origin + "api/manager/modules/init_db/",
+            getTemplates: this.origin + "api/admin/templates",
+            copyTemplates: this.origin + "api/admin/templates/copy"
+        };
+        this.validationTypeArray = [
+            { title: "None", value: "none" },
+            { title: "Number", value: "number" },
+            { title: "Email", value: "email" }
+        ];
+        this.suggestionTypeArray = [
+            { title: "None", value: "none" },
+            { title: "List", value: "list" },
+            { title: "Option", value: "option" }
+        ];
+        this.menuTypes = [
+            { title: "List", value: "list" },
+            { title: "Option", value: "option" }
+        ];
+    }
+    return StringsService;
+}());
+
+//# sourceMappingURL=strings.service.js.map
 
 /***/ }),
 
@@ -357,8 +367,8 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
-        template: __webpack_require__(347),
-        styles: [__webpack_require__(330)]
+        template: __webpack_require__(349),
+        styles: [__webpack_require__(332)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_root_scope__["a" /* RootScope */]) === "function" && _a || Object])
 ], AppComponent);
@@ -374,37 +384,38 @@ var _a;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_chips__ = __webpack_require__(341);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_chips__ = __webpack_require__(343);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_chips___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ngx_chips__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_color_picker__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_color_picker__ = __webpack_require__(344);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_color_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ngx_color_picker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser_animations__ = __webpack_require__(258);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_moment__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_moment__ = __webpack_require__(270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular2_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(259);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__login_login_component__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__dashboard_dashboard_component__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_loader_directive__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_toast_directive__ = __webpack_require__(266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_sub_loader_directive__ = __webpack_require__(265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_strings_service__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_loader_directive__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_toast_directive__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_sub_loader_directive__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_strings_service__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__services_root_scope__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_auth_service__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__routes_app_routes__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_auth_guard__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__dashboard_add_flow_add_flow_component__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__dashboard_header_header_component__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__dashboard_header_header_component__ = __webpack_require__(262);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__dashboard_list_list_component__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__dashboard_add_flow_item_add_flow_item_component__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__dashboard_add_flow_item_childs_services_view_component__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__dashboard_add_menu_add_menu_component__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__dashboard_view_menu_view_menu_component__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__directives_auto_tag__ = __webpack_require__(262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__get_bot_get_bot_component__ = __webpack_require__(267);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__directives_modules_loader_modules_loader_component__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__directives_auto_tag__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__get_bot_get_bot_component__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__directives_modules_loader_modules_loader_component__ = __webpack_require__(265);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__home_home_component__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__dashboard_add_templates_add_templates_component__ = __webpack_require__(261);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -449,6 +460,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppModule = (function () {
     function AppModule(Auth) {
         this.Auth = Auth;
@@ -478,6 +490,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_27__get_bot_get_bot_component__["a" /* GetBotComponent */],
             __WEBPACK_IMPORTED_MODULE_28__directives_modules_loader_modules_loader_component__["a" /* ModulesLoaderComponent */],
             __WEBPACK_IMPORTED_MODULE_29__home_home_component__["a" /* HomeComponent */],
+            __WEBPACK_IMPORTED_MODULE_30__dashboard_add_templates_add_templates_component__["a" /* AddTemplatesComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -506,9 +519,105 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(20);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddTemplatesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var AddTemplatesComponent = (function () {
+    function AddTemplatesComponent(apiService, router, location) {
+        this.apiService = apiService;
+        this.router = router;
+        this.location = location;
+        this.visibleChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.templates = [];
+        this.isProgress = false;
+        this.isCoping = false;
+    }
+    AddTemplatesComponent.prototype.ngOnInit = function () {
+        this.getTemplates();
+        this.templates.push({ name: 'Blank' });
+    };
+    AddTemplatesComponent.prototype.closeModal = function (go_back) {
+        if (go_back)
+            this.location.back();
+        this.visible = false;
+        this.visibleChange.emit(this.visible);
+    };
+    AddTemplatesComponent.prototype.getTemplates = function () {
+        var _this = this;
+        this.isProgress = true;
+        this.apiService.getTemplates().subscribe(function (res) {
+            _this.templates = [];
+            _this.templates.push({ name: 'Blank' });
+            _this.templates = _this.templates.concat(res);
+            _this.isProgress = false;
+        }, function (err) {
+            _this.isProgress = false;
+        });
+    };
+    AddTemplatesComponent.prototype.copyTemplates = function (template) {
+        var _this = this;
+        if (template.name == 'Blank') {
+            this.closeModal(false);
+            return;
+        }
+        this.isCoping = true;
+        this.apiService.copyModule(template._id).subscribe(function (res) {
+            _this.isCoping = false;
+            _this.closeModal(false);
+            _this.router.navigate(['dashboard/flow-item/' + res.ops[0]._id]);
+            // this.location.replaceState('dashboard/flow-item/' + res.ops[0]._id);
+            // this.router.navigateByUrl('dashboard/flow-item/' + res.ops[0]._id, );
+        }, function (err) {
+            _this.isCoping = false;
+        });
+    };
+    return AddTemplatesComponent;
+}());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+    __metadata("design:type", Boolean)
+], AddTemplatesComponent.prototype, "visible", void 0);
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === "function" && _a || Object)
+], AddTemplatesComponent.prototype, "visibleChange", void 0);
+AddTemplatesComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-add-templates',
+        template: __webpack_require__(354),
+        styles: [__webpack_require__(328)],
+        providers: [__WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */]]
+    }),
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["Location"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["Location"]) === "function" && _d || Object])
+], AddTemplatesComponent);
+
+var _a, _b, _c, _d;
+//# sourceMappingURL=add-templates.component.js.map
+
+/***/ }),
+
+/***/ 262:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_root_scope__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(9);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -554,8 +663,8 @@ var HeaderComponent = (function () {
 HeaderComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'dashboard-header',
-        template: __webpack_require__(353),
-        styles: [__webpack_require__(335)]
+        template: __webpack_require__(356),
+        styles: [__webpack_require__(337)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_root_scope__["a" /* RootScope */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _c || Object])
 ], HeaderComponent);
@@ -565,7 +674,7 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 262:
+/***/ 263:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -675,7 +784,7 @@ var _a;
 
 /***/ }),
 
-/***/ 263:
+/***/ 264:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -720,7 +829,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 264:
+/***/ 265:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -746,8 +855,8 @@ var ModulesLoaderComponent = (function () {
 ModulesLoaderComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-modules-loader',
-        template: __webpack_require__(356),
-        styles: [__webpack_require__(327)]
+        template: __webpack_require__(359),
+        styles: [__webpack_require__(329)]
     }),
     __metadata("design:paramtypes", [])
 ], ModulesLoaderComponent);
@@ -756,7 +865,7 @@ ModulesLoaderComponent = __decorate([
 
 /***/ }),
 
-/***/ 265:
+/***/ 266:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -798,7 +907,7 @@ var _a;
 
 /***/ }),
 
-/***/ 266:
+/***/ 267:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -841,7 +950,7 @@ var _a;
 
 /***/ }),
 
-/***/ 267:
+/***/ 268:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -849,9 +958,9 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_root_scope__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_strings_service__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_strings_service__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_models__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_forms__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_forms__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_common_services__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dashboard_dashboard_component__ = __webpack_require__(33);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GetBotComponent; });
@@ -1110,8 +1219,8 @@ __decorate([
 GetBotComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-get-bot',
-        template: __webpack_require__(357),
-        styles: [__webpack_require__(328)],
+        template: __webpack_require__(360),
+        styles: [__webpack_require__(330)],
         providers: [__WEBPACK_IMPORTED_MODULE_5__services_models__["a" /* Models */]]
     }),
     __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_root_scope__["a" /* RootScope */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_strings_service__["a" /* StringsService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__services_models__["a" /* Models */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_models__["a" /* Models */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__services_common_services__["a" /* Toast */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_8__dashboard_dashboard_component__["a" /* DashboardComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__dashboard_dashboard_component__["a" /* DashboardComponent */]) === "function" && _g || Object])
@@ -1122,10 +1231,28 @@ var _a, _b, _c, _d, _e, _f, _g;
 
 /***/ }),
 
-/***/ 327:
+/***/ 328:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
+// imports
+
+
+// module
+exports.push([module.i, "._template ._item_out {\n  padding: 21px; }\n  ._template ._item_out ._item {\n    min-height: 190px;\n    border: 9px solid #e0e0e0;\n    border-radius: 5px;\n    cursor: pointer;\n    transition: 0.2777s all;\n    background-color: #f9f9f961;\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }\n    ._template ._item_out ._item:hover {\n      border-color: #c6c6c6; }\n      ._template ._item_out ._item:hover ._txt {\n        background-color: #c6c6c6; }\n    ._template ._item_out ._item ._ic {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      height: 142px;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center; }\n      ._template ._item_out ._item ._ic i {\n        font-size: 61px;\n        color: #b4b4b4; }\n    ._template ._item_out ._item ._txt {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      min-height: 30px;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      background-color: #e0e0e0;\n      transition: 0.2777s all; }\n    ._template ._item_out ._item._loader {\n      border-color: transparent; }\n      ._template ._item_out ._item._loader ._ic span {\n        min-width: 60px;\n        min-height: 60px;\n        border-radius: 50em;\n        background-color: #e0e0e0; }\n      ._template ._item_out ._item._loader ._txt {\n        background-color: transparent; }\n        ._template ._item_out ._item._loader ._txt span {\n          width: 60%;\n          background-color: #e0e0e0;\n          height: 21px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 329:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1140,51 +1267,16 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 328:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(5)();
-// imports
-
-
-// module
-exports.push([module.i, "._section {\n  border: 1px solid #d9d9d9; }\n\n._clrpkrshw {\n  width: 32px;\n  height: 32px;\n  padding: 1px;\n  margin-left: 11px;\n  position: absolute;\n  border-radius: 50em;\n  border: 1px solid #d9d9d9; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 329:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(5)();
-// imports
-
-
-// module
-exports.push([module.i, ".container {\n  max-width: 921px; }\n\n.home {\n  overflow-x: hidden; }\n  .home .palx-bg {\n    position: fixed;\n    height: 30%;\n    top: 0;\n    left: 0;\n    width: 100%;\n    background-color: #4dd6c2; }\n  .home .nav {\n    position: fixed;\n    width: 100%;\n    top: 0;\n    z-index: 3; }\n    .home .nav.is-primary {\n      background-color: #4dd6c2; }\n  .home .main-ad {\n    max-height: 100vh;\n    overflow: hidden;\n    background-color: #4dd6c2;\n    padding-top: 52px; }\n    .home .main-ad .title-sec {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      padding-left: 23px;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: column;\n              flex-direction: column;\n      position: relative;\n      top: -52px;\n      min-height: 400px; }\n      .home .main-ad .title-sec ._ttl {\n        font-weight: 500; }\n    .home .main-ad .img-sec {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      overflow: hidden; }\n      .home .main-ad .img-sec img {\n        position: relative;\n        top: 92px;\n        opacity: 0.7677; }\n  .home .features._pd {\n    padding: 32px 0 0 0; }\n  .home .features ._ftrs {\n    position: relative;\n    background-color: #fff;\n    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.035);\n    padding-bottom: 51px; }\n    .home .features ._ftrs._ovlpd {\n      margin-top: -110px; }\n    .home .features ._ftrs ._t_bar {\n      padding-top: 21px;\n      position: relative; }\n      .home .features ._ftrs ._t_bar ._ttl {\n        font-weight: 400; }\n      .home .features ._ftrs ._t_bar ._dvdr {\n        height: 7px;\n        position: absolute;\n        bottom: -21px;\n        width: 50%;\n        left: 25%;\n        background-color: rgba(0, 209, 178, 0.25);\n        border-radius: 4px; }\n    .home .features ._ftrs ._bd {\n      margin-top: 51px; }\n      .home .features ._ftrs ._bd ._itm {\n        margin: 17px 39px; }\n        .home .features ._ftrs ._bd ._itm ._ic {\n          margin-bottom: 11px; }\n          .home .features ._ftrs ._bd ._itm ._ic i {\n            color: #00d1b2;\n            font-size: 42px; }\n        .home .features ._ftrs ._bd ._itm ._tt h2 {\n          font-weight: 400; }\n        .home .features ._ftrs ._bd ._itm ._desc {\n          margin-top: 9px; }\n  .home ._nocode ._ic {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center; }\n    .home ._nocode ._ic i {\n      font-size: 48px; }\n  .home ._sections {\n    margin: 21px auto; }\n  .home ._shadow {\n    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.035); }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
 /***/ 33:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_strings_service__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_strings_service__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_root_scope__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_common_services__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(9);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1200,14 +1292,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DashboardComponent = (function () {
-    function DashboardComponent(String, rootScope, Loader, Toast, utility) {
+    function DashboardComponent(String, rootScope, Loader, Toast, utility, router) {
         this.String = String;
         this.rootScope = rootScope;
         this.Loader = Loader;
         this.Toast = Toast;
         this.utility = utility;
+        this.router = router;
         this.d_a = "vinay";
+        this.addTemplateModal = {
+            open: false
+        };
     }
     DashboardComponent.prototype.ngOnInit = function () {
         this.Loader.hideRoot();
@@ -1222,19 +1319,23 @@ var DashboardComponent = (function () {
         e.setAttribute('test-bot', 'true');
         document.body.appendChild(e);
     };
+    DashboardComponent.prototype.openAddTemplateModal = function () {
+        this.router.navigate(['dashboard/add-flow']);
+        this.addTemplateModal.open = true;
+    };
     return DashboardComponent;
 }());
 DashboardComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-dashboard',
-        template: __webpack_require__(352),
-        styles: [__webpack_require__(334)],
+        template: __webpack_require__(355),
+        styles: [__webpack_require__(336)],
         providers: [__WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */], __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_strings_service__["a" /* StringsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_root_scope__["a" /* RootScope */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */]) === "function" && _e || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_strings_service__["a" /* StringsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_root_scope__["a" /* RootScope */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */]) === "function" && _f || Object])
 ], DashboardComponent);
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=dashboard.component.js.map
 
 /***/ }),
@@ -1242,12 +1343,12 @@ var _a, _b, _c, _d, _e;
 /***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "._section {\n  border: 1px solid #d9d9d9; }\n\n._clrpkrshw {\n  width: 32px;\n  height: 32px;\n  padding: 1px;\n  margin-left: 11px;\n  position: absolute;\n  border-radius: 50em;\n  border: 1px solid #d9d9d9; }\n", ""]);
 
 // exports
 
@@ -1260,12 +1361,12 @@ module.exports = module.exports.toString();
 /***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
 // module
-exports.push([module.i, ".flow {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\tpadding: 11px 9% 11px 3px;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n}\n.flow .flow-card-content {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: horizontal;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: row;\n\t        flex-direction: row;\n} \n\n.flow .flow-card-content .flow-bar {\n   -webkit-box-flex: 30;\n       -ms-flex-positive: 30;\n           flex-grow: 30;\n   min-width: 30%;\n   display: -webkit-box;\n   display: -ms-flexbox;\n   display: flex;\n   -webkit-box-orient: vertical;\n   -webkit-box-direction: normal;\n       -ms-flex-direction: column;\n           flex-direction: column;\n   -ms-flex-line-pack: center;\n       align-content: center;\n}\n.bars {\n   -webkit-box-flex: 1;\n       -ms-flex-positive: 1;\n           flex-grow: 1;\n   width: 7px;\n   background: #d9d9d9;\n   margin: 0 auto;\n}\n.bar-m {\n   -ms-flex-preferred-size: 7px;\n       flex-basis: 7px;\n   background: #d9d9d9;\n   width: calc(50% + 3.5px);\n   margin-left: calc(50% - 3.5px);\n}\n\n\n.flow .flow-card-content .flow-card {\n\theight: auto;\n\t-webkit-box-flex: 70;\n\t    -ms-flex-positive: 70;\n\t        flex-grow: 70;\n  max-width: 400px;\n}\n\n.flow .flow-card-content .flow-card.is-loading {\n  opacity: 0.4;\n  background: #e0e0e0;\n}\n\n.flow .flow-card-content .flow-card .loader-bar {\n    top: -1.25rem;\n    left: -1.25rem;\n    width: calc(100% + 1.25rem + 1.25rem);\n    z-index: 30;\n}\n\n.flow-card figure {\n\tbackground: #d9d9d9;\n\tborder-radius: 20px;\n\twidth: 30px;\n\theight: 30px;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tmargin: 0 auto;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n}\n\n.flow-card-divider {\n   display: -webkit-box;\n   display: -ms-flexbox;\n   display: flex;\n   -webkit-box-orient: horizontal;\n   -webkit-box-direction: normal;\n       -ms-flex-direction: row;\n           flex-direction: row;\n   height: 50px;\n}\n.flow-card-divider .left {\n  width: 30%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.flow-card-divider .right {\n  width: 70%;\n  padding: 11px;\n  max-width: 400px;\n}\n.bar-add-icon {\n  -ms-flex-preferred-size: 30px;\n      flex-basis: 30px;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0 auto;\n}\n.bar-add-icon i {\n\tborder: 7px solid #d9d9d9;\n\tcolor: #999;\n\tborder-radius: 50em;\n\tbackground: #f0f0f0;\n\tcursor: pointer;\n\tz-index: 20;\n  transition: 0.1s all;\n  width: 42px;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  font-size: 17px;\n}\n\n.bar-add-icon i:hover {\n\tborder-color:  #999;\n\tcolor: #555;\n}\n\n.end-card-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 45%;\n  min-width: 300px;\n}\n.end-card-content .flow-card {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);\n  border-radius: 0px;\n}\n\n.flow-card-actions {\n  border-top: 1px solid #e9e9e9;\n  padding-top: 9px;\n}\n\n\n\n.add-flow-indicater-container {\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n\n\n.tabs.sticked {\n    background-color: #fff;\n }\n.tabs.sticked.hide-mobile {\n  display: block!important;\n}\n\n\n.f-card {\n  min-width: 100px;\n  /*border: 1px solid #d9d9d9;*/\n  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);\n  background-color: #fdfdfd;  \n  -webkit-box-flex: 70;  \n      -ms-flex-positive: 70;  \n          flex-grow: 70;\n  max-width: 400px;\n}\n\n.f-card .title {\n  padding: 11px 15px;\n  margin: 0px; \n  display: -webkit-box; \n  display: -ms-flexbox; \n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n.f-card .title .index {\n  border: 1px solid #e7e7e7;\n  background-color: #f0f0f0;\n  padding: 4px;\n  font-size: 17px;\n  -ms-flex-preferred-size: 30px;\n      flex-basis: 30px;\n  width:30px; \n  text-align: center;\n  border-radius: 11px;\n}\n.f-card .title .text { \n  margin-left: 15px;\n  font-size: 19px;\n  font-weight: 400;\n  border-bottom: 2px solid #e9e9e9;\n  cursor: pointer; \n  outline: none;\n}\n.f-card .title span:hover {\n   border-bottom:2px solid #555;\n} \n.f-card .content {\n  padding: 5px 15px;\n  padding-bottom: 0px;\n  margin-bottom: 7px;\n}\n.f-card .content .msgs {\n  background-color: #f4f4f4;\n  padding: 5px 7px;\n  font-size: 13px;\n  font-weight: 300;\n  display: inline-block;\n  border-left:2px solid #d9d9d9;\n}\n.f-card .content .others {\n   font-size: 13px;\n   color:#888;\n   font-weight: 300;\n   padding: 5px 0px;\n}\n.f-card .content .others:last-child {\n  padding-bottom: 0px;\n}\n.f-card .content .others span {\n  color: #777;\n  font-weight: 400;\n}\n.f-card .footer {\n  background-color: transparent;\n  padding: 0px;\n  padding: 5px 0px;\n  margin: 0px 15px;\n  border-top: 1px solid #f0f0f0;\n  text-align: right;\n}\n.f-card .footer a {\n  border: 0px;\n  opacity: 0.87;\n}\n", ""]);
+exports.push([module.i, ".container {\n  max-width: 921px; }\n\n.home {\n  overflow-x: hidden; }\n  .home .palx-bg {\n    position: fixed;\n    height: 30%;\n    top: 0;\n    left: 0;\n    width: 100%;\n    background-color: #4dd6c2; }\n  .home .nav {\n    position: fixed;\n    width: 100%;\n    top: 0;\n    z-index: 3; }\n    .home .nav.is-primary {\n      background-color: #4dd6c2; }\n  .home .main-ad {\n    max-height: 100vh;\n    overflow: hidden;\n    background-color: #4dd6c2;\n    padding-top: 52px; }\n    .home .main-ad .title-sec {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      padding-left: 23px;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: column;\n              flex-direction: column;\n      position: relative;\n      top: -52px;\n      min-height: 400px; }\n      .home .main-ad .title-sec ._ttl {\n        font-weight: 500; }\n    .home .main-ad .img-sec {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-align: center;\n          -ms-flex-align: center;\n              align-items: center;\n      -webkit-box-pack: center;\n          -ms-flex-pack: center;\n              justify-content: center;\n      overflow: hidden; }\n      .home .main-ad .img-sec img {\n        position: relative;\n        top: 92px;\n        opacity: 0.7677; }\n  .home .features._pd {\n    padding: 32px 0 0 0; }\n  .home .features ._ftrs {\n    position: relative;\n    background-color: #fff;\n    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.035);\n    padding-bottom: 51px; }\n    .home .features ._ftrs._ovlpd {\n      margin-top: -110px; }\n    .home .features ._ftrs ._t_bar {\n      padding-top: 21px;\n      position: relative; }\n      .home .features ._ftrs ._t_bar ._ttl {\n        font-weight: 400; }\n      .home .features ._ftrs ._t_bar ._dvdr {\n        height: 7px;\n        position: absolute;\n        bottom: -21px;\n        width: 50%;\n        left: 25%;\n        background-color: rgba(0, 209, 178, 0.25);\n        border-radius: 4px; }\n    .home .features ._ftrs ._bd {\n      margin-top: 51px; }\n      .home .features ._ftrs ._bd ._itm {\n        margin: 17px 39px; }\n        .home .features ._ftrs ._bd ._itm ._ic {\n          margin-bottom: 11px; }\n          .home .features ._ftrs ._bd ._itm ._ic i {\n            color: #00d1b2;\n            font-size: 42px; }\n        .home .features ._ftrs ._bd ._itm ._tt h2 {\n          font-weight: 400; }\n        .home .features ._ftrs ._bd ._itm ._desc {\n          margin-top: 9px; }\n  .home ._nocode ._ic {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center; }\n    .home ._nocode ._ic i {\n      font-size: 48px; }\n  .home ._sections {\n    margin: 21px auto; }\n  .home ._shadow {\n    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.035); }\n", ""]);
 
 // exports
 
@@ -1278,7 +1379,7 @@ module.exports = module.exports.toString();
 /***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1296,7 +1397,25 @@ module.exports = module.exports.toString();
 /***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
+// imports
+
+
+// module
+exports.push([module.i, ".flow {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\tpadding: 11px 9% 11px 3px;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: column;\n\t        flex-direction: column;\n}\n.flow .flow-card-content {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: horizontal;\n\t-webkit-box-direction: normal;\n\t    -ms-flex-direction: row;\n\t        flex-direction: row;\n} \n\n.flow .flow-card-content .flow-bar {\n   -webkit-box-flex: 30;\n       -ms-flex-positive: 30;\n           flex-grow: 30;\n   min-width: 30%;\n   display: -webkit-box;\n   display: -ms-flexbox;\n   display: flex;\n   -webkit-box-orient: vertical;\n   -webkit-box-direction: normal;\n       -ms-flex-direction: column;\n           flex-direction: column;\n   -ms-flex-line-pack: center;\n       align-content: center;\n}\n.bars {\n   -webkit-box-flex: 1;\n       -ms-flex-positive: 1;\n           flex-grow: 1;\n   width: 7px;\n   background: #d9d9d9;\n   margin: 0 auto;\n}\n.bar-m {\n   -ms-flex-preferred-size: 7px;\n       flex-basis: 7px;\n   background: #d9d9d9;\n   width: calc(50% + 3.5px);\n   margin-left: calc(50% - 3.5px);\n}\n\n\n.flow .flow-card-content .flow-card {\n\theight: auto;\n\t-webkit-box-flex: 70;\n\t    -ms-flex-positive: 70;\n\t        flex-grow: 70;\n  max-width: 400px;\n}\n\n.flow .flow-card-content .flow-card.is-loading {\n  opacity: 0.4;\n  background: #e0e0e0;\n}\n\n.flow .flow-card-content .flow-card .loader-bar {\n    top: -1.25rem;\n    left: -1.25rem;\n    width: calc(100% + 1.25rem + 1.25rem);\n    z-index: 30;\n}\n\n.flow-card figure {\n\tbackground: #d9d9d9;\n\tborder-radius: 20px;\n\twidth: 30px;\n\theight: 30px;\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-align: center;\n\t    -ms-flex-align: center;\n\t        align-items: center;\n\tmargin: 0 auto;\n\t-webkit-box-pack: center;\n\t    -ms-flex-pack: center;\n\t        justify-content: center;\n}\n\n.flow-card-divider {\n   display: -webkit-box;\n   display: -ms-flexbox;\n   display: flex;\n   -webkit-box-orient: horizontal;\n   -webkit-box-direction: normal;\n       -ms-flex-direction: row;\n           flex-direction: row;\n   height: 50px;\n}\n.flow-card-divider .left {\n  width: 30%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n}\n.flow-card-divider .right {\n  width: 70%;\n  padding: 11px;\n  max-width: 400px;\n}\n.bar-add-icon {\n  -ms-flex-preferred-size: 30px;\n      flex-basis: 30px;\n  text-align: center;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  margin: 0 auto;\n}\n.bar-add-icon i {\n\tborder: 7px solid #d9d9d9;\n\tcolor: #999;\n\tborder-radius: 50em;\n\tbackground: #f0f0f0;\n\tcursor: pointer;\n\tz-index: 20;\n  transition: 0.1s all;\n  width: 42px;\n  height: 42px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  font-size: 17px;\n}\n\n.bar-add-icon i:hover {\n\tborder-color:  #999;\n\tcolor: #555;\n}\n\n.end-card-content {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  width: 45%;\n  min-width: 300px;\n}\n.end-card-content .flow-card {\n  -webkit-box-flex: 1;\n      -ms-flex-positive: 1;\n          flex-grow: 1;\n  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);\n  border-radius: 0px;\n}\n\n.flow-card-actions {\n  border-top: 1px solid #e9e9e9;\n  padding-top: 9px;\n}\n\n\n\n.add-flow-indicater-container {\n  -webkit-animation-duration: 1s;\n          animation-duration: 1s;\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n\n\n.tabs.sticked {\n    background-color: #fff;\n }\n.tabs.sticked.hide-mobile {\n  display: block!important;\n}\n\n\n.f-card {\n  min-width: 100px;\n  /*border: 1px solid #d9d9d9;*/\n  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);\n  background-color: #fdfdfd;  \n  -webkit-box-flex: 70;  \n      -ms-flex-positive: 70;  \n          flex-grow: 70;\n  max-width: 400px;\n}\n\n.f-card .title {\n  padding: 11px 15px;\n  margin: 0px; \n  display: -webkit-box; \n  display: -ms-flexbox; \n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n.f-card .title .index {\n  border: 1px solid #e7e7e7;\n  background-color: #f0f0f0;\n  padding: 4px;\n  font-size: 17px;\n  -ms-flex-preferred-size: 30px;\n      flex-basis: 30px;\n  width:30px; \n  text-align: center;\n  border-radius: 11px;\n}\n.f-card .title .text { \n  margin-left: 15px;\n  font-size: 19px;\n  font-weight: 400;\n  border-bottom: 2px solid #e9e9e9;\n  cursor: pointer; \n  outline: none;\n}\n.f-card .title span:hover {\n   border-bottom:2px solid #555;\n} \n.f-card .content {\n  padding: 5px 15px;\n  padding-bottom: 0px;\n  margin-bottom: 7px;\n}\n.f-card .content .msgs {\n  background-color: #f4f4f4;\n  padding: 5px 7px;\n  font-size: 13px;\n  font-weight: 300;\n  display: inline-block;\n  border-left:2px solid #d9d9d9;\n}\n.f-card .content .others {\n   font-size: 13px;\n   color:#888;\n   font-weight: 300;\n   padding: 5px 0px;\n}\n.f-card .content .others:last-child {\n  padding-bottom: 0px;\n}\n.f-card .content .others span {\n  color: #777;\n  font-weight: 400;\n}\n.f-card .footer {\n  background-color: transparent;\n  padding: 0px;\n  padding: 5px 0px;\n  margin: 0px 15px;\n  border-top: 1px solid #f0f0f0;\n  text-align: right;\n}\n.f-card .footer a {\n  border: 0px;\n  opacity: 0.87;\n}\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 334:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1311,10 +1430,28 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 334:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ 336:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1329,10 +1466,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 335:
+/***/ 337:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1347,10 +1484,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 336:
+/***/ 338:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1365,10 +1502,10 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 337:
+/***/ 339:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1383,10 +1520,71 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 338:
+/***/ 34:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__strings_service__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root_scope__ = __webpack_require__(8);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var AuthService = (function () {
+    function AuthService(str, rootScope) {
+        this.Strings = str;
+        this.rootScope = rootScope;
+    }
+    AuthService.prototype.isAuth = function () {
+        if ((localStorage.getItem(this.Strings.authInstance.storageName) == "null") || (localStorage.getItem(this.Strings.authInstance.storageName) == null) || (localStorage.getItem(this.Strings.authInstance.storageName) == undefined))
+            return false;
+        return true;
+    };
+    AuthService.prototype.getAuth = function () {
+        return JSON.parse(localStorage.getItem(this.Strings.authInstance.storageName));
+    };
+    AuthService.prototype.initAuth = function () {
+        var data = JSON.parse(localStorage.getItem(this.Strings.authInstance.storageName));
+        if (data == null)
+            return;
+        this.rootScope._auth_user.id = data[this.Strings.authInstance.storageIdKey];
+        this.rootScope._auth_user.name = data[this.Strings.authInstance.storageNameKey];
+        this.rootScope._auth_user.email = data[this.Strings.authInstance.storageEmailKey];
+        this.rootScope._auth_user.pic = data[this.Strings.authInstance.storageAvtarKey];
+    };
+    AuthService.prototype.setAuth = function (data) {
+        console.log("setting auth", this.Strings.authInstance.storageName);
+        localStorage.setItem(this.Strings.authInstance.storageName, JSON.stringify(data));
+    };
+    AuthService.prototype.logout = function () {
+        localStorage.removeItem(this.Strings.authInstance.storageName);
+    };
+    return AuthService;
+}());
+AuthService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__strings_service__["a" /* StringsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__root_scope__["a" /* RootScope */]) === "function" && _b || Object])
+], AuthService);
+
+var _a, _b;
+//# sourceMappingURL=auth.service.js.map
+
+/***/ }),
+
+/***/ 340:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(3)();
 // imports
 
 
@@ -1401,7 +1599,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 339:
+/***/ 341:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -1656,90 +1854,15 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 339;
+webpackContext.id = 341;
 
-
-/***/ }),
-
-/***/ 34:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__strings_service__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__root_scope__ = __webpack_require__(8);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var AuthService = (function () {
-    function AuthService(str, rootScope) {
-        this.Strings = str;
-        this.rootScope = rootScope;
-    }
-    AuthService.prototype.isAuth = function () {
-        if ((localStorage.getItem(this.Strings.authInstance.storageName) == "null") || (localStorage.getItem(this.Strings.authInstance.storageName) == null) || (localStorage.getItem(this.Strings.authInstance.storageName) == undefined))
-            return false;
-        return true;
-    };
-    AuthService.prototype.getAuth = function () {
-        return JSON.parse(localStorage.getItem(this.Strings.authInstance.storageName));
-    };
-    AuthService.prototype.initAuth = function () {
-        var data = JSON.parse(localStorage.getItem(this.Strings.authInstance.storageName));
-        if (data == null)
-            return;
-        this.rootScope._auth_user.id = data[this.Strings.authInstance.storageIdKey];
-        this.rootScope._auth_user.name = data[this.Strings.authInstance.storageNameKey];
-        this.rootScope._auth_user.email = data[this.Strings.authInstance.storageEmailKey];
-        this.rootScope._auth_user.pic = data[this.Strings.authInstance.storageAvtarKey];
-    };
-    AuthService.prototype.setAuth = function (data) {
-        console.log("setting auth", this.Strings.authInstance.storageName);
-        localStorage.setItem(this.Strings.authInstance.storageName, JSON.stringify(data));
-    };
-    AuthService.prototype.logout = function () {
-        localStorage.removeItem(this.Strings.authInstance.storageName);
-    };
-    return AuthService;
-}());
-AuthService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__strings_service__["a" /* StringsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__root_scope__["a" /* RootScope */]) === "function" && _b || Object])
-], AuthService);
-
-var _a, _b;
-//# sourceMappingURL=auth.service.js.map
-
-/***/ }),
-
-/***/ 347:
-/***/ (function(module, exports) {
-
-module.exports = "<loader></loader>\n<router-outlet></router-outlet>\n<toast class=\"anim sliceInUp\"></toast>\n"
-
-/***/ }),
-
-/***/ 348:
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"section container\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n\t    <div stick-from-top=\"0\">\n         <nav class=\"panel\">\n\t\t\t  <p class=\"panel-heading\">\n\t\t\t    {{flowData.name || 'Loading...'}}\n\t\t\t  </p>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"isLoadingFlow\">\n\t\t\t  \t<div class=\"loader-bar\"></div>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block is-active flex-wrap\" *ngIf=\"!isLoadingFlow\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-share\"></i>\n\t\t\t    </span>\n\t\t\t    <span class=\"tag\" *ngFor=\"let mt of flowData.matches\">{{mt}}</span>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Created at: {{flowData.timestamp_created.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Modified at: {{flowData.timestamp_updated.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow && flowData.statastics\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-check-square\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Triggerd: {{flowData.statastics.triggered || '0'}} times</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow && flowData.statastics && flowData.statastics.triggered>0\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Last Triggerd: {{flowData.statastics.triggeredAt | amTimeAgo}}</small>\n\t\t\t  </span>\n\t</nav>\n\t\t</div> \n\t  </div>\n\t  <div class=\"column is-9\">\n\n\t    <!-- tabs -->\n\t    <div class=\"tabs\" stick-from-top=\"0\">\n\t\t  <ul>\n\t\t    <li [class.is-active]=\"selectedTab == 'flow'\" (click)=\"selectedTab = 'flow'\"><a>Flow</a></li>\n\t\t    <li [class.is-active]=\"selectedTab == 'service'\" (click)=\"selectedTab = 'service'\"><a>Services</a></li>\n\t\t  </ul>\n\t\t</div>\n\n\n  \n\n\n\n\n\t\t<sub-loader *ngIf=\"isLoadingFlow\" loader-title=\"Loading Flow..\"></sub-loader>\n\n\t\t<div *ngIf=\"!isLoadingFlow && selectedTab != 'flow'\" class=\"anim sliceInUp\"> <!-- start of service tab -->\n        \t<services-view [ServicesData]=\"flowData\"></services-view>\n        </div>  <!-- end of service tab -->\n\n      <div *ngIf=\"!isLoadingFlow && selectedTab == 'flow'\"> <!-- start of flow tab -->\n\t    <div class=\"flow anim sliceInUp\" >\n\n        <!-- welcome card -->\n          <div class=\"flow-card-divider\" *ngIf=\"!flowData.welcome.msg\" style=\"margin-bottom: -5px;\">\n\t    \t  <div class=\"left\">\n\t    \t\t<a class=\"button is-primary is-medium\" (click)=\"openWelcomeEditModal()\">\n\t\t\t    <span class=\"icon\">\n\t\t\t      <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t\t    <span>Wecome Message</span>\n\t\t\t  </a>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n\n          <div class=\"end-card-content\" *ngIf=\"flowData.welcome.msg\">\n              <div class=\"box flow-card\" [class.is-loading]=\"i==4\">\n\t    \t\t    <div class=\"loader-bar\" *ngIf=\"i==4\"></div>\n\t\t\t\t\t  <article class=\"media\">\n\t\t\t\t\t    <div class=\"media-content\">\n\t\t\t\t\t      <div class=\"content\">\n\t\t\t\t\t        <p>\n\t\t\t\t\t          <strong><a class=\"button is-outlined\">Welcome Message</a></strong>\n\t\t\t\t\t          <br>\n\t\t\t\t\t          <span class=\"l-tag is-light\" *ngFor=\"let m of flowData.welcome.msg\">{{m}}</span>\n\t\t\t\t\t        </p>\n\t\t\t\t\t      </div>\n\t\t\t\t\t      <nav class=\"level is-mobile flow-card-actions\">\n\t\t\t\t\t        <div class=\"level-left\">\n\t\t\t\t\t          <a class=\"button is-small is-primary is-outlined\" (click)=\"openWelcomeEditModal()\">\n\t\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-pencil\"></i></span>\n\t\t\t\t\t            <span>Edit</span>\n\t\t\t\t\t          </a> \n\t\t\t\t\t        </div>\n\t\t\t\t\t      </nav>\n\t\t\t\t\t    </div>\n\t\t\t\t\t  </article>\n\t    \t\t\t</div>\n          \t\n          </div>\n\n          <div class=\"flow-card-divider\">\n\t    \t  <div class=\"left\">\n\t    \t\t<div class=\"bars\" style=\"flex-basis: 61px\"></div>\n\t    \t\t<div class=\"bar-add-icon add-flow-indicater-container {{indi}}\"><i (click)=\"openEditFlowItem(0, 'insert')\" class=\"fa fa-plus\" aria-hidden=\"true\"></i></div>\n\t    \t\t<div class=\"bars\"></div>\n\t    \t  </div>\n\t    \t  <div class=\"right\">\n\t    \t  \t\t<article class=\"message is-primary\" *ngIf=\"!flowData.modules || flowData.modules.length == 0\">\n\t\t\t\t\t  <div class=\"message-body\">\n\t\t\t\t\t     No Flows Items are added! click on <span class=\"tag is-info add-flow-indicater\" (mouseleave)=\"indi = ''\" (mouseenter)=\"indi = 'wobble'\">Add</span> icon to add Items.\n\t\t\t\t\t  </div>\n\t\t\t\t\t</article>\n\t    \t  </div>\n\t    \t</div>\n        <!-- welcome card end -->\n\n\n        <!-- loop cards -->\n\t      <div *ngFor=\"let item of flowData.modules; let i = index;\">\n\t    \t<div class=\"flow-card-content\">\n\t    \t    <div class=\"flow-bar\">\n\t    \t    \t<div class=\"bars\"></div>\n\t    \t    \t<div class=\"bar-m\"></div>\n\t    \t    \t<div class=\"bars\"></div>\n\t    \t    </div>\n\t    \t\t\n\n\n                    <div class=\"f-card\" [class.is-loading]=\"i==editFlowItemIndex && isLoadingeditFlowItem\" [ngClass]=\"{'anim': (i==editFlowItemIndex && isLoadingeditFlowItem), 'fadeInRight': (updateFlowType != 'edit'), 'pulse': (updateFlowType == 'edit')}\">\n\t\t\t         <div class=\"loader-bar\" *ngIf=\"i==editFlowItemIndex && isLoadingeditFlowItem\"></div>\n\t\t\t\t\t <div class=\"title\"><span class=\"index\">{{i+1}}</span><span class=\"text\" (click)=\"openEditFlowItem(i, 'edit')\">{{item.name}}</span></div>\n\t\t\t\t\t <div class=\"content\">\n\t\t\t\t\t\t <div class=\"msgs border-left-primary\">\n\t\t\t\t\t\t\t <div class=\"item\" *ngFor=\"let m of item.msg\">{{m}}</div>\n\t\t\t\t\t\t </div>\n\t\t\t\t\t\t <div class=\"others\">Validation : <span>{{item.validate ? item.validate : 'No validations added'}}</span></div>\n\t\t\t\t\t\t <div class=\"others\">Suggestions : <span>{{item.shortcut ? item.shortcut : 'No suggestions added'}}</span></div>\n\t\t\t\t\t </div>\n\t\t\t\t\t <div class=\"footer\">\n\t\t\t\t\t\t <a class=\"button is-small is-primary is-outlined\" (click)=\"openEditFlowItem(i, 'edit')\">\n\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-pencil\"></i></span>\n\t\t\t\t            <span>Edit</span>\n\t\t\t\t          </a>  &nbsp;\n\t\t\t\t          <a class=\"button is-small is-info is-outlined\">\n\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-clone\"></i></span>\n\t\t\t\t            <span>Copy</span>\n\t\t\t\t          </a> &nbsp;\n\t\t\t\t          <a class=\"button is-small is-danger is-outlined\" (click)=\"openFlowItemDeleteModal(i)\">\n\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-trash\"></i></span>\n\t\t\t\t            <span>Delete</span>\n\t\t\t\t          </a>\n\t\t\t\t\t </div>\n\t\t\t\t </div>\n\n\n\n\n\n\n\n\t    \t</div>\n\n\n\n\n\t    \t<div class=\"flow-card-divider\">\n\t    \t  <div class=\"left\">\n\t    \t\t<div class=\"bars\"></div>\n\t    \t\t<div class=\"bar-add-icon\"><i (click)=\"openEditFlowItem(i+1, 'insert')\" class=\"fa fa-plus\" aria-hidden=\"true\"></i></div>\n\t    \t\t<div class=\"bars\"></div>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n        </div>\n\n        <!-- loop cards end  -->\n\n        <!-- final card -->\n\n          <div class=\"flow-card-divider\">\n\t    \t  <div class=\"left\">\n\t    \t\t<div class=\"bars\" style=\"flex-basis: 11px\"></div>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n\n\t    \t<div class=\"flow-card-divider\" *ngIf=\"!flowData.final.msg\">\n\t    \t  <div class=\"left\">\n\t    \t\t<a class=\"button is-primary is-medium\" (click)=\"openFinalEditModal()\">\n\t\t\t    <span class=\"icon\">\n\t\t\t      <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t\t    <span>Add Final Action</span>\n\t\t\t  </a>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n          \n\n          <div class=\"end-card-content\" *ngIf=\"flowData.final.msg\">\n              <div class=\"box flow-card\" [class.is-loading]=\"false\">\n\t    \t\t    <div class=\"loader-bar\" *ngIf=\"i==4\"></div>\n\t\t\t\t\t  <article class=\"media\">\n\t\t\t\t\t    <div class=\"media-content\">\n\t\t\t\t\t      <div class=\"content\">\n\t\t\t\t\t        <p>\n\t\t\t\t\t          <strong><a class=\"button is-outlined\">End Flow </a></strong>\n\t\t\t\t\t          <br>\n\t\t\t\t\t          <span class=\"l-tag is-light\" *ngFor=\"let m of flowData.final.msg\">{{m}}</span>\n\t\t\t\t\t        </p>\n\t\t\t\t\t      </div>\n\t\t\t\t\t      <nav class=\"level is-mobile flow-card-actions\">\n\t\t\t\t\t        <div class=\"level-left\">\n\t\t\t\t\t          <a class=\"button is-small is-primary is-outlined\" (click)=\"openFinalEditModal()\">\n\t\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-pencil\"></i></span>\n\t\t\t\t\t            <span>Edit</span>\n\t\t\t\t\t          </a>  \n\t\t\t\t\t        </div>\n\t\t\t\t\t      </nav>\n\t\t\t\t\t    </div>\n\t\t\t\t\t  </article>\n\t    \t\t\t</div>\n          \t\n          </div>\n\n          \n\t        <!-- final card end -->\n\t    </div> <!-- end of flow tab -->\n\n\n        \n\n\n\t    </div>\n\n      \n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  \n\n\n\n\n<!-- modals -->\n<div class=\"modal is-active\" *ngIf=\"isActiveModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">{{updateFlowType | uppercase}} FLOW</p>\n      <button class=\"delete\" (click)=\"isActiveModal = false\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n\n      <form [formGroup]=\"createFlowItemForm\" >\n         <div class=\"input-container\">\n         \t<div class=\"label\">Name Of the Module *</div>\n         \t<div class=\"field\">\n         \t\t<input type=\"text\" formControlName=\"name\" auto-tag [autoTagValue]=\"constructAutoList()\"/>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.name\">{{formErrors.name}}</div>\n         </div>\n\n          <div class=\"input-container no-style\">\n         \t<div class=\"label\">Module Message *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_sub_err = true\" class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t{{focused_msg}}\n         \t<div class=\"err\" *ngIf=\"formErrors.msg\">{{formErrors.msg}}</div>\n         \t<div class=\"err\" *ngIf=\"!formErrors.msg && msg_sub_err && createFlowItemForm.value.msg.length==0\">{{validationMessages.msg.required}}</div>\n         </div>\t\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Before Message</div>\n         \t<div class=\"field\">\n         \t\t<tag-input class='tooltip' formControlName=\"beforeMsg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">After Message</div>\n         \t<div class=\"field\">\n         \t\t<tag-input class='tooltip' formControlName=\"afterMsg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         </div>\n\n\n          <br/>\n          <div class=\"columns\">\n\t\t\t  <div class=\"column is-3\">\n\t\t\t    Validation Type:\n\t\t\t  </div>\n\t\t\t  <div class=\"column\">\n               <div class=\"input-container\">\n\t\t\t    <span class=\"select\">\n\t\t\t\t\t\t\t<select formControlName=\"validate\">\n\t\t\t        <option *ngFor=\"let v of validationTypeArray\" value=\"{{v.value}}\">{{v.title}}</option>\n\t\t\t      </select>\n\t\t\t    </span>\n\n\t\t\t    <div *ngIf=\"createFlowItemForm.value.validate != 'none'\">\n                      <tag-input (onFocus)=\"v_msg_sub_err = true\" class='tooltip' formControlName=\"validateErrMsg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Validate Msgs *'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n\t\t                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n\t\t              </tag-input>\n\t\t              <div class=\"err\" *ngIf=\"formErrors.validateErrMsg\"><br/>{{formErrors.validateErrMsg}}</div>\n\t\t              <div class=\"err\" *ngIf=\"v_msg_sub_err && createFlowItemForm.value.validateErrMsg.length==0\"><br/>{{validationMessages.validateErrMsg.required}}</div>\n\t\t\t    </div>\n\n\n\n              </div>\n\t\t\t</div>\n\t\t  </div>\n\n\n          <div class=\"columns\">\n\t\t\t  <div class=\"column is-3\">\n\t\t\t    Suggestion Type:\n\t\t\t  </div>\n\t\t\t  <div class=\"column\">\n\t\t\t   <div class=\"input-container\">\n\t\t\t    <span class=\"select\">\n\t\t\t      <select formControlName=\"shortcut\">\n\t\t\t        <option *ngFor=\"let s of suggestionTypeArray\" value=\"{{s.value}}\">{{s.title}}</option>\n\t\t\t      </select>\n\t\t\t    </span>\n\n\n\t\t\t    <div *ngIf=\"createFlowItemForm.value.shortcut != 'none'\">\n                      <tag-input (onFocus)=\"s_msg_sub_err = true\"  class='tooltip' formControlName=\"shortcutData\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Suggestion Items *'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n\t\t                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n\t\t              </tag-input>\n\t\t              <div class=\"err\" *ngIf=\"formErrors.shortcutData\"><br/>{{formErrors.shortcutData}}</div>\n\t\t              <div class=\"err\" *ngIf=\"s_msg_sub_err && createFlowItemForm.value.shortcutData.length==0\"><br/>{{validationMessages.shortcutData.required}}</div>\n\t\t\t    </div>\n\n\n               </div>\n\t\t\t </div>\n\t\t  </div>\t  \n     </form>\n    </section>\n    <footer class=\"modal-card-foot\">\n      <span class=\"button is-success tooltip\" [class.is-disabled]=\"(createFlowItemForm.invalid) || (createFlowItemForm.value.validate != 'none' && createFlowItemForm.value.validateErrMsg.length==0) || (createFlowItemForm.value.shortcut != 'none' && createFlowItemForm.value.shortcutData.length==0)\" (click)=\"updateFlowItem()\">{{updateFlowType | uppercase}}\n      <span class=\"tooltiptext\" *ngIf=\"((createFlowItemForm.invalid) || (createFlowItemForm.value.validate != 'none' && createFlowItemForm.value.validateErrMsg.length==0) || (createFlowItemForm.value.shortcut != 'none' && createFlowItemForm.value.shortcutData.length==0))\">Fill are required fields(*)</span> \n      </span>\n      <a class=\"button\" (click)=\"isActiveModal = false\">Cancel</a>\n    </footer>\n  </div>\n</div>\n\n\n\n<!-- welcome add modal -->\n\n<div class=\"modal is-active\" *ngIf=\"isMelcomeModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">Welcome Message</p>\n      <button class=\"delete\" (click)=\"isMelcomeModal = false\" *ngIf=\"!isWelcomeModalUpdating\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n      <form [formGroup]=\"createWelcomeFlowItem\">\n\n       <div class=\"input-container no-style\">\n         \t<div class=\"label\">Module Message *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_welcome_err = true\" class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"msg_welcome_err && createWelcomeFlowItem.value.msg.length==0\">Specify atleast one message! </div>\n       </div>\n    </form>\n\n\n    </section>\n    <footer class=\"modal-card-foot\">\n      <a class=\"button is-success\" (click)=\"editWelcomeFlowItem() && msg_welcome_err = true\" [class.is-loading]=\"isWelcomeModalUpdating\">Save changes</a>\n      <a class=\"button\" (click)=\"isMelcomeModal = false\" *ngIf=\"!isWelcomeModalUpdating\">Cancel</a>\n    </footer>\n  </div>\n</div>\n\n\n\n<!-- final add modal -->\n\n<div class=\"modal is-active\" *ngIf=\"isFinalModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">Final Action</p>\n      <button class=\"delete\" (click)=\"isFinalModal = false\" *ngIf=\"!isFinalModalUpdating\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n      <form [formGroup]=\"createFinalFlowItem\">\n\n       <div class=\"input-container no-style\">\n         \t<div class=\"label\">Module Message *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_final_err = true\" class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"msg_final_err && createFinalFlowItem.value.msg.length==0\">Specify atleast one message! </div>\n       </div>\n    </form>\n\n\n    </section>\n    <footer class=\"modal-card-foot\">\n      <a class=\"button is-success\" (click)=\"editFinalFlowItem() && msg_final_err = true\" [class.is-loading]=\"isFinalModalUpdating\">Save changes</a>\n      <a class=\"button\" (click)=\"isFinalModal = false\" *ngIf=\"!isFinalModalUpdating\">Cancel</a>\n    </footer>\n  </div>\n</div>\n\n\n\n\n<!-- flow item confirm delete modal -->\n\n\n<div class=\"modal is-active\" *ngIf=\"flowItemDeleteStatus.isModal\">\n  <div class=\"modal-background\" (click)=\"flowItemDeleteStatus.isModal = false\"></div>\n  <div class=\"modal-content\">\n     <div class=\"card anim zoomIn\">\n\t\t  <div class=\"card-content\">\n\t\t    <div class=\"media\">\n\t\t      <div class=\"media-content\">\n\t\t        <p class=\"title is-4\">Confirm to Delete? </p>\n\t\t        <p class=\"subtitle is-6\">No longer available for recover!</p>\n\t\t      </div>\n\t\t    </div>\n\n\t\t    <div class=\"content\">\n\t\t      <a class=\"button is-primary\" [class.is-loading]=\"flowItemDeleteStatus.updating\" (click)=\"deleteFlowItem()\">Delete</a>\n\t\t      <a class=\"button is-danger is-outlined\" (click)=\"flowItemDeleteStatus.isModal = false\" [class.is-disabled]=\"flowItemDeleteStatus.updating\">Cancel</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n  </div>\n  <button class=\"modal-close\" (click)=\"flowItemDeleteStatus.isModal = false\"></button>\n</div>\n\n\n\n"
 
 /***/ }),
 
 /***/ 349:
 /***/ (function(module, exports) {
 
-module.exports = "\n\t<div class=\"columns\">\n\n\t  <div class=\"column is-3 \">\n         <aside class=\"menu\">\n\t\t  <p class=\"menu-label\">\n\t\t    Services\n\t\t  </p>\n\t\t  <ul class=\"menu-list\">\n\t\t    <li><a [class.is-active]=\"tab == 'email'\" (click)=\"changeTab('email')\">Email</a></li>\n\t\t    <li><a [class.is-active]=\"tab == 'api'\" (click)=\"changeTab('api')\">Api</a></li>\n\t\t  </ul>\n\t\t  \n\t\t</aside>\n\t  </div>\n\n\t  <div class=\"column is-9\">\n\n\t    \n        <div *ngIf=\"tab == 'email'\"> <!-- email tab start -->\n        <div class=\"align-right\">\n\t    \t<a class=\"button is-primary is-outlined anim-9 {{email_service_indi}}\" (click)=\"openEmailServiceModal('insert', -1)\">\n\t\t    \t<span class=\"icon\">\n\t\t\t\t\t   <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t        <span> New Email Service</span>\n\t       </a>\n\t    </div>\n\t    <br/>\n\n\t    <article class=\"message is-primary\" *ngIf=\"!ServicesData.services.email || ServicesData.services.email == 0\">\n\t\t\t\t\t  <div class=\"message-body\">\n\t\t\t\t\t     No Email Services found!,  click on <span class=\"tag is-info add-email-service-indicater\"  (mouseleave)=\"email_service_indi = ''\" (mouseenter)=\"email_service_indi = 'wobble'\">New Email Service</span> to add services.\n\t\t\t\t\t  </div>\n\t   </article>\n\n\n\n\t    <div class=\"columns is-multiline anim sliceInUp\">  \n\t\t  <div class=\"column is-6\" *ngFor=\"let item of ServicesData.services.email; let $i = index;\">\n           \n           <div class=\"card\">\n\t\t\t  <div class=\"card-content\">\n\t\t\t    <div class=\"media\">\n\t\t\t      <div class=\"media-left\">\n\t\t\t        <figure class=\"image is-24x24\">\n\t\t\t          <span class=\"icon\">\n\t\t\t\t\t\t  <i class=\"fa fa-envelope\" aria-hidden=\"true\"></i>\n\t\t\t\t\t </span>\n\t\t\t        </figure>\n\t\t\t      </div>\n\t\t\t      <div class=\"media-content\">\n\t\t\t        <p class=\"title is-6\">{{item.name}}</p>\n\t\t\t      </div>\n\t\t\t    </div>\n                <hr class=\"hr\" />\n\t\t\t    <div class=\"content\">\n\t\t\t      <div class=\"ellipsis\">To : <span *ngFor=\"let to of item.to\"><span class=\"tag is-light\">{{to}}</span> &nbsp;</span></div>\n\t\t\t      <hr class=\"hr\" />\n\t\t\t      <div class=\"ellipsis\">Subject : <small>{{item.subject}}</small></div>\n\t\t\t       <hr class=\"hr\" />\n\t\t\t      <div class=\"ellipsis\">Body : <small>{{item.body}}</small></div>\n\t\t\t      <hr class=\"hr\"/>\n\t\t\t      <div>\n\t\t\t      \t<a class=\"button is-success is-small is-outlined\" (click)=\"openEmailServiceModal('edit', $i)\">Edit</a>\n\t\t\t\t\t<a class=\"button is-danger is-small is-outlined\" (click)=\"openDeleteEmailServiceModal($i)\">Delete</a>\n\t\t\t\t </div>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t\t</div>\n\t\t </div>\n\t\t</div> \n\t\t</div>  <!-- email tab end -->\n\n\n\t\t<div class=\"columns is-multiline anim sliceInUp align-center flex-center\" *ngIf=\"tab == 'api'\"> \n\t\t   \n            <article class=\"message is-warning\">\n\t\t\t  <div class=\"message-header\">\n\t\t\t    <p>Sorry, Api services are not supported in this version!</p>\n\t\t\t    <button class=\"delete\"></button>\n\t\t\t  </div>\n\t\t\t  <div class=\"message-body\">\n\t\t\t    Api Service's are available from very next release..\n\t\t\t  </div>\n\t\t\t</article>\n\n\t\t</div>\n\n\t  </div>\n\t</div>    \n\n\n\n\n\n\n\n\n\n\n\t<!-- email servive edit modal -->\n\n<div class=\"modal is-active\" *ngIf=\"isEditEmailServiceModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">{{emailServiceEditStatus.mode | uppercase}} Email Service</p>\n      <button class=\"delete\" (click)=\"isEditEmailServiceModal = false\" *ngIf=\"!isWelcomeModalUpdating\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n      <form [formGroup]=\"emailServiceForm\">\n\n      <div class=\"input-container\">\n         \t<div class=\"label\">Name of the email Service *\t</div>\n         \t<div class=\"field\">\n         \t\t<input formControlName=\"name\" type='text' />\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.name\">{{emailServiceFormErrors.name}}</div>\n       </div>\n\n\n\n       <div class=\"input-container no-style\">\n         \t<div class=\"label\">Recipients *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_welcome_err = true\" class='tooltip' formControlName=\"to\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Recipients'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.to\">{{emailServiceFormErrors.to}} </div>\n       </div>\n\n\n       <div class=\"input-container\">\n         \t<div class=\"label\">Email Subject *\t</div>\n         \t<div class=\"field\">\n         \t\t<input formControlName=\"subject\" type='text' />\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.subject\">{{emailServiceFormErrors.subject}}</div>\n       </div>\n\n\n       <div class=\"input-container\">\n         \t<div class=\"label\">Email Body *\t</div>\n         \t<div class=\"field\">\n         \t\t<textarea formControlName=\"body\" rows=\"5\" class=\"mail-body-textarea\"></textarea>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.body\">{{emailServiceFormErrors.body}}</div>\n       </div>\n\n\n    </form>\n\n\n\n    </section>\n    <footer class=\"modal-card-foot\">\n      <a class=\"button is-success tooltip\"  [class.is-disabled]=\"(emailServiceForm.invalid)\" (click)=\"updateEmailService()\" [class.is-loading]=\"emailServiceEditStatus.updating\">{{emailServiceEditStatus.mode | uppercase}}\n       <span class=\"tooltiptext\" *ngIf=\"(emailServiceForm.invalid)\">Fill are required fields(*)</span> \n      </a>\n      <a class=\"button\" (click)=\"isEditEmailServiceModal = false\" [class.is-disabled]=\"emailServiceEditStatus.updating\" >Cancel</a>\n    </footer>\n  </div>\n</div>\n\n<!-- email service  delete modal -->\n\n\n<div class=\"modal is-active\" *ngIf=\"emailServiceDeleteStatus.isModal\">\n  <div class=\"modal-background\" (click)=\"emailServiceDeleteStatus.isModal = false\"></div>\n  <div class=\"modal-content\">\n     <div class=\"card anim zoomIn\">\n\t\t  <div class=\"card-content\">\n\t\t    <div class=\"media\">\n\t\t      <div class=\"media-content\">\n\t\t        <p class=\"title is-4\">Confirm to Delete? </p>\n\t\t        <p class=\"subtitle is-6\">No longer available for recover!</p>\n\t\t      </div>\n\t\t    </div>\n\n\t\t    <div class=\"content\">\n\t\t      <a class=\"button is-primary\" [class.is-loading]=\"emailServiceDeleteStatus.updating\" (click)=\"deleteEmailService()\">Delete</a>\n\t\t      <a class=\"button is-danger is-outlined\" (click)=\"emailServiceDeleteStatus.isModal = false\" [class.is-disabled]=\"emailServiceDeleteStatus.updating\">Cancel</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n  </div>\n  <button class=\"modal-close\" (click)=\"emailServiceDeleteStatus.isModal = false\"></button>\n</div>"
+module.exports = "<loader></loader>\n<router-outlet></router-outlet>\n<toast class=\"anim sliceInUp\"></toast>\n"
 
 /***/ }),
 
@@ -1760,74 +1883,95 @@ var environment = {
 /***/ 350:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"section container anim sliceInUp\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n         <h1 class=\"title\">New Flow</h1>\n\t\t <h2 class=\"subtitle\">Add flow to your bot</h2>\n\t  </div>\n\t  <div class=\"column\">\n\n      <form [formGroup]=\"createForm\" >\n\n         <div class=\"input-container\">\n         \t<div class=\"label\">Flow Name</div>\n         \t<div class=\"field\">\n         \t\t<input type=\"text\" name=\"\" formControlName=\"name\"/>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.name\">{{formErrors.name}}</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Flow Mathes</div>\n         \t<div class=\"field\">\n\n         \t\t<tag-input class='tooltip' formControlName=\"matches\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Items'\" (onAdd)=\"onItemAdded($event)\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]='matches'>  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n            \n         \t<div class=\"err\" *ngIf=\"formErrors.matches\">{{formErrors.matches}}</div>\n         </div>\n\n\n         <a class=\"button is-success is-loading\" [class.is-disabled]=\"!createForm.valid\" (click)=\"createFlow()\" [class.is-loading]=\"isCreating\">Create</a> \n         <a class=\"button\" [routerLink]=\"['/dashboard']\">Cancel</a>\n\n\t  </form>\t\t\n\n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  "
+module.exports = "<div class=\"section container\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n\t    <div stick-from-top=\"0\">\n         <nav class=\"panel\">\n\t\t\t  <p class=\"panel-heading\">\n\t\t\t    {{flowData.name || 'Loading...'}}\n\t\t\t  </p>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"isLoadingFlow\">\n\t\t\t  \t<div class=\"loader-bar\"></div>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block is-active flex-wrap\" *ngIf=\"!isLoadingFlow\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-share\"></i>\n\t\t\t    </span>\n\t\t\t    <span class=\"tag\" *ngFor=\"let mt of flowData.matches\">{{mt}}</span>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Created at: {{flowData.timestamp_created.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Modified at: {{flowData.timestamp_updated.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow && flowData.statastics\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-check-square\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Triggerd: {{flowData.statastics.triggered || '0'}} times</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingFlow && flowData.statastics && flowData.statastics.triggered>0\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Last Triggerd: {{flowData.statastics.triggeredAt | amTimeAgo}}</small>\n\t\t\t  </span>\n\t</nav>\n\t\t</div> \n\t  </div>\n\t  <div class=\"column is-9\">\n\n\t    <!-- tabs -->\n\t    <div class=\"tabs\" stick-from-top=\"0\">\n\t\t  <ul>\n\t\t    <li [class.is-active]=\"selectedTab == 'flow'\" (click)=\"selectedTab = 'flow'\"><a>Flow</a></li>\n\t\t    <li [class.is-active]=\"selectedTab == 'service'\" (click)=\"selectedTab = 'service'\"><a>Services</a></li>\n\t\t  </ul>\n\t\t</div>\n\n\n  \n\n\n\n\n\t\t<sub-loader *ngIf=\"isLoadingFlow\" loader-title=\"Loading Flow..\"></sub-loader>\n\n\t\t<div *ngIf=\"!isLoadingFlow && selectedTab != 'flow'\" class=\"anim sliceInUp\"> <!-- start of service tab -->\n        \t<services-view [ServicesData]=\"flowData\"></services-view>\n        </div>  <!-- end of service tab -->\n\n      <div *ngIf=\"!isLoadingFlow && selectedTab == 'flow'\"> <!-- start of flow tab -->\n\t    <div class=\"flow anim sliceInUp\" >\n\n        <!-- welcome card -->\n          <div class=\"flow-card-divider\" *ngIf=\"!flowData.welcome.msg\" style=\"margin-bottom: -5px;\">\n\t    \t  <div class=\"left\">\n\t    \t\t<a class=\"button is-primary is-medium\" (click)=\"openWelcomeEditModal()\">\n\t\t\t    <span class=\"icon\">\n\t\t\t      <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t\t    <span>Wecome Message</span>\n\t\t\t  </a>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n\n          <div class=\"end-card-content\" *ngIf=\"flowData.welcome.msg\">\n              <div class=\"box flow-card\" [class.is-loading]=\"i==4\">\n\t    \t\t    <div class=\"loader-bar\" *ngIf=\"i==4\"></div>\n\t\t\t\t\t  <article class=\"media\">\n\t\t\t\t\t    <div class=\"media-content\">\n\t\t\t\t\t      <div class=\"content\">\n\t\t\t\t\t        <p>\n\t\t\t\t\t          <strong><a class=\"button is-outlined\">Welcome Message</a></strong>\n\t\t\t\t\t          <br>\n\t\t\t\t\t          <span class=\"l-tag is-light\" *ngFor=\"let m of flowData.welcome.msg\">{{m}}</span>\n\t\t\t\t\t        </p>\n\t\t\t\t\t      </div>\n\t\t\t\t\t      <nav class=\"level is-mobile flow-card-actions\">\n\t\t\t\t\t        <div class=\"level-left\">\n\t\t\t\t\t          <a class=\"button is-small is-primary is-outlined\" (click)=\"openWelcomeEditModal()\">\n\t\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-pencil\"></i></span>\n\t\t\t\t\t            <span>Edit</span>\n\t\t\t\t\t          </a> \n\t\t\t\t\t        </div>\n\t\t\t\t\t      </nav>\n\t\t\t\t\t    </div>\n\t\t\t\t\t  </article>\n\t    \t\t\t</div>\n          \t\n          </div>\n\n          <div class=\"flow-card-divider\">\n\t    \t  <div class=\"left\">\n\t    \t\t<div class=\"bars\" style=\"flex-basis: 61px\"></div>\n\t    \t\t<div class=\"bar-add-icon add-flow-indicater-container {{indi}}\"><i (click)=\"openEditFlowItem(0, 'insert')\" class=\"fa fa-plus\" aria-hidden=\"true\"></i></div>\n\t    \t\t<div class=\"bars\"></div>\n\t    \t  </div>\n\t    \t  <div class=\"right\">\n\t    \t  \t\t<article class=\"message is-primary\" *ngIf=\"!flowData.modules || flowData.modules.length == 0\">\n\t\t\t\t\t  <div class=\"message-body\">\n\t\t\t\t\t     No Flows Items are added! click on <span class=\"tag is-info add-flow-indicater\" (mouseleave)=\"indi = ''\" (mouseenter)=\"indi = 'wobble'\">Add</span> icon to add Items.\n\t\t\t\t\t  </div>\n\t\t\t\t\t</article>\n\t    \t  </div>\n\t    \t</div>\n        <!-- welcome card end -->\n\n\n        <!-- loop cards -->\n\t      <div *ngFor=\"let item of flowData.modules; let i = index;\">\n\t    \t<div class=\"flow-card-content\">\n\t    \t    <div class=\"flow-bar\">\n\t    \t    \t<div class=\"bars\"></div>\n\t    \t    \t<div class=\"bar-m\"></div>\n\t    \t    \t<div class=\"bars\"></div>\n\t    \t    </div>\n\t    \t\t\n\n\n                    <div class=\"f-card\" [class.is-loading]=\"i==editFlowItemIndex && isLoadingeditFlowItem\" [ngClass]=\"{'anim': (i==editFlowItemIndex && isLoadingeditFlowItem), 'fadeInRight': (updateFlowType != 'edit'), 'pulse': (updateFlowType == 'edit')}\">\n\t\t\t         <div class=\"loader-bar\" *ngIf=\"i==editFlowItemIndex && isLoadingeditFlowItem\"></div>\n\t\t\t\t\t <div class=\"title\"><span class=\"index\">{{i+1}}</span><span class=\"text\" (click)=\"openEditFlowItem(i, 'edit')\">{{item.name}}</span></div>\n\t\t\t\t\t <div class=\"content\">\n\t\t\t\t\t\t <div class=\"msgs border-left-primary\">\n\t\t\t\t\t\t\t <div class=\"item\" *ngFor=\"let m of item.msg\">{{m}}</div>\n\t\t\t\t\t\t </div>\n\t\t\t\t\t\t <div class=\"others\">Validation : <span>{{item.validate ? item.validate : 'No validations added'}}</span></div>\n\t\t\t\t\t\t <div class=\"others\">Suggestions : <span>{{item.shortcut ? item.shortcut : 'No suggestions added'}}</span></div>\n\t\t\t\t\t </div>\n\t\t\t\t\t <div class=\"footer\">\n\t\t\t\t\t\t <a class=\"button is-small is-primary is-outlined\" (click)=\"openEditFlowItem(i, 'edit')\">\n\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-pencil\"></i></span>\n\t\t\t\t            <span>Edit</span>\n\t\t\t\t          </a>  &nbsp;\n\t\t\t\t          <a class=\"button is-small is-info is-outlined\">\n\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-clone\"></i></span>\n\t\t\t\t            <span>Copy</span>\n\t\t\t\t          </a> &nbsp;\n\t\t\t\t          <a class=\"button is-small is-danger is-outlined\" (click)=\"openFlowItemDeleteModal(i)\">\n\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-trash\"></i></span>\n\t\t\t\t            <span>Delete</span>\n\t\t\t\t          </a>\n\t\t\t\t\t </div>\n\t\t\t\t </div>\n\n\n\n\n\n\n\n\t    \t</div>\n\n\n\n\n\t    \t<div class=\"flow-card-divider\">\n\t    \t  <div class=\"left\">\n\t    \t\t<div class=\"bars\"></div>\n\t    \t\t<div class=\"bar-add-icon\"><i (click)=\"openEditFlowItem(i+1, 'insert')\" class=\"fa fa-plus\" aria-hidden=\"true\"></i></div>\n\t    \t\t<div class=\"bars\"></div>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n        </div>\n\n        <!-- loop cards end  -->\n\n        <!-- final card -->\n\n          <div class=\"flow-card-divider\">\n\t    \t  <div class=\"left\">\n\t    \t\t<div class=\"bars\" style=\"flex-basis: 11px\"></div>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n\n\t    \t<div class=\"flow-card-divider\" *ngIf=\"!flowData.final.msg\">\n\t    \t  <div class=\"left\">\n\t    \t\t<a class=\"button is-primary is-medium\" (click)=\"openFinalEditModal()\">\n\t\t\t    <span class=\"icon\">\n\t\t\t      <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t\t    <span>Add Final Action</span>\n\t\t\t  </a>\n\t    \t  </div>\n\t    \t  <div class=\"right\"></div>\n\t    \t</div>\n\n          \n\n          <div class=\"end-card-content\" *ngIf=\"flowData.final.msg\">\n              <div class=\"box flow-card\" [class.is-loading]=\"false\">\n\t    \t\t    <div class=\"loader-bar\" *ngIf=\"i==4\"></div>\n\t\t\t\t\t  <article class=\"media\">\n\t\t\t\t\t    <div class=\"media-content\">\n\t\t\t\t\t      <div class=\"content\">\n\t\t\t\t\t        <p>\n\t\t\t\t\t          <strong><a class=\"button is-outlined\">End Flow </a></strong>\n\t\t\t\t\t          <br>\n\t\t\t\t\t          <span class=\"l-tag is-light\" *ngFor=\"let m of flowData.final.msg\">{{m}}</span>\n\t\t\t\t\t        </p>\n\t\t\t\t\t      </div>\n\t\t\t\t\t      <nav class=\"level is-mobile flow-card-actions\">\n\t\t\t\t\t        <div class=\"level-left\">\n\t\t\t\t\t          <a class=\"button is-small is-primary is-outlined\" (click)=\"openFinalEditModal()\">\n\t\t\t\t\t            <span class=\"icon is-small\"><i class=\"fa fa-pencil\"></i></span>\n\t\t\t\t\t            <span>Edit</span>\n\t\t\t\t\t          </a>  \n\t\t\t\t\t        </div>\n\t\t\t\t\t      </nav>\n\t\t\t\t\t    </div>\n\t\t\t\t\t  </article>\n\t    \t\t\t</div>\n          \t\n          </div>\n\n          \n\t        <!-- final card end -->\n\t    </div> <!-- end of flow tab -->\n\n\n        \n\n\n\t    </div>\n\n      \n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  \n\n\n\n\n<!-- modals -->\n<div class=\"modal is-active\" *ngIf=\"isActiveModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">{{updateFlowType | uppercase}} FLOW</p>\n      <button class=\"delete\" (click)=\"isActiveModal = false\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n\n      <form [formGroup]=\"createFlowItemForm\" >\n         <div class=\"input-container\">\n         \t<div class=\"label\">Name Of the Module *</div>\n         \t<div class=\"field\">\n         \t\t<input type=\"text\" formControlName=\"name\" auto-tag [autoTagValue]=\"constructAutoList()\"/>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.name\">{{formErrors.name}}</div>\n         </div>\n\n          <div class=\"input-container no-style\">\n         \t<div class=\"label\">Module Message *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_sub_err = true\" class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t{{focused_msg}}\n         \t<div class=\"err\" *ngIf=\"formErrors.msg\">{{formErrors.msg}}</div>\n         \t<div class=\"err\" *ngIf=\"!formErrors.msg && msg_sub_err && createFlowItemForm.value.msg.length==0\">{{validationMessages.msg.required}}</div>\n         </div>\t\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Before Message</div>\n         \t<div class=\"field\">\n         \t\t<tag-input class='tooltip' formControlName=\"beforeMsg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">After Message</div>\n         \t<div class=\"field\">\n         \t\t<tag-input class='tooltip' formControlName=\"afterMsg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         </div>\n\n\n          <br/>\n          <div class=\"columns\">\n\t\t\t  <div class=\"column is-3\">\n\t\t\t    Validation Type:\n\t\t\t  </div>\n\t\t\t  <div class=\"column\">\n               <div class=\"input-container\">\n\t\t\t    <span class=\"select\">\n\t\t\t\t\t\t\t<select formControlName=\"validate\">\n\t\t\t        <option *ngFor=\"let v of validationTypeArray\" value=\"{{v.value}}\">{{v.title}}</option>\n\t\t\t      </select>\n\t\t\t    </span>\n\n\t\t\t    <div *ngIf=\"createFlowItemForm.value.validate != 'none'\">\n                      <tag-input (onFocus)=\"v_msg_sub_err = true\" class='tooltip' formControlName=\"validateErrMsg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Validate Msgs *'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n\t\t                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n\t\t              </tag-input>\n\t\t              <div class=\"err\" *ngIf=\"formErrors.validateErrMsg\"><br/>{{formErrors.validateErrMsg}}</div>\n\t\t              <div class=\"err\" *ngIf=\"v_msg_sub_err && createFlowItemForm.value.validateErrMsg.length==0\"><br/>{{validationMessages.validateErrMsg.required}}</div>\n\t\t\t    </div>\n\n\n\n              </div>\n\t\t\t</div>\n\t\t  </div>\n\n\n          <div class=\"columns\">\n\t\t\t  <div class=\"column is-3\">\n\t\t\t    Suggestion Type:\n\t\t\t  </div>\n\t\t\t  <div class=\"column\">\n\t\t\t   <div class=\"input-container\">\n\t\t\t    <span class=\"select\">\n\t\t\t      <select formControlName=\"shortcut\">\n\t\t\t        <option *ngFor=\"let s of suggestionTypeArray\" value=\"{{s.value}}\">{{s.title}}</option>\n\t\t\t      </select>\n\t\t\t    </span>\n\n\n\t\t\t    <div *ngIf=\"createFlowItemForm.value.shortcut != 'none'\">\n                      <tag-input (onFocus)=\"s_msg_sub_err = true\"  class='tooltip' formControlName=\"shortcutData\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Suggestion Items *'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n\t\t                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n\t\t              </tag-input>\n\t\t              <div class=\"err\" *ngIf=\"formErrors.shortcutData\"><br/>{{formErrors.shortcutData}}</div>\n\t\t              <div class=\"err\" *ngIf=\"s_msg_sub_err && createFlowItemForm.value.shortcutData.length==0\"><br/>{{validationMessages.shortcutData.required}}</div>\n\t\t\t    </div>\n\n\n               </div>\n\t\t\t </div>\n\t\t  </div>\t  \n     </form>\n    </section>\n    <footer class=\"modal-card-foot\">\n      <span class=\"button is-success tooltip\" [class.is-disabled]=\"(createFlowItemForm.invalid) || (createFlowItemForm.value.validate != 'none' && createFlowItemForm.value.validateErrMsg.length==0) || (createFlowItemForm.value.shortcut != 'none' && createFlowItemForm.value.shortcutData.length==0)\" (click)=\"updateFlowItem()\">{{updateFlowType | uppercase}}\n      <span class=\"tooltiptext\" *ngIf=\"((createFlowItemForm.invalid) || (createFlowItemForm.value.validate != 'none' && createFlowItemForm.value.validateErrMsg.length==0) || (createFlowItemForm.value.shortcut != 'none' && createFlowItemForm.value.shortcutData.length==0))\">Fill are required fields(*)</span> \n      </span>\n      <a class=\"button\" (click)=\"isActiveModal = false\">Cancel</a>\n    </footer>\n  </div>\n</div>\n\n\n\n<!-- welcome add modal -->\n\n<div class=\"modal is-active\" *ngIf=\"isMelcomeModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">Welcome Message</p>\n      <button class=\"delete\" (click)=\"isMelcomeModal = false\" *ngIf=\"!isWelcomeModalUpdating\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n      <form [formGroup]=\"createWelcomeFlowItem\">\n\n       <div class=\"input-container no-style\">\n         \t<div class=\"label\">Module Message *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_welcome_err = true\" class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"msg_welcome_err && createWelcomeFlowItem.value.msg.length==0\">Specify atleast one message! </div>\n       </div>\n    </form>\n\n\n    </section>\n    <footer class=\"modal-card-foot\">\n      <a class=\"button is-success\" (click)=\"editWelcomeFlowItem() && msg_welcome_err = true\" [class.is-loading]=\"isWelcomeModalUpdating\">Save changes</a>\n      <a class=\"button\" (click)=\"isMelcomeModal = false\" *ngIf=\"!isWelcomeModalUpdating\">Cancel</a>\n    </footer>\n  </div>\n</div>\n\n\n\n<!-- final add modal -->\n\n<div class=\"modal is-active\" *ngIf=\"isFinalModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">Final Action</p>\n      <button class=\"delete\" (click)=\"isFinalModal = false\" *ngIf=\"!isFinalModalUpdating\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n      <form [formGroup]=\"createFinalFlowItem\">\n\n       <div class=\"input-container no-style\">\n         \t<div class=\"label\">Module Message *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_final_err = true\" class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Msgs'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"msg_final_err && createFinalFlowItem.value.msg.length==0\">Specify atleast one message! </div>\n       </div>\n    </form>\n\n\n    </section>\n    <footer class=\"modal-card-foot\">\n      <a class=\"button is-success\" (click)=\"editFinalFlowItem() && msg_final_err = true\" [class.is-loading]=\"isFinalModalUpdating\">Save changes</a>\n      <a class=\"button\" (click)=\"isFinalModal = false\" *ngIf=\"!isFinalModalUpdating\">Cancel</a>\n    </footer>\n  </div>\n</div>\n\n\n\n\n<!-- flow item confirm delete modal -->\n\n\n<div class=\"modal is-active\" *ngIf=\"flowItemDeleteStatus.isModal\">\n  <div class=\"modal-background\" (click)=\"flowItemDeleteStatus.isModal = false\"></div>\n  <div class=\"modal-content\">\n     <div class=\"card anim zoomIn\">\n\t\t  <div class=\"card-content\">\n\t\t    <div class=\"media\">\n\t\t      <div class=\"media-content\">\n\t\t        <p class=\"title is-4\">Confirm to Delete? </p>\n\t\t        <p class=\"subtitle is-6\">No longer available for recover!</p>\n\t\t      </div>\n\t\t    </div>\n\n\t\t    <div class=\"content\">\n\t\t      <a class=\"button is-primary\" [class.is-loading]=\"flowItemDeleteStatus.updating\" (click)=\"deleteFlowItem()\">Delete</a>\n\t\t      <a class=\"button is-danger is-outlined\" (click)=\"flowItemDeleteStatus.isModal = false\" [class.is-disabled]=\"flowItemDeleteStatus.updating\">Cancel</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n  </div>\n  <button class=\"modal-close\" (click)=\"flowItemDeleteStatus.isModal = false\"></button>\n</div>\n\n\n\n"
 
 /***/ }),
 
 /***/ 351:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"section container anim sliceInUp\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n         <h1 class=\"title\">New Menu</h1>\n\t\t <h2 class=\"subtitle\">Add Menu's to your bot</h2>\n\t  </div>\n\t  <div class=\"column\">\n\n      <form [formGroup]=\"addMenuForm\" >\n\n         <div class=\"input-container\">\n         \t<div class=\"label\">Menu Name</div>\n         \t<div class=\"field\">\n         \t\t<input type=\"text\" name=\"\" formControlName=\"name\" [(ngModel)]=\"formVars.name\" autofocus=\"true\" />\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.name\">{{formErrors.name}}</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Menu Matches</div>\n         \t<div class=\"field\">\n\n         \t\t<tag-input class='tooltip' formControlName=\"matches\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Items'\" (onAdd)=\"onItemAdded($event)\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.matches\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n            \n         \t<div class=\"err\" *ngIf=\"formErrors.matches\">{{formErrors.matches}}</div>\n         </div>\n\n\n\n         <div class=\"input-container\">\n         \t<div class=\"label\">Menu Type</div>\n         \t<div class=\"field\">\n         \t\t<span class=\"select\">\n\t\t\t      <select formControlName=\"type\">\n\t\t\t        <option *ngFor=\"let t of Strings.menuTypes\" value=\"{{t.value}}\">{{t.title}}</option>\n\t\t\t      </select>\n\t\t\t    </span>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.type\">{{formErrors.type}}</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Menu Items</div>\n         \t<div class=\"field\">\n\n         \t\t<tag-input class='tooltip' formControlName=\"menus\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Items'\" (onAdd)=\"onItemAdded($event)\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.menus\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n            \n         \t<div class=\"err\" *ngIf=\"formErrors.menus\">{{formErrors.menus}}</div>\n         </div>\n\n\n\n\n\n         <a class=\"button is-success is-loading\" [class.is-disabled]=\"!addMenuForm.valid\" (click)=\"updateMenu()\" [class.is-loading]=\"formStatus.updating\">Create</a> \n         <a class=\"button\" [routerLink]=\"['/dashboard']\" [class.is-disabled]=\"formStatus.updating\">Cancel</a>\n\n\t  </form>\t\t\n\n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  \n\n\n\n\n\n\n\n\n\n\n\n"
+module.exports = "\n\t<div class=\"columns\">\n\n\t  <div class=\"column is-3 \">\n         <aside class=\"menu\">\n\t\t  <p class=\"menu-label\">\n\t\t    Services\n\t\t  </p>\n\t\t  <ul class=\"menu-list\">\n\t\t    <li><a [class.is-active]=\"tab == 'email'\" (click)=\"changeTab('email')\">Email</a></li>\n\t\t    <li><a [class.is-active]=\"tab == 'api'\" (click)=\"changeTab('api')\">Api</a></li>\n\t\t  </ul>\n\t\t  \n\t\t</aside>\n\t  </div>\n\n\t  <div class=\"column is-9\">\n\n\t    \n        <div *ngIf=\"tab == 'email'\"> <!-- email tab start -->\n        <div class=\"align-right\">\n\t    \t<a class=\"button is-primary is-outlined anim-9 {{email_service_indi}}\" (click)=\"openEmailServiceModal('insert', -1)\">\n\t\t    \t<span class=\"icon\">\n\t\t\t\t\t   <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t        <span> New Email Service</span>\n\t       </a>\n\t    </div>\n\t    <br/>\n\n\t    <article class=\"message is-primary\" *ngIf=\"!ServicesData.services.email || ServicesData.services.email == 0\">\n\t\t\t\t\t  <div class=\"message-body\">\n\t\t\t\t\t     No Email Services found!,  click on <span class=\"tag is-info add-email-service-indicater\"  (mouseleave)=\"email_service_indi = ''\" (mouseenter)=\"email_service_indi = 'wobble'\">New Email Service</span> to add services.\n\t\t\t\t\t  </div>\n\t   </article>\n\n\n\n\t    <div class=\"columns is-multiline anim sliceInUp\">  \n\t\t  <div class=\"column is-6\" *ngFor=\"let item of ServicesData.services.email; let $i = index;\">\n           \n           <div class=\"card\">\n\t\t\t  <div class=\"card-content\">\n\t\t\t    <div class=\"media\">\n\t\t\t      <div class=\"media-left\">\n\t\t\t        <figure class=\"image is-24x24\">\n\t\t\t          <span class=\"icon\">\n\t\t\t\t\t\t  <i class=\"fa fa-envelope\" aria-hidden=\"true\"></i>\n\t\t\t\t\t </span>\n\t\t\t        </figure>\n\t\t\t      </div>\n\t\t\t      <div class=\"media-content\">\n\t\t\t        <p class=\"title is-6\">{{item.name}}</p>\n\t\t\t      </div>\n\t\t\t    </div>\n                <hr class=\"hr\" />\n\t\t\t    <div class=\"content\">\n\t\t\t      <div class=\"ellipsis\">To : <span *ngFor=\"let to of item.to\"><span class=\"tag is-light\">{{to}}</span> &nbsp;</span></div>\n\t\t\t      <hr class=\"hr\" />\n\t\t\t      <div class=\"ellipsis\">Subject : <small>{{item.subject}}</small></div>\n\t\t\t       <hr class=\"hr\" />\n\t\t\t      <div class=\"ellipsis\">Body : <small>{{item.body}}</small></div>\n\t\t\t      <hr class=\"hr\"/>\n\t\t\t      <div>\n\t\t\t      \t<a class=\"button is-success is-small is-outlined\" (click)=\"openEmailServiceModal('edit', $i)\">Edit</a>\n\t\t\t\t\t<a class=\"button is-danger is-small is-outlined\" (click)=\"openDeleteEmailServiceModal($i)\">Delete</a>\n\t\t\t\t </div>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t\t</div>\n\t\t </div>\n\t\t</div> \n\t\t</div>  <!-- email tab end -->\n\n\n\t\t<div class=\"columns is-multiline anim sliceInUp align-center flex-center\" *ngIf=\"tab == 'api'\"> \n\t\t   \n            <article class=\"message is-warning\">\n\t\t\t  <div class=\"message-header\">\n\t\t\t    <p>Sorry, Api services are not supported in this version!</p>\n\t\t\t    <button class=\"delete\"></button>\n\t\t\t  </div>\n\t\t\t  <div class=\"message-body\">\n\t\t\t    Api Service's are available from very next release..\n\t\t\t  </div>\n\t\t\t</article>\n\n\t\t</div>\n\n\t  </div>\n\t</div>    \n\n\n\n\n\n\n\n\n\n\n\t<!-- email servive edit modal -->\n\n<div class=\"modal is-active\" *ngIf=\"isEditEmailServiceModal\">\n  <div class=\"modal-background\"></div>\n  <div class=\"modal-card anim zoomIn\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">{{emailServiceEditStatus.mode | uppercase}} Email Service</p>\n      <button class=\"delete\" (click)=\"isEditEmailServiceModal = false\" *ngIf=\"!isWelcomeModalUpdating\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n      <form [formGroup]=\"emailServiceForm\">\n\n      <div class=\"input-container\">\n         \t<div class=\"label\">Name of the email Service *\t</div>\n         \t<div class=\"field\">\n         \t\t<input formControlName=\"name\" type='text' />\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.name\">{{emailServiceFormErrors.name}}</div>\n       </div>\n\n\n\n       <div class=\"input-container no-style\">\n         \t<div class=\"label\">Recipients *\t</div>\n         \t<div class=\"field\">\n         \t\t<tag-input (onFocus)=\"msg_welcome_err = true\" class='tooltip' formControlName=\"to\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Recipients'\" [editable]=\"true\" [modelAsStrings]=\"true\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.to\">{{emailServiceFormErrors.to}} </div>\n       </div>\n\n\n       <div class=\"input-container\">\n         \t<div class=\"label\">Email Subject *\t</div>\n         \t<div class=\"field\">\n         \t\t<input formControlName=\"subject\" type='text' />\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.subject\">{{emailServiceFormErrors.subject}}</div>\n       </div>\n\n\n       <div class=\"input-container\">\n         \t<div class=\"label\">Email Body *\t</div>\n         \t<div class=\"field\">\n         \t\t<textarea formControlName=\"body\" rows=\"5\" class=\"mail-body-textarea\"></textarea>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"emailServiceFormErr || emailServiceFormErrors.body\">{{emailServiceFormErrors.body}}</div>\n       </div>\n\n\n    </form>\n\n\n\n    </section>\n    <footer class=\"modal-card-foot\">\n      <a class=\"button is-success tooltip\"  [class.is-disabled]=\"(emailServiceForm.invalid)\" (click)=\"updateEmailService()\" [class.is-loading]=\"emailServiceEditStatus.updating\">{{emailServiceEditStatus.mode | uppercase}}\n       <span class=\"tooltiptext\" *ngIf=\"(emailServiceForm.invalid)\">Fill are required fields(*)</span> \n      </a>\n      <a class=\"button\" (click)=\"isEditEmailServiceModal = false\" [class.is-disabled]=\"emailServiceEditStatus.updating\" >Cancel</a>\n    </footer>\n  </div>\n</div>\n\n<!-- email service  delete modal -->\n\n\n<div class=\"modal is-active\" *ngIf=\"emailServiceDeleteStatus.isModal\">\n  <div class=\"modal-background\" (click)=\"emailServiceDeleteStatus.isModal = false\"></div>\n  <div class=\"modal-content\">\n     <div class=\"card anim zoomIn\">\n\t\t  <div class=\"card-content\">\n\t\t    <div class=\"media\">\n\t\t      <div class=\"media-content\">\n\t\t        <p class=\"title is-4\">Confirm to Delete? </p>\n\t\t        <p class=\"subtitle is-6\">No longer available for recover!</p>\n\t\t      </div>\n\t\t    </div>\n\n\t\t    <div class=\"content\">\n\t\t      <a class=\"button is-primary\" [class.is-loading]=\"emailServiceDeleteStatus.updating\" (click)=\"deleteEmailService()\">Delete</a>\n\t\t      <a class=\"button is-danger is-outlined\" (click)=\"emailServiceDeleteStatus.isModal = false\" [class.is-disabled]=\"emailServiceDeleteStatus.updating\">Cancel</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n  </div>\n  <button class=\"modal-close\" (click)=\"emailServiceDeleteStatus.isModal = false\"></button>\n</div>"
 
 /***/ }),
 
 /***/ 352:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"dashboard\">\n\n<dashboard-header></dashboard-header>\n\n<!-- sub nav -->\n<nav class=\"force-padding nav\">\n <div class=\"container\">\n\t\t  <div class=\"nav-left\">\n\t\t  </div>\n\n\t\t  <div class=\"nav-center\">\n\t\t  </div>\n\n\t\t  <div class=\"nav-right\">\n\t\t\t\t    <div class=\"nav-item\">\n\t\t\t\t      <div class=\"field is-grouped\">\n\t\t\t\t        <p class=\"control\">\n\t\t\t\t          <a [routerLink]=\"['add-flow']\" class=\"button is-primary is-outlined\" id=\"add_flow\">\n\t\t\t\t            <span class=\"icon\">\n\t\t\t\t              <i class=\"fa fa-plus\"></i>\n\t\t\t\t            </span>\n\t\t\t\t            <span>Add Flow</span>\n\t\t\t\t          </a>\n\t\t\t\t        </p>\n\t\t\t\t        <p class=\"control\">\n\t\t\t\t          <a [routerLink]=\"['add-menu']\" class=\"button is-primary is-outlined\" id=\"add_menu\">\n\t\t\t\t            <span class=\"icon\">\n\t\t\t\t              <i class=\"fa fa-plus\"></i>\n\t\t\t\t            </span>\n\t\t\t\t            <span>Add Menu</span>\n\t\t\t\t          </a>\n\t\t\t\t        </p>\n\t\t\t\t      </div>\n\t\t\t\t   </div>\n\t\t  </div>\n\t</div>\t  \n</nav>\n<!-- sub nav end --> \n\n\n\n<router-outlet></router-outlet>\n\n</div>\n\n\n<footer class=\"footer\">\n  <div class=\"container\">\n    <div class=\"content has-text-centered\">\n      <p>\n        <strong>botflow</strong> | The website content\n        is licensed <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC ANS 4.0</a>.\n      </p>\n\n      <span hresf=\"http://localhost:3000/ui-manager\">botflow @ 2017-2018</span> | <a href=\"ui-manager\">Material Dashboard</a>\n    </div>\n  </div>\n</footer>\n\n\n\n"
+module.exports = "<div class=\"section container anim sliceInUp\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n         <h1 class=\"title\">New Flow</h1>\n\t\t <h2 class=\"subtitle\">Add flow to your bot</h2>\n\t  </div>\n\t  <div class=\"column\">\n\n      <form [formGroup]=\"createForm\" >\n\n         <div class=\"input-container\">\n         \t<div class=\"label\">Flow Name</div>\n         \t<div class=\"field\">\n         \t\t<input type=\"text\" name=\"\" formControlName=\"name\"/>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.name\">{{formErrors.name}}</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Flow Mathes</div>\n         \t<div class=\"field\">\n\n         \t\t<tag-input class='tooltip' formControlName=\"matches\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Items'\" (onAdd)=\"onItemAdded($event)\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]='matches'>  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n            \n         \t<div class=\"err\" *ngIf=\"formErrors.matches\">{{formErrors.matches}}</div>\n         </div>\n\n\n         <a class=\"button is-success is-loading\" [class.is-disabled]=\"!createForm.valid\" (click)=\"createFlow()\" [class.is-loading]=\"isCreating\">Create</a> \n         <a class=\"button\" [routerLink]=\"['/dashboard']\">Cancel</a>\n\n\t  </form>\t\t\n\n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  "
 
 /***/ }),
 
 /***/ 353:
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"nav hero iss-primary\" [class.at-top]=\"atTop\">\n <div class=\"container\">\n\t\t  <div class=\"nav-left\">\n\t\t    <a class=\"nav-item\" [routerLink]=\"['/']\">\n\t\t      <h2 class=\"subtitle _title\">botflow</h2>\n\t\t    </a>\n\t\t  </div>\n\n\t\t  <div class=\"nav-center\">\n\t\t    <!-- <a class=\"nav-item\">\n\t\t      <span class=\"icon\">\n\t\t        <i class=\"fa fa-github\"></i>\n\t\t      </span>\n\t\t    </a> -->\n\t\t    <a class=\"nav-item\" href=\"https://twitter.com/Vinayvnvv\" target=\"_blank\">\n\t\t      <span class=\"icon\" >\n\t\t        <i class=\"fa fa-twitter\"></i>\n\t\t      </span>\n\t\t    </a>\n\t\t  </div>\n\n\t\t  <!-- This \"nav-toggle\" hamburger menu is only visible on mobile -->\n\t\t  <!-- You need JavaScript to toggle the \"is-active\" class on \"nav-menu\" -->\n\t\t  <span class=\"nav-toggle\" (click)=\"isMenu = !isMenu\" [class.is-active] = \"isMenu\">\n\t\t    <span></span>\n\t\t    <span></span>\n\t\t    <span></span>\n\t\t  </span>\n\n\t\t  <!-- This \"nav-menu\" is hidden on mobile -->\n\t\t  <!-- Add the modifier \"is-active\" to display it on mobile -->\n\t\t  <div class=\"nav-right nav-menu\" [class.is-active] = \"isMenu\">\n\t\t    <a class=\"nav-item\" [routerLink]=\"['/dashboard']\">\n\t\t      Home\n\t\t    </a>\n\t\t    <!-- <a class=\"nav-item button is-light\">\n\t\t      Documentation\n\t\t    </a> -->\n\t\t    <a class=\"nav-item\">\n\t\t      <span class=\"icon is-small\">\n\t\t              <i class=\"fa fa-google\"></i>\n\t\t      </span>&nbsp;\n\t\t      {{rootScope._auth_user.name}}\n\t\t      <span class=\"icon\">\n\t\t              <i class=\"fa fa-angle-down\"></i>\n\t\t      </span>\n\t\t    </a>\n\n\t\t    <div class=\"nav-item\">\n\t\t      <div class=\"field is-grouped\">\n\t\t        <p class=\"control\">\n\t\t          <a class=\"button is-primary\" (click)=\"isGetBotModal = true\">\n\t\t            <span class=\"icon is-small\">\n\t\t              <i class=\"fa fa-code\"></i>\n\t\t            </span>\n\t\t            <span>Get Bot</span>\n\t\t          </a> &nbsp;\n\t\t          <a class=\"button iss-primary iss-inverted iss-outlined\" (click)=\"logout()\" >\n\t\t            <span class=\"icon is-small\">\n\t\t              <i class=\"fa fa-power-off\"></i>\n\t\t            </span>\n\t\t            <span>Logout</span>\n\t\t          </a>\n\t\t        </p>\n\t\t        <!-- <p class=\"control\">\n\t\t          <a class=\"button is-primary\">\n\t\t            <span class=\"icon\">\n\t\t              <i class=\"fa fa-download\"></i>\n\t\t            </span>\n\t\t            <span>Download</span>\n\t\t          </a>\n\t\t        </p> -->\n\t\t      </div>\n\t\t    </div>\n\t\t  </div>\n\t</div>\t  \n</nav>\n\n<app-get-bot [(open)]=\"isGetBotModal\"></app-get-bot>"
+module.exports = "<div class=\"section container anim sliceInUp\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n         <h1 class=\"title\">New Menu</h1>\n\t\t <h2 class=\"subtitle\">Add Menu's to your bot</h2>\n\t  </div>\n\t  <div class=\"column\">\n\n      <form [formGroup]=\"addMenuForm\" >\n\n         <div class=\"input-container\">\n         \t<div class=\"label\">Menu Name</div>\n         \t<div class=\"field\">\n         \t\t<input type=\"text\" name=\"\" formControlName=\"name\" [(ngModel)]=\"formVars.name\" autofocus=\"true\" />\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.name\">{{formErrors.name}}</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Menu Matches</div>\n         \t<div class=\"field\">\n\n         \t\t<tag-input class='tooltip' formControlName=\"matches\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Items'\" (onAdd)=\"onItemAdded($event)\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.matches\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n            \n         \t<div class=\"err\" *ngIf=\"formErrors.matches\">{{formErrors.matches}}</div>\n         </div>\n\n\n\n         <div class=\"input-container\">\n         \t<div class=\"label\">Menu Type</div>\n         \t<div class=\"field\">\n         \t\t<span class=\"select\">\n\t\t\t      <select formControlName=\"type\">\n\t\t\t        <option *ngFor=\"let t of Strings.menuTypes\" value=\"{{t.value}}\">{{t.title}}</option>\n\t\t\t      </select>\n\t\t\t    </span>\n         \t</div>\n         \t<div class=\"err\" *ngIf=\"formErrors.type\">{{formErrors.type}}</div>\n         </div>\n\n\n         <div class=\"input-container no-style\">\n         \t<div class=\"label\">Menu Items</div>\n         \t<div class=\"field\">\n\n         \t\t<tag-input class='tooltip' formControlName=\"menus\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Items'\" (onAdd)=\"onItemAdded($event)\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.menus\">  \n                 <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n               </tag-input>\n         \t</div>\n            \n         \t<div class=\"err\" *ngIf=\"formErrors.menus\">{{formErrors.menus}}</div>\n         </div>\n\n\n\n\n\n         <a class=\"button is-success is-loading\" [class.is-disabled]=\"!addMenuForm.valid\" (click)=\"updateMenu()\" [class.is-loading]=\"formStatus.updating\">Create</a> \n         <a class=\"button\" [routerLink]=\"['/dashboard']\" [class.is-disabled]=\"formStatus.updating\">Cancel</a>\n\n\t  </form>\t\t\n\n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  \n\n\n\n\n\n\n\n\n\n\n\n"
 
 /***/ }),
 
 /***/ 354:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"section container\">\n\n\n\n\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n\t    \n\t    <div stick-from-top=\"0\">\n\t     \t<aside class=\"menu\">\n\t\t\t\t  <p class=\"menu-label\">\n\t\t\t\t    SELECT TYPE\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li><a class=\"{{isFlowTab}}\" (click)=\"filterModules('flow')\">Flows</a></li>\n\t\t\t\t    <li><a class=\"{{isMenuTab}}\" (click)=\"filterModules('menu')\">Menu's</a></li>\n\t\t\t\t  </ul>\n\t\t\t\t  <!-- <p class=\"menu-label\">\n\t\t\t\t    Administration\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li><a>Team Settings</a></li>\n\t\t\t\t    <li>\n\t\t\t\t      <a class=\"is-active\">Manage Your Team</a>\n\t\t\t\t      <ul>\n\t\t\t\t        <li><a>Members</a></li>\n\t\t\t\t        <li><a>Plugins</a></li>\n\t\t\t\t        <li><a>Add a member</a></li>\n\t\t\t\t      </ul>\n\t\t\t\t    </li>\n\t\t\t\t    <li><a>Invitations</a></li>\n\t\t\t\t    <li><a>Cloud Storage Environment Settings</a></li>\n\t\t\t\t    <li><a>Authentication</a></li>\n\t\t\t\t  </ul>\n\t\t\t\t  <p class=\"menu-label\">\n\t\t\t\t    Transactions\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li><a>Payments</a></li>\n\t\t\t\t    <li><a>Transfers</a></li>\n\t\t\t\t    <li><a>Balance</a></li>\n\t\t\t\t  </ul> -->\n\t\t\t</aside>\n\t\t</div>\t\n\n\t  </div>\n\t  <div class=\"column\">\n\n\t  <!-- <sub-loader *ngIf=\"!Modules\" loader-title=\"Loading Modules..\"></sub-loader> -->\n\t  <app-modules-loader *ngIf=\"!Modules\"></app-modules-loader>\n\n\t  <div *ngIf=\"Modules && filteredModulesData.length == 0 \" class=\"no-items-indi\">\n\t  \t\t<article class=\"message is-primary\">\n\t\t\t  <div class=\"message-body\">\n\t\t\t     <span *ngIf=\"isFlowTab == 'is-active'\">No Flows are added!,  click on <span class=\"tag is-info add-flow-indicater\" (mouseleave)=\"indicateUser('leave', 'flow')\" (mouseenter)=\"indicateUser('enter', 'flow')\">Add Flow</span> button to add Flows.</span>\n\n\t\t\t     <span *ngIf=\"isMenuTab == 'is-active'\">No Menu's are added!,  click on <span class=\"tag is-info add-flow-indicater\" (mouseleave)=\"indicateUser('leave', 'menu')\" (mouseenter)=\"indicateUser('enter', 'menu')\">Add Menu</span> button to add Menu's.</span>\n\n\t\t\t  </div>\n\t\t\t</article>\n\t  </div>\n\t    \n           \n\n           <div class=\"columns is-multiline\">\n\t\t\t  <div class=\"column is-6 anim-4 sliceInUp\" *ngFor=\"let item of filteredModulesData\" >\n\t\t   <div class=\"list-card\" >\n\t\t   \t\t<div class=\"header\">\n                 \t<h5 class=\"title is-5\" [routerLink]=\"item.type == 'flow' ? ['flow-item', item._id] : ['menu', item._id]\">{{item.name}}</h5>\n\t\t   \t\t</div>\n\t\t   \t\t<div class=\"content\">\n\t\t   \t\t\t<div class=\"matches\">\n\t\t   \t\t\t\t<span class=\"item border-top-primary\" *ngFor=\"let m of item.matches\">{{m}}</span>\n\t\t   \t\t\t</div>\n\t\t   \t\t\t<div class=\"details\">\t\n\t\t   \t\t\t\t<div class=\"row\"><span class=\"icon is-small\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i></span> Created at: <b>{{item.timestamp_created.at | amTimeAgo}}</b></div>\n\t\t   \t\t\t\t<div class=\"row\"><span class=\"icon is-small\"><i class=\"fa fa-check-square\" aria-hidden=\"true\"></i></span> Triggerd <b>{{item.statastics.triggered}}</b> times</div>\n\t\t   \t\t\t\t<div class=\"row\" *ngIf=\"item.statastics.triggered>0\"><span class=\"icon is-small\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i></span> Last triggered <b>{{item.statastics.triggeredAt | amTimeAgo}}</b></div>\n\t\t   \t\t\t</div>\n\t\t   \t\t</div>\n\t\t   \t\t<div class=\"footer\">\n\t\t   \t\t\t   <a class=\"button is-small is-info is-outlined\" [routerLink]=\"item.type == 'flow' ? ['flow-item', item._id] : ['menu', item._id]\">\n\t\t\t\t\t    <span class=\"icon is-small \">\n\t\t\t\t\t      <i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>\n\t\t\t\t\t    </span>\n\t\t\t\t\t    <span>Edit</span>\n\t\t\t\t\t  </a>\n\t\t\t\t\t  <a class=\"button is-small is-primary is-outlined\">\n\t\t\t\t\t    <span class=\"icon is-small \">\n\t\t\t\t\t      <i class=\"fa fa-clone\" aria-hidden=\"true\"></i>\n\t\t\t\t\t    </span>\n\t\t\t\t\t    <span>Copy</span>\n\t\t\t\t\t  </a>\n\n\t\t\t\t\t  <a class=\"button is-small is-danger is-outlined\" (click)=\"openDeleteModuleModal(item._id)\">\n\t\t\t\t\t    <span class=\"icon is-small\">\n\t\t\t\t\t     <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>\n\t\t\t\t\t    </span>\n\t\t\t\t\t    <span>Delete</span>\n\t\t\t\t\t  </a>\n\t\t   \t\t</div>\n\t\t   </div>\n\n\t\t </div>\n\t\t   </div>\n\n\n         \n\n\n\n\t  </div>\n\t</div>\n</div>\n\n\n\n\n\n\n\n\n<!-- email service  delete modal -->\n\n\n<div class=\"modal is-active\" *ngIf=\"moduleDeleteStatus.isModal\">\n  <div class=\"modal-background\" (click)=\"moduleDeleteStatus.isModal = false\"></div>\n  <div class=\"modal-content\">\n     <div class=\"card anim zoomIn\">\n\t\t  <div class=\"card-content\">\n\t\t    <div class=\"media\">\n\t\t      <div class=\"media-content\">\n\t\t        <p class=\"title is-4\">Confirm to Delete? </p>\n\t\t        <p class=\"subtitle is-6\">No longer available for recover!</p>\n\t\t      </div>\n\t\t    </div>\n\n\t\t    <div class=\"content\">\n\t\t      <a class=\"button is-primary\" [class.is-loading]=\"moduleDeleteStatus.updating\" (click)=\"deleteModule()\">Delete</a>\n\t\t      <a class=\"button is-danger is-outlined\" (click)=\"moduleDeleteStatus.isModal = false\" [class.is-disabled]=\"moduleDeleteStatus.updating\">Cancel</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n  </div>\n  <button class=\"modal-close\" (click)=\"moduleDeleteStatus.isModal = false\"></button>\n</div>"
+module.exports = "<div class=\"modal is-active\">\n  <div class=\"modal-background\" (click)=\"!isCoping && closeModal(true)\"></div>\n  <div class=\"modal-card\">\n    <header class=\"modal-card-head\">\n      <p class=\"modal-card-title\">Select Template</p>\n      <button class=\"delete\" aria-label=\"close\" (click)=\"!isCoping && closeModal(true)\"></button>\n    </header>\n    <section class=\"modal-card-body\">\n      <sub-loader *ngIf=\"isCoping\" loader-title=\"Copying Flow..\"></sub-loader>\n      <div *ngIf=\"!isCoping\" class=\"_template columns is-multiline is-variable is-6\">\n      \t<div class=\"column is-4 _item_out\" *ngFor=\"let item of templates\" (click)=\"copyTemplates(item)\">\n      \t\t<div class=\"_item\">\n      \t\t\t<div class=\"_ic\"><i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i></div>\n      \t\t\t<div class=\"_txt\">{{item.name}}</div>\n      \t\t</div>\n      \t</div>\n      \t<div class=\"column is-4 _item_out\" *ngIf=\"isProgress\">\n      \t\t<div class=\"_item _loader\">\n      \t\t\t<div class=\"_ic\">\n      \t\t\t\t<span class='reading-loader'></span>\n      \t\t\t</div>\n      \t\t\t<div class=\"_txt\">\n      \t\t\t\t<span class=\"reading-loader\"></span>\n      \t\t\t</div>\n      \t\t</div>\n      \t</div>\n      </div>\n    </section>\n    <!-- <footer class=\"modal-card-foot\">\n      <button class=\"button is-success\">Save changes</button>\n      <button class=\"button\" (click)=\"closeModal()\" >Cancel</button>\n    </footer> -->\n  </div>\n</div>"
 
 /***/ }),
 
 /***/ 355:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"section container\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n\t    <div stick-from-top=\"0\">\n         <nav class=\"panel\">\n\t\t\t  <p class=\"panel-heading\">\n\t\t\t    {{menuData.name || 'Loading...'}}\n\t\t\t  </p>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"isLoadingMenu\">\n\t\t\t  \t<div class=\"loader-bar\"></div>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block is-active flex-wrap\" *ngIf=\"!isLoadingMenu\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-share\"></i>\n\t\t\t    </span>\n\t\t\t    <span class=\"tag\" *ngFor=\"let mt of menuData.matches\">{{mt}}&nbsp;</span>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Created at: {{menuData.timestamp_created.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Modified at: {{menuData.timestamp_updated.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu && menuData.statastics\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-check-square\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Triggerd: {{menuData.statastics.triggered || '0'}} times</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu && menuData.statastics && menuData.statastics.triggered>0\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Last Triggerd: {{menuData.statastics.triggeredAt | amTimeAgo}} ago</small>\n\t\t\t  </span>\n\t</nav>\n\t\t</div> \n\t  </div>\n\t  <div class=\"column\">\n\n\t  \n\n\t  \t<div class=\"tabs\">\n\t\t  <ul>\n\t\t    <li class=\"is-active\"><a>Menu</a></li>\n\t\t  </ul>\n\t\t</div>\n\n\t\t<div>\n\t\t     <sub-loader *ngIf=\"isLoadingMenu\" loader-title=\"Loading Flow..\"></sub-loader>\n          <div *ngIf=\"!isLoadingMenu\">\n\t\t     <aside class=\"menu anim-4 sliceInUp\" >\n\t\t\t\t  <p class=\"menu-label\">\n\t\t\t\t    Menu Items\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li *ngFor=\"let m of menuData.menus; let $i = index;\">\n\t\t\t\t      <div class=\"loader-bar\" *ngIf=\"editable[$i] && editMenuStatus.updating\"></div>\n\t\t\t\t    \t<a *ngIf=\"!editable[$i] && !deletable[$i]\" class=\"anim-3 slideInDown\" >{{m}} \n\t\t\t\t\t    \t<span class=\"icon is-small\" (click)=\"showDeleteForm($i)\">\n\t\t\t\t\t\t      <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\t\t\t\t\t\t    <span class=\"icon is-small\" (click)=\"showEditableForm($i)\">\n\t\t\t\t\t\t      <i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\n\t\t\t\t\t    </a>\n\t\t\t\t\t    <a *ngIf=\"deletable[$i]\" class=\"anim-3 slideInUp\" [class.is-disabled]=\"editMenuStatus.updating\">\n                          {{m}}\n                          <a class=\"button is-danger is-outlined is-small ad-action-del anim-4 slideInLeft\" (click)=\"deleteItem($i)\" [class.is-loading]=\"editMenuStatus.updating\">Confirm Delete</a>\n\n\t\t\t\t\t    </a>\n\t\t\t\t\t    <a *ngIf=\"editable[$i]\" class=\"anim-3 slideInUp\" [class.is-disabled]=\"editMenuStatus.updating\">\n\t\t\t\t\t    \t<input type=\"text\" [(ngModel)]=\"editMenu[$i]\" value=\"{{menuData.menus[$i]}}\"/>\n\t\t\t\t\t    \t\n\t\t\t\t\t\t    <span class=\"icon is-small\" (click)=\"cancelEditableForm()\"  >\n\t\t\t\t\t\t      <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\n\t\t\t\t\t\t    <span class=\"icon is-small\" (click)=\"updateMenuItem($i)\" [class.is-disabled]=\"editMenu[$i].length == 0\">\n\t\t\t\t\t\t      <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\t\t\t\t\t    </a>\n\t\t\t\t\t    <div class=\"err\" *ngIf=\"editable[$i] && editMenu[$i].length == 0\">\n\t\t\t\t\t      <span class=\"tag is-danger anim-2 slideInDown\">Cannot be blank!</span>\n\t\t\t\t\t    </div>\n  \t\t\t\t    </li>\n\t\t\t\t  </ul>\n\t\t     </aside>\n             <br/>\n\t\t     <a class=\"button is-info is-outlined is-small\" (click)=\"addMenuItem()\">\n\t\t     \t<span class=\"icon is-small\">\n\t\t\t      <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t\t    <span>Add items</span>\n\t\t\t </a>\n\n         </div>\n\n\t\t</div>\n\n\t    \n\n      \n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  \n\n\n\n\n\n\n"
+module.exports = "<div class=\"dashboard\">\n\n<dashboard-header></dashboard-header>\n\n<!-- sub nav -->\n<nav class=\"force-padding nav\">\n <div class=\"container\">\n\t\t  <div class=\"nav-left\">\n\t\t  </div>\n\n\t\t  <div class=\"nav-center\">\n\t\t  </div>\n\n\t\t  <div class=\"nav-right\">\n\t\t\t\t    <div class=\"nav-item\">\n\t\t\t\t      <div class=\"field is-grouped\">\n\t\t\t\t        <p class=\"control\">\n\t\t\t\t          <a (click)=\"openAddTemplateModal()\" class=\"button is-primary is-outlined\" id=\"add_flow\">\n\t\t\t\t            <span class=\"icon\">\n\t\t\t\t              <i class=\"fa fa-plus\"></i>\n\t\t\t\t            </span>\n\t\t\t\t            <span>Add Flow</span>\n\t\t\t\t          </a>\n\t\t\t\t        </p>\n\t\t\t\t        <p class=\"control\">\n\t\t\t\t          <a [routerLink]=\"['add-menu']\" class=\"button is-primary is-outlined\" id=\"add_menu\">\n\t\t\t\t            <span class=\"icon\">\n\t\t\t\t              <i class=\"fa fa-plus\"></i>\n\t\t\t\t            </span>\n\t\t\t\t            <span>Add Menu</span>\n\t\t\t\t          </a>\n\t\t\t\t        </p>\n\t\t\t\t      </div>\n\t\t\t\t   </div>\n\t\t  </div>\n\t</div>\t  \n</nav>\n<!-- sub nav end --> \n\n\n\n<router-outlet></router-outlet>\n\n</div>\n\n\n<footer class=\"footer\">\n  <div class=\"container\">\n    <div class=\"content has-text-centered\">\n      <p>\n        <strong>botflow</strong> | The website content\n        is licensed <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC ANS 4.0</a>.\n      </p>\n\n      <span hresf=\"http://localhost:3000/ui-manager\">botflow @ 2017-2018</span> | <a href=\"ui-manager\">Material Dashboard</a>\n    </div>\n  </div>\n</footer>\n\n\n\n<!-- modals -->\n\n<app-add-templates *ngIf=\"addTemplateModal.open\" [(visible)]=\"addTemplateModal.open\"></app-add-templates>\n\n\n\n"
 
 /***/ }),
 
 /***/ 356:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"columns is-multiline _md_ldr\">\n\t<div class=\"column is-6 _itm\" *ngFor=\"let item of [0]\">\n\t\t<div class=\"_ldr\">\n\t\t\t<div class=\"_ttl reading-loader\"></div>\n\t\t\t<div class=\"_mtc\">\n\t\t\t\t<div *ngFor=\"let item of [0,1,2,3]\" class=\"reading-loader\"></div>\n\t\t\t</div>\n\t\t\t<div class='_othr'>\n\t\t\t\t<div *ngFor=\"let item of [0,1,2]\" class=\"reading-loader\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+module.exports = "<nav class=\"nav hero iss-primary\" [class.at-top]=\"atTop\">\n <div class=\"container\">\n\t\t  <div class=\"nav-left\">\n\t\t    <a class=\"nav-item\" [routerLink]=\"['/']\">\n\t\t      <h2 class=\"subtitle _title\">botflow</h2>\n\t\t    </a>\n\t\t  </div>\n\n\t\t  <div class=\"nav-center\">\n\t\t    <!-- <a class=\"nav-item\">\n\t\t      <span class=\"icon\">\n\t\t        <i class=\"fa fa-github\"></i>\n\t\t      </span>\n\t\t    </a> -->\n\t\t    <a class=\"nav-item\" href=\"https://twitter.com/Vinayvnvv\" target=\"_blank\">\n\t\t      <span class=\"icon\" >\n\t\t        <i class=\"fa fa-twitter\"></i>\n\t\t      </span>\n\t\t    </a>\n\t\t  </div>\n\n\t\t  <!-- This \"nav-toggle\" hamburger menu is only visible on mobile -->\n\t\t  <!-- You need JavaScript to toggle the \"is-active\" class on \"nav-menu\" -->\n\t\t  <span class=\"nav-toggle\" (click)=\"isMenu = !isMenu\" [class.is-active] = \"isMenu\">\n\t\t    <span></span>\n\t\t    <span></span>\n\t\t    <span></span>\n\t\t  </span>\n\n\t\t  <!-- This \"nav-menu\" is hidden on mobile -->\n\t\t  <!-- Add the modifier \"is-active\" to display it on mobile -->\n\t\t  <div class=\"nav-right nav-menu\" [class.is-active] = \"isMenu\">\n\t\t    <a class=\"nav-item\" [routerLink]=\"['/dashboard']\">\n\t\t      Home\n\t\t    </a>\n\t\t    <!-- <a class=\"nav-item button is-light\">\n\t\t      Documentation\n\t\t    </a> -->\n\t\t    <a class=\"nav-item\">\n\t\t      <span class=\"icon is-small\">\n\t\t              <i class=\"fa fa-google\"></i>\n\t\t      </span>&nbsp;\n\t\t      {{rootScope._auth_user.name}}\n\t\t      <span class=\"icon\">\n\t\t              <i class=\"fa fa-angle-down\"></i>\n\t\t      </span>\n\t\t    </a>\n\n\t\t    <div class=\"nav-item\">\n\t\t      <div class=\"field is-grouped\">\n\t\t        <p class=\"control\">\n\t\t          <a class=\"button is-primary\" (click)=\"isGetBotModal = true\">\n\t\t            <span class=\"icon is-small\">\n\t\t              <i class=\"fa fa-code\"></i>\n\t\t            </span>\n\t\t            <span>Get Bot</span>\n\t\t          </a> &nbsp;\n\t\t          <a class=\"button iss-primary iss-inverted iss-outlined\" (click)=\"logout()\" >\n\t\t            <span class=\"icon is-small\">\n\t\t              <i class=\"fa fa-power-off\"></i>\n\t\t            </span>\n\t\t            <span>Logout</span>\n\t\t          </a>\n\t\t        </p>\n\t\t        <!-- <p class=\"control\">\n\t\t          <a class=\"button is-primary\">\n\t\t            <span class=\"icon\">\n\t\t              <i class=\"fa fa-download\"></i>\n\t\t            </span>\n\t\t            <span>Download</span>\n\t\t          </a>\n\t\t        </p> -->\n\t\t      </div>\n\t\t    </div>\n\t\t  </div>\n\t</div>\t  \n</nav>\n\n<app-get-bot [(open)]=\"isGetBotModal\"></app-get-bot>"
 
 /***/ }),
 
 /***/ 357:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal is-active\" *ngIf=\"open\">\n  <div class=\"modal-background\" (click)=\"closeModal()\"></div>\n  <div class=\"modal-content\">\n\n    <div *ngIf=\"view == 'code'\">\n       <header class=\"modal-card-head\">\n        <p class=\"modal-card-title\">Get Your Bot</p>\n        <button class=\"delete\" (click)=\"closeModal()\"></button>\n      </header>\n      <section class=\"modal-card-body\">\n        <h6 class=\"subtitle is-6\">Copy below snippet and paste in to your application to run the bot!</h6>\n        <code class=\"\" style=\"background-color: #f5f5f5;color:#777\"> \n          &#60;<span style=\"color: green\">script</span> <span style=\"color: #08c\">chat-bot-id</span>=\"<span style=\"color: #800\">{{chat_bot_id}}</span>\" <span style=\"color: #08c\">type</span>=\"<span style=\"color: #800\">text/javascript</span>\" <span style=\"color: #08c\">src</span>=\"<span style=\"color: #800\">{{(host == 'localhost') ? origin : host }}bot/build/script_prod-min.js</span>\"&#62;&#60;/<span style=\"color: green\">script</span>&#62;\n         </code>\n\n         <br/><br/>\n          <a class=\"button is-info\" (click)=\"goView('setup')\">Setup Bot</a>\n\n\n      </section>\n      <footer class=\"modal-card-foot\">\n        <a class=\"button is-success\" *ngIf=\"false\">Save changes</a>\n        <a class=\"button\" (click)=\"closeModal()\" >Cancel</a>\n      </footer>\n  </div>\n\n  <div *ngIf=\"view == 'setup'\">\n      <header class=\"modal-card-head\">\n        <p class=\"modal-card-title\">SetUp Bot</p>\n        <button class=\"delete\" (click)=\"closeModal()\"></button>\n      </header>\n      <section class=\"modal-card-body\">\n\n\n          <sub-loader *ngIf=\"isLoadingInitData\" loader-title=\"Getting Bot Configuration..\"></sub-loader>\n        \n          <div *ngIf=\"!isLoadingInitData\">\n            <form [formGroup]=\"botSetUpForm\" >\n            <section class=\"section _section\">\n              <h3 class=\"title is-4\">Intializers</h3>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Bot name in ToolBar</div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"bot_name\" [(ngModel)]=\"formVars.bot_name\"/>\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.bot_name\">{{formErrors.bot_name}}</div>\n              </div>\n\n\n              <div class=\"input-container no-style\">\n                  <div class=\"label\">Welcome messages</div>\n                  <div class=\"field\">\n\n                    <tag-input class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add msg'\"  [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.msg\">  \n                         <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n                       </tag-input>\n                  </div>\n                    \n                  <div class=\"err\" *ngIf=\"formErrors.msg\">{{formErrors.msg}}</div>\n                 \n             </div>\n\n             <div class=\"input-container no-style\">\n                  <div class=\"label\">Suggestion Type</div>\n                  <div class=\"field\">\n                      <div class=\"input-container\">\n                        <span class=\"select\">\n                          <select formControlName=\"shortcut\" [(ngModel)]=\"formVars.shortcut\">\n                            <option *ngFor=\"let s of suggestionTypeArray\" value=\"{{s.value}}\">{{s.title}}</option>\n                         </select>\n                        </span>\n                      </div>\n               \n                  </div>\n                    \n                  <div class=\"err\" *ngIf=\"formErrors.shortcut\">{{formErrors.shortcut}}</div>\n\n                   <ul *ngIf=\"formVars.shortcut != suggestionTypeArray[0].value\">\n                      <tag-input (onFocus)=\"s_msg_sub_err = true\"  class='tooltip' formControlName=\"shortcutData\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Suggestion Items *'\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.shortcutData\">  \n                         <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n                      </tag-input>                      \n                      <div class=\"err\" *ngIf=\"s_msg_sub_err && botSetUpForm.value.shortcutData.length == 0\" >\n                        <br/>{{validationMessages.shortcutData.required}}</div>\n                  </ul>\n             </div>\n\n\n\n            </section>\n\n            <section class=\"section _section\">\n              <h3 class=\"title is-4\">Theme Setting</h3>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Theme background color <span class=\"_clrpkrshw\" [style.background]=\"formVars.style.bgcolor\"></span></div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"bgcolor\" [(colorPicker)]=\"formVars.style.bgcolor\"  [value]=\"formVars.style.bgcolor\"/>\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.bgcolor\">{{formErrors.bgcolor}}</div>\n              </div>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Theme Text color <span class=\"_clrpkrshw\" [style.background]=\"formVars.style.color\"></span></div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"color\" [(colorPicker)]=\"formVars.style.color\"  [value]=\"formVars.style.color\"/>\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.color\">{{formErrors.color}}</div>\n              </div>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Bot Height (in %)</div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"height\" [(ngModel)]=\"formVars.style.height\"  />\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.height\">{{formErrors.height}}</div>\n              </div>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Bot Width</div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"width\" [(ngModel)]=\"formVars.style.width\"  />\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.width\">{{formErrors.width}}</div>\n              </div>\n\n\n            </section>\n          </form>\n        </div>\n\n\n\n      </section>\n      <footer class=\"modal-card-foot\">\n        <a class=\"button is-success\" [class.is-disabled]=\"!botSetUpForm.valid || isLoadingInitData || isUpdatingInitData\" (click)=\"updateBotSetupData()\" [class.is-loading]=\"isUpdatingInitData\">Save changes</a>\n        <a class=\"button\" (click)=\"goView('code')\">Cancel</a>\n      </footer>\n  </div>\n\n\n  </div>\n  <button class=\"modal-close\" (click)=\"closeModal()\"></button>\n</div>"
+module.exports = "<div class=\"section container\">\n\n\n\n\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n\t    \n\t    <div stick-from-top=\"0\">\n\t     \t<aside class=\"menu\">\n\t\t\t\t  <p class=\"menu-label\">\n\t\t\t\t    SELECT TYPE\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li><a class=\"{{isFlowTab}}\" (click)=\"filterModules('flow')\">Flows</a></li>\n\t\t\t\t    <li><a class=\"{{isMenuTab}}\" (click)=\"filterModules('menu')\">Menu's</a></li>\n\t\t\t\t  </ul>\n\t\t\t\t  <!-- <p class=\"menu-label\">\n\t\t\t\t    Administration\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li><a>Team Settings</a></li>\n\t\t\t\t    <li>\n\t\t\t\t      <a class=\"is-active\">Manage Your Team</a>\n\t\t\t\t      <ul>\n\t\t\t\t        <li><a>Members</a></li>\n\t\t\t\t        <li><a>Plugins</a></li>\n\t\t\t\t        <li><a>Add a member</a></li>\n\t\t\t\t      </ul>\n\t\t\t\t    </li>\n\t\t\t\t    <li><a>Invitations</a></li>\n\t\t\t\t    <li><a>Cloud Storage Environment Settings</a></li>\n\t\t\t\t    <li><a>Authentication</a></li>\n\t\t\t\t  </ul>\n\t\t\t\t  <p class=\"menu-label\">\n\t\t\t\t    Transactions\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li><a>Payments</a></li>\n\t\t\t\t    <li><a>Transfers</a></li>\n\t\t\t\t    <li><a>Balance</a></li>\n\t\t\t\t  </ul> -->\n\t\t\t</aside>\n\t\t</div>\t\n\n\t  </div>\n\t  <div class=\"column\">\n\n\t  <!-- <sub-loader *ngIf=\"!Modules\" loader-title=\"Loading Modules..\"></sub-loader> -->\n\t  <app-modules-loader *ngIf=\"!Modules\"></app-modules-loader>\n\n\t  <div *ngIf=\"Modules && filteredModulesData.length == 0 \" class=\"no-items-indi\">\n\t  \t\t<article class=\"message is-primary\">\n\t\t\t  <div class=\"message-body\">\n\t\t\t     <span *ngIf=\"isFlowTab == 'is-active'\">No Flows are added!,  click on <span class=\"tag is-info add-flow-indicater\" (mouseleave)=\"indicateUser('leave', 'flow')\" (mouseenter)=\"indicateUser('enter', 'flow')\">Add Flow</span> button to add Flows.</span>\n\n\t\t\t     <span *ngIf=\"isMenuTab == 'is-active'\">No Menu's are added!,  click on <span class=\"tag is-info add-flow-indicater\" (mouseleave)=\"indicateUser('leave', 'menu')\" (mouseenter)=\"indicateUser('enter', 'menu')\">Add Menu</span> button to add Menu's.</span>\n\n\t\t\t  </div>\n\t\t\t</article>\n\t  </div>\n\t    \n           \n\n           <div class=\"columns is-multiline\">\n\t\t\t  <div class=\"column is-6 anim-4 sliceInUp\" *ngFor=\"let item of filteredModulesData\" >\n\t\t   <div class=\"list-card\" >\n\t\t   \t\t<div class=\"header\">\n                 \t<h5 class=\"title is-5\" [routerLink]=\"item.type == 'flow' ? ['flow-item', item._id] : ['menu', item._id]\">{{item.name}}</h5>\n\t\t   \t\t</div>\n\t\t   \t\t<div class=\"content\">\n\t\t   \t\t\t<div class=\"matches\">\n\t\t   \t\t\t\t<span class=\"item border-top-primary\" *ngFor=\"let m of item.matches\">{{m}}</span>\n\t\t   \t\t\t</div>\n\t\t   \t\t\t<div class=\"details\">\t\n\t\t   \t\t\t\t<div class=\"row\"><span class=\"icon is-small\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i></span> Created at: <b>{{item.timestamp_created.at | amTimeAgo}}</b></div>\n\t\t   \t\t\t\t<div class=\"row\"><span class=\"icon is-small\"><i class=\"fa fa-check-square\" aria-hidden=\"true\"></i></span> Triggerd <b>{{item.statastics.triggered}}</b> times</div>\n\t\t   \t\t\t\t<div class=\"row\" ><span class=\"icon is-small\"><i class=\"fa fa-clock-o\" aria-hidden=\"true\"></i></span> Last triggered <b> {{(item.statastics.triggered>0) ? (item.statastics.triggeredAt | amTimeAgo) : 'not yet triggered'}}</b></div>\n\t\t   \t\t\t</div>\n\t\t   \t\t</div>\n\t\t   \t\t<div class=\"footer\">\n\t\t   \t\t\t   <a class=\"button is-small is-info is-outlined\" [routerLink]=\"item.type == 'flow' ? ['flow-item', item._id] : ['menu', item._id]\">\n\t\t\t\t\t    <span class=\"icon is-small \">\n\t\t\t\t\t      <i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>\n\t\t\t\t\t    </span>\n\t\t\t\t\t    <span>Edit</span>\n\t\t\t\t\t  </a>\n\t\t\t\t\t  <a class=\"button is-small is-primary is-outlined\">\n\t\t\t\t\t    <span class=\"icon is-small \">\n\t\t\t\t\t      <i class=\"fa fa-clone\" aria-hidden=\"true\"></i>\n\t\t\t\t\t    </span>\n\t\t\t\t\t    <span>Copy</span>\n\t\t\t\t\t  </a>\n\n\t\t\t\t\t  <a class=\"button is-small is-danger is-outlined\" (click)=\"openDeleteModuleModal(item._id)\">\n\t\t\t\t\t    <span class=\"icon is-small\">\n\t\t\t\t\t     <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>\n\t\t\t\t\t    </span>\n\t\t\t\t\t    <span>Delete</span>\n\t\t\t\t\t  </a>\n\t\t   \t\t</div>\n\t\t   </div>\n\n\t\t </div>\n\t\t   </div>\n\n\n         \n\n\n\n\t  </div>\n\t</div>\n</div>\n\n\n\n\n\n\n\n\n<!-- email service  delete modal -->\n\n\n<div class=\"modal is-active\" *ngIf=\"moduleDeleteStatus.isModal\">\n  <div class=\"modal-background\" (click)=\"moduleDeleteStatus.isModal = false\"></div>\n  <div class=\"modal-content\">\n     <div class=\"card anim zoomIn\">\n\t\t  <div class=\"card-content\">\n\t\t    <div class=\"media\">\n\t\t      <div class=\"media-content\">\n\t\t        <p class=\"title is-4\">Confirm to Delete? </p>\n\t\t        <p class=\"subtitle is-6\">No longer available for recover!</p>\n\t\t      </div>\n\t\t    </div>\n\n\t\t    <div class=\"content\">\n\t\t      <a class=\"button is-primary\" [class.is-loading]=\"moduleDeleteStatus.updating\" (click)=\"deleteModule()\">Delete</a>\n\t\t      <a class=\"button is-danger is-outlined\" (click)=\"moduleDeleteStatus.isModal = false\" [class.is-disabled]=\"moduleDeleteStatus.updating\">Cancel</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</div>\n  </div>\n  <button class=\"modal-close\" (click)=\"moduleDeleteStatus.isModal = false\"></button>\n</div>"
 
 /***/ }),
 
 /***/ 358:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"home\">\n\t<div class='palx-bg is-hidden-mobile'></div>\n\t<nav class=\"nav hero is-primary\">\n\t <div class=\"container\">\n\t\t\t  <div class=\"nav-left\">\n\t\t\t    <a class=\"nav-item\">\n\t\t\t      <h2 class=\"subtitle _title\">botflow</h2>\n\t\t\t    </a>\n\t\t\t  </div>\n\n\t\t\t  <div class=\"nav-center\">\n\t\t\t  </div>\n\n\t\t\t  <!-- This \"nav-toggle\" hamburger menu is only visible on mobile -->\n\t\t\t  <span class=\"nav-toggle\" (click)=\"isMenu = !isMenu\" [class.is-active] = \"isMenu\">\n\t\t\t    <span></span>\n\t\t\t    <span></span>\n\t\t\t    <span></span>\n\t\t\t  </span>\n\t\t\t  <!-- Add the modifier \"is-active\" to display it on mobile -->\n\t\t\t  <div class=\"nav-right nav-menu\" [class.is-active] = \"isMenu\">\n\t\t\t    <a class=\"nav-item\" href=\"#features\">\n\t\t\t      <!-- <span class=\"icon\" >\n\t\t\t        <i class=\"fa fa-twitter\"></i>\n\t\t\t      </span> -->\n\t\t\t      Features\n\t\t\t    </a>\n\t\t\t    <a class=\"nav-item\" [routerLink]=\"['/dashboard']\">\n\t\t\t      <span class=\"icon is-small\">\n\t\t\t        <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>\n\t\t\t      </span>&nbsp;\n\t\t\t      Manage\n\t\t\t    </a>\n\t\t\t  \t<a class=\"nav-item\" href=\"https://twitter.com/Vinayvnvv\" target=\"_blank\">\n\t\t\t      <span class=\"icon\" >\n\t\t\t        <i class=\"fa fa-twitter\"></i>\n\t\t\t      </span>\n\t\t\t    </a>\n\t\t\t    <div class=\"nav-item\">\n\t\t\t      <div class=\"field is-grouped\">\n\t\t\t        <p class=\"control\">\n\t\t\t          <a class=\"button is-primary is-inverted\" [routerLink]=\"['/dashboard']\" >\n\t\t\t            <span class=\"icon is-small\">\n\t\t\t              <i class=\"fa fa-power-off\"></i>\n\t\t\t            </span>\n\t\t\t            <span>Login</span>\n\t\t\t          </a>\n\t\t\t        </p>\n\t\t\t      </div>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t</div>\t  \n\t</nav>\n\t<section class=\"hero is-primary main-ad\">\n\t  <div class=\"hero-body\">\n\t    <div class=\"container\">\n\t      <div class=\"columns\">\n\t      \t<div class=\"column is-6 title-sec\">\n\t\t      <h1 class=\"title _ttl\">\n\t\t        Create Flows, Automate Queries & Help People!\n\t\t      </h1>\n\t\t      <h2 class=\"subtitle\">\n\t\t       An automated <b>chat-bots</b> based on the flows.\n\t\t      </h2>\n\t\t      <div>\n\t\t      \t<a class=\"button is-black iss-outlined\" [routerLink]=\"['/dashboard']\">Create for Free</a>&nbsp;&nbsp;\n\t\t      \t<a class=\"button is-primary is-inverted\" [routerLink]=\"['/dashboard']\">Register</a>\n\t\t      </div>\n\t\t    </div>\n\t\t    <div class=\"column is-6 img-sec is-hidden-mobile\">\n\t\t    \t<img src=\"assets/img/launch-bg.svg\"/>\n\t\t    </div>\n\t\t  </div>\n\t    </div>\n\t  </div>\n\t</section>\n\n\t<section class=\"features _pd\" id=\"features\">\n\t\t<div class=\"container\">\n\t\t   <div class=\"_ftrs _ovlpd\">\t\n\t\t\t\t<div class=\"_t_bar has-text-centered\">\n\t\t\t\t\t<h1 class=\"title _ttl has-text-weight-bold\">\n\t\t\t\t       Features\n\t\t\t\t    </h1>\n\t\t\t\t    <div class=\"_dvdr\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"columns is-multiline _bd\">\n\t\t\t\t\t<div class='column is-4 has-text-centered' *ngFor=\"let item of featuresData\">\n\t\t\t\t\t\t<div class=\"_itm\">\n\t\t\t\t\t\t\t<div class=\"_ic\">\n\t\t\t\t\t\t\t\t<i class=\"{{item.icon}}\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"_tt\">\n\t\t\t\t\t\t\t\t<h2 class=\"subtitle is-4\">{{item.name}}</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class='_desc'>\n\t\t\t\t\t\t\t\t{{item.desc}}\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n\n\t<div class=\"container _sections\">\n\t\t<section class=\"hero is-dark is-bold _shadow _nocode\">\n\t\t  <div class=\"hero-body\">\n\t\t  \t<div class=\"columns\">\n\t\t\t  \t<div class=\"column is-2 _ic\">\n\t\t\t  \t\t<b><i class=\"fa fa-code\" aria-hidden=\"true\"></i></b>\n\t\t\t  \t</div>\n\t\t\t  \t<div class=\"column is-10\">\n\t\t\t  \t\t<h1 class=\"title\">\n\t\t\t\t       <b> One JS Snippet all that works!</b>\n\t\t\t\t    </h1>\n\t\t\t      <h2 class=\"subtitle\">\n\t\t\t        Just insert the snippet which will convert into your bot and auto will start.\n\t\t\t      </h2>\n\t\t\t  \t</div>\n\t\t\t  </div>\n\t\t      \n\t\t    </div>\n\t\t</section>\n\t</div>\n\n\t<section class=\"features\">\n\t\t<div class=\"container\">\n\t\t   <div class=\"_ftrs\">\t\n\t\t\t\t<div class=\"_t_bar has-text-centered\">\n\t\t\t\t\t<h1 class=\"title _ttl has-text-weight-bold\">\n\t\t\t\t       What's Special?\n\t\t\t\t    </h1>\n\t\t\t\t    <div class=\"_dvdr\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"columns is-multiline _bd\">\n\t\t\t\t\t<div class='column is-4 has-text-centered' *ngFor=\"let item of specialData\">\n\t\t\t\t\t\t<div class=\"_itm\">\n\t\t\t\t\t\t\t<div class=\"_ic\">\n\t\t\t\t\t\t\t\t<i class=\"{{item.icon}}\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"_tt\">\n\t\t\t\t\t\t\t\t<h2 class=\"subtitle is-4\">{{item.name}}</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class='_desc'>\n\t\t\t\t\t\t\t\t{{item.desc}}\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n\t<div class=\"container\">\n\t\t<section class=\"hero\" style=\"background-color: transparent;\">\n\t\t  <div class=\"hero-body\">\n\t\t    <div class=\" has-text-centered\">\n\t\t    \t<a class='button is-primary is-large _shadow' [routerLink]=\"['/dashboard']\">Create For Free</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</section>\n\t</div>\n\n\t<footer class=\"footer\">\n\t  <div class=\"container\">\n\t    <div class=\"content has-text-centered\">\n\t      <p>\n\t        <strong>botflow</strong> | The website content\n\t        is licensed <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC ANS 4.0</a>.\n\t      </p>\n\n\t      <span hresf=\"http://localhost:3000/ui-manager\">botflow @ 2017-2018</span> | <a href=\"ui-manager\">Material Dashboard</a>\n\t    </div>\n\t  </div>\n\t</footer>\n\n\n</div>\n"
+module.exports = "<div class=\"section container\">\n\t<div class=\"columns\">\n\t  <div class=\"column is-3 r-border\">\n\t    <div stick-from-top=\"0\">\n         <nav class=\"panel\">\n\t\t\t  <p class=\"panel-heading\">\n\t\t\t    {{menuData.name || 'Loading...'}}\n\t\t\t  </p>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"isLoadingMenu\">\n\t\t\t  \t<div class=\"loader-bar\"></div>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block is-active flex-wrap\" *ngIf=\"!isLoadingMenu\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-share\"></i>\n\t\t\t    </span>\n\t\t\t    <span class=\"tag\" *ngFor=\"let mt of menuData.matches\">{{mt}}&nbsp;</span>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Created at: {{menuData.timestamp_created.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Modified at: {{menuData.timestamp_updated.at | amTimeAgo}}</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu && menuData.statastics\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-check-square\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Triggerd: {{menuData.statastics.triggered || '0'}} times</small>\n\t\t\t  </span>\n\t\t\t  <span class=\"panel-block\" *ngIf=\"!isLoadingMenu && menuData.statastics && menuData.statastics.triggered>0\">\n\t\t\t    <span class=\"panel-icon\">\n\t\t\t      <i class=\"fa fa-clock-o\"></i>\n\t\t\t    </span>\n\t\t\t    <small>Last Triggerd: {{menuData.statastics.triggeredAt | amTimeAgo}} ago</small>\n\t\t\t  </span>\n\t</nav>\n\t\t</div> \n\t  </div>\n\t  <div class=\"column\">\n\n\t  \n\n\t  \t<div class=\"tabs\">\n\t\t  <ul>\n\t\t    <li class=\"is-active\"><a>Menu</a></li>\n\t\t  </ul>\n\t\t</div>\n\n\t\t<div>\n\t\t     <sub-loader *ngIf=\"isLoadingMenu\" loader-title=\"Loading Flow..\"></sub-loader>\n          <div *ngIf=\"!isLoadingMenu\">\n\t\t     <aside class=\"menu anim-4 sliceInUp\" >\n\t\t\t\t  <p class=\"menu-label\">\n\t\t\t\t    Menu Items\n\t\t\t\t  </p>\n\t\t\t\t  <ul class=\"menu-list\">\n\t\t\t\t    <li *ngFor=\"let m of menuData.menus; let $i = index;\">\n\t\t\t\t      <div class=\"loader-bar\" *ngIf=\"editable[$i] && editMenuStatus.updating\"></div>\n\t\t\t\t    \t<a *ngIf=\"!editable[$i] && !deletable[$i]\" class=\"anim-3 slideInDown\" >{{m}} \n\t\t\t\t\t    \t<span class=\"icon is-small\" (click)=\"showDeleteForm($i)\">\n\t\t\t\t\t\t      <i class=\"fa fa-trash\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\t\t\t\t\t\t    <span class=\"icon is-small\" (click)=\"showEditableForm($i)\">\n\t\t\t\t\t\t      <i class=\"fa fa-pencil\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\n\t\t\t\t\t    </a>\n\t\t\t\t\t    <a *ngIf=\"deletable[$i]\" class=\"anim-3 slideInUp\" [class.is-disabled]=\"editMenuStatus.updating\">\n                          {{m}}\n                          <a class=\"button is-danger is-outlined is-small ad-action-del anim-4 slideInLeft\" (click)=\"deleteItem($i)\" [class.is-loading]=\"editMenuStatus.updating\">Confirm Delete</a>\n\n\t\t\t\t\t    </a>\n\t\t\t\t\t    <a *ngIf=\"editable[$i]\" class=\"anim-3 slideInUp\" [class.is-disabled]=\"editMenuStatus.updating\">\n\t\t\t\t\t    \t<input type=\"text\" [(ngModel)]=\"editMenu[$i]\" value=\"{{menuData.menus[$i]}}\"/>\n\t\t\t\t\t    \t\n\t\t\t\t\t\t    <span class=\"icon is-small\" (click)=\"cancelEditableForm()\"  >\n\t\t\t\t\t\t      <i class=\"fa fa-times\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\n\t\t\t\t\t\t    <span class=\"icon is-small\" (click)=\"updateMenuItem($i)\" [class.is-disabled]=\"editMenu[$i].length == 0\">\n\t\t\t\t\t\t      <i class=\"fa fa-check\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t    </span>\n\t\t\t\t\t    </a>\n\t\t\t\t\t    <div class=\"err\" *ngIf=\"editable[$i] && editMenu[$i].length == 0\">\n\t\t\t\t\t      <span class=\"tag is-danger anim-2 slideInDown\">Cannot be blank!</span>\n\t\t\t\t\t    </div>\n  \t\t\t\t    </li>\n\t\t\t\t  </ul>\n\t\t     </aside>\n             <br/>\n\t\t     <a class=\"button is-info is-outlined is-small\" (click)=\"addMenuItem()\">\n\t\t     \t<span class=\"icon is-small\">\n\t\t\t      <i class=\"fa fa-plus\"></i>\n\t\t\t    </span>\n\t\t\t    <span>Add items</span>\n\t\t\t </a>\n\n         </div>\n\n\t\t</div>\n\n\t    \n\n      \n\t\t\t\n\t  \t\n\t  </div>\n\t </div>\n</div>\t  \n\n\n\n\n\n\n"
 
 /***/ }),
 
 /***/ 359:
 /***/ (function(module, exports) {
 
+module.exports = "<div class=\"columns is-multiline _md_ldr\">\n\t<div class=\"column is-6 _itm\" *ngFor=\"let item of [0]\">\n\t\t<div class=\"_ldr\">\n\t\t\t<div class=\"_ttl reading-loader\"></div>\n\t\t\t<div class=\"_mtc\">\n\t\t\t\t<div *ngFor=\"let item of [0,1,2,3]\" class=\"reading-loader\"></div>\n\t\t\t</div>\n\t\t\t<div class='_othr'>\n\t\t\t\t<div *ngFor=\"let item of [0,1,2]\" class=\"reading-loader\"></div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>"
+
+/***/ }),
+
+/***/ 360:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"modal is-active\" *ngIf=\"open\">\n  <div class=\"modal-background\" (click)=\"closeModal()\"></div>\n  <div class=\"modal-content\">\n\n    <div *ngIf=\"view == 'code'\">\n       <header class=\"modal-card-head\">\n        <p class=\"modal-card-title\">Get Your Bot</p>\n        <button class=\"delete\" (click)=\"closeModal()\"></button>\n      </header>\n      <section class=\"modal-card-body\">\n        <h6 class=\"subtitle is-6\">Copy below snippet and paste in to your application to run the bot!</h6>\n        <code class=\"\" style=\"background-color: #f5f5f5;color:#777\"> \n          &#60;<span style=\"color: green\">script</span> <span style=\"color: #08c\">chat-bot-id</span>=\"<span style=\"color: #800\">{{chat_bot_id}}</span>\" <span style=\"color: #08c\">type</span>=\"<span style=\"color: #800\">text/javascript</span>\" <span style=\"color: #08c\">src</span>=\"<span style=\"color: #800\">{{(host == 'localhost') ? origin : host }}bot/build/script_prod-min.js</span>\"&#62;&#60;/<span style=\"color: green\">script</span>&#62;\n         </code>\n\n         <br/><br/>\n          <a class=\"button is-info\" (click)=\"goView('setup')\">Setup Bot</a>\n\n\n      </section>\n      <footer class=\"modal-card-foot\">\n        <a class=\"button is-success\" *ngIf=\"false\">Save changes</a>\n        <a class=\"button\" (click)=\"closeModal()\" >Cancel</a>\n      </footer>\n  </div>\n\n  <div *ngIf=\"view == 'setup'\">\n      <header class=\"modal-card-head\">\n        <p class=\"modal-card-title\">SetUp Bot</p>\n        <button class=\"delete\" (click)=\"closeModal()\"></button>\n      </header>\n      <section class=\"modal-card-body\">\n\n\n          <sub-loader *ngIf=\"isLoadingInitData\" loader-title=\"Getting Bot Configuration..\"></sub-loader>\n        \n          <div *ngIf=\"!isLoadingInitData\">\n            <form [formGroup]=\"botSetUpForm\" >\n            <section class=\"section _section\">\n              <h3 class=\"title is-4\">Intializers</h3>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Bot name in ToolBar</div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"bot_name\" [(ngModel)]=\"formVars.bot_name\"/>\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.bot_name\">{{formErrors.bot_name}}</div>\n              </div>\n\n\n              <div class=\"input-container no-style\">\n                  <div class=\"label\">Welcome messages</div>\n                  <div class=\"field\">\n\n                    <tag-input class='tooltip' formControlName=\"msg\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add msg'\"  [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.msg\">  \n                         <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n                       </tag-input>\n                  </div>\n                    \n                  <div class=\"err\" *ngIf=\"formErrors.msg\">{{formErrors.msg}}</div>\n                 \n             </div>\n\n             <div class=\"input-container no-style\">\n                  <div class=\"label\">Suggestion Type</div>\n                  <div class=\"field\">\n                      <div class=\"input-container\">\n                        <span class=\"select\">\n                          <select formControlName=\"shortcut\" [(ngModel)]=\"formVars.shortcut\">\n                            <option *ngFor=\"let s of suggestionTypeArray\" value=\"{{s.value}}\">{{s.title}}</option>\n                         </select>\n                        </span>\n                      </div>\n               \n                  </div>\n                    \n                  <div class=\"err\" *ngIf=\"formErrors.shortcut\">{{formErrors.shortcut}}</div>\n\n                   <ul *ngIf=\"formVars.shortcut != suggestionTypeArray[0].value\">\n                      <tag-input (onFocus)=\"s_msg_sub_err = true\"  class='tooltip' formControlName=\"shortcutData\" [placeholder]=\"'+ Add'\" [secondaryPlaceholder]=\"'Add Suggestion Items *'\" [editable]=\"true\" [modelAsStrings]=\"true\" [(ngModel)]=\"formVars.shortcutData\">  \n                         <span class=\"tooltiptext\">Type and Press Enter to add items</span> \n                      </tag-input>                      \n                      <div class=\"err\" *ngIf=\"s_msg_sub_err && botSetUpForm.value.shortcutData.length == 0\" >\n                        <br/>{{validationMessages.shortcutData.required}}</div>\n                  </ul>\n             </div>\n\n\n\n            </section>\n\n            <section class=\"section _section\">\n              <h3 class=\"title is-4\">Theme Setting</h3>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Theme background color <span class=\"_clrpkrshw\" [style.background]=\"formVars.style.bgcolor\"></span></div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"bgcolor\" [(colorPicker)]=\"formVars.style.bgcolor\"  [value]=\"formVars.style.bgcolor\"/>\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.bgcolor\">{{formErrors.bgcolor}}</div>\n              </div>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Theme Text color <span class=\"_clrpkrshw\" [style.background]=\"formVars.style.color\"></span></div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"color\" [(colorPicker)]=\"formVars.style.color\"  [value]=\"formVars.style.color\"/>\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.color\">{{formErrors.color}}</div>\n              </div>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Bot Height (in %)</div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"height\" [(ngModel)]=\"formVars.style.height\"  />\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.height\">{{formErrors.height}}</div>\n              </div>\n\n              <div class=\"input-container\">\n                  <div class=\"label\">Bot Width</div>\n                  <div class=\"field\">\n                    <input type=\"text\" name=\"\" formControlName=\"width\" [(ngModel)]=\"formVars.style.width\"  />\n                  </div>\n                  <div class=\"err\" *ngIf=\"formErrors.width\">{{formErrors.width}}</div>\n              </div>\n\n\n            </section>\n          </form>\n        </div>\n\n\n\n      </section>\n      <footer class=\"modal-card-foot\">\n        <a class=\"button is-success\" [class.is-disabled]=\"!botSetUpForm.valid || isLoadingInitData || isUpdatingInitData\" (click)=\"updateBotSetupData()\" [class.is-loading]=\"isUpdatingInitData\">Save changes</a>\n        <a class=\"button\" (click)=\"goView('code')\">Cancel</a>\n      </footer>\n  </div>\n\n\n  </div>\n  <button class=\"modal-close\" (click)=\"closeModal()\"></button>\n</div>"
+
+/***/ }),
+
+/***/ 361:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"home\">\n\t<div class='palx-bg is-hidden-mobile'></div>\n\t<nav class=\"nav hero is-primary\">\n\t <div class=\"container\">\n\t\t\t  <div class=\"nav-left\">\n\t\t\t    <a class=\"nav-item\">\n\t\t\t      <h2 class=\"subtitle _title\">botflow</h2>\n\t\t\t    </a>\n\t\t\t  </div>\n\n\t\t\t  <div class=\"nav-center\">\n\t\t\t  </div>\n\n\t\t\t  <!-- This \"nav-toggle\" hamburger menu is only visible on mobile -->\n\t\t\t  <span class=\"nav-toggle\" (click)=\"isMenu = !isMenu\" [class.is-active] = \"isMenu\">\n\t\t\t    <span></span>\n\t\t\t    <span></span>\n\t\t\t    <span></span>\n\t\t\t  </span>\n\t\t\t  <!-- Add the modifier \"is-active\" to display it on mobile -->\n\t\t\t  <div class=\"nav-right nav-menu\" [class.is-active] = \"isMenu\">\n\t\t\t    <a class=\"nav-item\" href=\"#features\">\n\t\t\t      <!-- <span class=\"icon\" >\n\t\t\t        <i class=\"fa fa-twitter\"></i>\n\t\t\t      </span> -->\n\t\t\t      Features\n\t\t\t    </a>\n\t\t\t    <a class=\"nav-item\" [routerLink]=\"['/dashboard']\">\n\t\t\t      <span class=\"icon is-small\">\n\t\t\t        <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i>\n\t\t\t      </span>&nbsp;\n\t\t\t      Manage\n\t\t\t    </a>\n\t\t\t  \t<a class=\"nav-item\" href=\"https://twitter.com/Vinayvnvv\" target=\"_blank\">\n\t\t\t      <span class=\"icon\" >\n\t\t\t        <i class=\"fa fa-twitter\"></i>\n\t\t\t      </span>\n\t\t\t    </a>\n\t\t\t    <div class=\"nav-item\">\n\t\t\t      <div class=\"field is-grouped\">\n\t\t\t        <p class=\"control\">\n\t\t\t          <a class=\"button is-primary is-inverted\" [routerLink]=\"['/dashboard']\" >\n\t\t\t            <span class=\"icon is-small\">\n\t\t\t              <i class=\"fa fa-power-off\"></i>\n\t\t\t            </span>\n\t\t\t            <span>Login</span>\n\t\t\t          </a>\n\t\t\t        </p>\n\t\t\t      </div>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t</div>\t  \n\t</nav>\n\t<section class=\"hero is-primary main-ad\">\n\t  <div class=\"hero-body\">\n\t    <div class=\"container\">\n\t      <div class=\"columns\">\n\t      \t<div class=\"column is-6 title-sec\">\n\t\t      <h1 class=\"title _ttl\">\n\t\t        Create Flows, Automate Queries & Help People!\n\t\t      </h1>\n\t\t      <h2 class=\"subtitle\">\n\t\t       An automated <b>chat-bots</b> based on the flows.\n\t\t      </h2>\n\t\t      <div>\n\t\t      \t<a class=\"button is-black iss-outlined\" [routerLink]=\"['/dashboard']\">Create for Free</a>&nbsp;&nbsp;\n\t\t      \t<a class=\"button is-primary is-inverted\" [routerLink]=\"['/dashboard']\">Register</a>\n\t\t      </div>\n\t\t    </div>\n\t\t    <div class=\"column is-6 img-sec is-hidden-mobile\">\n\t\t    \t<img src=\"dashboard/assets/img/launch-bg.svg\"/>\n\t\t    </div>\n\t\t  </div>\n\t    </div>\n\t  </div>\n\t</section>\n\n\t<section class=\"features _pd\" id=\"features\">\n\t\t<div class=\"container\">\n\t\t   <div class=\"_ftrs _ovlpd\">\t\n\t\t\t\t<div class=\"_t_bar has-text-centered\">\n\t\t\t\t\t<h1 class=\"title _ttl has-text-weight-bold\">\n\t\t\t\t       Features\n\t\t\t\t    </h1>\n\t\t\t\t    <div class=\"_dvdr\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"columns is-multiline _bd\">\n\t\t\t\t\t<div class='column is-4 has-text-centered' *ngFor=\"let item of featuresData\">\n\t\t\t\t\t\t<div class=\"_itm\">\n\t\t\t\t\t\t\t<div class=\"_ic\">\n\t\t\t\t\t\t\t\t<i class=\"{{item.icon}}\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"_tt\">\n\t\t\t\t\t\t\t\t<h2 class=\"subtitle is-4\">{{item.name}}</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class='_desc'>\n\t\t\t\t\t\t\t\t{{item.desc}}\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n\n\t<div class=\"container _sections\">\n\t\t<section class=\"hero is-dark is-bold _shadow _nocode\">\n\t\t  <div class=\"hero-body\">\n\t\t  \t<div class=\"columns\">\n\t\t\t  \t<div class=\"column is-2 _ic\">\n\t\t\t  \t\t<b><i class=\"fa fa-code\" aria-hidden=\"true\"></i></b>\n\t\t\t  \t</div>\n\t\t\t  \t<div class=\"column is-10\">\n\t\t\t  \t\t<h1 class=\"title\">\n\t\t\t\t       <b> One JS Snippet all that works!</b>\n\t\t\t\t    </h1>\n\t\t\t      <h2 class=\"subtitle\">\n\t\t\t        Just insert the snippet which will convert into your bot and auto will start.\n\t\t\t      </h2>\n\t\t\t  \t</div>\n\t\t\t  </div>\n\t\t      \n\t\t    </div>\n\t\t</section>\n\t</div>\n\n\t<section class=\"features\">\n\t\t<div class=\"container\">\n\t\t   <div class=\"_ftrs\">\t\n\t\t\t\t<div class=\"_t_bar has-text-centered\">\n\t\t\t\t\t<h1 class=\"title _ttl has-text-weight-bold\">\n\t\t\t\t       What's Special?\n\t\t\t\t    </h1>\n\t\t\t\t    <div class=\"_dvdr\"></div>\n\t\t\t\t</div>\n\t\t\t\t<div class=\"columns is-multiline _bd\">\n\t\t\t\t\t<div class='column is-4 has-text-centered' *ngFor=\"let item of specialData\">\n\t\t\t\t\t\t<div class=\"_itm\">\n\t\t\t\t\t\t\t<div class=\"_ic\">\n\t\t\t\t\t\t\t\t<i class=\"{{item.icon}}\" aria-hidden=\"true\"></i>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"_tt\">\n\t\t\t\t\t\t\t\t<h2 class=\"subtitle is-4\">{{item.name}}</h2>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class='_desc'>\n\t\t\t\t\t\t\t\t{{item.desc}}\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t</section>\n\n\t<div class=\"container\">\n\t\t<section class=\"hero\" style=\"background-color: transparent;\">\n\t\t  <div class=\"hero-body\">\n\t\t    <div class=\" has-text-centered\">\n\t\t    \t<a class='button is-primary is-large _shadow' [routerLink]=\"['/dashboard']\">Create For Free</a>\n\t\t    </div>\n\t\t  </div>\n\t\t</section>\n\t</div>\n\n\t<footer class=\"footer\">\n\t  <div class=\"container\">\n\t    <div class=\"content has-text-centered\">\n\t      <p>\n\t        <strong>botflow</strong> | The website content\n\t        is licensed <a href=\"http://creativecommons.org/licenses/by-nc-sa/4.0/\">CC ANS 4.0</a>.\n\t      </p>\n\n\t      <span hresf=\"http://localhost:3000/ui-manager\">botflow @ 2017-2018</span> | <a href=\"ui-manager\">Material Dashboard</a>\n\t    </div>\n\t  </div>\n\t</footer>\n\n\n</div>\n"
+
+/***/ }),
+
+/***/ 362:
+/***/ (function(module, exports) {
+
 module.exports = "<div class=\"login\">\n\n  <nav class=\"nav\" style=\"background-color: transparent;\">\n\t\t  <div class=\"nav-center\">\n\t\t    <a class=\"nav-item\">\n\t\t      <h2 class=\"subtitle _title\">botflow</h2>\n\t\t    </a>\n\t\t    <a class=\"nav-item\" href=\"https://twitter.com/Vinayvnvv\" target=\"_blank\">\n\t\t      <span class=\"icon\">\n\t\t        <i class=\"fa fa-twitter\"></i>\n\t\t      </span>\n\t\t    </a>\n\t\t  </div>\n  </nav>\n\n  <div class=\"body\">\n    <div class=\"caption subtitle is-4\">Create Your Own Bot!</div>\n  \t<div class=\"card-l box anim sliceInUp\">\n\n  \t    <div><h3 class=\"title is-3\">Login</h3></div>\n  \t\t \n  \t\t <div>\n  \t\t    <i class=\"fa fa-user-circle\" aria-hidden=\"true\" style=\"font-size: 52px;color:#777\"></i>\n\t\t</div>\n\t\t<div ><h2 class=\"subtitle\">Login with google</h2></div>\n\t\t<div> \n\t\t  <a class=\"button is-primary\" (click)=\"googleSignIn()\">\n\t\t    <span class=\"icon\">\n\t\t      <i class=\"fa fa-google\" aria-hidden=\"true\"></i>\n\t\t    </span>\n\t\t    <span>Sign In</span>\n\t\t  </a>\n  \t\t</div>\n\n\n  \t</div>\n  </div>\n\n\n</div> \n<div class='overlay'>\n\t<svg jsname=\"BUfzDd\" xmlns=\"http://www.w3.org/2000/svg\" vviewBox=\"100% 100% 1440 810\" style=\"width: 100%; height: 100%\" ppreserveAspectRatio=\"xMinYMin slice\" aria-hidden=\"true\"><path fill=\"#efefee\" d=\"M592.66 0c-15 64.092-30.7 125.285-46.598 183.777C634.056 325.56 748.348 550.932 819.642 809.5h419.672C1184.518 593.727 1083.124 290.064 902.637 0H592.66z\"></path><path fill=\"#f6f6f6\" d=\"M545.962 183.777c-53.796 196.576-111.592 361.156-163.49 490.74 11.7 44.494 22.8 89.49 33.1 134.883h404.07c-71.294-258.468-185.586-483.84-273.68-625.623z\"></path><path fill=\"#f7f7f7\" d=\"M153.89 0c74.094 180.678 161.088 417.448 228.483 674.517C449.67 506.337 527.063 279.465 592.56 0H153.89z\"></path><path fill=\"#fbfbfc\" d=\"M153.89 0H0v809.5h415.57C345.477 500.938 240.884 211.874 153.89 0z\"></path><path fill=\"#ebebec\" d=\"M1144.22 501.538c52.596-134.583 101.492-290.964 134.09-463.343 1.2-6.1 2.3-12.298 3.4-18.497 0-.2.1-.4.1-.6 1.1-6.3 2.3-12.7 3.4-19.098H902.536c105.293 169.28 183.688 343.158 241.684 501.638v-.1z\"></path><path fill=\"#e1e1e1\" d=\"M1285.31 0c-2.2 12.798-4.5 25.597-6.9 38.195C1321.507 86.39 1379.603 158.98 1440 257.168V0h-154.69z\"></path><path fill=\"#e7e7e7\" d=\"M1278.31,38.196C1245.81,209.874 1197.22,365.556 1144.82,499.838L1144.82,503.638C1185.82,615.924 1216.41,720.211 1239.11,809.6L1439.7,810L1439.7,256.768C1379.4,158.78 1321.41,86.288 1278.31,38.195L1278.31,38.196z\"></path></svg>\n</div>"
 
 /***/ }),
 
-/***/ 409:
+/***/ 412:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(247);
@@ -1840,13 +1984,14 @@ module.exports = __webpack_require__(247);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_common_services__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_api_services__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_strings_service__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_api_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_strings_service__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_models__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__childs_services_view_component__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_root_scope__ = __webpack_require__(8);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddFlowItemComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1865,8 +2010,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AddFlowItemComponent = (function () {
-    function AddFlowItemComponent(activeRouter, Loader, Toast, Api, zone, String, Models, Utility) {
+    function AddFlowItemComponent(activeRouter, Loader, Toast, Api, zone, String, Models, Utility, rootScope) {
         this.activeRouter = activeRouter;
         this.Loader = Loader;
         this.Toast = Toast;
@@ -1875,6 +2021,7 @@ var AddFlowItemComponent = (function () {
         this.String = String;
         this.Models = Models;
         this.Utility = Utility;
+        this.rootScope = rootScope;
         this.flowData = [];
         this.isLoadingFlow = true;
         this.msg = [];
@@ -2130,14 +2277,14 @@ __decorate([
 AddFlowItemComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-add-flow-item',
-        template: __webpack_require__(348),
-        styles: [__webpack_require__(331)],
+        template: __webpack_require__(350),
+        styles: [__webpack_require__(333)],
         providers: [__WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */], __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_6__services_models__["a" /* Models */], __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */]]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__services_strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_strings_service__["a" /* StringsService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__services_models__["a" /* Models */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_models__["a" /* Models */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */]) === "function" && _j || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__services_strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_strings_service__["a" /* StringsService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__services_models__["a" /* Models */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_models__["a" /* Models */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_8__services_root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__services_root_scope__["a" /* RootScope */]) === "function" && _k || Object])
 ], AddFlowItemComponent);
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 //# sourceMappingURL=add-flow-item.component.js.map
 
 /***/ }),
@@ -2147,8 +2294,8 @@ var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api_services__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_common_services__ = __webpack_require__(13);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServicesViewComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2315,7 +2462,7 @@ __decorate([
 ServicesViewComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: "services-view",
-        template: __webpack_require__(349),
+        template: __webpack_require__(351),
         providers: [__WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */], __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */]) === "function" && _c || Object])
@@ -2332,10 +2479,10 @@ var _a, _b, _c;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dashboard_component__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_api_services__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_api_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_common_services__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(9);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddFlowComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2442,8 +2589,8 @@ var AddFlowComponent = (function () {
 AddFlowComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-add-flow',
-        template: __webpack_require__(350),
-        styles: [__webpack_require__(332)],
+        template: __webpack_require__(352),
+        styles: [__webpack_require__(334)],
         providers: [__WEBPACK_IMPORTED_MODULE_4__services_common_services__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_4__services_common_services__["c" /* Loader */], __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__dashboard_component__["a" /* DashboardComponent */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__dashboard_component__["a" /* DashboardComponent */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_api_services__["a" /* ApiService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_common_services__["a" /* Toast */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_common_services__["c" /* Loader */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* Router */]) === "function" && _f || Object])
@@ -2490,11 +2637,11 @@ var RootScope = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_services__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_common_services__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_strings_service__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_strings_service__ = __webpack_require__(18);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddMenuComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2616,8 +2763,8 @@ var AddMenuComponent = (function () {
 AddMenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-add-menu',
-        template: __webpack_require__(351),
-        styles: [__webpack_require__(333)],
+        template: __webpack_require__(353),
+        styles: [__webpack_require__(335)],
         providers: [__WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */], __WEBPACK_IMPORTED_MODULE_2__services_api_services__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_5__services_strings_service__["a" /* StringsService */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_api_services__["a" /* ApiService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["c" /* Loader */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__services_strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_strings_service__["a" /* StringsService */]) === "function" && _f || Object])
@@ -2633,9 +2780,9 @@ var _a, _b, _c, _d, _e, _f;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api_services__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_common_services__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(9);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2756,8 +2903,8 @@ var ListComponent = (function () {
 ListComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-list',
-        template: __webpack_require__(354),
-        styles: [__webpack_require__(336)],
+        template: __webpack_require__(357),
+        styles: [__webpack_require__(338)],
         providers: [__WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */], __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["c" /* Loader */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["a" /* Toast */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* ActivatedRoute */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_common_services__["b" /* Utility */]) === "function" && _f || Object])
@@ -2773,8 +2920,8 @@ var _a, _b, _c, _d, _e, _f;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api_services__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_api_services__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_common_services__ = __webpack_require__(13);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewMenuComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2901,8 +3048,8 @@ var ViewMenuComponent = (function () {
 ViewMenuComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-view-menu',
-        template: __webpack_require__(355),
-        styles: [__webpack_require__(337)],
+        template: __webpack_require__(358),
+        styles: [__webpack_require__(339)],
         providers: [__WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */], __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_api_services__["a" /* ApiService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["a" /* Toast */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_common_services__["b" /* Utility */]) === "function" && _d || Object])
@@ -2953,8 +3100,8 @@ var HomeComponent = (function () {
 HomeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-home',
-        template: __webpack_require__(358),
-        styles: [__webpack_require__(329)]
+        template: __webpack_require__(361),
+        styles: [__webpack_require__(331)]
     }),
     __metadata("design:paramtypes", [])
 ], HomeComponent);
@@ -2968,10 +3115,10 @@ HomeComponent = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_strings_service__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_strings_service__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_auth_service__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_api_services__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_api_services__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_root_scope__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_common_services__ = __webpack_require__(13);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
@@ -3062,8 +3209,8 @@ var LoginComponent = (function () {
 LoginComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-login',
-        template: __webpack_require__(359),
-        styles: [__webpack_require__(338)],
+        template: __webpack_require__(362),
+        styles: [__webpack_require__(340)],
         providers: [__WEBPACK_IMPORTED_MODULE_4__services_api_services__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_6__services_common_services__["c" /* Loader */], __WEBPACK_IMPORTED_MODULE_6__services_common_services__["a" /* Toast */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_strings_service__["a" /* StringsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_strings_service__["a" /* StringsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__services_api_services__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_api_services__["a" /* ApiService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__services_root_scope__["a" /* RootScope */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__services_root_scope__["a" /* RootScope */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__services_common_services__["c" /* Loader */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_common_services__["c" /* Loader */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_6__services_common_services__["a" /* Toast */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__services_common_services__["a" /* Toast */]) === "function" && _h || Object])
@@ -3079,7 +3226,7 @@ var _a, _b, _c, _d, _e, _f, _g, _h;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home_component__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_dashboard_component__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login_component__ = __webpack_require__(84);
@@ -3164,7 +3311,7 @@ var routingComponents = [__WEBPACK_IMPORTED_MODULE_3__dashboard_dashboard_compon
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__auth_service__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthGuard; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3312,5 +3459,5 @@ var Models = (function () {
 
 /***/ })
 
-},[409]);
+},[412]);
 //# sourceMappingURL=main.bundle.js.map

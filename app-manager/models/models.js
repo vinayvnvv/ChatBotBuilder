@@ -31,6 +31,10 @@ var Models = function() {
 	       model.welcome = {
 	       	msg:undefined
 	       }
+	       if(data.modules) model.modules = data.modules;
+	       if(data.welcome) model.welcome = data.welcome;
+	       if(data.final) model.final = data.final;
+	       if(data.services) model.services = data.services;
     
 	       return model;
 	}

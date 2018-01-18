@@ -3,6 +3,7 @@ var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var header = require('./../../application/header');
 var TemplateModel = require('./../models/template_model');
+var manager = require('./../../app-manager/db/modules')
 
 var Main = function() {
 
@@ -90,6 +91,41 @@ var Main = function() {
 								}
 							);
 			});
+
+	}
+
+
+	this.copyTemplates = function(id, cid, success_callback, error_callback) {
+  		
+
+        
+
+        MongoClient.connect(header.db.url, function(err, db) {
+
+        	var collection = db.collection(header.collections.templates);
+
+	        collection.find({"_id":ObjectId(id)}).toArray( function(err, docs) {
+					  	 if(err) { error_callback(err); return; }
+					  	 if(docs.length == 0) { error_callback({"msg": 'no template found with id:' + id}); return; }
+
+					  	 var doc = docs[0].module;
+					 //  	 collection = db.collection(header.collections.module(cid));
+						//   collection.insert(doc.module,  function(err, result) {
+						//   	 if(err) { error_callback(err); return }
+		    //                  success_callback(result);
+						  	
+						// });
+
+						manager.create(cid, doc, 
+							function(res){
+								success_callback(res);
+							},
+							function(err){ 
+								error_callback(err);
+							 });
+					  	
+					});
+	    });
 
 	}
 
