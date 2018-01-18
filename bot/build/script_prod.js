@@ -5729,7 +5729,7 @@ alight.component('bot-flow-root', function (scope, element, env) {
 				    	scope.test_bot = (document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem('test-bot'));
 				    	scope.bot_socket = io.connect(__c_b_app.env.Api.urls.socket_connect);
 				    	scope.client_id = scope.Helper.decodeId(document.querySelectorAll("[" + __c_b_app.env.vars.bot_id_selecter_attr + "]")["0"].attributes.getNamedItem(__c_b_app.env.vars.bot_id_selecter_attr).value);
-	    				scope.uuid = (scope.test_bot ? ('	_test_' + scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)) : (scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)));
+	    				scope.uuid = (scope.test_bot ? ("_test_" + scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)) : (scope.Helper.getCookie(__c_b_app.env.cookie.uuid_key)));
 	    				scope.is_typing = false;
 	    				scope.suggestion = null;
 	    				scope.is_scroll = true;
