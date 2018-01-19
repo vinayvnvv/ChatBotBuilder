@@ -79,6 +79,9 @@ var MainDB = function() {
 
    }
 
+   this.getModule = function(track, query, callback_suc, callback_err) {
+    
+   }
 
 
    this.getModule = function(track, query, callback_suc, callback_err) {

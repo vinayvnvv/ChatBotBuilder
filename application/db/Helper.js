@@ -211,6 +211,24 @@ var Utility = new (require('./../services/utility.js')) ();
              	                 );
     }
 
+
+    this.resetTrackWithClientId = function(uuid, cid, callback_suc, callback_err) {
+    	DBHelper.updateTrack(
+             	                   uuid,
+             	                   DBHelper.constructTrackModel({
+             	                   	                             current_module:"init",
+             	                   	                             module_id : "",
+                                                                 answers:[],
+                                                              	 last_track_details:{},
+                                                              	 validate:"0",
+                                                              	 client_id: cid
+             	                   	                           }),
+             	                   function(res) {  if(callback_suc) callback_suc(); },
+             	                   function() {}
+
+             	                 );
+    }
+
     this.updateModuleStatsOnMatch = function(c_id, doc) {
     	console.log("****************\n Updatting matched stats", doc)
     	var triggered, triggeredAt;
