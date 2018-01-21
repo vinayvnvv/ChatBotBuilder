@@ -19,6 +19,10 @@ var Validator = function() {
 		if(type == 'email') {
 			return this.isEmail(query);
 		}
+		if(type == 'pattern') {
+			var regex = new RegExp(type, '');
+			return regex.test(query);
+		}
 
 	}
 
