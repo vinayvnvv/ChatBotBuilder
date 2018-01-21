@@ -11,15 +11,15 @@ var Validator = function() {
 	}
 
 
-	this.isValid = function(query, type) {
+	this.isValid = function(query, obj) {
 
-		if(type == 'number') {
+		if(obj.type == 'number') {
 			return this.isNum(query);
 		}
-		if(type == 'email') {
+		if(obj.type == 'email') {
 			return this.isEmail(query);
 		}
-		if(type == 'pattern') {
+		if(obj.type == 'pattern') {
 			var regex = new RegExp(type, '');
 			return regex.test(query);
 		}

@@ -102,7 +102,7 @@ var MainDB = function() {
               console.log("entering for validation...")
                    if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc)) {  //not validated , return
                       console.log("validated Errr, Sending Validated Err Msg...")
-                      callback_suc({msg:doc.modules[track.validate].validateErrMsg});
+                      callback_suc({msg:doc.modules[track.validate].validate.errMsg});
                       return;
                    }
               }
@@ -150,7 +150,7 @@ var MainDB = function() {
                    if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc)) {  //not validated , return
                       console.log("validated Errr, Sending Validated Err Msg...")
                       callback_suc({
-                          msg:doc.modules[track.validate].validateErrMsg, 
+                          msg:doc.modules[track.validate].validate.errMsg, 
                           shortcut:doc.modules[track.validate].shortcut,
                           shortcutData:doc.modules[track.validate].shortcutData
                         });

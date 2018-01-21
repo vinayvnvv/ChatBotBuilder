@@ -31,50 +31,13 @@ Flow modules
       ],
       "customStyleTemplate": "true",
       "template": "<h1>{{msg[1]}}</h1",
-      "validate": null,
-      "validateErrMsg": "UserID  must be number"
-    },
-    {
-      "name":"ask for email",
-      "id": "aa123213",
-      "msg": [
-        "Thank you {{$flow[0]}}!",
-        "Enter Your Email For ID:"
-      ],
-      "beforeMsg": [],
-      "afterMsg": [],
-      "shortcut": "option",
-      "customStyleTemplate": "true",
-      "template": "<h1>{{$flow[0]}}</h1",
-      "validate": "email",
-      "validateErrMsg": "Pls Enter correct email id:"
-    },
-    {
-      "name":"ask for no of tables",
-      "id": "aa123213",
-      "msg": ["How many tables You want?"],
-      "beforeMsg": [],
-      "afterMsg": [],
-      "shortcut": "option",
-      "customStyleTemplate": "true",
-      "template": "<h1>{{$flow[0]}}</h1",
-      "validate": "number",
-      "validateErrMsg": "It should be a number!"
-    },
-    {
-      "name":"ask for adress",
-      "id": "aa123213",
-      "msg": [
-        "Last one step",
-        "Enter your address"
-      ],
-      "beforeMsg": [],
-      "afterMsg": [],
-      "shortcut": "option",
-      "customStyleTemplate": "true",
-      "template": "<h1>{{$flow[0]}}</h1",
-      "validate": null,
-      "validateErrMsg": "It should be a number!"
+      "validate": {
+        "type": "number",
+        "errMsg": "---",
+        "params": {
+          "pattern": ""
+        }
+      }
     }
   ],
   "final": {
