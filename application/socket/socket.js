@@ -5,6 +5,7 @@ var DB = new (require('./../db/main'))  ();
 var DBHelper = new (require('./../db/Helper')) ();
 var Strings = require('./../string');
 var Utility = new (require('./../services/utility.js')) ();
+var header = require('./../header');
 
 var msg = {
   "type":"single|flow",
