@@ -79,9 +79,6 @@ var MainDB = function() {
 
    }
 
-   this.getModule = function(track, query, callback_suc, callback_err) {
-    
-   }
 
 
    this.getModule = function(track, query, callback_suc, callback_err) {
@@ -147,7 +144,8 @@ var MainDB = function() {
             console.log("Validation:" + doc.modules[track.validate].validate)  
              if(doc.modules[track.validate].validate != null && doc.modules[track.validate].validate != undefined && doc.modules[track.validate].validate != 'none') {
               console.log("entering for validation...")
-                   if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc)) {  //not validated , return
+              var is_first_module_first_msg = (track.current_module == track.validate); 
+                   if(!Validator.isValid(query, doc.modules[track.validate].validate, callback_suc) && !is_first_module_first_msg) {  //not validated , return
                       console.log("validated Errr, Sending Validated Err Msg...")
                       callback_suc({
                           msg:doc.modules[track.validate].validate.errMsg, 

@@ -13,6 +13,8 @@ var Validator = function() {
 
 	this.isValid = function(query, obj) {
 
+		console.log("validation type---------->", obj)
+
 		if(obj.type == 'number') {
 			return this.isNum(query);
 		}
@@ -20,7 +22,8 @@ var Validator = function() {
 			return this.isEmail(query);
 		}
 		if(obj.type == 'pattern') {
-			var regex = new RegExp(type, '');
+			var regex = new RegExp(obj.params.pattern, '');
+			console.log(regex.test(query))
 			return regex.test(query);
 		}
 
