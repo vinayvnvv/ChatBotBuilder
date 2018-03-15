@@ -5,7 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "test",
-    "start": "forever start gulpfile.js",
+    "start": "node gulpfile.js | forever start gulpfile.js --minUptime 5000",
     "stop": "forever stopall",
     "log": "forever logs",
     "cleanlogs": "forever cleanlogs"
