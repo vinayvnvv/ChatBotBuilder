@@ -5923,6 +5923,12 @@ alight.component('bot-flow-root', function (scope, element, env) {
 	    	}
 	    };
 });
+alight.component('c-bot-loader', function (scope, element, env) {
+	    return { 
+	    	templateUrl: "app/loader/loader.component.html",
+	    	onStart: function() {}
+	    };
+});
 alight.component('c-bot-mgs', function (scope, element, env) {
 	    return { 
 	    	templateUrl: "app/msgs/msgs.component.html",
@@ -5934,12 +5940,6 @@ alight.component('c-bot-mgs', function (scope, element, env) {
 				    	scope.name = "Shannubhag"
 				    }
 	    	}
-	    };
-});
-alight.component('c-bot-loader', function (scope, element, env) {
-	    return { 
-	    	templateUrl: "app/loader/loader.component.html",
-	    	onStart: function() {}
 	    };
 });
 alight.component('c-bot-sug', function (scope, element, env) {
