@@ -5,7 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "test",
-    "start": "node gulpfile.js | forever start gulpfile.js --minUptime 5000",
+    "start": "node gulpfile.js",
     "stop": "forever stopall",
     "log": "forever logs",
     "cleanlogs": "forever cleanlogs"
@@ -35,7 +35,6 @@
     "body-parser": "^1.17.1",
     "cors": "^2.8.1",
     "express": "^4.14.1",
-    "forever": "^0.15.3",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.5.0",

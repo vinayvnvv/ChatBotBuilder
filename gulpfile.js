@@ -56,4 +56,10 @@ Server.start(port);
 Sockets.listen();
 
 
+//errr handling
+process.on('uncaughtException', err => {
+	console.log('\n\n\n', '\x1b[31m', '<---------- ERR ---------->\n', err, '\x1b[30m')
+})
+
+
 

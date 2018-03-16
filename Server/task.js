@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat')
-var connect = require('gulp-connect');
 var AppFiles = new (require('./app_files'))();
 var BotFiles = new (require('./bot-files'))();
 var AppManagerFiles = new (require('./app-manager-files'))();
@@ -28,7 +27,6 @@ var gulpActivity = function(app, http) {
 		gulp.task('connect', function() {
 				   http.listen(port, function(){
 				   console.log('listening on :' + port);
-				   // console.log(gulp)
 				});
 		});
 
@@ -164,6 +162,7 @@ var gulpActivity = function(app, http) {
 
 		gulp.task('watch', function(event) {
 			console.log("files changed")
+
 			gulp.watch(AppFiles.custom.js, ['build_js', 'build_final_js']);
 			gulp.watch(AppFiles.custom.css, ['build_css']);
 
@@ -186,14 +185,13 @@ var gulpActivity = function(app, http) {
             process.exit();
      	 });
 
+
+
 		gulp.task('default', ['connect', 
 			                  'build_js', 'build_libs_js', 'build_final_js', 'build_css', 'build_libs_css', 
 			                  'build_manager_js', 'build_bot_js', 'build_manager_libs_js', 'build_manager_final_js', 'build_manager_css', 'build_manager_libs_css',
 			                  'watch']);
 
-
-		if(!gulp.isRunning) 
-			gulp.start('connect');
 
 	}
 	

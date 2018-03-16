@@ -40,13 +40,7 @@ this.listen = function () {
 	var bot = io
 	              .of('/sockets/bot')
 	              .on('connection', function(socket) {
-
-
-
-
-
-
-	              	
+  	
 
                   socket.on('init', function(data) {
                     DBHelper.getBotStyle(data.c_id, function(style){ socket.emit('setup', style); }, function(err){});//send Style Setup
