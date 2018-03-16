@@ -5,7 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "test",
-    "start": "node gulpfile.js",
+    "start": "gulp",
     "stop": "forever stopall",
     "log": "forever logs",
     "cleanlogs": "forever cleanlogs"
