@@ -6,7 +6,7 @@ var __c_b_app_Controller = function(name, controller) {
 
 //api services
 var __c_b_app_Api_Service = function() {
-	this.host = ( (location.hostname == '127.0.0.1' || location.hostname == 'localhost') ?  "http://127.0.0.1:3000/" : "https://botflow.herokuapp.com/");
+	this.host = ( (location.port != '1111' && (location.hostname == '127.0.0.1' || location.hostname == 'localhost')) ?  "http://127.0.0.1:3000/" : "https://botflow.herokuapp.com/");
     this.urls = {
     	socket_connect: this.host + "sockets/bot",
     	get_msg: this.host + "api/bot/msgs/",
